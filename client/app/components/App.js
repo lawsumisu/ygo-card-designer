@@ -1,11 +1,19 @@
 import React from 'react';
-import {Card} from './Card';
+import Card from './Card';
 import styles from './App.scss';
 
-const App = () => (
-  <div className={styles.app}>
-    <Card/>
-  </div>
-);
+class App extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return (
+      <div className={styles.app}>
+        <Card/>
+      </div>
+    )
+  }
+}
 
 export default App;
