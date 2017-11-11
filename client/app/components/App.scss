@@ -4,4 +4,72 @@
   line-height: 200%;
   padding: 6px 20px 30px;
   border: solid 1px red;
+  width: 250px;
 }
+
+.ygo-card-top{
+    font-variant: small-caps;
+    width: 100%;
+    border: 1px solid brown;
+    box-sizing: border-box;
+    display: flex;
+
+    .ygo-card-name{
+      font-variant: small-caps;
+      font-family: serif;
+      flex: 1 0;
+    }
+
+    .ygo-card-attribute{
+      padding: 0 6px;
+      flex: 0 0;
+    }
+}
+
+.ygo_card_level{
+  float: right;
+}
+
+.ygo-card-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ygo-card-center{
+  width: 95%;
+
+  .ygo-card-image{
+    img{
+      width: 100%;
+    }
+  }
+}
+
+.ygo-card-bottom{
+  width: 100%;
+  border: 1px solid brown;
+
+  .ygo-card-type{
+    width: 100%;
+    box-sizing: border-box;
+    font-variant: small-caps;
+    font-family: serif;
+  }
+
+  .ygo-card-effect{
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ygo-card-battle-points{
+    margin-left: auto;
+    width: 75%;
+
+    input{
+      width: 45px;
+    }
+  }
+}
+
+

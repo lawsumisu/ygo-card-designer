@@ -3,13 +3,13 @@
 import * as actions from './actions';
 
 const initialCardState = {
-    name: 'New Card',
-    level: 7,
+    name: 'Blue-Eyes White Dragon',
+    level: 8,
     attribute: 'LIGHT',
     description: '',
     effect: '',
-    atk: 0,
-    def: 0,
+    atk: 3000,
+    def: 2500,
 }
 
 function cardReducer(previousState=initialCardState, action){

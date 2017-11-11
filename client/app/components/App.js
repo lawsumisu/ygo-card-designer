@@ -9,7 +9,7 @@ class App extends React.Component{
 
   render(){
     return (
-      <div className={styles.app}>
+      <div className="app">
         <Card/>
       </div>
     )

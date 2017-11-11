@@ -1,5 +1,15 @@
 'use strict';
 
+var atkDefRegex = /^[0-9]+$/
+
+var getValidBattlePoint= function(battlePoint){
+    console.log(battlePoint);
+    if (battlePoint === '' || battlePoint === '?') return battlePoint;
+    else if ( atkDefRegex.test(battlePoint)){
+        var battlePointAsNumber = parseInt(battlePoint);
+        if (battlePointAsNumber < 10000) return battlePointAsNumber + ''; 
+    }
+}
 // Actions
 export const UPDATE_LEVEL = 'UPDATE_LEVEL';
 export const UPDATE_NAME = 'UPDATE_NAME';
@@ -12,6 +22,7 @@ export const UPDATE_TRAP_SUBTYPE = 'UPDATE_TRAP_SUBTYPE';
 export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION';
 export const UPDATE_EFFECT = 'UPDATE_EFFECT';
 export const UPDATE_ATTRIBUTE = 'UPDATE_ATTRIBUTE';
+export const NONE = 'NONE'
 
 //Action creators
 function updateName(name){
@@ -29,16 +40,28 @@ function updateLevel(level){
 }
 
 function updateAtk(atk){
-    return {
+    var validatedAtk = getValidBattlePoint(atk);
+    if (validatedAtk != undefined){
+        return {
         type: UPDATE_ATK,
-        atk: atk
+        atk: validatedAtk
+        }
+    } 
+    else return {
+        type: NONE
     }
 }
 
 function updateDef(def){
-    return {
+    var validatedDef = getValidBattlePoint(def);
+    if (validatedDef != undefined){
+        return {
         type: UPDATE_DEF,
-        def: def
+        def: validatedDef
+        }
+    } 
+    else return {
+        type: NONE
     }
 }
 

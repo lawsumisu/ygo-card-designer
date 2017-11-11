@@ -48,11 +48,7 @@ module.exports = {
                 use: [{
                     loader: "style-loader" // creates style nodes from JS strings
                 }, {
-                    loader: "css-loader", // translates CSS into CommonJS
-                    options: {
-                        modules: true,
-                        localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                    }
+                    loader: "css-loader" // translates CSS into CommonJS
                 }, {
                     loader: "sass-loader" // compiles Sass to CSS
                 }]
@@ -61,6 +57,10 @@ module.exports = {
                 test: /\.jsx?/,
                 include: APP_DIR,
                 use: ['babel-loader'],
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: 'url-loader'
             }
         ]
     },
