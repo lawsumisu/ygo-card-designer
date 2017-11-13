@@ -1,51 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateType} from '../redux/actions';
+import {LevelBar} from './LevelBar';
 import styles from './App.scss';
-import image from '../assets/BlueEyesWhiteDragon.png'
-
-class StarBar extends React.Component {
-    constructor(props){
-        super(props);
-    }
-
-    getStars(){
-        return Math.min(this.props.stars, 12)
-    }
-
-    getStarsAsDisplay(){
-        var display = [];
-        for (var i = 0; i < this.getStars(); ++i){
-            display.push(
-                <span 
-                    className="ygo_card_level"
-                    key={i}>
-                     {'\u272a'}
-                </span>
-            )
-        }
-        return display;
-    }
+import image from '../assets/BlueEyesWhiteDragon.png';
 
 
-    render(){
-        return (
-            <div>
-                {
-                   this.getStarsAsDisplay()
-                }
-            </div>
-        )
-    }
-}
 class Card extends React.Component{
     constructor(props){
         super(props);
 
-    }
-
-    getLevelAsDisplay(){
-        return '\u272a'.repeat(this.props.cardState.level);
     }
 
     render(){
@@ -62,15 +26,17 @@ class Card extends React.Component{
                         </span> 
                 </div>
                 <div className="ygo-card-center">
-                    <StarBar stars={this.props.cardState.level}/>
+                    <LevelBar stars={this.props.cardState.level} updateLevel={this.props.updateLevel}/>
                     <div className="ygo-card-image">
                         <img src={image}/>
                     </div>
                 </div>
                 
                 <div className="ygo-card-bottom">
-                    <div>
-                        <input className="ygo-card-type" type="text" value={this.props.cardState.type}/>
+                    <div className="ygo-card-type">
+                        <span>[</span>
+                        <input type="text" value={this.props.cardState.type}/>
+                        <span>]</span>
                     </div>
                     <div>
                         <input className="ygo-card-effect" type="text" value={this.props.cardState.effect} onChange={(event) => this.props.updateEffect(event.target.value)}/>
