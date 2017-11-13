@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateType} from '../redux/actions';
 import {LevelBar} from './LevelBar';
+import {AttributeSelector} from './AttributeSelector';
 import styles from './App.scss';
 import image from '../assets/BlueEyesWhiteDragon.png';
 
@@ -21,12 +22,12 @@ class Card extends React.Component{
                         type="text" 
                         value={this.props.cardState.name} 
                         onChange={(event) => this.props.updateName(event.target.value)}/>
-                        <span className="ygo-card-attribute">
-                            {'\u5149'}
-                        </span> 
+                        <AttributeSelector 
+                            updateAttribute={this.props.updateAttribute}
+                            attribute={this.props.cardState.attribute}/> 
                 </div>
                 <div className="ygo-card-center">
-                    <LevelBar stars={this.props.cardState.level} updateLevel={this.props.updateLevel}/>
+                    <LevelBar level={this.props.cardState.level} updateLevel={this.props.updateLevel}/>
                     <div className="ygo-card-image">
                         <img src={image}/>
                     </div>

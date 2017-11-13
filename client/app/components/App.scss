@@ -5,6 +5,7 @@
   padding: 6px 20px 30px;
   border: solid 1px red;
   width: 250px;
+  margin-top: 50px;
 }
 
 .ygo-card-top{
@@ -23,6 +24,15 @@
     .ygo-card-attribute{
       padding: 0 6px;
       flex: 0 0;
+      position: relative;
+      cursor: pointer;
+
+      .ygo-card-attribute-selection{
+        cursor: pointer;
+        &:hover{
+          color: #00bb00;
+        }
+      }
     }
 }
 

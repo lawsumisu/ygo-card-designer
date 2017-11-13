@@ -5,7 +5,7 @@ import * as actions from './actions';
 const initialCardState = {
     name: 'Blue-Eyes White Dragon',
     level: 8,
-    attribute: 'LIGHT',
+    attribute: '光',
     description: '',
     effect: '',
     atk: 3000,

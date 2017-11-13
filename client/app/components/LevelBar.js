@@ -17,8 +17,8 @@ class LevelBar extends React.Component {
         }
     }
 
-    getStars(){
-        return Math.min(this.props.stars, 12)
+    getLevel(){
+        return Math.min(this.props.level, 12)
     }
 
     updateHover(index){
@@ -53,7 +53,7 @@ class LevelBar extends React.Component {
 
     getStarsAsDisplay(){
         var display = [];
-        var currentLevel = this.getStars();
+        var currentLevel = this.getLevel();
         for (let i = 1; i <= 12; ++i){
             let isSelected = i <= currentLevel;
             let isHovered = this.state.isEditing && i <= this.state.currentHoveredLevel;
