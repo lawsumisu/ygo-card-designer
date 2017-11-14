@@ -7,7 +7,7 @@ import React from 'react';
  * level: Level of this card (int)
  * updateLevel: callback for updating the level of a card (function(int))
  */
-class LevelBar extends React.Component {
+class LevelSelector extends React.Component {
     constructor(props){
         super(props);
 
@@ -78,4 +78,4 @@ class LevelBar extends React.Component {
     }
 }
 
-export {LevelBar};
+export {LevelSelector};

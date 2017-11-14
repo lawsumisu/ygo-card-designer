@@ -1,8 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateType} from '../redux/actions';
-import {LevelBar} from './LevelBar';
+import {LevelSelector} from './LevelSelector';
 import {AttributeSelector} from './AttributeSelector';
+import {ImageSelector} from './ImageSelector';
+import {TypeSelector} from './TypeSelector';
+import _ from 'lodash';
 import styles from './App.scss';
 import image from '../assets/BlueEyesWhiteDragon.png';
 
@@ -10,7 +13,6 @@ import image from '../assets/BlueEyesWhiteDragon.png';
 class Card extends React.Component{
     constructor(props){
         super(props);
-
     }
 
     render(){
@@ -22,23 +24,18 @@ class Card extends React.Component{
                         type="text" 
                         value={this.props.cardState.name} 
                         onChange={(event) => this.props.updateName(event.target.value)}/>
-                        <AttributeSelector 
-                            updateAttribute={this.props.updateAttribute}
-                            attribute={this.props.cardState.attribute}/> 
+                    <AttributeSelector 
+                        updateAttribute={this.props.updateAttribute}
+                        attribute={this.props.cardState.attribute}/> 
                 </div>
                 <div className="ygo-card-center">
-                    <LevelBar level={this.props.cardState.level} updateLevel={this.props.updateLevel}/>
-                    <div className="ygo-card-image">
-                        <img src={image}/>
-                    </div>
+                    <LevelSelector level={this.props.cardState.level} updateLevel={this.props.updateLevel}/>
+                    <ImageSelector/>
+                    
                 </div>
                 
                 <div className="ygo-card-bottom">
-                    <div className="ygo-card-type">
-                        <span>[</span>
-                        <input type="text" value={this.props.cardState.type}/>
-                        <span>]</span>
-                    </div>
+                    <TypeSelector isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
                     <div>
                         <input className="ygo-card-effect" type="text" value={this.props.cardState.effect} onChange={(event) => this.props.updateEffect(event.target.value)}/>
                     </div>

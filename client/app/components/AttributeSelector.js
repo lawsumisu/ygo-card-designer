@@ -6,7 +6,7 @@ const LIGHT = '光';
 const WATER = '水';
 const EARTH = '土';
 const DARK = '闇';
-const FIRE = '火';
+const FIRE = '炎';
 const WIND = '風';
 
 class AttributeSelector extends React.Component{
@@ -33,7 +33,7 @@ class AttributeSelector extends React.Component{
         var radius = 30;
         var attributes = [LIGHT, WATER, EARTH, DARK, FIRE, WIND];
         return _.map(attributes, (attribute, index) => {
-            var theta = (-2*Math.PI/attributes.length * index) - Math.PI/2;
+            var theta = (2*Math.PI/attributes.length * index) - Math.PI/2;
             var style = {
                 transform: sprintf('rotate(%srad) translate(%spx) rotate(%srad)', theta, radius, -theta),
                 position: 'absolute',

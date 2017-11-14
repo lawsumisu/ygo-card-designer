@@ -1,0 +1,13 @@
+.resizable-input-content, .resizable-input-hidden-content{
+  font:inherit;
+  margin:0;
+  padding:0;
+}
+.resizable-input-content{
+  border:none;
+  min-width:10px;
+}
+.resizable-input-hidden-content{
+  display:none;
+  white-space:pre;
+}
