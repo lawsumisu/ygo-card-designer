@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateType} from '../redux/actions';
+import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateDescription, updateType} from '../redux/actions';
 import {LevelSelector} from './LevelSelector';
 import {AttributeSelector} from './AttributeSelector';
 import {ImageSelector} from './ImageSelector';
@@ -39,6 +39,12 @@ class Card extends React.Component{
                     <div>
                         <input className="ygo-card-effect" type="text" value={this.props.cardState.effect} onChange={(event) => this.props.updateEffect(event.target.value)}/>
                     </div>
+                    <div>
+                        <textarea 
+                            className="ygo-card-description"
+                            value={this.props.cardState.description} 
+                            onChange={(event) => this.props.updateDescription(event.target.value)}/>
+                    </div>
                     <div className="ygo-card-battle-points">
                         ATK/
                         <input type="text" value={this.props.cardState.atk} onChange={(event) => this.props.updateAtk(event.target.value)}/>
@@ -66,6 +72,7 @@ const mapDispatchToProps = function(dispatch){
         updateAtk: (atk) => dispatch(updateAtk(atk)),
         updateDef: (def) => dispatch(updateDef(def)),
         updateEffect: (effect) => dispatch(updateEffect(effect)),
+        updateDescription: (description) => dispatch(updateDescription(description)),
         updateType: (type) => dispatch(updateType(type))
     }
 }

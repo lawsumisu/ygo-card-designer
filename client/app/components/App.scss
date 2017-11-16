@@ -119,6 +119,10 @@
         white-space: nowrap;
       }
     }
+
+    .ygo-card-type-input, .ygo-card-type-input-spacer{
+      display: none;
+    }
     .ygo-card-type-input{
       display: none;
       width: 100%;
@@ -132,15 +136,24 @@
       &:focus{
         display: block;
       }
+
     }
     font-variant: small-caps;
     font-family: serif;
     font-weight: bold;
   }
 
-  .ygo-card-effect{
+  .ygo-card-effect, .ygo-card-description{
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .ygo-card-description{
+    font-style: italic;
+    height: 50px;
+    font-size: 10px;
+    font-family: serif;
+    resize:none;
   }
 
   .ygo-card-battle-points{

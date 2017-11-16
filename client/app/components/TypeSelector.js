@@ -14,6 +14,8 @@ class TypeSelector extends React.Component{
             input: '',
             tribes: [],
             fontWidthScale: 1,
+            inputIsFocused: false,
+            inputIsHovered: false
         }
     }
 
@@ -70,9 +72,33 @@ class TypeSelector extends React.Component{
         if (!_.isEmpty(this.state.input)){
             this.setState({
                 input: '',
-                tribes: _.concat(this.state.tribes, this.createTribe(this.state.input))
+                tribes: _.concat(this.state.tribes, this.createTribe(this.state.input)),
+                inputIsFocused: false
             });
         }
+        else{
+            this.setState({
+                inputIsFocused: false
+            });
+        }
+    }
+
+    handleOnMouseEnter(){
+        this.setState({
+            inputIsHovered: true
+        });
+    }
+
+    handleOnMouseLeave(){
+        this.setState({
+            inputIsHovered: false
+        });
+    }
+
+    handleOnFocus(){
+        this.setState({
+            inputIsFocused: true
+        });
     }
 
     getTribesAsDisplay(){
@@ -86,7 +112,8 @@ class TypeSelector extends React.Component{
                         value={tribe.name} 
                         onChange={(event) => this.updateTribe(event, index)}
                         onKeyDown={(event) => this.handleKeyDown(event, index)}/>
-                    <div>-</div>
+                    {index < this.state.tribes.length-1 ? <div>-</div> : this.getTypeSpacer()}
+
                 </div>
                 
             )
@@ -107,6 +134,15 @@ class TypeSelector extends React.Component{
         console.log($('.ygo-card-type').width());
     }
 
+    // Getter for spacer that precedes the input box. It has special properties depending on whether or not the main input box is being interacted with.
+    getTypeSpacer(){
+        if ($('.ygo-card-type-input').css('display') !== 'none'){
+            return (
+                <div>-</div>
+            )
+        }
+    }
+
     render(){
         var style = {
             transform: sprintf('scale(%s, 1)', this.state.fontWidthScale)
@@ -122,6 +158,9 @@ class TypeSelector extends React.Component{
                     type="text" 
                     value={this.state.input} 
                     onChange={(event) => this.updateInput(event)}
+                    onFocus={(event) => this.handleOnFocus()}
+                    onMouseEnter={(event) => this.handleOnMouseEnter()}
+                    onMouseLeave={(event) => this.handleOnMouseLeave()}
                     onBlur={(event) => this.handleOnBlur()}/>
                 {this.getEffectAsDisplay()}
                 <span>]</span>
