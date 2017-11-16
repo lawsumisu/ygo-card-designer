@@ -16,7 +16,7 @@ export const UPDATE_NAME = 'UPDATE_NAME';
 export const UPDATE_ATK = 'UPDATE_ATK';
 export const UPDATE_DEF = 'UPDATE_DEF';
 export const UPDATE_TYPE = 'UPDATE_TYPE';
-export const UPDATE_MONSTER_SUBTYPE = 'UPDATE_MONSTER_SUBTYPE';
+export const UPDATE_MONSTER_TRIBE = 'UPDATE_MONSTER_TRIBE';
 export const UPDATE_SPELL_SUBTYPE = 'UPDATE_SPELL_SUBTYPE';
 export const UPDATE_TRAP_SUBTYPE = 'UPDATE_TRAP_SUBTYPE';
 export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION';
@@ -65,6 +65,14 @@ function updateDef(def){
     }
 }
 
+function updateTribes(tribes){
+    console.log(tribes);
+    return {
+        type: UPDATE_MONSTER_TRIBE,
+        tribes: tribes
+    }
+}
+
 function updateDescription(description){
     return {
         type: UPDATE_DESCRIPTION,
@@ -79,13 +87,6 @@ function updateEffect(effect){
     }
 }
 
-function updateType(type){
-    return {
-        type: UPDATE_TYPE,
-        cardType: type
-    }
-}
-
 function updateAttribute(attribute){
     return {
         type: UPDATE_ATTRIBUTE,
@@ -93,4 +94,4 @@ function updateAttribute(attribute){
     }
 }
 
-export {updateAtk, updateDef, updateName, updateEffect, updateType, updateDescription, updateLevel, updateAttribute}
+export {updateAtk, updateDef, updateName, updateEffect, updateDescription, updateLevel, updateAttribute, updateTribes}

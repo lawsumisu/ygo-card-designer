@@ -1,4 +1,5 @@
 import React from 'react';
+import level from '../assets/Level.png';
 
 /**
  * Component for setting the level of a card.
@@ -41,13 +42,19 @@ class LevelSelector extends React.Component {
         if (isHovered) className.push('ygo-card-level-hovered');
 
         return (
-            <span 
+            /*<span 
                 className={className.join(' ')}
                 onMouseEnter={(event) => this.updateHover(index)}
                 onClick={(event) => this.props.updateLevel(index)}
                 key={index}>
                     {'\u272a'}
-            </span>
+            </span>*/
+            <img 
+                src={level} 
+                className={className.join(' ')}                
+                onMouseEnter={(event) => this.updateHover(index)}
+                onClick={(event) => this.props.updateLevel(index)}
+                key={index}/>
         )
     }
 

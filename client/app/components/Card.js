@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateDescription, updateType} from '../redux/actions';
+import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateDescription, updateTribes} from '../redux/actions';
 import {LevelSelector} from './LevelSelector';
 import {AttributeSelector} from './AttributeSelector';
 import {ImageSelector} from './ImageSelector';
@@ -35,7 +35,7 @@ class Card extends React.Component{
                 </div>
                 
                 <div className="ygo-card-bottom">
-                    <TypeSelector isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
+                    <TypeSelector tribes={this.props.cardState.tribes} updateTribes={this.props.updateTribes} isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
                     <div>
                         <input className="ygo-card-effect" type="text" value={this.props.cardState.effect} onChange={(event) => this.props.updateEffect(event.target.value)}/>
                     </div>
@@ -73,7 +73,7 @@ const mapDispatchToProps = function(dispatch){
         updateDef: (def) => dispatch(updateDef(def)),
         updateEffect: (effect) => dispatch(updateEffect(effect)),
         updateDescription: (description) => dispatch(updateDescription(description)),
-        updateType: (type) => dispatch(updateType(type))
+        updateTribes: (tribes) => dispatch(updateTribes(tribes))
     }
 }
 

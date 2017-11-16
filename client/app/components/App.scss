@@ -41,32 +41,31 @@
 .ygo-card-level{
   display: flex;
   flex-direction: row-reverse;
+
+  .ygo-card-level-selected, .ygo-card-level-unselected{
+    width: 19.75px;
+    height: 19.75px;
+    cursor: pointer;
+  }
   
   .ygo-card-level-selected{
     color: #EC6400;
-    cursor: pointer;
   }
 
   .ygo-card-level-unselected{
-    cursor: pointer;
     visibility: hidden;
   }
 
   &:hover{
     .ygo-card-level-selected{
-      color: black;
-      text-shadow:
-        -1px -1px 0 #ff9900,  
-        1px -1px 0 #ff9900,
-        -1px 1px 0 #ff9900,
-        1px 1px 0 #ff9900;
+      opacity: .45;
     }
     .ygo-card-level-unselected{
-      color: black;
+      opacity: .1;
       visibility: visible;
     }
     .ygo-card-level-hovered{
-      color: #EC6400;
+      opacity: 1;
     }
     
   }
