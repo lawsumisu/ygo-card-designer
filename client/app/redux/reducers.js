@@ -5,7 +5,7 @@ import * as actions from './actions';
 const initialCardState = {
     name: 'Blue-Eyes White Dragon',
     level: 8,
-    attribute: '光',
+    attribute: 'LIGHT',
     description: 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
     tribes: [{
         name:'Dragon',

@@ -2,85 +2,106 @@
   text-size-adjust: none;
   font-family: helvetica, arial, sans-serif;
   line-height: 200%;
-  padding: 6px 20px 30px;
-  border: solid 1px red;
-  width: 250px;
   margin-top: 50px;
+
+  --card-diagonal: 1042.93px;
+  --aspect-ratio: 1.46;
+  --card-width: 590px;
+  --card-height: calc(86/59 * var(--card-width));
+
 }
-
-.ygo-card-top{
-    font-variant: small-caps;
-    width: 100%;
-    border: 1px solid brown;
-    box-sizing: border-box;
-    display: flex;
-
-    .ygo-card-name{
-      font-variant: small-caps;
-      font-family: serif;
-      flex: 1 0;
-    }
-
-    .ygo-card-attribute{
-      padding: 0 6px;
-      flex: 0 0;
-      position: relative;
-      cursor: pointer;
-
-      .ygo-card-attribute-selection{
-        cursor: pointer;
-        
-        &:hover{
-          color: #00bb00;
-          background-color: whitesmoke;
-        }
-      }
-    }
-}
-
-.ygo-card-level{
-  display: flex;
-  flex-direction: row-reverse;
-
-  .ygo-card-level-selected, .ygo-card-level-unselected{
-    width: 19.75px;
-    height: 19.75px;
-    cursor: pointer;
-  }
-  
-  .ygo-card-level-selected{
-    color: #EC6400;
-  }
-
-  .ygo-card-level-unselected{
-    visibility: hidden;
-  }
-
-  &:hover{
-    .ygo-card-level-selected{
-      opacity: .45;
-    }
-    .ygo-card-level-unselected{
-      opacity: .1;
-      visibility: visible;
-    }
-    .ygo-card-level-hovered{
-      opacity: 1;
-    }
-    
-  }
-}
-
-
 
 .ygo-card-content{
+  border: solid 1px red;
   display: flex;
   flex-direction: column;
   align-items: center;
+  //background-image: url("../assets/NormalMonster.png");
+  background-size: cover;
+  width: var(--card-width);
+  height: var(--card-height);
+}
+
+.ygo-card-top, .ygo-card-bottom{
+  width: calc(52/59 * var(--card-width));
+  box-sizing: border-box;
+}
+
+.ygo-card-top{
+  margin-top: calc(4/86 * var(--card-height));
+  height: calc(6/86 * var(--card-height));
+  font-variant: small-caps;
+  border: 1px solid brown;
+  display: flex;
+
+  .ygo-card-name{
+    font-variant: small-caps;
+    font-family: serif;
+    flex: 1 0;
+    width: 100%;
+  }
+
+  .ygo-card-attribute{
+    flex: 0 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+
+    .ygo-card-attribute-selection{
+      width: calc(5.5/59 * var(--card-width));
+      height: auto;
+    }
+
+    .ygo-card-attribute-suggestion{
+      cursor: pointer;
+      width: calc(5.5/59 * var(--card-width));
+      height: auto;
+      position: absolute;
+      opacity: .5;
+
+      &:hover{
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .ygo-card-center{
-  width: 95%;
+  width: calc(46/59 * var(--card-width));
+  height: calc(54/86 * var(--card-height));;
+
+  .ygo-card-level{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    height: calc(4.5/86 * var(--card-height));
+
+    .ygo-card-level-selected, .ygo-card-level-unselected{
+      width: calc(3.8/59 * var(--card-width));
+      height: calc(3.8/59 * var(--card-width));
+      cursor: pointer;
+    }
+    
+    .ygo-card-level-unselected{
+      visibility: hidden;
+    }
+
+    &:hover{
+      .ygo-card-level-selected{
+        opacity: .55;
+      }
+      .ygo-card-level-unselected{
+        opacity: .2;
+        visibility: visible;
+      }
+      .ygo-card-level-hovered{
+        opacity: 1;
+      }
+      
+    }
+  }
 
   .ygo-card-image{
     cursor: pointer;
@@ -89,15 +110,21 @@
     }
     img{
       width: 100%;
+      height: calc(46/59 * var(--card-width));
     }
   }
 }
 
 .ygo-card-bottom{
-  width: 100%;
+  height: calc(18/86 * var(--card-height));
   border: 1px solid brown;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: calc(1/59 * var(--card-width));
 
   .ygo-card-type{
+    line-height:100%;
     display: flex;
     flex-direction: row;
     font-size: 14px;
@@ -124,6 +151,9 @@
     }
     .ygo-card-type-input{
       display: none;
+      border: none;
+      padding: 0px;
+      margin: 0px;
       width: 100%;
       min-width: 60px;
       flex: 1 0;
@@ -147,22 +177,38 @@
     box-sizing: border-box;
   }
 
-  .ygo-card-description{
-    font-style: italic;
-    height: 50px;
-    font-size: 10px;
-    font-family: serif;
-    resize:none;
+  .ygo-card-bottom-text{
+    flex: 1 0;
+    border-bottom: 1px solid;
+    display: flex;
+    flex-direction: column;
+
+    .ygo-card-description, .ygo-card-effect{
+      font-size: 10px;
+      resize:none;
+      flex: 1 0;
+    }
+
+    .ygo-card-description{
+      font-style: italic;
+      height: 50px;
+      font-family: serif;
+    }
   }
 
   .ygo-card-battle-points{
+    width: calc(22.5/59 * var(--card-width));
     font-family: serif;
     font-weight: bold;
-    margin-left: auto;
-    width: 75%;
+    align-self: flex-end;
+    display: flex;
 
-    input{
-      width: 45px;
+    div{
+      flex: 0 1 50%;
+
+      input{
+        width: 45px;
+      }
     }
   }
 }

@@ -36,20 +36,29 @@ class Card extends React.Component{
                 
                 <div className="ygo-card-bottom">
                     <TypeSelector tribes={this.props.cardState.tribes} updateTribes={this.props.updateTribes} isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
-                    <div>
-                        <input className="ygo-card-effect" type="text" value={this.props.cardState.effect} onChange={(event) => this.props.updateEffect(event.target.value)}/>
-                    </div>
-                    <div>
+
+                    <div className="ygo-card-bottom-text">
+                        <textarea 
+                            className="ygo-card-effect" 
+                            value={this.props.cardState.effect} 
+                            onChange={(event) => this.props.updateEffect(event.target.value)}/>
                         <textarea 
                             className="ygo-card-description"
                             value={this.props.cardState.description} 
                             onChange={(event) => this.props.updateDescription(event.target.value)}/>
                     </div>
+                    <div>
+                        
+                    </div>
                     <div className="ygo-card-battle-points">
-                        ATK/
-                        <input type="text" value={this.props.cardState.atk} onChange={(event) => this.props.updateAtk(event.target.value)}/>
-                        DEF/
-                        <input type="text" value={this.props.cardState.def} onChange={(event) => this.props.updateDef(event.target.value)}/>
+                        <div>
+                            <span>ATK/</span>
+                            <input type="text" value={this.props.cardState.atk} onChange={(event) => this.props.updateAtk(event.target.value)}/>
+                        </div>
+                        <div>
+                            <span>DEF/</span>
+                            <input type="text" value={this.props.cardState.def} onChange={(event) => this.props.updateDef(event.target.value)}/>
+                        </div>                                       
                     </div>
                 </div>
             </div>

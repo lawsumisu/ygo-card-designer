@@ -66,7 +66,6 @@ function updateDef(def){
 }
 
 function updateTribes(tribes){
-    console.log(tribes);
     return {
         type: UPDATE_MONSTER_TRIBE,
         tribes: tribes

@@ -98,7 +98,6 @@ class TypeSelector extends React.Component{
     }
 
     getTribesAsDisplay(){
-        console.log(this.props.tribes)
         return _.map(this.props.tribes, (tribe, index) => {
             
             return (
