@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateDescription, updateTribes} from '../redux/actions';
+import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateLore, updateTribes} from '../redux/actions';
 import {LevelSelector} from './LevelSelector';
 import {AttributeSelector} from './AttributeSelector';
 import {ImageSelector} from './ImageSelector';
 import {TypeSelector} from './TypeSelector';
+import {TextEditor} from './TextEditor';
 import _ from 'lodash';
 import styles from './App.scss';
 import image from '../assets/BlueEyesWhiteDragon.png';
@@ -36,17 +37,8 @@ class Card extends React.Component{
                 
                 <div className="ygo-card-bottom">
                     <TypeSelector tribes={this.props.cardState.tribes} updateTribes={this.props.updateTribes} isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
-
-                    <div className="ygo-card-bottom-text">
-                        <textarea 
-                            className="ygo-card-effect" 
-                            value={this.props.cardState.effect} 
-                            onChange={(event) => this.props.updateEffect(event.target.value)}/>
-                        <textarea 
-                            className="ygo-card-description"
-                            value={this.props.cardState.description} 
-                            onChange={(event) => this.props.updateDescription(event.target.value)}/>
-                    </div>
+                    
+                    <TextEditor effect={this.props.cardState.effect} updateEffect={this.props.updateEffect} lore={this.props.cardState.lore} updateLore={this.props.updateLore}/>
                     <div>
                         
                     </div>
@@ -54,6 +46,9 @@ class Card extends React.Component{
                         <div>
                             <span>ATK/</span>
                             <input type="text" value={this.props.cardState.atk} onChange={(event) => this.props.updateAtk(event.target.value)}/>
+                        </div>
+                        <div className="ygo-card-battle-point-spacer">
+
                         </div>
                         <div>
                             <span>DEF/</span>
@@ -81,7 +76,7 @@ const mapDispatchToProps = function(dispatch){
         updateAtk: (atk) => dispatch(updateAtk(atk)),
         updateDef: (def) => dispatch(updateDef(def)),
         updateEffect: (effect) => dispatch(updateEffect(effect)),
-        updateDescription: (description) => dispatch(updateDescription(description)),
+        updateLore: (lore) => dispatch(updateLore(lore)),
         updateTribes: (tribes) => dispatch(updateTribes(tribes))
     }
 }

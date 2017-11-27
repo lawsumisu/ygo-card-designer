@@ -6,7 +6,7 @@ const initialCardState = {
     name: 'Blue-Eyes White Dragon',
     level: 8,
     attribute: 'LIGHT',
-    description: 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
+    lore: 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
     tribes: [{
         name:'Dragon',
         id: 0
@@ -34,9 +34,9 @@ function cardReducer(previousState=initialCardState, action){
             return Object.assign({}, previousState, {
                 tribes: action.tribes
             });
-        case actions.UPDATE_DESCRIPTION:
+        case actions.UPDATE_LORE:
             return Object.assign({}, previousState, {
-                description: action.description
+                lore: action.lore
             });
         case actions.UPDATE_EFFECT:
             return Object.assign({}, previousState, {

@@ -63,6 +63,17 @@ class TypeSelector extends React.Component{
         } 
     }
 
+    handleKeyPress(event){
+        //If pressing enter when there is content in this input, add it.
+        if (event.key === 'Enter'){
+            var input = event.target.value;
+            this.setState({
+                input: '',
+            });
+            this.props.updateTribes(_.concat(this.props.tribes, this.createTribe(input)));
+        }
+    }
+
     handleOnBlur(){
         // Append current input to tribe list and then clear it.
         if (!_.isEmpty(this.state.input)){
@@ -156,6 +167,7 @@ class TypeSelector extends React.Component{
                     type="text" 
                     value={this.state.input} 
                     onChange={(event) => this.updateInput(event)}
+                    onKeyPress={(event) => this.handleKeyPress(event)}
                     onFocus={(event) => this.handleOnFocus()}
                     onBlur={(event) => this.handleOnBlur()}/>
                 {this.getEffectAsDisplay()}

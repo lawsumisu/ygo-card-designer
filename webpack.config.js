@@ -59,7 +59,7 @@ module.exports = {
                 use: ['babel-loader'],
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|svg|jpg|gif|ttf)$/,
                 use: 'url-loader'
             }
         ]
