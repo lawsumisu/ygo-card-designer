@@ -1,0 +1,21 @@
+.max-size-container{
+    width: 200px;
+}
+
+.full-size-content, .max-size-container{
+    display: none;
+    white-space: pre;
+}
+
+.full-size-content, .max-size-container, .autoscaling-content{
+    font: inherit;
+}
+
+.autoscaling-content{
+    transform-origin: 0% 50%;
+
+    .resizable-input-content{
+        min-width: 100%;
+    }
+}
+

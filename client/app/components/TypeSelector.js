@@ -165,7 +165,8 @@ class TypeSelector extends React.Component{
                 <input 
                     className="ygo-card-type-input"
                     type="text" 
-                    value={this.state.input} 
+                    value={this.state.input}
+                    placeholder='Enter type here...' 
                     onChange={(event) => this.updateInput(event)}
                     onKeyPress={(event) => this.handleKeyPress(event)}
                     onFocus={(event) => this.handleOnFocus()}

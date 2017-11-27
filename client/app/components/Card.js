@@ -9,6 +9,7 @@ import {TextEditor} from './TextEditor';
 import _ from 'lodash';
 import styles from './App.scss';
 import image from '../assets/BlueEyesWhiteDragon.png';
+import {AutoscalingInput} from './common/AutoscalingInput';
 
 
 class Card extends React.Component{
@@ -20,11 +21,13 @@ class Card extends React.Component{
         return (
             <div className="ygo-card-content">
                 <div className="ygo-card-top">
-                    <input 
+                    <AutoscalingInput
                         className="ygo-card-name"
                         type="text" 
+                        placeholder="Enter a name here..."
                         value={this.props.cardState.name} 
-                        onChange={(event) => this.props.updateName(event.target.value)}/>
+                        onChange={(event) => this.props.updateName(event.target.value)}
+                    />
                     <AttributeSelector 
                         updateAttribute={this.props.updateAttribute}
                         attribute={this.props.cardState.attribute}/> 

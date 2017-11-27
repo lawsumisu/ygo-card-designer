@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import _ from 'lodash';
 
 class ResizableInput extends React.Component{
     constructor(props){
@@ -28,12 +29,17 @@ class ResizableInput extends React.Component{
 
     render(){
         return (
-            <div>
+            <div 
+                className={this.props.containerClassName}
+                style={this.props.containerStyle}
+                >
                 <span className="resizable-input-hidden-content" ref="hiddenContent"></span>
                 <input 
                     className={this.getClassName()}
                     ref="content" type="text" 
-                    value={this.props.value} 
+                    placeholder={this.props.placeholder}
+                    value={this.props.value}
+                    style={this.props.style} 
                     onChange={(event) => this.updateInput(event)}
                     onKeyDown={this.props.onKeyDown ? (event) => this.props.onKeyDown(event) : (event) => {}}/>
             </div>     
