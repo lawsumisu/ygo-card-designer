@@ -4,4 +4,4 @@ A modern _Yu-Gi-Oh!_ card editor built with React. The goal of this project is t
 ## Setup
 Run `npm install` to download dependencies.  
 Run `npm start` to start the webpack bundler and server that hosts the app.  
-Once the server has started successfully, navigate to http://localhost:8000.
+Once the server has started successfully, navigate to http://localhost:8080.
