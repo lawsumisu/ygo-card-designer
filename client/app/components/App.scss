@@ -216,8 +216,10 @@
 
     .ygo-card-lore, .ygo-card-effect{
       font-size: 10px;
+      line-height: 16px;
       resize:none;
       flex: 1 0;
+      height: 50%;
     }
 
     .ygo-card-lore{

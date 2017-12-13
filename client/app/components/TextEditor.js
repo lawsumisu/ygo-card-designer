@@ -1,5 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
+import $ from 'jquery';
+import 'jquery-textfill';
+import {AutoscalingTextarea} from './common/AutoscalingTextarea';
 
 class TextEditor extends React.Component{
     constructor(props){
@@ -11,6 +14,10 @@ class TextEditor extends React.Component{
             loreIsFocused: false
 
         };
+    }
+
+    componentDidMount(){
+        
     }
 
     handleOnMouseEnter(){
@@ -38,6 +45,14 @@ class TextEditor extends React.Component{
         }
     }
 
+    updateEffect(event){
+        this.props.updateEffect(event.target.value);
+        // $('.ygo-card-effect').textfill({
+        //     debug: true,
+        //     innerTag: 'textarea'
+        // });
+    }
+
     getStyle(text){
         if (_.isEmpty(text) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.mainIsHovered){
             return {
@@ -52,22 +67,26 @@ class TextEditor extends React.Component{
             <div className="ygo-card-bottom-text"
                 onMouseEnter={(event) => this.handleOnMouseEnter()}
                 onMouseLeave={(event) => this.handleOnMouseLeave()}>
-                <textarea
+                <AutoscalingTextarea
                     style={this.getStyle(this.props.effect)}
-                    className="ygo-card-effect" 
+                    maxFontSize={15}
+                    className="ygo-card-effect"
                     placeholder="Enter effect here..."
                     value={this.props.effect} 
                     onChange={(event) => this.props.updateEffect(event.target.value)}
                     onFocus={(event) => this.updateFocus('effect', true)}
                     onBlur={(event) => this.updateFocus('effect', false)}/>
-                <textarea 
+                
+                <AutoscalingTextarea
                     style={this.getStyle(this.props.lore)}
+                    maxFontSize={15}
                     className="ygo-card-lore"
                     placeholder="Enter lore here..."
                     value={this.props.lore} 
                     onChange={(event) => this.props.updateLore(event.target.value)}
                     onFocus={(event) => this.updateFocus('lore', true)}
-                    onBlur={(event) => this.updateFocus('lore', false)}/>
+                    onBlur={(event) => this.updateFocus('lore', false)}
+                    />
             </div>
         )
         

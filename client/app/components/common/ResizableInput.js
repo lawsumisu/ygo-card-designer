@@ -2,6 +2,9 @@ import React from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
 
+/**
+ * A <input/> like component that grows as text is added.
+ */
 class ResizableInput extends React.Component{
     constructor(props){
         super(props);
@@ -23,8 +26,13 @@ class ResizableInput extends React.Component{
     }
 
     resizeInput(){
-        $(this.refs.hiddenContent).text($(this.refs.content).val());
-        $(this.refs.content).width($(this.refs.hiddenContent).width()); 
+        var hiddenContentElement =  $(this.refs.hiddenContent);
+        var resizingContentElement = $(this.refs.content);
+
+        hiddenContentElement.show();
+        hiddenContentElement.text(resizingContentElement.val());
+        resizingContentElement.width(hiddenContentElement.width()); 
+        hiddenContentElement.hide();
     }
 
     render(){

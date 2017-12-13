@@ -5,6 +5,9 @@ import {ResizableInput} from './ResizableInput';
 import styles from '../../style/AutoscalingInput.scss';
 
 
+/**
+ * A <input/> like component that horizontally scales text so that it does not overflow the input.
+ */
 class AutoscalingInput extends React.Component{
     constructor(props){
         super(props);

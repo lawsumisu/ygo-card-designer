@@ -1,0 +1,18 @@
+.full-content, .autoscaling-textarea-content{
+    font: inherit;
+    width: 100%;
+    padding: 0px;
+}
+
+.full-content{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    display: none;
+}
+
+.autoscaling-textarea-content{
+    resize: none;
+    height: 100%;
+    overflow: hidden;
+}
+
