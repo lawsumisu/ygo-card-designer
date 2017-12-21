@@ -47,14 +47,14 @@ class Card extends React.Component{
                     </div>
                     <div className="ygo-card-battle-points">
                         <div>
-                            <span>ATK/</span>
+                            <span>ATK</span><span className="battle-point-slash">/</span>
                             <input type="text" value={this.props.cardState.atk} onChange={(event) => this.props.updateAtk(event.target.value)}/>
                         </div>
                         <div className="ygo-card-battle-point-spacer">
 
                         </div>
                         <div>
-                            <span>DEF/</span>
+                            <span>DEF</span><span className="battle-point-slash">/</span>
                             <input type="text" value={this.props.cardState.def} onChange={(event) => this.props.updateDef(event.target.value)}/>
                         </div>                                       
                     </div>

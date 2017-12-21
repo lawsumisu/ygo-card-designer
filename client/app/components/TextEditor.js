@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import $ from 'jquery';
-import 'jquery-textfill';
 import {AutoscalingTextarea} from './common/AutoscalingTextarea';
 
 class TextEditor extends React.Component{
@@ -12,7 +11,6 @@ class TextEditor extends React.Component{
             mainIsHovered: false,
             effectIsFocused: false,
             loreIsFocused: false
-
         };
     }
 

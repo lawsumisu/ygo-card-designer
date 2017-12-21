@@ -21,16 +21,23 @@ class AutoscalingInput extends React.Component{
         this.scaleInput();
     }
 
-    updateInput(event){
-        this.props.onChange(event);
+    componentDidUpdate(){
         this.scaleInput();
+    }
+
+    updateInput(event){
+        this.props.onChange(event);  
     }
 
     scaleInput(){
         $(this.refs.fullSizeContent).text($(this.autoscalingInputRef.refs.content).val()); 
-        this.setState({
-            scale: Math.min($(this.refs.maxSizeContainer).width()/$(this.refs.fullSizeContent).width(), 1)
-        });
+        var newScale = Math.min($(this.refs.maxSizeContainer).width()/$(this.refs.fullSizeContent).width(), 1);
+        if (newScale !== this.state.scale){
+            this.setState({
+            scale: newScale 
+            });
+        }
+        
     }
 
     getStyle(){

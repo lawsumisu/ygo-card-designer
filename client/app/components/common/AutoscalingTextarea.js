@@ -1,6 +1,5 @@
 import React from 'react';
 import $ from 'jquery';
-import 'jquery-textfill';
 import _ from 'lodash';
 import styles from '../../style/AutoscalingTextarea.scss';
 

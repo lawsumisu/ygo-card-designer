@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import {AutoscalingTextarea} from './common/AutoscalingTextarea';
+import CardDownloader from './CardDownloader';
 import styles from './App.scss';
 
 class App extends React.Component{
@@ -11,6 +11,7 @@ class App extends React.Component{
   render(){
     return (
       <div className="app">
+        <CardDownloader/>
         <Card/>
       </div>
     )

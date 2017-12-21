@@ -127,11 +127,18 @@ class TypeSelector extends React.Component{
         });
     }
 
-    getEffectAsDisplay(){
+    getEffectTypeAsDisplay(){
         if (this.props.isEffect && this.props.isEffect()){
             return (
                 <div>
                     /Effect
+                </div>
+            )
+        }
+        else{
+            return (
+                <div>
+                    /Normal
                 </div>
             )
         }
@@ -166,12 +173,12 @@ class TypeSelector extends React.Component{
                     className="ygo-card-type-input"
                     type="text" 
                     value={this.state.input}
-                    placeholder='Enter type here...' 
+                    placeholder='New tribe...' 
                     onChange={(event) => this.updateInput(event)}
                     onKeyPress={(event) => this.handleKeyPress(event)}
                     onFocus={(event) => this.handleOnFocus()}
                     onBlur={(event) => this.handleOnBlur()}/>
-                {this.getEffectAsDisplay()}
+                {this.getEffectTypeAsDisplay()}
                 <span>]</span>
             </div>
         )
