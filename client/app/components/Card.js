@@ -17,9 +17,21 @@ class Card extends React.Component{
         super(props);
     }
 
+    getClassNames(){
+        var classNames = ['ygo-card-content'];
+        if (this.props.cardState.effect.length > 0){
+            classNames.push('effect-monster');
+        }
+        else{
+            classNames.push('normal-monster');
+        }
+
+        return classNames.join(' ');
+    }
+
     render(){
         return (
-            <div className="ygo-card-content">
+            <div className={this.getClassNames()}>
                 <div className="ygo-card-top">
                     <AutoscalingInput
                         className="ygo-card-name"

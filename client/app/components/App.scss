@@ -42,7 +42,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("../assets/NormalMonster2.png");
   background-size: cover;
   width: var(--card-width);
   height: var(--card-height);
@@ -51,6 +50,15 @@
     background: transparent;
     border: none;
   }
+
+  &.normal-monster{
+    background-image: url("../assets/NormalMonster2.png");
+  }
+
+  &.effect-monster{
+    background-image: url("../assets/EffectMonster.png");
+  }
+
 }
 
 .ygo-card-top, .ygo-card-bottom{

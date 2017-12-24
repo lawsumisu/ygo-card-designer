@@ -11,7 +11,6 @@ class ImageSelector extends React.Component{
     }
 
     updateImage(event){
-        console.log(event.target.files)
         var file = event.target.files[0];
         var imageType = /^image\//;
 

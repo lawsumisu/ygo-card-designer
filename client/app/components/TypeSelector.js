@@ -57,7 +57,18 @@ class TypeSelector extends React.Component{
         // If pressing backspace when there is no content in this input, delete it.
         if (_.isEmpty(this.props.tribes[index].name) && event.keyCode === 8){
             this.props.tribes.splice(index, 1);
-            this.props.updateTribes(this.props.tribes)
+            this.props.updateTribes(this.props.tribes);
+
+            //Autofocus previous tribe
+            var tribeInputElements = $('.ygo-card-type-tribe .resizable-input-content');
+            if (tribeInputElements.length > 1){
+                var i = Math.max(index-1, 0);
+                tribeInputElements[i].focus();
+            }
+            else if (tribeInputElements.length == 1){
+                //Else if there was only one element left, focus the original input
+                $('.ygo-card-type-input').focus();
+            }
             
             event.preventDefault();
         } 
@@ -115,7 +126,7 @@ class TypeSelector extends React.Component{
                 <div
                     className="ygo-card-type-tribe"
                     key={tribe.id}>
-                    <ResizableInput 
+                    <ResizableInput
                         value={tribe.name} 
                         onChange={(event) => this.updateTribe(event, index)}
                         onKeyDown={(event) => this.handleKeyDown(event, index)}/>
@@ -145,7 +156,7 @@ class TypeSelector extends React.Component{
     }
 
     updateFontScale(){
-        console.log($('.ygo-card-type').width());
+        // console.log($('.ygo-card-type').width());
     }
 
     // Getter for spacer that precedes the input box. It has special properties depending on whether or not the main input box is being interacted with.
@@ -173,7 +184,7 @@ class TypeSelector extends React.Component{
                     className="ygo-card-type-input"
                     type="text" 
                     value={this.state.input}
-                    placeholder='New tribe...' 
+                    placeholder='Add tribe...' 
                     onChange={(event) => this.updateInput(event)}
                     onKeyPress={(event) => this.handleKeyPress(event)}
                     onFocus={(event) => this.handleOnFocus()}

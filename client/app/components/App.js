@@ -6,6 +6,7 @@ import styles from './App.scss';
 class App extends React.Component{
   constructor(props){
     super(props);
+
   }
 
   render(){
