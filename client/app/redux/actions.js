@@ -17,6 +17,7 @@ export const UPDATE_ATK = 'UPDATE_ATK';
 export const UPDATE_DEF = 'UPDATE_DEF';
 export const UPDATE_TYPE = 'UPDATE_TYPE';
 export const UPDATE_MONSTER_TRIBE = 'UPDATE_MONSTER_TRIBE';
+export const UPDATE_MONSTER_TYPE =  'UPDATE_MONSTER_TYPE';
 export const UPDATE_SPELL_SUBTYPE = 'UPDATE_SPELL_SUBTYPE';
 export const UPDATE_TRAP_SUBTYPE = 'UPDATE_TRAP_SUBTYPE';
 export const UPDATE_LORE = 'UPDATE_LORE';
@@ -72,6 +73,13 @@ function updateTribes(tribes){
     }
 }
 
+function updateMonsterType(monsterType){
+    return {
+        type: UPDATE_MONSTER_TYPE,
+        monsterType: monsterType
+    }
+}
+
 function updateLore(lore){
     return {
         type: UPDATE_LORE,
@@ -93,4 +101,4 @@ function updateAttribute(attribute){
     }
 }
 
-export {updateAtk, updateDef, updateName, updateEffect, updateLore, updateLevel, updateAttribute, updateTribes}
+export {updateAtk, updateDef, updateName, updateEffect, updateLore, updateLevel, updateAttribute, updateTribes, updateMonsterType}

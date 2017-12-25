@@ -46,7 +46,7 @@
   width: var(--card-width);
   height: var(--card-height);
 
-  input, textarea{
+  input, textarea, select{
     background: transparent;
     border: none;
   }
@@ -57,6 +57,18 @@
 
   &.effect-monster{
     background-image: url("../assets/EffectMonster.png");
+  }
+
+  &.fusion-monster{
+    background-image: url("../assets/FusionMonster.png");
+  }
+
+  &.ritual-monster{
+    background-image: url("../assets/RitualMonster.png");
+  }
+
+  &.synchro-monster{
+    background-image: url("../assets/SynchroMonster.png");
   }
 
 }
@@ -148,13 +160,18 @@
     line-height: 0;
     padding: 7.8px;
     cursor: pointer;
+    height: calc(44.3/59 * var(--card-width));
     #ygo-card-image-file-loader{
       display: none;
     }
     img{
       width: 100%;
-      height: auto;
+      height: 100%;
     }
+  }
+
+  .ygo-card-set-id{
+    height: calc(3.8/59 * var(--card-width));
   }
 }
 
@@ -175,8 +192,11 @@
     font-family: YGO ITC Stone Serif Small Caps Bold;
 
     &:hover{
-      .ygo-card-type-input{
+      .ygo-card-type-input, .ygo-card-monster-type-selector{
         display: block;
+      }
+      .ygo-card-monster-type-selected{
+        display: none;
       }
     }
     
@@ -195,19 +215,26 @@
       display: none;
     }
     .ygo-card-type-input{
-      display: none;
       padding: 0px;
       margin: 0px;
       width: 100%;
       min-width: 60px;
       flex: 1 0;
       box-sizing: border-box;
+    }
+
+    .ygo-card-monster-type-selector, .ygo-card-type-input{
+      display: none;
       font: inherit;
 
       &:focus{
         display: block;
       }
-
+    }
+    
+    .ygo-card-monster-type{
+      display: flex;
+      flex-direction: row;
     }
   }
 

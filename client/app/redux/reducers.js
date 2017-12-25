@@ -1,11 +1,13 @@
 'use strict';
 
 import * as actions from './actions';
+import {MonsterTypes} from '../constants';
 
 const initialCardState = {
     name: 'Blue-Eyes White Dragon',
     level: 8,
     attribute: 'LIGHT',
+    monsterType: MonsterTypes.NORMAL,
     lore: 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
     tribes: [{
         name:'Dragon',
@@ -33,6 +35,10 @@ function cardReducer(previousState=initialCardState, action){
         case actions.UPDATE_MONSTER_TRIBE:
             return Object.assign({}, previousState, {
                 tribes: action.tribes
+            });
+        case actions.UPDATE_MONSTER_TYPE:
+            return Object.assign({}, previousState, {
+                monsterType: action.monsterType
             });
         case actions.UPDATE_LORE:
             return Object.assign({}, previousState, {

@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateLore, updateTribes} from '../redux/actions';
+import {MonsterTypes} from '../constants';
+import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateLore, updateTribes, updateMonsterType} from '../redux/actions';
 import {LevelSelector} from './LevelSelector';
 import {AttributeSelector} from './AttributeSelector';
 import {ImageSelector} from './ImageSelector';
-import {TypeSelector} from './TypeSelector';
+import {TypeEditor} from './typeEditor/TypeEditor';
 import {TextEditor} from './TextEditor';
 import _ from 'lodash';
 import styles from './App.scss';
@@ -19,7 +20,16 @@ class Card extends React.Component{
 
     getClassNames(){
         var classNames = ['ygo-card-content'];
-        if (this.props.cardState.effect.length > 0){
+        if (this.props.cardState.monsterType === MonsterTypes.FUSION){
+            classNames.push('fusion-monster');
+        }
+        else if (this.props.cardState.monsterType === MonsterTypes.SYNCHRO){
+            classNames.push('synchro-monster');
+        }
+        else if (this.props.cardState.monsterType === MonsterTypes.RITUAL){
+            classNames.push('ritual-monster');
+        }
+        else if (this.props.cardState.effect.length > 0){
             classNames.push('effect-monster');
         }
         else{
@@ -47,11 +57,16 @@ class Card extends React.Component{
                 <div className="ygo-card-center">
                     <LevelSelector level={this.props.cardState.level} updateLevel={this.props.updateLevel}/>
                     <ImageSelector/>
-                    
+                    <div className="ygo-card-set-id"></div>
                 </div>
                 
                 <div className="ygo-card-bottom">
-                    <TypeSelector tribes={this.props.cardState.tribes} updateTribes={this.props.updateTribes} isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
+                    <TypeEditor 
+                        tribes={this.props.cardState.tribes} 
+                        updateTribes={this.props.updateTribes}
+                        monsterType={this.props.cardState.monsterType}
+                        updateMonsterType={this.props.updateMonsterType} 
+                        isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
                     
                     <TextEditor effect={this.props.cardState.effect} updateEffect={this.props.updateEffect} lore={this.props.cardState.lore} updateLore={this.props.updateLore}/>
                     <div>
@@ -92,7 +107,8 @@ const mapDispatchToProps = function(dispatch){
         updateDef: (def) => dispatch(updateDef(def)),
         updateEffect: (effect) => dispatch(updateEffect(effect)),
         updateLore: (lore) => dispatch(updateLore(lore)),
-        updateTribes: (tribes) => dispatch(updateTribes(tribes))
+        updateTribes: (tribes) => dispatch(updateTribes(tribes)),
+        updateMonsterType: (type) => dispatch(updateMonsterType(type))
     }
 }
 

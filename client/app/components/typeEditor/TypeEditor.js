@@ -2,11 +2,12 @@ import React from 'react';
 import _ from 'lodash';
 import {sprintf} from 'sprintf-js';
 import $ from 'jquery';
-import {ResizableInput} from './common/ResizableInput';
-import styles from '../style/ResizableInput.scss';
+import {ResizableInput} from '../common/ResizableInput';
+import {MonsterTypeEditor} from './MonsterTypeEditor';
+import styles from '../../style/ResizableInput.scss';
 
 var tribeCount = 0;
-class TypeSelector extends React.Component{
+class TypeEditor extends React.Component{
     constructor(props){
         super(props);
 
@@ -189,6 +190,7 @@ class TypeSelector extends React.Component{
                     onKeyPress={(event) => this.handleKeyPress(event)}
                     onFocus={(event) => this.handleOnFocus()}
                     onBlur={(event) => this.handleOnBlur()}/>
+                <MonsterTypeEditor updateMonsterType={this.props.updateMonsterType} monsterType={this.props.monsterType}/>
                 {this.getEffectTypeAsDisplay()}
                 <span>]</span>
             </div>
@@ -196,4 +198,4 @@ class TypeSelector extends React.Component{
     }
 }
 
-export {TypeSelector};
+export {TypeEditor};
