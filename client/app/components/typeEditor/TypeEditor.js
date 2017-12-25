@@ -13,10 +13,14 @@ class TypeEditor extends React.Component{
 
         this.state = {
             input: '',
-            fontWidthScale: 1,
+            scale: 1,
             inputIsFocused: false,
             inputIsHovered: false
         }
+    }
+
+    componentDidUpdate(){
+        this.updateScale();
     }
 
     createTribe(tribeString){
@@ -51,7 +55,7 @@ class TypeEditor extends React.Component{
         
         this.props.updateTribes(this.props.tribes.slice(0, index+1).concat(tribesToAdd, this.props.tribes.slice(index+1)));
 
-        setTimeout(() => this.updateFontScale(), 100);
+        setTimeout(() => this.updateScale(), 100);
     }
 
     handleKeyDown(event, index){
@@ -143,21 +147,28 @@ class TypeEditor extends React.Component{
         if (this.props.isEffect && this.props.isEffect()){
             return (
                 <div>
-                    /Effect
+                    <span>/</span>
+                    <span>Effect</span>
                 </div>
             )
         }
         else{
             return (
                 <div>
-                    /Normal
+                    <span>/</span>
+                    <span>Normal</span>
                 </div>
             )
         }
     }
 
-    updateFontScale(){
-        // console.log($('.ygo-card-type').width());
+    updateScale(){
+        var scaleFactor = Math.min($(this.refs.hiddenContent).width()/($(this.refs.actualContent).width()), 1)
+        if (scaleFactor !== this.state.scale){
+            this.setState({
+                scale: Math.min(scaleFactor, 1)
+            });
+        }   
     }
 
     // Getter for spacer that precedes the input box. It has special properties depending on whether or not the main input box is being interacted with.
@@ -171,29 +182,34 @@ class TypeEditor extends React.Component{
 
     render(){
         var style = {
-            transform: sprintf('scale(%s, 1)', this.state.fontWidthScale)
+            transform: sprintf('scale(%s, 1)', this.state.scale)
         }
         return (
-            <div 
-                className="ygo-card-type"
-                onMouseEnter={(event) => this.handleOnMouseEnter()}
-                onMouseLeave={(event) => this.handleOnMouseLeave()}
-                style={style}>
-                <span>[</span>
-                {this.getTribesAsDisplay()}
-                <input 
-                    className="ygo-card-type-input"
-                    type="text" 
-                    value={this.state.input}
-                    placeholder='Add tribe...' 
-                    onChange={(event) => this.updateInput(event)}
-                    onKeyPress={(event) => this.handleKeyPress(event)}
-                    onFocus={(event) => this.handleOnFocus()}
-                    onBlur={(event) => this.handleOnBlur()}/>
-                <MonsterTypeEditor updateMonsterType={this.props.updateMonsterType} monsterType={this.props.monsterType}/>
-                {this.getEffectTypeAsDisplay()}
-                <span>]</span>
+            <div>
+                <div className="ygo-card-type-hidden-content"  ref="hiddenContent"></div>
+                <div 
+                    className="ygo-card-type"
+                    ref="actualContent"
+                    onMouseEnter={(event) => this.handleOnMouseEnter()}
+                    onMouseLeave={(event) => this.handleOnMouseLeave()}
+                    style={style}>
+                    <span>[</span>
+                    {this.getTribesAsDisplay()}
+                    <input 
+                        className="ygo-card-type-input"
+                        type="text" 
+                        value={this.state.input}
+                        placeholder='Add tribe...' 
+                        onChange={(event) => this.updateInput(event)}
+                        onKeyPress={(event) => this.handleKeyPress(event)}
+                        onFocus={(event) => this.handleOnFocus()}
+                        onBlur={(event) => this.handleOnBlur()}/>
+                    <MonsterTypeEditor updateMonsterType={this.props.updateMonsterType} monsterType={this.props.monsterType}/>
+                    {this.getEffectTypeAsDisplay()}
+                    <span>]</span>
+                </div>
             </div>
+            
         )
     }
 }

@@ -44,7 +44,8 @@ class ResizableInput extends React.Component{
                 <span className="resizable-input-hidden-content" ref="hiddenContent"></span>
                 <input 
                     className={this.getClassName()}
-                    ref="content" type="text" 
+                    ref="content" 
+                    type="text" 
                     placeholder={this.props.placeholder}
                     value={this.props.value}
                     style={this.props.style} 
