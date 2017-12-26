@@ -10,7 +10,6 @@ import style from './CatalogInput.scss';
 class CatalogInput extends React.Component{
     constructor(props){
         super(props);
-        console.log(this.props.style);
 
         this.state = {
             inputIsFocused: false,
@@ -73,7 +72,7 @@ class CatalogInput extends React.Component{
                         )
                     }
                     
-                    {index < this.props.items.length-1 ? <div>{this.props.delimiter}</div> : this.getInputPrecedingDelimiterAsDisplay()}
+                    {index < this.props.items.length-1 ? <div>{this.props.delimiter}</div> : null}
                 </div>
             )
         });
@@ -112,6 +111,14 @@ class CatalogInput extends React.Component{
         return inputClassNames.join(' ');
     }
 
+    getInputContainerClassNames(){
+        var inputContainerClassNames = ['catalog-input-container'];
+        if (this.state.inputIsFocused){
+            inputContainerClassNames.push('catalog-input-container-visible');
+        }
+        return inputContainerClassNames.join(' ');
+    }
+
     getTransformedInput(inputElement){
         if (this.props.inputTransform){
             return this.props.inputTransform(inputElement);
@@ -130,15 +137,15 @@ class CatalogInput extends React.Component{
             this.props.updateItems(this.props.items);
 
             //Autofocus previous item
-            var tribeInputElements = $('.ygo-card-type-tribe .resizable-input-content');
-            if (tribeInputElements.length > 1){
-                var i = Math.max(index-1, 0);
-                tribeInputElements[i].focus();
-            }
-            else if (tribeInputElements.length == 1){
-                //Else if there was only one element left, focus the original input
-                $('.ygo-card-type-input').focus();
-            }
+            // var tribeInputElements = $('.ygo-card-type-tribe .resizable-input-content');
+            // if (tribeInputElements.length > 1){
+            //     var i = Math.max(index-1, 0);
+            //     tribeInputElements[i].focus();
+            // }
+            // else if (tribeInputElements.length == 1){
+            //     //Else if there was only one element left, focus the original input
+            //     $('.ygo-card-type-input').focus();
+            // }
             
             event.preventDefault();
         } 
@@ -158,7 +165,7 @@ class CatalogInput extends React.Component{
      handleOnBlur(){
         // Append current input to tribe list and then clear it.
         if (!_.isEmpty(this.state.input)){
-            this.props.updateTribes(_.concat(this.props.tribes, this.state.input));
+            this.props.updateItems(_.concat(this.props.items, this.state.input));
             this.setState({
                 input: '',
                 inputIsFocused: false
@@ -181,19 +188,25 @@ class CatalogInput extends React.Component{
         return(
             <div 
                 className={this.getClassNames()}
-                style={this.props.style}>
+                style={this.props.style}
+                onMouseEnter={this.props.onMouseEnter}
+                onMouseLeave={this.props.onMouseLeave}>
                 {this.getItemsAsDisplay()}
-                {this.getTransformedInput(
-                    <input 
-                        className={this.getInputClassNames()}
-                        type="text" 
-                        value={this.state.input}
-                        placeholder={this.props.placeholder}
-                        onChange={(event) => this.updateInput(event)}
-                        onKeyPress={(event) => this.handleKeyPress(event)}
-                        onFocus={(event) => this.handleOnFocus()}
-                        onBlur={(event) => this.handleOnBlur()}/>
-                )}
+                <div className={this.getInputContainerClassNames()}>
+                    {this.props.items.length > 1 ? <div>{this.props.delimiter}</div> : null}
+                    {this.getTransformedInput(
+                        <input 
+                            className={this.getInputClassNames()}
+                            type="text" 
+                            value={this.state.input}
+                            placeholder={this.props.placeholder}
+                            onChange={(event) => this.updateInput(event)}
+                            onKeyPress={(event) => this.handleKeyPress(event)}
+                            onFocus={(event) => this.handleOnFocus()}
+                            onBlur={(event) => this.handleOnBlur()}/>
+                    )}
+                </div>
+                
             </div>
         )
     }

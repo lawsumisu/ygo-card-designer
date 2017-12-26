@@ -265,6 +265,9 @@
     .ygo-card-effect-container{
       display: flex;
       flex-direction: column;
+      &.ygo-card-effect-container-invisible{
+        display: none;
+      }
     }
 
     .ygo-card-effect, .ygo-card-fusion-materials{
@@ -274,6 +277,10 @@
     .ygo-card-effect{
       min-height: 0px; //This is to help the flex-shrink to work when monster materials are visible
       flex: 1 1;
+
+      &.ygo-card-effect-invisible{
+        display: none;
+      }
     }
 
     .ygo-card-fusion-materials{

@@ -45,10 +45,16 @@ class DescriptionEditor extends React.Component{
                     items={this.props.fusionMaterials}
                     updateItems={this.props.updateFusionMaterials}
                     inputTransform={inputTransform}
+                    onMouseEnter={(event) => this.updateMaterialHorizontalScale()}
+                    onMouseLeave={(event) => this.updateMaterialHorizontalScale()}
                 />
             )
         }
     }
+
+    /* -------------- *
+     | Event Handlers |
+     + -------------- */
 
     handleOnMouseEnter(){
         this.setState({
@@ -60,6 +66,23 @@ class DescriptionEditor extends React.Component{
         this.setState({
             mainIsHovered: false
         });
+    }
+
+    getEffectContainerClassNames(effectText){
+        var effectClassNames = ['ygo-card-effect-container'];
+        if (_.isEmpty(effectText) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.mainIsHovered && (
+            _.isEmpty(this.props.fusionMaterials) || this.props.monsterType !== MonsterTypes.FUSION)){
+            effectClassNames.push('ygo-card-effect-container-invisible');
+        }
+        return effectClassNames.join(' ');
+    }
+
+    getEffectClassNames(effectText){
+        var effectClassNames = ['ygo-card-effect'];
+        if (_.isEmpty(effectText) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.mainIsHovered){
+            effectClassNames.push('ygo-card-effect-invisible');
+        }
+        return effectClassNames.join(' ');
     }
 
     updateFocus(inputType, isFocused){
@@ -77,10 +100,6 @@ class DescriptionEditor extends React.Component{
 
     updateEffect(event){
         this.props.updateEffect(event.target.value);
-        // $('.ygo-card-effect').textfill({
-        //     debug: true,
-        //     innerTag: 'textarea'
-        // });
     }
 
     getStyle(text){
@@ -92,25 +111,18 @@ class DescriptionEditor extends React.Component{
         else return {}
     }
 
-    getEffectContainerStyle(text){
-        if (_.isEmpty(text) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.mainIsHovered && this.props.fusionMaterials.length == 0){
-            return {
-                display: 'none'
-            };
-        }
-        else return {}
-    }
-
     updateMaterialHorizontalScale(){
-        var maxWidth = $('.ygo-card-effect-container').width();
-        var actualWidth = $('.ygo-card-fusion-materials').width();
-        var materialHorizontalScaleFactor = Math.min(maxWidth/actualWidth, 1);
-        if (materialHorizontalScaleFactor !== this.state.materialHorizontalScale){
-            this.setState({
-                materialHorizontalScale: Math.min(materialHorizontalScaleFactor, 1)
-            });
-        } 
-        console.log(maxWidth, actualWidth, materialHorizontalScaleFactor);
+        if (this.props.monsterType === MonsterTypes.FUSION){
+            var maxWidth = $('.ygo-card-effect-container').width();
+            var actualWidth = $('.ygo-card-fusion-materials').width();
+            var materialHorizontalScaleFactor = Math.min(maxWidth/actualWidth, 1);
+            if (materialHorizontalScaleFactor !== this.state.materialHorizontalScale){
+                this.setState({
+                    materialHorizontalScale: Math.min(materialHorizontalScaleFactor, 1)
+                });
+            }
+        }
+         
     }
 
     render(){
@@ -119,12 +131,11 @@ class DescriptionEditor extends React.Component{
                 onMouseEnter={(event) => this.handleOnMouseEnter()}
                 onMouseLeave={(event) => this.handleOnMouseLeave()}>
                 <div 
-                    className="ygo-card-effect-container"
-                    style={this.getEffectContainerStyle(this.props.effect)}>
+                    className={this.getEffectContainerClassNames(this.props.effect)}>
                     {this.getMaterialEditor()}
                     <AutoscalingTextarea
                         maxFontSize={15}
-                        className="ygo-card-effect"
+                        className={this.getEffectClassNames()}
                         placeholder="Enter effect here..."
                         value={this.props.effect} 
                         onChange={(event) => this.props.updateEffect(event.target.value)}
