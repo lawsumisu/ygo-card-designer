@@ -34,7 +34,9 @@ class MonsterTypeEditor extends React.Component{
                     onFocus={(event) => this.handleOnFocus(event)}
                     onBlur={(event) => this.handleOnBlur(event)}
                     value={this.props.monsterType}>
-                    <option value={MonsterTypes.NORMAL}>Regular</option>
+                    <option value={MonsterTypes.NORMAL}>Regular
+                        
+                    </option>
                     <option value={MonsterTypes.FUSION}>{MonsterTypes.FUSION}</option>
                     <option value={MonsterTypes.RITUAL}>{MonsterTypes.RITUAL}</option>
                     <option value={MonsterTypes.SYNCHRO}>{MonsterTypes.SYNCHRO}</option>
