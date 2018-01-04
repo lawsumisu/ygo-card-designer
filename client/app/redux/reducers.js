@@ -8,7 +8,7 @@ const initialCardState = {
     level: 8,
     attribute: 'LIGHT',
     monsterType: MonsterTypes.NORMAL,
-    fusionMaterials: ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'],
+    fusionMaterials: ['"Blue-Eyes White Dragon"'],
     lore: 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
     tribes: [{
         name:'Dragon',

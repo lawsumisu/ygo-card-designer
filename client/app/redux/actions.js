@@ -3,7 +3,6 @@
 var atkDefRegex = /^[0-9]+$/
 
 var getValidBattlePoint= function(battlePoint){
-    console.log(battlePoint);
     if (battlePoint === '' || battlePoint === '?') return battlePoint;
     else if ( atkDefRegex.test(battlePoint)){
         var battlePointAsNumber = parseInt(battlePoint);

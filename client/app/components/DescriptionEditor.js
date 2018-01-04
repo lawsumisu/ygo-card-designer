@@ -1,3 +1,4 @@
+
 import React from 'react';
 import _ from 'lodash';
 import $ from 'jquery';
@@ -14,6 +15,7 @@ class DescriptionEditor extends React.Component{
             mainIsHovered: false,
             effectIsFocused: false,
             loreIsFocused: false,
+            monsterMaterialIsFocused: false,
             materialHorizontalScale: 1
         };
     }
@@ -23,31 +25,46 @@ class DescriptionEditor extends React.Component{
     }
 
     getMaterialEditor(){
+        var handleMonsterMaterialContainerOnMouseEnter = (event) => {
+            this.setState({
+                monsterMaterialIsHovered: true
+            });
+        };
+
+        var handleMonsterMaterialContainerOnMouseLeave = (event) =>{
+            this.setState({
+                monsterMaterialIsHovered: false
+            });
+        };
+
         if (this.props.monsterType === MonsterTypes.FUSION){
             var style = {
                 transform: sprintf('scale(%s, 1)', this.state.materialHorizontalScale)
             }
-            var inputTransform = (input) =>{
-                return (
-                    <div className="ygo-card-fusion-material">
-                        <span>"</span>
-                        {input}
-                        <span>"</span>
-                    </div>
-                )
-            }
             return (
-                <CatalogInput
-                    style={style}
-                    className="ygo-card-fusion-materials"
-                    placeholder="Add Fusion Material..."
-                    delimiter="+"
-                    items={this.props.fusionMaterials}
-                    updateItems={this.props.updateFusionMaterials}
-                    inputTransform={inputTransform}
-                    onMouseEnter={(event) => this.updateMaterialHorizontalScale()}
-                    onMouseLeave={(event) => this.updateMaterialHorizontalScale()}
-                />
+                <div 
+                    className="ygo-card-monster-materials-container"
+                    onMouseEnter={handleMonsterMaterialContainerOnMouseEnter}
+                    onMouseLeave={handleMonsterMaterialContainerOnMouseLeave}
+                    >
+                    <CatalogInput
+                        style={style}
+                        className="ygo-card-fusion-materials"
+                        placeholder="Add Fusion Material..."
+                        delimiter="+"
+                        items={this.props.fusionMaterials}
+                        updateItems={this.props.updateFusionMaterials}
+                        onMouseEnter={(event) => this.updateMaterialHorizontalScale()}
+                        onMouseLeave={(event) => this.updateMaterialHorizontalScale()}
+                        onBlur={(event) => {
+                            this.updateMaterialHorizontalScale();
+                            this.updateFocus('monsterMaterial', false);
+                            }}
+                        onFocus={(event) => this.updateFocus('monsterMaterial', true)}
+                        showInput={this.state.monsterMaterialIsHovered}
+                    />
+                </div>
+                
             )
         }
     }
@@ -70,7 +87,7 @@ class DescriptionEditor extends React.Component{
 
     getEffectContainerClassNames(effectText){
         var effectClassNames = ['ygo-card-effect-container'];
-        if (_.isEmpty(effectText) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.mainIsHovered && (
+        if (_.isEmpty(effectText) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.monsterMaterialIsFocused && !this.state.mainIsHovered && (
             _.isEmpty(this.props.fusionMaterials) || this.props.monsterType !== MonsterTypes.FUSION)){
             effectClassNames.push('ygo-card-effect-container-invisible');
         }
@@ -96,6 +113,11 @@ class DescriptionEditor extends React.Component{
                 loreIsFocused: isFocused
             });
         }
+        else if (inputType === 'monsterMaterial'){
+            this.setState({
+                monsterMaterialIsFocused: isFocused
+            });
+        }
     }
 
     updateEffect(event){
@@ -115,6 +137,7 @@ class DescriptionEditor extends React.Component{
         if (this.props.monsterType === MonsterTypes.FUSION){
             var maxWidth = $('.ygo-card-effect-container').width();
             var actualWidth = $('.ygo-card-fusion-materials').width();
+            if (actualWidth === 0) return;
             var materialHorizontalScaleFactor = Math.min(maxWidth/actualWidth, 1);
             if (materialHorizontalScaleFactor !== this.state.materialHorizontalScale){
                 this.setState({

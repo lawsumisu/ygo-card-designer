@@ -13,16 +13,9 @@ class CatalogInput extends React.Component{
 
         this.state = {
             inputIsFocused: false,
-            itemIds: []
+            itemIds: [],
+            input: ''
         }
-    }
-
-
-    createItem(item){
-        return {
-            name: item,
-            id: ++tribeCount
-        };
     }
 
      updateInput(event){
@@ -63,15 +56,12 @@ class CatalogInput extends React.Component{
                 <div
                     className={this.getItemClassNames()}
                     key={index}>
-                    {
-                        this.getTransformedInput(
-                            <ResizableInput
-                                value={item} 
-                                onChange={(event) => this.updateItem(event, index)}
-                                onKeyDown={(event) => this.handleKeyDown(event, index)}/>
-                        )
-                    }
-                    
+                    <ResizableInput
+                        value={item} 
+                        onChange={(event) => this.updateItem(event, index)}
+                        onKeyDown={(event) => this.handleKeyDown(event, index)}
+                        onFocus={(event) => this.handleOnFocus(event)}
+                        onBlur={(event) => this.handleOnBlur(event, false)}/>
                     {index < this.props.items.length-1 ? <div>{this.props.delimiter}</div> : null}
                 </div>
             )
@@ -80,7 +70,7 @@ class CatalogInput extends React.Component{
 
     // Getter for delimiter that precedes the input box. It has special properties depending on whether or not the main input box is being interacted with.
     getInputPrecedingDelimiterAsDisplay(){
-        if (this.state.inputIsFocused || this.props.inputIsHovered){
+        if (this.props.items.length >= 1 && !_.isEmpty(this.props.delimiter)){
             return (
                 <div>{this.props.delimiter}</div>
             )
@@ -113,17 +103,10 @@ class CatalogInput extends React.Component{
 
     getInputContainerClassNames(){
         var inputContainerClassNames = ['catalog-input-container'];
-        if (this.state.inputIsFocused){
+        if (this.state.inputIsFocused || this.props.showInput || this.props.items.length === 0){
             inputContainerClassNames.push('catalog-input-container-visible');
         }
         return inputContainerClassNames.join(' ');
-    }
-
-    getTransformedInput(inputElement){
-        if (this.props.inputTransform){
-            return this.props.inputTransform(inputElement);
-        }
-        else return inputElement;
     }
 
     /* -------------- +
@@ -137,15 +120,16 @@ class CatalogInput extends React.Component{
             this.props.updateItems(this.props.items);
 
             //Autofocus previous item
+            var itemElements = $(this.catalogInputElement).find('.catalog-item .resizable-input-content');
             // var tribeInputElements = $('.ygo-card-type-tribe .resizable-input-content');
-            // if (tribeInputElements.length > 1){
-            //     var i = Math.max(index-1, 0);
-            //     tribeInputElements[i].focus();
-            // }
-            // else if (tribeInputElements.length == 1){
-            //     //Else if there was only one element left, focus the original input
-            //     $('.ygo-card-type-input').focus();
-            // }
+            if (itemElements.length > 1){
+                var i = Math.max(index-1, 0);
+                itemElements[i].focus();
+            }
+            else if (itemElements.length == 1){
+                //Else if there was only one element left, focus the original input
+                $(this.catalogInputElement).find('.catalog-input').focus();
+            }
             
             event.preventDefault();
         } 
@@ -162,26 +146,41 @@ class CatalogInput extends React.Component{
         }
     }
 
-     handleOnBlur(){
-        // Append current input to tribe list and then clear it.
-        if (!_.isEmpty(this.state.input)){
+    /**
+     * Event handler for when an input element loses focus.
+     * @param {*} event 
+     * @param {*} isMainInput 
+     */
+    handleOnBlur(event, isMainInput){
+        // If main input element is blurred, Append current input to tribe list and then clear it.
+        if (!_.isEmpty(this.state.input) && isMainInput){
             this.props.updateItems(_.concat(this.props.items, this.state.input));
             this.setState({
                 input: '',
                 inputIsFocused: false
+            }, () =>{
+                this.props.onBlur(event);
             });
         }
         else{
             this.setState({
                 inputIsFocused: false
+            }, () =>{
+                this.props.onBlur(event);
             });
         }
     }
 
-    handleOnFocus(){
+    /**
+     * Event handler for when an input element gains focus.
+     * @param {*} event 
+     */
+    handleOnFocus(event){
         this.setState({
             inputIsFocused: true
-        });
+        }, () => {
+            this.props.onFocus(event);
+        }) ;
     }
 
     render(){
@@ -190,21 +189,20 @@ class CatalogInput extends React.Component{
                 className={this.getClassNames()}
                 style={this.props.style}
                 onMouseEnter={this.props.onMouseEnter}
-                onMouseLeave={this.props.onMouseLeave}>
+                onMouseLeave={this.props.onMouseLeave}
+                ref={(input) => this.catalogInputElement = input}>
                 {this.getItemsAsDisplay()}
                 <div className={this.getInputContainerClassNames()}>
-                    {this.props.items.length > 1 ? <div>{this.props.delimiter}</div> : null}
-                    {this.getTransformedInput(
-                        <input 
-                            className={this.getInputClassNames()}
-                            type="text" 
-                            value={this.state.input}
-                            placeholder={this.props.placeholder}
-                            onChange={(event) => this.updateInput(event)}
-                            onKeyPress={(event) => this.handleKeyPress(event)}
-                            onFocus={(event) => this.handleOnFocus()}
-                            onBlur={(event) => this.handleOnBlur()}/>
-                    )}
+                    {this.getInputPrecedingDelimiterAsDisplay()}
+                    <input 
+                        className={this.getInputClassNames()}
+                        type="text" 
+                        value={this.state.input}
+                        placeholder={this.props.placeholder}
+                        onChange={(event) => this.updateInput(event)}
+                        onKeyPress={(event) => this.handleKeyPress(event)}
+                        onFocus={(event) => this.handleOnFocus(event)}
+                        onBlur={(event) => this.handleOnBlur(event, true)}/>
                 </div>
                 
             </div>
