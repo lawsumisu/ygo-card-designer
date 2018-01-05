@@ -109,28 +109,54 @@ class CatalogInput extends React.Component{
         return inputContainerClassNames.join(' ');
     }
 
+    getItemInputElements(){
+        return $(this.catalogInputElement).find('.catalog-item .resizable-input-content');
+    }
+
+    focusItemInputElement(index, cursorPosition){
+        var itemElements = this.getItemInputElements();
+            if (itemElements.length > 0){
+                var elementToFocus = itemElements[index];
+                elementToFocus.focus();
+                elementToFocus.setSelectionRange(cursorPosition, cursorPosition);
+            }
+            else if (itemElements.length === 0){
+                //Else if there was only one element left, focus the original input
+                $(this.catalogInputElement).find('.catalog-input').focus();
+            }
+    }
+
+    focusMainInputElement(){
+        $(this.catalogInputElement).find('.catalog-input').focus();
+    }
+
     /* -------------- +
      | Event Handlers |
      + -------------- */
 
     handleKeyDown(event, index){
-        // If pressing backspace when there is no content in this input, delete it.
-        if (_.isEmpty(this.props.items[index]) && event.keyCode === 8){
-            this.props.items.splice(index, 1);
-            this.props.updateItems(this.props.items);
+        // If removing character when there is no content in this input, delete it.
+        if (_.isEmpty(this.props.items[index]) && (event.key === 'Backspace' || event.key === 'Delete')){
+            let clonedItems = _.clone(this.props.items);
+            clonedItems.splice(index, 1);
+            this.props.updateItems(clonedItems);
 
-            //Autofocus previous item
-            var itemElements = $(this.catalogInputElement).find('.catalog-item .resizable-input-content');
-            // var tribeInputElements = $('.ygo-card-type-tribe .resizable-input-content');
-            if (itemElements.length > 1){
-                var i = Math.max(index-1, 0);
-                itemElements[i].focus();
-            }
-            else if (itemElements.length == 1){
-                //Else if there was only one element left, focus the original input
-                $(this.catalogInputElement).find('.catalog-input').focus();
-            }
-            
+            //Autofocus new item after re-rerender
+            let itemElementToFocusIndex = event.key === 'Backspace' ? Math.max(index-1, 0): index;
+            let cursorPosition = event.key === 'Backspace' ? _.size(clonedItems[itemElementToFocusIndex]) : 0
+
+            //TODO make this a utility function?
+            this.setState({}, () => {
+                var itemElements = this.getItemInputElements();
+                if (itemElements.length > 0){
+                    this.focusItemInputElement(itemElementToFocusIndex, cursorPosition);       
+                }
+                else if (itemElements.length === 0){
+                    //Else if there was only one element left, focus the original input
+                    this.focusMainInputElement();
+                }
+            });
+
             event.preventDefault();
         } 
     }
