@@ -10,10 +10,7 @@ const initialCardState = {
     monsterType: MonsterTypes.NORMAL,
     fusionMaterials: ['"Blue-Eyes White Dragon"'],
     lore: 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
-    tribes: [{
-        name:'Dragon',
-        id: 0
-    }],
+    tribes: ['Dragon'],
     effect: '',
     atk: 3000,
     def: 2500,

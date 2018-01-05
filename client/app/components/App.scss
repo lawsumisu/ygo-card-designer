@@ -228,9 +228,10 @@
       display: none;
       font: inherit;
 
-      &:focus{
+      &:focus, &.ygo-card-monster-type-selector-visible{
         display: block;
       }
+
     }
     
     .ygo-card-monster-type{

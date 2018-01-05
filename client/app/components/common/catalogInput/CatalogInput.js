@@ -13,7 +13,6 @@ class CatalogInput extends React.Component{
 
         this.state = {
             inputIsFocused: false,
-            itemIds: [],
             input: ''
         }
     }
@@ -185,14 +184,18 @@ class CatalogInput extends React.Component{
                 input: '',
                 inputIsFocused: false
             }, () =>{
-                this.props.onBlur(event);
+                if (this.props.onBlur){
+                    this.props.onBlur(event);
+                }
             });
         }
         else{
             this.setState({
                 inputIsFocused: false
             }, () =>{
-                this.props.onBlur(event);
+                if (this.props.onBlur){
+                    this.props.onBlur(event);
+                }  
             });
         }
     }
@@ -205,7 +208,9 @@ class CatalogInput extends React.Component{
         this.setState({
             inputIsFocused: true
         }, () => {
-            this.props.onFocus(event);
+            if (this.props.onFocus){
+                 this.props.onFocus(event);
+            }  
         }) ;
     }
 

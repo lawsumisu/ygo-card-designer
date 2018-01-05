@@ -65,6 +65,13 @@ module.exports = {
         ]
     },
 
+    resolve: {
+        alias: {
+            client: path.join(__dirname, 'client')
+        },
+        extensions: ['.js']
+    },
+
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         // enable HMR globally
