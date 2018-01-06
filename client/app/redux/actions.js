@@ -36,6 +36,7 @@ let ActionCreators = {
         updateAttribute: updateAttribute
     },
     monster: {
+        updateName: updateName,
         updateLevel: updateLevel,
         updateAtk: updateAtk,
         updateDef: updateDef,

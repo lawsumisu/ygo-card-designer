@@ -1,7 +1,7 @@
 import React from 'react';
 import {MonsterTypes} from '../../constants';
 
-
+let orderedMonsterTypeList = ['BASIC', 'FUSION', 'RITUAL', 'SYNCHRO', 'XYZ'] //TODO replace with reselect
 class MonsterTypeEditor extends React.Component{
     constructor(props){
         super(props);
@@ -12,7 +12,7 @@ class MonsterTypeEditor extends React.Component{
     }
 
     getSelectedMonsterTypeAsDisplay(){
-        if (this.props.monsterType !== MonsterTypes.NORMAL && !this.state.selectIsFocused && !this.props.showEditor){
+        if (this.props.monsterType !== MonsterTypes.BASIC && !this.state.selectIsFocused && !this.props.showEditor){
             return (
                 <span className='ygo-card-monster-type-selected'>{this.props.monsterType}</span>
             );
@@ -20,7 +20,7 @@ class MonsterTypeEditor extends React.Component{
     }
 
     getDividerAsDisplay(){
-        if(this.props.monsterType !== MonsterTypes.NORMAL || this.state.selectIsFocused || this.props.showEditor){
+        if(this.props.monsterType !== MonsterTypes.BASIC || this.state.selectIsFocused || this.props.showEditor){
             return (
                 <span>/</span>
             );
@@ -70,13 +70,11 @@ class MonsterTypeEditor extends React.Component{
                     onFocus={(event) => this.handleOnFocus(event)}
                     onBlur={(event) => this.handleOnBlur(event)}
                     value={this.props.monsterType}>
-                    <option value={MonsterTypes.NORMAL}>Regular
-                        
-                    </option>
-                    <option value={MonsterTypes.FUSION}>{MonsterTypes.FUSION}</option>
-                    <option value={MonsterTypes.RITUAL}>{MonsterTypes.RITUAL}</option>
-                    <option value={MonsterTypes.SYNCHRO}>{MonsterTypes.SYNCHRO}</option>
-                    <option value={MonsterTypes.XYZ}>{MonsterTypes.XYZ}</option>
+                    {_.map(orderedMonsterTypeList, (monsterType) => {
+                        return (
+                             <option key={monsterType} value={MonsterTypes[monsterType]}>{MonsterTypes[monsterType]}</option>
+                        );
+                    })}
                 </select>
             </div>
         )

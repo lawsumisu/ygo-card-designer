@@ -1,5 +1,5 @@
 const MonsterTypes = {
-    NORMAL: 'Normal',
+    BASIC: 'Basic',
     FUSION: 'Fusion',
     SYNCHRO: 'Synchro',
     RITUAL: 'Ritual',
