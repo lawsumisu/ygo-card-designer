@@ -1,8 +1,12 @@
 import React from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
-import styles from '../../style/AutoscalingTextarea.scss';
+import styles from 'client/app/components/common/autoscalingTextarea/AutoscalingTextarea.scss';
 
+
+/**
+ * A <textarea/> like component that can be used to auto-resize font when inputted text would cause it to overflow/scrolll.
+ */
 class AutoscalingTextarea extends React.Component{
     constructor(props){
         super(props);

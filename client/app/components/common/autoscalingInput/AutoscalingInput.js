@@ -1,12 +1,12 @@
 import React from 'react';
 import $ from 'jquery';
 import {sprintf} from 'sprintf-js';
-import {ResizableInput} from './ResizableInput';
-import styles from '../../style/AutoscalingInput.scss';
+import {ResizableInput} from 'client/app/components/common/resizableInput/ResizableInput';
+import styles from 'client/app/components/common/autoscalingInput/AutoscalingInput.scss';
 
 
 /**
- * A <input/> like component that horizontally scales text so that it does not overflow the input.
+ * An <input/> like component that horizontally scales text so that it does not overflow the input.
  */
 class AutoscalingInput extends React.Component{
     constructor(props){

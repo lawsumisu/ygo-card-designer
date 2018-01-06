@@ -2,12 +2,11 @@ import React from 'react';
 import _ from 'lodash';
 import {sprintf} from 'sprintf-js';
 import $ from 'jquery';
-import {ResizableInput} from '../common/ResizableInput';
-import {MonsterTypeEditor} from './MonsterTypeEditor';
+import {ResizableInput} from 'client/app/components/common/resizableInput/ResizableInput';
+import {MonsterTypeEditor} from 'client/app/components/editors/typeEditor/MonsterTypeEditor';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
-import styles from '../../style/ResizableInput.scss';
 
-var tribeCount = 0;
+
 class TypeEditor extends React.Component{
     constructor(props){
         super(props);

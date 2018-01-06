@@ -1,7 +1,6 @@
 import React from 'react';
-import {MonsterTypes} from '../../constants';
+import {MonsterTypes, OrderedMonsterTypeKeyList} from 'client/app/constants';
 
-let orderedMonsterTypeList = ['BASIC', 'FUSION', 'RITUAL', 'SYNCHRO', 'XYZ'] //TODO replace with reselect
 class MonsterTypeEditor extends React.Component{
     constructor(props){
         super(props);
@@ -70,7 +69,7 @@ class MonsterTypeEditor extends React.Component{
                     onFocus={(event) => this.handleOnFocus(event)}
                     onBlur={(event) => this.handleOnBlur(event)}
                     value={this.props.monsterType}>
-                    {_.map(orderedMonsterTypeList, (monsterType) => {
+                    {_.map(OrderedMonsterTypeKeyList, (monsterType) => {
                         return (
                              <option key={monsterType} value={MonsterTypes[monsterType]}>{MonsterTypes[monsterType]}</option>
                         );

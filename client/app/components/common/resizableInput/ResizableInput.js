@@ -1,9 +1,10 @@
 import React from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
+import 'client/app/components/common/resizableInput/resizableInput.scss';
 
 /**
- * A <input/> like component that grows as text is added.
+ * An <input/> like component that grows as text is added.
  */
 class ResizableInput extends React.Component{
     constructor(props){
