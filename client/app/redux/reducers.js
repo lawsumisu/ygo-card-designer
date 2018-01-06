@@ -7,7 +7,7 @@ const initialCardState = {
     name: 'Blue-Eyes White Dragon',
     level: 8,
     attribute: 'LIGHT',
-    monsterType: MonsterTypes.NORMAL,
+    monsterType: MonsterTypes.BASIC,
     fusionMaterials: ['"Blue-Eyes White Dragon"'],
     synchroMaterials: ['1 Tuner monster', '1 or more non-Tuner monsters'],
     xyzMaterials: '3 Normal Dragon-Type monsters',
