@@ -39,8 +39,6 @@ class TypeEditor extends React.Component{
     handleOnFocus(){
         this.setState({
             editorIsFocused: true
-        }, () => {
-            console.log(this.state.editorIsFocused);
         });
     }
 

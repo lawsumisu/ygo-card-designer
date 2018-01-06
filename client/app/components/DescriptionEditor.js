@@ -6,6 +6,7 @@ import {sprintf} from 'sprintf-js';
 import {AutoscalingTextarea} from './common/AutoscalingTextarea';
 import {MonsterTypes} from '../constants';
 import {CatalogInput} from './common/catalogInput/CatalogInput';
+import {AutoscalingInput} from 'client/app/components/common/AutoscalingInput';
 
 class DescriptionEditor extends React.Component{
     constructor(props){
@@ -39,7 +40,7 @@ class DescriptionEditor extends React.Component{
 
         const monsterMaterialProperties = this.getMonsterMaterialProperties();
 
-        if (!_.isEmpty(monsterMaterialProperties)){ 
+        if (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO){ 
             var style = {
                 transform: sprintf('scale(%s, 1)', this.state.materialHorizontalScale)
             }
@@ -51,7 +52,7 @@ class DescriptionEditor extends React.Component{
                     >
                     <CatalogInput
                         style={style}
-                        className="ygo-card-fusion-materials"
+                        className={monsterMaterialProperties.className}
                         placeholder={monsterMaterialProperties.placeholder}
                         delimiter="+"
                         items={monsterMaterialProperties.monsterMaterials}
@@ -69,6 +70,18 @@ class DescriptionEditor extends React.Component{
                 
             )
         }
+        else if (this.props.monsterType === MonsterTypes.XYZ){
+            return (
+                <AutoscalingInput
+                    value={monsterMaterialProperties.monsterMaterials}
+                    onChange={(event) => this.props.updateXyzMaterials(event.target.value)}
+                    placeholder={monsterMaterialProperties.placeholder}
+                    className={monsterMaterialProperties.className}
+                    onBlur={(event) => this.updateFocus('monsterMaterial', false)}
+                    onFocus={(event) => this.updateFocus('monsterMaterial', true)}
+                />
+            );
+        }
     }
 
     getMonsterMaterialProperties(){
@@ -76,14 +89,24 @@ class DescriptionEditor extends React.Component{
             return {
                 monsterMaterials: this.props.fusionMaterials,
                 updateFunction: this.props.updateFusionMaterials,
-                placeholder: 'Add Fusion Material...'
+                placeholder: 'Add Fusion Material...',
+                className: 'ygo-card-fusion-materials'
             };
         }
         else if (this.props.monsterType === MonsterTypes.SYNCHRO){
             return {
                 monsterMaterials: this.props.synchroMaterials,
                 updateFunction: this.props.updateSynchroMaterials,
-                placeholder: 'Add Synchro Material'
+                placeholder: 'Add Synchro Material...',
+                className: 'ygo-card-synchro-materials'
+            };
+        }
+        else if (this.props.monsterType === MonsterTypes.XYZ){
+            return {
+                monsterMaterials: this.props.xyzMaterials,
+                updateFunction: this.props.updateXyzMaterials,
+                placeholder: 'Add Xyz Material...',
+                className: 'ygo-card-xyz-materials'
             };
         }
         else{
@@ -92,7 +115,7 @@ class DescriptionEditor extends React.Component{
     }
 
     includesMonsterMaterials(){
-        return (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO);
+        return (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO || this.props.monsterType === MonsterTypes.XYZ);
     }
 
     /* -------------- *
@@ -160,14 +183,15 @@ class DescriptionEditor extends React.Component{
     }
 
     updateMaterialHorizontalScale(){
-        if (this.includesMonsterMaterials()){
-            var maxWidth = $('.ygo-card-effect-container').width();
-            var actualWidth = $('.ygo-card-fusion-materials').width();
-            if (actualWidth === 0) return;
-            var materialHorizontalScaleFactor = Math.min(maxWidth/actualWidth, 1);
+        if (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO){
+            const monsterMaterialProperties = this.getMonsterMaterialProperties();
+            const maxWidth = $('.ygo-card-effect-container').width();
+            const actualWidth = $(monsterMaterialProperties.className).width();
+            if (!actualWidth || actualWidth === 0) return;
+            const materialHorizontalScaleFactor = Math.min(maxWidth/actualWidth, 1);
             if (materialHorizontalScaleFactor !== this.state.materialHorizontalScale){
                 this.setState({
-                    materialHorizontalScale: Math.min(materialHorizontalScaleFactor, 1)
+                    materialHorizontalScale: materialHorizontalScaleFactor
                 });
             }
         }

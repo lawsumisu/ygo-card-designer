@@ -1,5 +1,7 @@
 import React from 'react';
 import level from '../assets/Level.png';
+import rank from 'client/app/assets/Rank.png';
+import {MonsterTypes} from '../constants';
 
 /**
  * Component for setting the level of a card.
@@ -35,23 +37,16 @@ class LevelSelector extends React.Component {
     }
 
     getStarAsDisplay(isSelected, isHovered, index){
-        var className = [];
-        if (isSelected) className.push('ygo-card-level-selected');
-        else className.push('ygo-card-level-unselected');
+        var classNames = [];
+        if (isSelected) classNames.push('ygo-card-level-selected');
+        else classNames.push('ygo-card-level-unselected');
 
-        if (isHovered) className.push('ygo-card-level-hovered');
+        if (isHovered) classNames.push('ygo-card-level-hovered');
 
         return (
-            /*<span 
-                className={className.join(' ')}
-                onMouseEnter={(event) => this.updateHover(index)}
-                onClick={(event) => this.props.updateLevel(index)}
-                key={index}>
-                    {'\u272a'}
-            </span>*/
             <img 
-                src={level} 
-                className={className.join(' ')}                
+                src={this.props.monsterType === MonsterTypes.XYZ ? rank: level} 
+                className={classNames.join(' ')}                
                 onMouseEnter={(event) => this.updateHover(index)}
                 onClick={(event) => this.props.updateLevel(index)}
                 key={index}/>
@@ -70,11 +65,19 @@ class LevelSelector extends React.Component {
         return display;
     }
 
+    getClassNames(){
+        let classNames = ['ygo-card-level'];
+        if (this.props.monsterType === MonsterTypes.XYZ){
+            classNames.push('ygo-card-stars-rank');
+        }
+        return classNames.join(' ');
+    }
+
 
     render(){
         return (
             <div 
-                className="ygo-card-level"
+                className={this.getClassNames()}
                 onMouseEnter={(event) => this.updateEditState(true)}
                 onMouseLeave={(event) => this.updateEditState(false)}>
                 {
