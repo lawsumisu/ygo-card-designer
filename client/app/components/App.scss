@@ -71,6 +71,15 @@
     background-image: url("../assets/SynchroMonster.png");
   }
 
+   &.xyz-monster{
+    background-image: url("../assets/XyzMonster.png");
+    .ygo-card-name{
+      input{
+        color: white;
+      }  
+    }
+  }
+
 }
 
 .ygo-card-top, .ygo-card-bottom{

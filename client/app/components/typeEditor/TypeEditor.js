@@ -39,6 +39,8 @@ class TypeEditor extends React.Component{
     handleOnFocus(){
         this.setState({
             editorIsFocused: true
+        }, () => {
+            console.log(this.state.editorIsFocused);
         });
     }
 
@@ -81,13 +83,13 @@ class TypeEditor extends React.Component{
             transform: sprintf('scale(%s, 1)', this.state.scale)
         }
         return (
-            <div>
+            <div
+                onMouseEnter={(event) => this.handleOnMouseEnter()}
+                onMouseLeave={(event) => this.handleOnMouseLeave()}>
                 <div className="ygo-card-type-hidden-content"  ref="hiddenContent"></div>
                 <div 
                     className="ygo-card-type"
-                    ref="actualContent"
-                    onMouseEnter={(event) => this.handleOnMouseEnter()}
-                    onMouseLeave={(event) => this.handleOnMouseLeave()}
+                    ref="actualContent"       
                     style={style}>
                     <span>[</span>
                     <CatalogInput

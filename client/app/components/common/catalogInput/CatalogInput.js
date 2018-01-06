@@ -209,7 +209,7 @@ class CatalogInput extends React.Component{
             inputIsFocused: true
         }, () => {
             if (this.props.onFocus){
-                 this.props.onFocus(event);
+                this.props.onFocus(event);
             }  
         }) ;
     }

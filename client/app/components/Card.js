@@ -29,6 +29,9 @@ class Card extends React.Component{
         else if (this.props.cardState.monsterType === MonsterTypes.RITUAL){
             classNames.push('ritual-monster');
         }
+        else if (this.props.cardState.monsterType === MonsterTypes.XYZ){
+            classNames.push('xyz-monster');
+        }
         else if (this.props.cardState.effect.length > 0){
             classNames.push('effect-monster');
         }

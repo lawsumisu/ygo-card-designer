@@ -76,6 +76,7 @@ class MonsterTypeEditor extends React.Component{
                     <option value={MonsterTypes.FUSION}>{MonsterTypes.FUSION}</option>
                     <option value={MonsterTypes.RITUAL}>{MonsterTypes.RITUAL}</option>
                     <option value={MonsterTypes.SYNCHRO}>{MonsterTypes.SYNCHRO}</option>
+                    <option value={MonsterTypes.XYZ}>{MonsterTypes.XYZ}</option>
                 </select>
             </div>
         )
