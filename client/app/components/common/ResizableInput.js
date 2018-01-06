@@ -9,7 +9,12 @@ class ResizableInput extends React.Component{
     constructor(props){
         super(props);
     }
+
     componentDidMount(){
+        this.resizeInput();
+    }
+
+    componentDidUpdate(){
         this.resizeInput();
     }
 
@@ -20,9 +25,9 @@ class ResizableInput extends React.Component{
         }
         return className;
     }
+
     updateInput(event){
-        this.props.onChange(event);
-        this.resizeInput();   
+        this.props.onChange(event);  
     }
 
     resizeInput(){
@@ -50,7 +55,10 @@ class ResizableInput extends React.Component{
                     value={this.props.value}
                     style={this.props.style} 
                     onChange={(event) => this.updateInput(event)}
-                    onKeyDown={this.props.onKeyDown ? (event) => this.props.onKeyDown(event) : (event) => {}}/>
+                    onKeyDown={this.props.onKeyDown ? (event) => this.props.onKeyDown(event) : (event) => {}}
+                    onFocus={this.props.onFocus ? (event) => this.props.onFocus(event) : (event) => {}}
+                    onBlur={this.props.onBlur ? (event) => this.props.onBlur(event) : (event) => {}}/>
+                    
             </div>     
         )
         

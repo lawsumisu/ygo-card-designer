@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {MonsterTypes} from '../constants';
-import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateLore, updateTribes, updateMonsterType} from '../redux/actions';
+import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateLore, updateTribes, updateMonsterType, updateFusionMaterials, updateSynchroMaterials} from '../redux/actions';
 import {LevelSelector} from './LevelSelector';
 import {AttributeSelector} from './AttributeSelector';
 import {ImageSelector} from './ImageSelector';
 import {TypeEditor} from './typeEditor/TypeEditor';
-import {TextEditor} from './TextEditor';
+import {DescriptionEditor} from './DescriptionEditor';
 import _ from 'lodash';
 import styles from './App.scss';
 import image from '../assets/BlueEyesWhiteDragon.png';
@@ -68,7 +68,16 @@ class Card extends React.Component{
                         updateMonsterType={this.props.updateMonsterType} 
                         isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
                     
-                    <TextEditor effect={this.props.cardState.effect} updateEffect={this.props.updateEffect} lore={this.props.cardState.lore} updateLore={this.props.updateLore}/>
+                    <DescriptionEditor
+                        monsterType={this.props.cardState.monsterType}
+                        fusionMaterials={this.props.cardState.fusionMaterials}
+                        updateFusionMaterials={this.props.updateFusionMaterials} 
+                        synchroMaterials={this.props.cardState.synchroMaterials}
+                        updateSynchroMaterials={this.props.updateSynchroMaterials}
+                        effect={this.props.cardState.effect} 
+                        updateEffect={this.props.updateEffect} 
+                        lore={this.props.cardState.lore} 
+                        updateLore={this.props.updateLore}/>
                     <div>
                         
                     </div>
@@ -108,7 +117,9 @@ const mapDispatchToProps = function(dispatch){
         updateEffect: (effect) => dispatch(updateEffect(effect)),
         updateLore: (lore) => dispatch(updateLore(lore)),
         updateTribes: (tribes) => dispatch(updateTribes(tribes)),
-        updateMonsterType: (type) => dispatch(updateMonsterType(type))
+        updateMonsterType: (type) => dispatch(updateMonsterType(type)),
+        updateFusionMaterials: (fusionMaterials) => dispatch(updateFusionMaterials(fusionMaterials)),
+        updateSynchroMaterials: (synchroMaterials) => dispatch(updateSynchroMaterials(synchroMaterials))
     }
 }
 
