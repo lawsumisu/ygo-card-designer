@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {MonsterTypes} from '../constants';
 import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateLore, updateTribes, updateMonsterType, updateFusionMaterials, updateSynchroMaterials} from '../redux/actions';
 import {LevelSelector} from './LevelSelector';
-import {AttributeSelector} from './AttributeSelector';
+import {AttributeEditor} from 'client/app/components/AttributeEditor';
 import {ImageSelector} from './ImageSelector';
 import {TypeEditor} from './typeEditor/TypeEditor';
 import {DescriptionEditor} from './DescriptionEditor';
@@ -50,7 +50,7 @@ class Card extends React.Component{
                         value={this.props.cardState.name} 
                         onChange={(event) => this.props.updateName(event.target.value)}
                     />
-                    <AttributeSelector 
+                    <AttributeEditor 
                         updateAttribute={this.props.updateAttribute}
                         attribute={this.props.cardState.attribute}/> 
                 </div>
