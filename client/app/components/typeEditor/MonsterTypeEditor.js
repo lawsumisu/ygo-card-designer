@@ -20,7 +20,7 @@ class MonsterTypeEditor extends React.Component{
     }
 
     getDividerAsDisplay(){
-        if(this.props.monsterType !== MonsterTypeEditor.NORMAL || this.state.selectIsFocused || this.props.showEditor){
+        if(this.props.monsterType !== MonsterTypes.NORMAL || this.state.selectIsFocused || this.props.showEditor){
             return (
                 <span>/</span>
             );

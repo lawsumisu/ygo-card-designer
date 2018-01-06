@@ -288,9 +288,8 @@
       flex-shrink: 0;
       width: fit-content;
       transform-origin: 0% 50%;
-      .ygo-card-fusion-material{
-        display: flex;
-        flex-direction: row;
+      .catalog-delimiter{
+        padding: 0px 4px;
       }
     }
   }

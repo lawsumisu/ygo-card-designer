@@ -61,17 +61,17 @@ class CatalogInput extends React.Component{
                         onKeyDown={(event) => this.handleKeyDown(event, index)}
                         onFocus={(event) => this.handleOnFocus(event)}
                         onBlur={(event) => this.handleOnBlur(event, false)}/>
-                    {index < this.props.items.length-1 ? <div>{this.props.delimiter}</div> : null}
+                    {index < this.props.items.length-1 ? <div className="catalog-delimiter">{this.props.delimiter}</div> : null}
                 </div>
             )
         });
     }
 
-    // Getter for delimiter that precedes the input box. It has special properties depending on whether or not the main input box is being interacted with.
+    // Getter for delimiter that precedes the input box.
     getInputPrecedingDelimiterAsDisplay(){
         if (this.props.items.length >= 1 && !_.isEmpty(this.props.delimiter)){
             return (
-                <div>{this.props.delimiter}</div>
+                <div className="catalog-delimiter">{this.props.delimiter}</div>
             )
         }
     }

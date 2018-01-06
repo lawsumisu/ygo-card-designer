@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {MonsterTypes} from '../constants';
-import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateLore, updateTribes, updateMonsterType, updateFusionMaterials} from '../redux/actions';
+import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateLore, updateTribes, updateMonsterType, updateFusionMaterials, updateSynchroMaterials} from '../redux/actions';
 import {LevelSelector} from './LevelSelector';
 import {AttributeSelector} from './AttributeSelector';
 import {ImageSelector} from './ImageSelector';
@@ -72,6 +72,8 @@ class Card extends React.Component{
                         monsterType={this.props.cardState.monsterType}
                         fusionMaterials={this.props.cardState.fusionMaterials}
                         updateFusionMaterials={this.props.updateFusionMaterials} 
+                        synchroMaterials={this.props.cardState.synchroMaterials}
+                        updateSynchroMaterials={this.props.updateSynchroMaterials}
                         effect={this.props.cardState.effect} 
                         updateEffect={this.props.updateEffect} 
                         lore={this.props.cardState.lore} 
@@ -116,7 +118,8 @@ const mapDispatchToProps = function(dispatch){
         updateLore: (lore) => dispatch(updateLore(lore)),
         updateTribes: (tribes) => dispatch(updateTribes(tribes)),
         updateMonsterType: (type) => dispatch(updateMonsterType(type)),
-        updateFusionMaterials: (fusionMaterials) => dispatch(updateFusionMaterials(fusionMaterials))
+        updateFusionMaterials: (fusionMaterials) => dispatch(updateFusionMaterials(fusionMaterials)),
+        updateSynchroMaterials: (synchroMaterials) => dispatch(updateSynchroMaterials(synchroMaterials))
     }
 }
 

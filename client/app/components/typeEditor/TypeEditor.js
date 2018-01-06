@@ -15,7 +15,7 @@ class TypeEditor extends React.Component{
         this.state = {
             scale: 1,
             inputIsFocused: false,
-            inputIsHovered: false,
+            editorIsHovered: false,
             editorIsFocused: false
         }
     }
@@ -26,13 +26,13 @@ class TypeEditor extends React.Component{
 
     handleOnMouseEnter(){
         this.setState({
-            inputIsHovered: true
+            editorIsHovered: true
         });
     }
 
     handleOnMouseLeave(){
         this.setState({
-            inputIsHovered: false
+            editorIsHovered: false
         });
     }
 
@@ -99,14 +99,14 @@ class TypeEditor extends React.Component{
                         onMouseLeave={(event) => this.updateScale()}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
-                        showInput={this.state.editorIsFocused}
+                        showInput={this.state.editorIsFocused || this.state.editorIsHovered}
                         />
                     <MonsterTypeEditor 
                         updateMonsterType={this.props.updateMonsterType} 
                         monsterType={this.props.monsterType}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
-                        showEditor={this.state.editorIsFocused}/>
+                        showEditor={this.state.editorIsFocused || this.state.editorIsHovered}/>
                     {this.getEffectTypeAsDisplay()}
                     <span>]</span>
                 </div>

@@ -37,7 +37,9 @@ class DescriptionEditor extends React.Component{
             });
         };
 
-        if (this.props.monsterType === MonsterTypes.FUSION){
+        const monsterMaterialProperties = this.getMonsterMaterialProperties();
+
+        if (!_.isEmpty(monsterMaterialProperties)){ 
             var style = {
                 transform: sprintf('scale(%s, 1)', this.state.materialHorizontalScale)
             }
@@ -50,10 +52,10 @@ class DescriptionEditor extends React.Component{
                     <CatalogInput
                         style={style}
                         className="ygo-card-fusion-materials"
-                        placeholder="Add Fusion Material..."
+                        placeholder={monsterMaterialProperties.placeholder}
                         delimiter="+"
-                        items={this.props.fusionMaterials}
-                        updateItems={this.props.updateFusionMaterials}
+                        items={monsterMaterialProperties.monsterMaterials}
+                        updateItems={monsterMaterialProperties.updateFunction}
                         onMouseEnter={(event) => this.updateMaterialHorizontalScale()}
                         onMouseLeave={(event) => this.updateMaterialHorizontalScale()}
                         onBlur={(event) => {
@@ -67,6 +69,30 @@ class DescriptionEditor extends React.Component{
                 
             )
         }
+    }
+
+    getMonsterMaterialProperties(){
+        if (this.props.monsterType === MonsterTypes.FUSION){
+            return {
+                monsterMaterials: this.props.fusionMaterials,
+                updateFunction: this.props.updateFusionMaterials,
+                placeholder: 'Add Fusion Material...'
+            };
+        }
+        else if (this.props.monsterType === MonsterTypes.SYNCHRO){
+            return {
+                monsterMaterials: this.props.synchroMaterials,
+                updateFunction: this.props.updateSynchroMaterials,
+                placeholder: 'Add Synchro Material'
+            };
+        }
+        else{
+            return {};
+        }
+    }
+
+    includesMonsterMaterials(){
+        return (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO);
     }
 
     /* -------------- *
@@ -88,7 +114,7 @@ class DescriptionEditor extends React.Component{
     getEffectContainerClassNames(effectText){
         var effectClassNames = ['ygo-card-effect-container'];
         if (_.isEmpty(effectText) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.monsterMaterialIsFocused && !this.state.mainIsHovered && (
-            _.isEmpty(this.props.fusionMaterials) || this.props.monsterType !== MonsterTypes.FUSION)){
+            _.isEmpty(this.props.fusionMaterials) || !this.includesMonsterMaterials())){
             effectClassNames.push('ygo-card-effect-container-invisible');
         }
         return effectClassNames.join(' ');
@@ -134,7 +160,7 @@ class DescriptionEditor extends React.Component{
     }
 
     updateMaterialHorizontalScale(){
-        if (this.props.monsterType === MonsterTypes.FUSION){
+        if (this.includesMonsterMaterials()){
             var maxWidth = $('.ygo-card-effect-container').width();
             var actualWidth = $('.ygo-card-fusion-materials').width();
             if (actualWidth === 0) return;
@@ -158,7 +184,7 @@ class DescriptionEditor extends React.Component{
                     {this.getMaterialEditor()}
                     <AutoscalingTextarea
                         maxFontSize={15}
-                        className={this.getEffectClassNames()}
+                        className={this.getEffectClassNames(this.props.effect)}
                         placeholder="Enter effect here..."
                         value={this.props.effect} 
                         onChange={(event) => this.props.updateEffect(event.target.value)}

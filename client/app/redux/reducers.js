@@ -9,6 +9,7 @@ const initialCardState = {
     attribute: 'LIGHT',
     monsterType: MonsterTypes.NORMAL,
     fusionMaterials: ['"Blue-Eyes White Dragon"'],
+    synchroMaterials: ['1 Tuner monster', '1 or more non-Tuner monsters'],
     lore: 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
     tribes: ['Dragon'],
     effect: '',
@@ -37,6 +38,10 @@ function cardReducer(previousState=initialCardState, action){
         case actions.UPDATE_FUSION_MATERIALS:
             return Object.assign({}, previousState, {
                 fusionMaterials: action.fusionMaterials
+            });
+        case actions.UPDATE_SYNCHRO_MATERIALS:
+            return Object.assign({}, previousState, {
+                synchroMaterials: action.synchroMaterials
             });
         case actions.UPDATE_MONSTER_TYPE:
             return Object.assign({}, previousState, {
