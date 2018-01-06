@@ -60,6 +60,8 @@ class AutoscalingInput extends React.Component{
                     value={this.props.value} 
                     containerStyle={this.getStyle()}
                     onChange={(event) => this.updateInput(event)}
+                    onFocus={this.props.onFocus ? (event) => this.props.onFocus(event) : (event) => {}}
+                    onBlur={this.props.onBlur ? (event) => this.props.onBlur(event) : (event) => {}}
                 />
             </div>
         )    

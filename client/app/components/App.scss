@@ -71,6 +71,15 @@
     background-image: url("../assets/SynchroMonster.png");
   }
 
+   &.xyz-monster{
+    background-image: url("../assets/XyzMonster.png");
+    .ygo-card-name{
+      input{
+        color: white;
+      }  
+    }
+  }
+
 }
 
 .ygo-card-top, .ygo-card-bottom{
@@ -130,6 +139,10 @@
     justify-content: center;
     align-items: center;
     height: calc(4.2/86 * var(--card-height));
+
+    &.ygo-card-stars-rank{
+      flex-direction: row;
+    }
 
     .ygo-card-level-selected, .ygo-card-level-unselected{
       width: calc(3.8/59 * var(--card-width));
@@ -271,7 +284,7 @@
       }
     }
 
-    .ygo-card-effect, .ygo-card-fusion-materials{
+    .ygo-card-effect, .ygo-card-fusion-materials, .ygo-card-synchro-materials, .ygo-card-xyz-materials{
       font-family: YGO Matrix Book;
     }
 
@@ -284,7 +297,7 @@
       }
     }
 
-    .ygo-card-fusion-materials{
+    .ygo-card-fusion-materials, .ygo-card-synchro-materials{
       flex-shrink: 0;
       width: fit-content;
       transform-origin: 0% 50%;

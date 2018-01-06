@@ -19,6 +19,7 @@ export const UPDATE_MONSTER_TRIBE = 'UPDATE_MONSTER_TRIBE';
 export const UPDATE_MONSTER_TYPE =  'UPDATE_MONSTER_TYPE';
 export const UPDATE_FUSION_MATERIALS = 'UPDATE_FUSION_MATERIALS';
 export const UPDATE_SYNCHRO_MATERIALS = 'UPDATE_SYNCHRO_MATERIALS';
+export const UPDATE_XYZ_MATERIALS = 'UPDATE_XYZ_MATERIALS';
 export const UPDATE_SPELL_SUBTYPE = 'UPDATE_SPELL_SUBTYPE';
 export const UPDATE_TRAP_SUBTYPE = 'UPDATE_TRAP_SUBTYPE';
 export const UPDATE_LORE = 'UPDATE_LORE';
@@ -27,6 +28,24 @@ export const UPDATE_ATTRIBUTE = 'UPDATE_ATTRIBUTE';
 export const NONE = 'NONE'
 
 //Action creators
+let ActionCreators = {
+    general: {
+        updateName: updateName,
+        updateLore: updateLore,
+        updateEffect: updateEffect,
+        updateAttribute: updateAttribute
+    },
+    monster: {
+        updateLevel: updateLevel,
+        updateAtk: updateAtk,
+        updateDef: updateDef,
+        updateTribes: updateTribes,
+        updateMonsterType: updateMonsterType,
+        updateFusionMaterials: updateFusionMaterials,
+        updateSynchroMaterials: updateSynchroMaterials,
+        updateXyzMaterials: updateXyzMaterials,
+    }
+}
 function updateName(name){
     return {
         type: UPDATE_NAME,
@@ -95,6 +114,13 @@ function updateSynchroMaterials(synchroMaterials){
     }
 }
 
+function updateXyzMaterials(xyzMaterials){
+    return {
+        type: UPDATE_XYZ_MATERIALS,
+        xyzMaterials: xyzMaterials
+    }
+}
+
 function updateLore(lore){
     return {
         type: UPDATE_LORE,
@@ -116,4 +142,4 @@ function updateAttribute(attribute){
     }
 }
 
-export {updateAtk, updateDef, updateName, updateEffect, updateLore, updateLevel, updateAttribute, updateTribes, updateMonsterType, updateFusionMaterials, updateSynchroMaterials}
+export {ActionCreators}

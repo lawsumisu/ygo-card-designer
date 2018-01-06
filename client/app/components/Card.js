@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {MonsterTypes} from '../constants';
-import {updateName, updateAttribute, updateLevel, updateAtk, updateDef, updateEffect, updateLore, updateTribes, updateMonsterType, updateFusionMaterials, updateSynchroMaterials} from '../redux/actions';
+import {ActionCreators} from 'client/app/redux/actions';
 import {LevelSelector} from './LevelSelector';
 import {AttributeEditor} from 'client/app/components/AttributeEditor';
 import {ImageSelector} from './ImageSelector';
@@ -29,6 +29,9 @@ class Card extends React.Component{
         else if (this.props.cardState.monsterType === MonsterTypes.RITUAL){
             classNames.push('ritual-monster');
         }
+        else if (this.props.cardState.monsterType === MonsterTypes.XYZ){
+            classNames.push('xyz-monster');
+        }
         else if (this.props.cardState.effect.length > 0){
             classNames.push('effect-monster');
         }
@@ -45,7 +48,6 @@ class Card extends React.Component{
                 <div className="ygo-card-top">
                     <AutoscalingInput
                         className="ygo-card-name"
-                        type="text" 
                         placeholder="Enter a name here..."
                         value={this.props.cardState.name} 
                         onChange={(event) => this.props.updateName(event.target.value)}
@@ -55,7 +57,11 @@ class Card extends React.Component{
                         attribute={this.props.cardState.attribute}/> 
                 </div>
                 <div className="ygo-card-center">
-                    <LevelSelector level={this.props.cardState.level} updateLevel={this.props.updateLevel}/>
+                    <LevelSelector 
+                        level={this.props.cardState.level} 
+                        updateLevel={this.props.updateLevel}
+                        monsterType={this.props.cardState.monsterType}
+                    />
                     <ImageSelector/>
                     <div className="ygo-card-set-id"></div>
                 </div>
@@ -74,6 +80,8 @@ class Card extends React.Component{
                         updateFusionMaterials={this.props.updateFusionMaterials} 
                         synchroMaterials={this.props.cardState.synchroMaterials}
                         updateSynchroMaterials={this.props.updateSynchroMaterials}
+                        xyzMaterials={this.props.cardState.xyzMaterials}
+                        updateXyzMaterials={this.props.updateXyzMaterials}
                         effect={this.props.cardState.effect} 
                         updateEffect={this.props.updateEffect} 
                         lore={this.props.cardState.lore} 
@@ -109,17 +117,18 @@ const mapStateToProps = function(state){
 
 const mapDispatchToProps = function(dispatch){
     return {
-        updateName: (name) => dispatch(updateName(name)),
-        updateLevel: (level) => dispatch(updateLevel(level)),
-        updateAttribute: (attribute) => dispatch(updateAttribute(attribute)),
-        updateAtk: (atk) => dispatch(updateAtk(atk)),
-        updateDef: (def) => dispatch(updateDef(def)),
-        updateEffect: (effect) => dispatch(updateEffect(effect)),
-        updateLore: (lore) => dispatch(updateLore(lore)),
-        updateTribes: (tribes) => dispatch(updateTribes(tribes)),
-        updateMonsterType: (type) => dispatch(updateMonsterType(type)),
-        updateFusionMaterials: (fusionMaterials) => dispatch(updateFusionMaterials(fusionMaterials)),
-        updateSynchroMaterials: (synchroMaterials) => dispatch(updateSynchroMaterials(synchroMaterials))
+        updateName: (name) => dispatch(ActionCreators.monster.updateName(name)),
+        updateLevel: (level) => dispatch(ActionCreators.monster.updateLevel(level)),
+        updateAttribute: (attribute) => dispatch(ActionCreators.general.updateAttribute(attribute)),
+        updateAtk: (atk) => dispatch(ActionCreators.monster.updateAtk(atk)),
+        updateDef: (def) => dispatch(ActionCreators.monster.updateDef(def)),
+        updateEffect: (effect) => dispatch(ActionCreators.general.updateEffect(effect)),
+        updateLore: (lore) => dispatch(ActionCreators.general.updateLore(lore)),
+        updateTribes: (tribes) => dispatch(ActionCreators.monster.updateTribes(tribes)),
+        updateMonsterType: (type) => dispatch(ActionCreators.monster.updateMonsterType(type)),
+        updateFusionMaterials: (fusionMaterials) => dispatch(ActionCreators.monster.updateFusionMaterials(fusionMaterials)),
+        updateSynchroMaterials: (synchroMaterials) => dispatch(ActionCreators.monster.updateSynchroMaterials(synchroMaterials)),
+        updateXyzMaterials: (xyzMaterials) => dispatch(ActionCreators.monster.updateXyzMaterials(xyzMaterials))
     }
 }
 
