@@ -1,0 +1,55 @@
+.ygo-card-action-text-container{
+    height: calc(4.2/86 * var(--card-height));
+    font-family: YGO ITC Stone Serif Small Caps Bold;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 28px;
+    >div{
+        display: flex;
+        flex-direction: row;
+
+        margin-top: -.5px;
+        .action-text-container-left-brace{
+            padding-right: 2px;
+        }
+        .action-text-container-right-brace{
+            padding-left: 2px;
+        }
+
+        .action-type-container{
+            display: flex;
+            flex-direction: row;
+            margin: 3px -1px 0px 9px;
+            .action-type{
+                cursor: pointer;
+                width: calc(3/59 * var(--card-width));
+                height: calc(3/59 * var(--card-width));
+                opacity: .5;
+                display: none;
+
+                &.action-type-visible, &.action-type-selected{
+                    display: block;
+                }
+
+                &.action-type-selected{
+                    opacity: 1;
+                    &:hover{
+                    filter: brightness(1.2);
+                    }
+                }
+
+                &.action-type-disabled{
+                    cursor: not-allowed;
+                    opacity: .3;
+                    &:hover{
+                    filter: brightness(1);
+                    }
+                }
+                
+                &:hover{
+                    filter: brightness(1.6);
+                }
+            }             
+        }
+    } 
+}

@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {getValidActionTypes, getIncompatibleActionTypes} from 'client/app/utilities';
 import {CardTypes} from 'client/app/constants';
 
+import 'client/app/components/editors/ActionTypeEditor/ActionTypeEditor.scss';
 import equip from 'client/app/assets/Equip.png';
 import quickPlay from 'client/app/assets/Quick-Play.png';
 import ritual from 'client/app/assets/Ritual.png';

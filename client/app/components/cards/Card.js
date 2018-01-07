@@ -8,29 +8,17 @@ import {selectCardType} from 'client/app/redux/selectors';
 
 import {LevelSelector} from 'client/app/components/editors/LevelSelector';
 import {AttributeEditor} from 'client/app/components/editors/AttributeEditor';
-import {ActionTypeEditor} from 'client/app/components/editors/ActionTypeEditor';
+import {ActionTypeEditor} from 'client/app/components/editors/actionTypeEditor/ActionTypeEditor';
 import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
 import {DescriptionEditor} from 'client/app/components/editors/DescriptionEditor';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
 
-import 'client/app/components/cards/MonsterCard.scss';
+import 'client/app/components/cards/Card.scss';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
-import equip from 'client/app/assets/Equip.png';
-import quickPlay from 'client/app/assets/Quick-Play.png';
-import ritual from 'client/app/assets/Ritual.png';
-import continuous from 'client/app/assets/Continuous.png';
-import field from 'client/app/assets/Field.png';
 
-const spellIcons = ['EQUIP', 'QUICKPLAY', 'CONTINUOUS', 'RITUAL', 'FIELD']
-const spellIconMap = {
-    EQUIP: equip,
-    QUICKPLAY: quickPlay,
-    CONTINUOUS: continuous,
-    RITUAL: ritual,
-    FIELD: field
-}
-class MonsterCard extends React.Component{
+
+class Card extends React.Component{
     constructor(props){
         super(props);
     }
@@ -197,4 +185,4 @@ const mapDispatchToProps = function(dispatch){
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MonsterCard);
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

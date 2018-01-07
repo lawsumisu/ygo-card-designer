@@ -1,5 +1,5 @@
 import React from 'react';
-import MonsterCard from 'client/app/components/cards/MonsterCard';
+import Card from 'client/app/components/cards/Card';
 import CardDownloader from 'client/app/components/cards/CardDownloader';
 import styles from 'client/app/App.scss';
 
@@ -12,7 +12,7 @@ class App extends React.Component{
     return (
       <div className="app">
         <CardDownloader/>
-        <MonsterCard/>
+        <Card/>
       </div>
     )
   }
