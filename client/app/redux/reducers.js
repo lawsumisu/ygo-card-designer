@@ -1,7 +1,7 @@
 'use strict';
 
-import * as actions from './actions';
-import {MonsterTypes} from '../constants';
+import {Actions} from 'client/app/redux/actions';
+import {MonsterTypes} from 'client/app/constants';
 
 const initialCardState = {
     name: 'Blue-Eyes White Dragon',
@@ -20,51 +20,51 @@ const initialCardState = {
 
 function cardReducer(previousState=initialCardState, action){
     switch(action.type){
-        case actions.UPDATE_ATK:
+        case Actions.UPDATE_ATK:
             return Object.assign({}, previousState, {
                 atk: action.atk
             });
-        case actions.UPDATE_DEF:
+        case Actions.UPDATE_DEF:
             return Object.assign({}, previousState, {
                 def: action.def
             });
-        case actions.UPDATE_ATTRIBUTE:
+        case Actions.UPDATE_ATTRIBUTE:
             return Object.assign({}, previousState, {
                 attribute: action.attribute
             });
-        case actions.UPDATE_MONSTER_TRIBE:
+        case Actions.UPDATE_MONSTER_TRIBE:
             return Object.assign({}, previousState, {
                 tribes: action.tribes
             });
-        case actions.UPDATE_FUSION_MATERIALS:
+        case Actions.UPDATE_FUSION_MATERIALS:
             return Object.assign({}, previousState, {
                 fusionMaterials: action.fusionMaterials
             });
-        case actions.UPDATE_SYNCHRO_MATERIALS:
+        case Actions.UPDATE_SYNCHRO_MATERIALS:
             return Object.assign({}, previousState, {
                 synchroMaterials: action.synchroMaterials
             });
-        case actions.UPDATE_XYZ_MATERIALS:
+        case Actions.UPDATE_XYZ_MATERIALS:
             return Object.assign({}, previousState, {
                 xyzMaterials: action.xyzMaterials
             });
-        case actions.UPDATE_MONSTER_TYPE:
+        case Actions.UPDATE_MONSTER_TYPE:
             return Object.assign({}, previousState, {
                 monsterType: action.monsterType
             });
-        case actions.UPDATE_LORE:
+        case Actions.UPDATE_LORE:
             return Object.assign({}, previousState, {
                 lore: action.lore
             });
-        case actions.UPDATE_EFFECT:
+        case Actions.UPDATE_EFFECT:
             return Object.assign({}, previousState, {
                 effect: action.effect
             });
-        case actions.UPDATE_LEVEL:
+        case Actions.UPDATE_LEVEL:
             return Object.assign({}, previousState, {
                 level: action.level
             });
-        case actions.UPDATE_NAME:
+        case Actions.UPDATE_NAME:
             return Object.assign({}, previousState, {
                 name: action.name
             });
