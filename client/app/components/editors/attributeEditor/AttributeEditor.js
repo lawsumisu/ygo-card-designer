@@ -15,23 +15,19 @@ import trap from 'client/app/assets/TRAP.png';
 import 'client/app/components/editors/attributeEditor/AttributeEditor.scss';
 
 
-var monsterAttributeMap = {
+const attributeMap = {
     LIGHT: light,
     DARK: dark,
     WIND: wind,
     WATER: water,
     FIRE: fire,
     EARTH: earth,
-    DIVINE: divine
-}
-
-const spellTrapAttributeMap = {
+    DIVINE: divine,
     SPELL: spell,
     TRAP: trap
 }
 
-let orderedMonsterAttributeList = ['LIGHT', 'WIND', 'WATER', 'DIVINE', 'FIRE', 'EARTH', 'DARK'];
-let orderedSpellTrapAttributeList = ['TRAP', 'SPELL'];
+const orderedAttributeList = ['LIGHT', 'WIND', 'WATER', 'DIVINE', 'FIRE', 'EARTH', 'DARK', 'TRAP', 'SPELL'];
 
 class AttributeEditor extends React.Component{
     constructor(props){
@@ -48,13 +44,13 @@ class AttributeEditor extends React.Component{
         this.props.updateAttribute(attribute);
     }
 
-    getInterpolatedAngle(start, stop, t){
+    getInterpolatedValue(start, stop, t){
         return start*(1-t) + stop*(t);
     }
 
     getAttributeWheel(){
-        const radius = 75;
         const attributeSelectionWidth = $(this.attributeSelection).width();
+        const radius = attributeSelectionWidth;
         const attributeSelectionContainerWidth = $(this.attributeSelectionContainer).outerWidth();
         const wheelDimension = radius * 2 + attributeSelectionWidth;
         const attributeWheelStyle = {
@@ -65,38 +61,36 @@ class AttributeEditor extends React.Component{
         };
         return (
             <div style={attributeWheelStyle}>
-                {this.getAttributeSelectionElements(monsterAttributeMap, orderedMonsterAttributeList, radius, -9/10*Math.PI, -1/10*Math.PI)}
-                {this.getAttributeSelectionElements(spellTrapAttributeMap, orderedSpellTrapAttributeList, radius, Math.PI/2.8, 1.8/2.8*Math.PI)}              
+                {
+                    _.map(orderedAttributeList, (attribute, index) => {
+                        const t = index/(_.size(attributeMap));
+                        const angleStart = 5/6*Math.PI;
+                        const theta = this.getInterpolatedValue(angleStart, angleStart+Math.PI*2, t);
+                        const style = {
+                            transform: sprintf('rotate(%srad) translate(%spx) rotate(%srad)', theta, radius, -theta),
+                            top: radius + 'px',
+                            left: radius + 'px',
+                        }
+                        return (
+                            <div
+                                className="ygo-card-attribute-suggestion-anchor"
+                                key={attribute}
+                                style={style}>
+                                    <img
+                                    src={attributeMap[attribute]}
+                                    onClick={(event) => this.updateAttribute(event, attribute)}
+                                    className="ygo-card-attribute-suggestion"
+                                    />
+                            </div>            
+                        )})
+                }         
             </div>
         )
     }
 
-    getAttributeSelectionElements(attributeMap, orderedAttributeList, radius, angleStart, angleStop){
-        return _.map(orderedAttributeList, (attribute, index) => {
-            const t = index/(_.size(attributeMap)-1);
-            const theta = this.getInterpolatedAngle(angleStart, angleStop, t);
-            const style = {
-                transform: sprintf('rotate(%srad) translate(%spx) rotate(%srad)', theta, radius, -theta),
-                top: radius + 'px',
-                left: radius + 'px',
-            }
-            return (
-                <div
-                    className="ygo-card-attribute-suggestion-anchor"
-                    key={attribute}
-                    style={style}>
-                        <img
-                        src={attributeMap[attribute]}
-                        onClick={(event) => this.updateAttribute(event, attribute)}
-                        className="ygo-card-attribute-suggestion"
-                        />
-                </div>            
-            )});
-    }
-
     getAttributeImage(attributeName){
-        if (_.has(monsterAttributeMap, attributeName)){
-            return monsterAttributeMap[attributeName];
+        if (_.has(attributeMap, attributeName)){
+            return attributeMap[attributeName];
         }
         else if (_.has(spellTrapAttributeMap, attributeName)){
             return spellTrapAttributeMap[attributeName];

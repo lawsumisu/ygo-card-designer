@@ -2,12 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 
-import {MonsterTypes} from 'client/app/constants';
+import {MonsterTypes, CardTypes} from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
 import {selectCardType} from 'client/app/redux/selectors';
 
 import {LevelSelector} from 'client/app/components/editors/LevelSelector';
-import {AttributeEditor} from 'client/app/components/editors/AttributeEditor';
+import {AttributeEditor} from 'client/app/components/editors/attributeEditor/AttributeEditor';
 import {ActionTypeEditor} from 'client/app/components/editors/actionTypeEditor/ActionTypeEditor';
 import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
@@ -24,7 +24,7 @@ class Card extends React.Component{
     }
 
     getCardCenterEditor(){
-        if (this.props.cardState.attribute === 'SPELL' || this.props.cardState.attribute === 'TRAP'){
+        if (this.props.cardState.cardType === CardTypes.SPELL || this.props.cardState.cardType === CardTypes.TRAP){
             return(
                 <ActionTypeEditor
                     cardType={this.props.cardState.cardType}
@@ -34,7 +34,7 @@ class Card extends React.Component{
            );
 
         }  
-        else{
+        else if (this.props.cardState.cardType === CardTypes.MONSTER){
             return (
                 <LevelSelector 
                     level={this.props.cardState.level} 
@@ -50,6 +50,7 @@ class Card extends React.Component{
             return (
                 <div className="ygo-card-bottom">
                     <DescriptionEditor
+                        cardType={this.props.cardState.cardType}
                         monsterType={this.props.cardState.monsterType}
                         fusionMaterials={this.props.cardState.fusionMaterials}
                         updateFusionMaterials={this.props.updateFusionMaterials} 
@@ -75,6 +76,7 @@ class Card extends React.Component{
                         isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
                     
                     <DescriptionEditor
+                        cardType={this.props.cardState.cardType}
                         monsterType={this.props.cardState.monsterType}
                         fusionMaterials={this.props.cardState.fusionMaterials}
                         updateFusionMaterials={this.props.updateFusionMaterials} 
@@ -106,10 +108,10 @@ class Card extends React.Component{
 
     getClassNames(){
         var classNames = ['ygo-card-content'];
-        if (this.props.cardState.attribute === 'SPELL'){
+        if (this.props.cardState.cardType === CardTypes.SPELL){
             classNames.push('spell-card');
         }
-        else if (this.props.cardState.attribute === 'TRAP'){
+        else if (this.props.cardState.cardType === CardTypes.TRAP){
             classNames.push('trap-card');
         }
         else{
