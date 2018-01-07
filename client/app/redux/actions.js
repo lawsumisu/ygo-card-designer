@@ -27,6 +27,7 @@ const Actions = {
     UPDATE_LORE: 'UPDATE_LORE',
     UPDATE_EFFECT: 'UPDATE_EFFECT',
     UPDATE_ATTRIBUTE: 'UPDATE_ATTRIBUTE',
+    UPDATE_ACTION_TYPES: 'UPDATE_ACTION_TYPES',
     NONE: 'NONE'
 }
 
@@ -48,6 +49,9 @@ let ActionCreators = {
         updateFusionMaterials: updateFusionMaterials,
         updateSynchroMaterials: updateSynchroMaterials,
         updateXyzMaterials: updateXyzMaterials,
+    },
+    action: {
+        updateActionTypes: updateActionTypes
     }
 }
 function updateName(name){
@@ -143,6 +147,13 @@ function updateAttribute(attribute){
     return {
         type: Actions.UPDATE_ATTRIBUTE,
         attribute: attribute
+    }
+}
+
+function updateActionTypes(actionTypes){
+    return {
+        type: Actions.UPDATE_ACTION_TYPES,
+        actionTypes: actionTypes
     }
 }
 

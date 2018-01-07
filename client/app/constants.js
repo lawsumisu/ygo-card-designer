@@ -8,4 +8,25 @@ const MonsterTypes = {
 
 const OrderedMonsterTypeKeyList = ['BASIC', 'FUSION', 'SYNCHRO', 'RITUAL', 'XYZ']
 
-export {MonsterTypes, OrderedMonsterTypeKeyList};
+const CardTypes = {
+    MONSTER: 'MONSTER',
+    SPELL: 'SPELL',
+    TRAP: 'TRAP'
+}
+
+export const SpellActionTypes = {
+    CONTINUOUS: 'CONTINUOUS',
+    FIELD: 'FIELD',
+    RITUAL: 'RITUAL',
+    QUICKPLAY: 'QUICKPLAY',
+    EQUIP: 'EQUIP',
+}
+
+export const TrapActionTypes = {
+    CONTINUOUS: 'CONTINUOUS',
+    COUNTER: 'COUNTER'
+}
+
+export const AllActionTypes = Object.assign({}, SpellActionTypes, TrapActionTypes);
+
+export {MonsterTypes, OrderedMonsterTypeKeyList, CardTypes};

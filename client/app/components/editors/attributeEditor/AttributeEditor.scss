@@ -1,0 +1,38 @@
+.ygo-card-attribute{
+    padding: 6px;
+    flex: 0 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+
+    .ygo-card-attribute-selection{
+        width: calc(6.0/59 * var(--card-width));
+        height: auto;
+    }
+    
+    .ygo-card-attribute-suggestion-anchor{
+        z-index: 10;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        height: calc(6.0/59 * var(--card-width));
+        width: calc(6.0/59 * var(--card-width));
+
+        &:hover{
+            .ygo-card-attribute-suggestion{
+                opacity: 1;
+                width: calc(6.0/59 * var(--card-width));
+            }
+        }
+        .ygo-card-attribute-suggestion{
+            width: calc(4.0/59 * var(--card-width));
+            height: auto;
+            opacity: .5;   
+        }
+
+    }
+    
+}
