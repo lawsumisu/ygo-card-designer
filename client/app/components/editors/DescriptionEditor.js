@@ -120,7 +120,7 @@ class DescriptionEditor extends React.Component{
      | Event Handlers |
      + -------------- */
 
-    handleBottomTextContainerOnMouseLeave(){
+    handleBottomTextContainerOnMouseEnter(){
         this.setState({
             mainIsHovered: true
         });
@@ -211,7 +211,7 @@ class DescriptionEditor extends React.Component{
     render(){
         return (
             <div className="ygo-card-bottom-text"
-                onMouseEnter={(event) => this.handleBottomTextContainerOnMouseLeave()}
+                onMouseEnter={(event) => this.handleBottomTextContainerOnMouseEnter()}
                 onMouseLeave={(event) => this.handleBottomTextContainerOnMouseLeave()}>
                 <div 
                     className={this.getEffectContainerClassNames(this.props.effect)}>
