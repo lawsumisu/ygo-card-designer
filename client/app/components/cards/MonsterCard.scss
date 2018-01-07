@@ -178,9 +178,19 @@
           width: calc(3/59 * var(--card-width));
           height: calc(3/59 * var(--card-width));
           opacity: .5;
+          display: none;
+          
+          &.action-type-visible, &.action-type-selected{
+            display: block;
+          }
+
           &.action-type-selected{
             opacity: 1;
+            &:hover{
+              filter: brightness(1.2);
+            }
           }
+          
           &:hover{
             filter: brightness(1.6);
           }

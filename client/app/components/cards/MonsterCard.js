@@ -40,6 +40,8 @@ class MonsterCard extends React.Component{
             return(
                 <ActionTypeEditor
                     cardType={this.props.cardState.cardType}
+                    actionTypes={this.props.cardState.actionTypes}
+                    updateActionTypes={this.props.updateActionTypes}
                 />
            );
 
@@ -182,6 +184,7 @@ const mapDispatchToProps = function(dispatch){
         updateName: (name) => dispatch(ActionCreators.monster.updateName(name)),
         updateLevel: (level) => dispatch(ActionCreators.monster.updateLevel(level)),
         updateAttribute: (attribute) => dispatch(ActionCreators.general.updateAttribute(attribute)),
+        updateActionTypes: (actionTypes) => dispatch(ActionCreators.action.updateActionTypes(actionTypes)),
         updateAtk: (atk) => dispatch(ActionCreators.monster.updateAtk(atk)),
         updateDef: (def) => dispatch(ActionCreators.monster.updateDef(def)),
         updateEffect: (effect) => dispatch(ActionCreators.general.updateEffect(effect)),

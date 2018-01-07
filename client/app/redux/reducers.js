@@ -7,6 +7,7 @@ const initialCardState = {
     name: 'Blue-Eyes White Dragon',
     level: 8,
     attribute: 'LIGHT',
+    actionTypes: [],
     monsterType: MonsterTypes.BASIC,
     fusionMaterials: ['"Blue-Eyes White Dragon"'],
     synchroMaterials: ['1 Tuner monster', '1 or more non-Tuner monsters'],
@@ -31,6 +32,10 @@ function cardReducer(previousState=initialCardState, action){
         case Actions.UPDATE_ATTRIBUTE:
             return Object.assign({}, previousState, {
                 attribute: action.attribute
+            });
+        case Actions.UPDATE_ACTION_TYPES:
+            return Object.assign({}, previousState, {
+                actionTypes: action.actionTypes
             });
         case Actions.UPDATE_MONSTER_TRIBE:
             return Object.assign({}, previousState, {
