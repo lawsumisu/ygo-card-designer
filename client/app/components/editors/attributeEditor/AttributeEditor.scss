@@ -22,15 +22,17 @@
         width: calc(6.0/59 * var(--card-width));
 
         &:hover{
+            z-index: 11;
             .ygo-card-attribute-suggestion{
                 opacity: 1;
-                width: calc(6.0/59 * var(--card-width));
+                width: calc(5.0/59 * var(--card-width));
             }
         }
         .ygo-card-attribute-suggestion{
-            width: calc(4.0/59 * var(--card-width));
+            width: calc(3.0/59 * var(--card-width));
             height: auto;
-            opacity: .5;   
+            opacity: .9;   
+            transition: width .2s;
         }
 
     }

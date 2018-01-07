@@ -4,7 +4,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import {sprintf} from 'sprintf-js';
 
-import {MonsterTypes} from 'client/app/constants';
+import {MonsterTypes, CardTypes} from 'client/app/constants';
 
 import {AutoscalingTextarea} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextarea';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
@@ -28,113 +28,121 @@ class DescriptionEditor extends React.Component{
     }
 
     getMaterialEditor(){
-        var handleMonsterMaterialContainerOnMouseEnter = (event) => {
-            this.setState({
-                monsterMaterialIsHovered: true
-            });
-        };
-
-        var handleMonsterMaterialContainerOnMouseLeave = (event) =>{
-            this.setState({
-                monsterMaterialIsHovered: false
-            });
-        };
-
-        const monsterMaterialProperties = this.getMonsterMaterialProperties();
-
-        if (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO){ 
-            var style = {
-                transform: sprintf('scale(%s, 1)', this.state.materialHorizontalScale)
+        if (this.props.cardType === CardTypes.MONSTER){
+            const monsterMaterialProperties = this.getMonsterMaterialProperties();
+            if (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO){ 
+                const style = {
+                    transform: sprintf('scale(%s, 1)', this.state.materialHorizontalScale)
+                }
+                return (
+                    <div 
+                        className="ygo-card-monster-materials-container"
+                        onMouseEnter={(event) => this.handleMonsterMaterialContainerOnMouseEnter()}
+                        onMouseLeave={(event) => this.handleMonsterMaterialContainerOnMouseLeave()}
+                        >
+                        <CatalogInput
+                            style={style}
+                            className={monsterMaterialProperties.className}
+                            placeholder={monsterMaterialProperties.placeholder}
+                            delimiter="+"
+                            items={monsterMaterialProperties.monsterMaterials}
+                            updateItems={monsterMaterialProperties.updateFunction}
+                            onMouseEnter={(event) => this.updateMaterialHorizontalScale()}
+                            onMouseLeave={(event) => this.updateMaterialHorizontalScale()}
+                            onBlur={(event) => {
+                                this.updateMaterialHorizontalScale();
+                                this.updateFocus('monsterMaterial', false);
+                                }}
+                            onFocus={(event) => this.updateFocus('monsterMaterial', true)}
+                            showInput={this.state.monsterMaterialIsHovered}
+                        />
+                    </div>
+                    
+                )
             }
-            return (
-                <div 
-                    className="ygo-card-monster-materials-container"
-                    onMouseEnter={handleMonsterMaterialContainerOnMouseEnter}
-                    onMouseLeave={handleMonsterMaterialContainerOnMouseLeave}
-                    >
-                    <CatalogInput
-                        style={style}
-                        className={monsterMaterialProperties.className}
+            else if (this.props.monsterType === MonsterTypes.XYZ){
+                return (
+                    <AutoscalingInput
+                        value={monsterMaterialProperties.monsterMaterials}
+                        onChange={(event) => this.props.updateXyzMaterials(event.target.value)}
                         placeholder={monsterMaterialProperties.placeholder}
-                        delimiter="+"
-                        items={monsterMaterialProperties.monsterMaterials}
-                        updateItems={monsterMaterialProperties.updateFunction}
-                        onMouseEnter={(event) => this.updateMaterialHorizontalScale()}
-                        onMouseLeave={(event) => this.updateMaterialHorizontalScale()}
-                        onBlur={(event) => {
-                            this.updateMaterialHorizontalScale();
-                            this.updateFocus('monsterMaterial', false);
-                            }}
+                        className={monsterMaterialProperties.className}
+                        onBlur={(event) => this.updateFocus('monsterMaterial', false)}
                         onFocus={(event) => this.updateFocus('monsterMaterial', true)}
-                        showInput={this.state.monsterMaterialIsHovered}
                     />
-                </div>
-                
-            )
-        }
-        else if (this.props.monsterType === MonsterTypes.XYZ){
-            return (
-                <AutoscalingInput
-                    value={monsterMaterialProperties.monsterMaterials}
-                    onChange={(event) => this.props.updateXyzMaterials(event.target.value)}
-                    placeholder={monsterMaterialProperties.placeholder}
-                    className={monsterMaterialProperties.className}
-                    onBlur={(event) => this.updateFocus('monsterMaterial', false)}
-                    onFocus={(event) => this.updateFocus('monsterMaterial', true)}
-                />
-            );
+                );
+            }
         }
     }
 
     getMonsterMaterialProperties(){
-        if (this.props.monsterType === MonsterTypes.FUSION){
-            return {
-                monsterMaterials: this.props.fusionMaterials,
-                updateFunction: this.props.updateFusionMaterials,
-                placeholder: 'Add Fusion Material...',
-                className: 'ygo-card-fusion-materials'
-            };
-        }
-        else if (this.props.monsterType === MonsterTypes.SYNCHRO){
-            return {
-                monsterMaterials: this.props.synchroMaterials,
-                updateFunction: this.props.updateSynchroMaterials,
-                placeholder: 'Add Synchro Material...',
-                className: 'ygo-card-synchro-materials'
-            };
-        }
-        else if (this.props.monsterType === MonsterTypes.XYZ){
-            return {
-                monsterMaterials: this.props.xyzMaterials,
-                updateFunction: this.props.updateXyzMaterials,
-                placeholder: 'Add Xyz Material...',
-                className: 'ygo-card-xyz-materials'
-            };
+        if (this.props.cardType === CardTypes.MONSTER){
+            if (this.props.monsterType === MonsterTypes.FUSION){
+                return {
+                    monsterMaterials: this.props.fusionMaterials,
+                    updateFunction: this.props.updateFusionMaterials,
+                    placeholder: 'Add Fusion Material...',
+                    className: 'ygo-card-fusion-materials'
+                };
+            }
+            else if (this.props.monsterType === MonsterTypes.SYNCHRO){
+                return {
+                    monsterMaterials: this.props.synchroMaterials,
+                    updateFunction: this.props.updateSynchroMaterials,
+                    placeholder: 'Add Synchro Material...',
+                    className: 'ygo-card-synchro-materials'
+                };
+            }
+            else if (this.props.monsterType === MonsterTypes.XYZ){
+                return {
+                    monsterMaterials: this.props.xyzMaterials,
+                    updateFunction: this.props.updateXyzMaterials,
+                    placeholder: 'Add Xyz Material...',
+                    className: 'ygo-card-xyz-materials'
+                };
+            }
+            else{
+                return {};
+            }
         }
         else{
             return {};
         }
+        
     }
 
     includesMonsterMaterials(){
-        return (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO || this.props.monsterType === MonsterTypes.XYZ);
+        return this.props.cardType === CardTypes.MONSTER && 
+        (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO || this.props.monsterType === MonsterTypes.XYZ);
     }
 
     /* -------------- *
      | Event Handlers |
      + -------------- */
 
-    handleOnMouseEnter(){
+    handleBottomTextContainerOnMouseLeave(){
         this.setState({
             mainIsHovered: true
         });
     }
 
-    handleOnMouseLeave(){
+    handleBottomTextContainerOnMouseLeave(){
         this.setState({
             mainIsHovered: false
         });
     }
+
+    handleMonsterMaterialContainerOnMouseEnter() {
+        this.setState({
+            monsterMaterialIsHovered: true
+        });
+    };
+
+    handleMonsterMaterialContainerOnMouseLeave(){
+        this.setState({
+            monsterMaterialIsHovered: false
+        });
+    };
 
     getEffectContainerClassNames(effectText){
         var effectClassNames = ['ygo-card-effect-container'];
@@ -185,7 +193,7 @@ class DescriptionEditor extends React.Component{
     }
 
     updateMaterialHorizontalScale(){
-        if (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO){
+        if (this.props.cardType === CardTypes.MONSTER && (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO)){
             const monsterMaterialProperties = this.getMonsterMaterialProperties();
             const maxWidth = $('.ygo-card-effect-container').width();
             const actualWidth = $(monsterMaterialProperties.className).width();
@@ -203,8 +211,8 @@ class DescriptionEditor extends React.Component{
     render(){
         return (
             <div className="ygo-card-bottom-text"
-                onMouseEnter={(event) => this.handleOnMouseEnter()}
-                onMouseLeave={(event) => this.handleOnMouseLeave()}>
+                onMouseEnter={(event) => this.handleBottomTextContainerOnMouseLeave()}
+                onMouseLeave={(event) => this.handleBottomTextContainerOnMouseLeave()}>
                 <div 
                     className={this.getEffectContainerClassNames(this.props.effect)}>
                     {this.getMaterialEditor()}
