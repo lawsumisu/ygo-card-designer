@@ -62,8 +62,17 @@
     background-image: url("~client/app/assets/SynchroMonster.png");
   }
 
-   &.xyz-monster{
+  &.xyz-monster{
     background-image: url("~client/app/assets/XyzMonster.png");
+    .ygo-card-name{
+      input{
+        color: white;
+      }  
+    }
+  }
+
+  &.spell-card{
+    background-image: url("~client/app/assets/NormalSpell.png");
     .ygo-card-name{
       input{
         color: white;
@@ -92,31 +101,6 @@
     width: 84%;
   }
 
-  .ygo-card-attribute{
-    padding: 6px;
-    flex: 0 0;
-    display: flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-
-    .ygo-card-attribute-selection{
-      width: calc(6.0/59 * var(--card-width));
-      height: auto;
-    }
-
-    .ygo-card-attribute-suggestion{
-      cursor: pointer;
-      width: calc(6.0/59 * var(--card-width));
-      height: auto;
-      position: absolute;
-      opacity: .5;
-
-      &:hover{
-        opacity: 1;
-      }
-    }
-  }
 }
 
 .ygo-card-center{
@@ -159,6 +143,11 @@
       
     }
   }
+  
+  .ygo-card-spell-speed-container{
+    margin-bottom: 2px;
+    height: calc(4.2/86 * var(--card-height));
+  }
 
   .ygo-card-image{
     line-height: 0;
@@ -186,9 +175,9 @@
   flex-direction: column;
   box-sizing: border-box;
   padding: calc(1/59 * var(--card-width));
-  padding-top:0;
 
   .ygo-card-type{
+    margin-top: calc(-1/59 * var(--card-width)); //Need to push card type up to offset the way this font pushes the text down.
     width: fit-content;
     transform-origin: 0% 50%;
     line-height:1.5;

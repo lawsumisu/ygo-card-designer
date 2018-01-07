@@ -21,54 +21,47 @@ class MonsterCard extends React.Component{
         super(props);
     }
 
-    getClassNames(){
-        var classNames = ['ygo-card-content'];
-        if (this.props.cardState.monsterType === MonsterTypes.FUSION){
-            classNames.push('fusion-monster');
-        }
-        else if (this.props.cardState.monsterType === MonsterTypes.SYNCHRO){
-            classNames.push('synchro-monster');
-        }
-        else if (this.props.cardState.monsterType === MonsterTypes.RITUAL){
-            classNames.push('ritual-monster');
-        }
-        else if (this.props.cardState.monsterType === MonsterTypes.XYZ){
-            classNames.push('xyz-monster');
-        }
-        else if (this.props.cardState.effect.length > 0){
-            classNames.push('effect-monster');
-        }
-        else{
-            classNames.push('normal-monster');
-        }
+    getCardCenterEditor(){
+        if (this.props.cardState.attribute === 'SPELL'){
+           return(
+               <div className="ygo-card-spell-speed-container">
 
-        return classNames.join(' ');
+               </div>
+           );
+
+        }  
+        else{
+            return (
+                <LevelSelector 
+                    level={this.props.cardState.level} 
+                    updateLevel={this.props.updateLevel}
+                    monsterType={this.props.cardState.monsterType}
+                />
+            );
+        }
     }
 
-    render(){
-        return (
-            <div className={this.getClassNames()}>
-                <div className="ygo-card-top">
-                    <AutoscalingInput
-                        className="ygo-card-name"
-                        placeholder="Enter a name here..."
-                        value={this.props.cardState.name} 
-                        onChange={(event) => this.props.updateName(event.target.value)}
-                    />
-                    <AttributeEditor 
-                        updateAttribute={this.props.updateAttribute}
-                        attribute={this.props.cardState.attribute}/> 
-                </div>
-                <div className="ygo-card-center">
-                    <LevelSelector 
-                        level={this.props.cardState.level} 
-                        updateLevel={this.props.updateLevel}
+    getCardBottom(){
+        if (this.props.cardState.attribute === 'SPELL'){
+            return (
+                <div className="ygo-card-bottom">
+                    <DescriptionEditor
                         monsterType={this.props.cardState.monsterType}
-                    />
-                    <ImageSelector/>
-                    <div className="ygo-card-set-id"></div>
+                        fusionMaterials={this.props.cardState.fusionMaterials}
+                        updateFusionMaterials={this.props.updateFusionMaterials} 
+                        synchroMaterials={this.props.cardState.synchroMaterials}
+                        updateSynchroMaterials={this.props.updateSynchroMaterials}
+                        xyzMaterials={this.props.cardState.xyzMaterials}
+                        updateXyzMaterials={this.props.updateXyzMaterials}
+                        effect={this.props.cardState.effect} 
+                        updateEffect={this.props.updateEffect} 
+                        lore={this.props.cardState.lore} 
+                        updateLore={this.props.updateLore}/>
                 </div>
-                
+            );
+        }
+        else{
+            return (
                 <div className="ygo-card-bottom">
                     <TypeEditor 
                         tribes={this.props.cardState.tribes} 
@@ -89,9 +82,6 @@ class MonsterCard extends React.Component{
                         updateEffect={this.props.updateEffect} 
                         lore={this.props.cardState.lore} 
                         updateLore={this.props.updateLore}/>
-                    <div>
-                        
-                    </div>
                     <div className="ygo-card-battle-points">
                         <div>
                             <span>ATK</span><span className="battle-point-slash">/</span>
@@ -106,6 +96,58 @@ class MonsterCard extends React.Component{
                         </div>                                       
                     </div>
                 </div>
+            );
+        }
+    }
+
+    getClassNames(){
+        var classNames = ['ygo-card-content'];
+        if (this.props.cardState.attribute === 'SPELL'){
+            classNames.push('spell-card');
+        }
+        else{
+            if (this.props.cardState.monsterType === MonsterTypes.FUSION){
+                classNames.push('fusion-monster');
+            }
+            else if (this.props.cardState.monsterType === MonsterTypes.SYNCHRO){
+                classNames.push('synchro-monster');
+            }
+            else if (this.props.cardState.monsterType === MonsterTypes.RITUAL){
+                classNames.push('ritual-monster');
+            }
+            else if (this.props.cardState.monsterType === MonsterTypes.XYZ){
+                classNames.push('xyz-monster');
+            }
+            else if (this.props.cardState.effect.length > 0){
+                classNames.push('effect-monster');
+            }
+            else{
+                classNames.push('normal-monster');
+            }
+        }
+        return classNames.join(' ');
+    }
+
+    render(){
+        return (
+            <div className={this.getClassNames()}>
+                <div className="ygo-card-top">
+                    <AutoscalingInput
+                        className="ygo-card-name"
+                        placeholder="Enter a name here..."
+                        value={this.props.cardState.name} 
+                        onChange={(event) => this.props.updateName(event.target.value)}
+                    />
+                    <AttributeEditor 
+                        updateAttribute={this.props.updateAttribute}
+                        attribute={this.props.cardState.attribute}/> 
+                </div>
+                <div className="ygo-card-center">
+                    {this.getCardCenterEditor()}
+                    <ImageSelector/>
+                    <div className="ygo-card-set-id"></div>
+                </div>
+                {this.getCardBottom()}
             </div>
         )
     }

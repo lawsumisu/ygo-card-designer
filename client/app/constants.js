@@ -8,4 +8,9 @@ const MonsterTypes = {
 
 const OrderedMonsterTypeKeyList = ['BASIC', 'FUSION', 'SYNCHRO', 'RITUAL', 'XYZ']
 
-export {MonsterTypes, OrderedMonsterTypeKeyList};
+const CardTypes = {
+    MONSTER: 'MONSTER',
+    SPELL: 'SPELL',
+    TRAP: 'TRAP'
+}
+export {MonsterTypes, OrderedMonsterTypeKeyList, CardTypes};
