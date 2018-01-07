@@ -179,7 +179,7 @@
           height: calc(3/59 * var(--card-width));
           opacity: .5;
           display: none;
-          
+
           &.action-type-visible, &.action-type-selected{
             display: block;
           }
@@ -188,6 +188,14 @@
             opacity: 1;
             &:hover{
               filter: brightness(1.2);
+            }
+          }
+
+          &.action-type-disabled{
+            cursor: not-allowed;
+            opacity: .3;
+            &:hover{
+              filter: brightness(1);
             }
           }
           

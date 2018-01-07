@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {getValidActionTypes} from 'client/app/utilities';
+import {getValidActionTypes, getIncompatibleActionTypes} from 'client/app/utilities';
 import {CardTypes} from 'client/app/constants';
 
 import equip from 'client/app/assets/Equip.png';
@@ -60,6 +60,7 @@ export class ActionTypeEditor extends React.Component{
     }
 
     getActionTypeClassNames(actionType){
+        const nonSimultaneousActionTypes = getIncompatibleActionTypes(this.props.cardType, this.props.actionTypes);
         let classNames = ['action-type'];
         if (_.includes(this.props.actionTypes, actionType)){
             classNames.push('action-type-selected');
@@ -67,18 +68,26 @@ export class ActionTypeEditor extends React.Component{
         if (this.state.showEditor){
             classNames.push('action-type-visible');
         }
+        if (nonSimultaneousActionTypes.has(actionType)){
+            classNames.push('action-type-disabled');
+        }
+        
         return classNames.join(' ');
     }
 
+    /* -------------- +
+     | Event Handlers |
+     + -------------- */
+
     actionTypeHandleOnClick(actionType){
-        if (_.includes(this.props.actionTypes, actionType)){
+         if (_.includes(this.props.actionTypes, actionType)){
             //This Action Type is selected, so deselect it.
             this.props.updateActionTypes(_.filter(this.props.actionTypes, (selectedActionType) => {
                 return selectedActionType !== actionType;
             }));            
         }
-        else{
-            // This Action Type has been newly selected, so add it to the list.
+        else if (!getIncompatibleActionTypes(this.props.cardType, this.props.actionTypes).has(actionType)){
+            // This Action Type has been newly selected, so add it to the list as long as it's not disabled.
             this.props.updateActionTypes(_.concat(this.props.actionTypes, actionType));
         }
     }
