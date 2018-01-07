@@ -72,7 +72,7 @@
   }
 
   &.spell-card{
-    background-image: url("~client/app/assets/NormalSpell.png");
+    background-image: url("~client/app/assets/TestEquipSpell.png");
     .ygo-card-name{
       input{
         color: white;
@@ -113,11 +113,10 @@
 }
 
 .ygo-card-center{
-  width: calc(46/59 * var(--card-width));
+  width: calc(47/59 * var(--card-width));
   height: calc(53/86 * var(--card-height));;
 
   .ygo-card-level{
-    margin-bottom: 2px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
@@ -154,13 +153,26 @@
   }
   
   .ygo-card-spell-speed-container{
-    margin-bottom: 2px;
     height: calc(4.2/86 * var(--card-height));
+    font-family: YGO ITC Stone Serif Small Caps Bold;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 28px;
+    >div{
+      margin-top: -.5px;
+      .spell-speed-container-left-brace{
+        padding-right: 2px;
+      }
+      .spell-speed-container-right-brace{
+        padding-left: 2px;
+      }
+    }
+    
   }
 
   .ygo-card-image{
     line-height: 0;
-    padding: 7.8px;
+    padding: 10px 12.5px;
     cursor: pointer;
     height: calc(44.3/59 * var(--card-width));
     #ygo-card-image-file-loader{

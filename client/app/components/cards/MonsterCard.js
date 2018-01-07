@@ -25,7 +25,11 @@ class MonsterCard extends React.Component{
         if (this.props.cardState.attribute === 'SPELL' || this.props.cardState.attribute === 'TRAP'){
            return(
                <div className="ygo-card-spell-speed-container">
-
+                   <div>
+                        <span className="spell-speed-container-left-brace">[</span>
+                        <span>Spell Card</span>
+                        <span className="spell-speed-container-right-brace">]</span>
+                   </div>
                </div>
            );
 
