@@ -72,7 +72,7 @@
   }
 
   &.spell-card{
-    background-image: url("~client/app/assets/TestEquipSpell.png");
+    background-image: url("~client/app/assets/NormalSpell.png");
     .ygo-card-name{
       input{
         color: white;
@@ -152,19 +152,40 @@
     }
   }
   
-  .ygo-card-spell-speed-container{
+  .ygo-card-action-text-container{
     height: calc(4.2/86 * var(--card-height));
     font-family: YGO ITC Stone Serif Small Caps Bold;
     display: flex;
     flex-direction: row-reverse;
     font-size: 28px;
     >div{
+      display: flex;
+      flex-direction: row;
+
       margin-top: -.5px;
-      .spell-speed-container-left-brace{
+      .action-text-container-left-brace{
         padding-right: 2px;
       }
-      .spell-speed-container-right-brace{
+      .action-text-container-right-brace{
         padding-left: 2px;
+      }
+
+      .action-type-container{
+        display: flex;
+        flex-direction: row;
+        .action-type{
+          cursor: pointer;
+          width: calc(3/59 * var(--card-width));
+          height: calc(3/59 * var(--card-width));
+          opacity: .5;
+          &.action-type-selected{
+            opacity: 1;
+          }
+          &:hover{
+            filter: brightness(1.6);
+          }
+        }      
+        margin: 3px -1px 0px 9px;
       }
     }
     

@@ -4,9 +4,11 @@ import _ from 'lodash';
 
 import {MonsterTypes} from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
+import {selectCardType} from 'client/app/redux/selectors';
 
 import {LevelSelector} from 'client/app/components/editors/LevelSelector';
 import {AttributeEditor} from 'client/app/components/editors/AttributeEditor';
+import {ActionTypeEditor} from 'client/app/components/editors/ActionTypeEditor';
 import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
 import {DescriptionEditor} from 'client/app/components/editors/DescriptionEditor';
@@ -14,8 +16,20 @@ import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/Au
 
 import 'client/app/components/cards/MonsterCard.scss';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
+import equip from 'client/app/assets/Equip.png';
+import quickPlay from 'client/app/assets/Quick-Play.png';
+import ritual from 'client/app/assets/Ritual.png';
+import continuous from 'client/app/assets/Continuous.png';
+import field from 'client/app/assets/Field.png';
 
-
+const spellIcons = ['EQUIP', 'QUICKPLAY', 'CONTINUOUS', 'RITUAL', 'FIELD']
+const spellIconMap = {
+    EQUIP: equip,
+    QUICKPLAY: quickPlay,
+    CONTINUOUS: continuous,
+    RITUAL: ritual,
+    FIELD: field
+}
 class MonsterCard extends React.Component{
     constructor(props){
         super(props);
@@ -23,14 +37,10 @@ class MonsterCard extends React.Component{
 
     getCardCenterEditor(){
         if (this.props.cardState.attribute === 'SPELL' || this.props.cardState.attribute === 'TRAP'){
-           return(
-               <div className="ygo-card-spell-speed-container">
-                   <div>
-                        <span className="spell-speed-container-left-brace">[</span>
-                        <span>Spell Card</span>
-                        <span className="spell-speed-container-right-brace">]</span>
-                   </div>
-               </div>
+            return(
+                <ActionTypeEditor
+                    cardType={this.props.cardState.cardType}
+                />
            );
 
         }  
@@ -163,7 +173,7 @@ class MonsterCard extends React.Component{
 // Hook up Redux store state to props of this Component.
 const mapStateToProps = function(state){
     return {
-        cardState: state.cardReducer
+        cardState: Object.assign({cardType: selectCardType(state)}, state.cardReducer)
     }
 }
 

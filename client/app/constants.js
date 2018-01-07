@@ -13,4 +13,20 @@ const CardTypes = {
     SPELL: 'SPELL',
     TRAP: 'TRAP'
 }
+
+export const SpellActionTypes = {
+    CONTINUOUS: 'CONTINUOUS',
+    FIELD: 'FIELD',
+    RITUAL: 'RITUAL',
+    QUICKPLAY: 'QUICKPLAY',
+    EQUIP: 'EQUIP',
+}
+
+export const TrapActionTypes = {
+    CONTINUOUS: 'CONTINUOUS',
+    COUNTER: 'COUNTER'
+}
+
+export const AllActionTypes = Object.assign({}, SpellActionTypes, TrapActionTypes);
+
 export {MonsterTypes, OrderedMonsterTypeKeyList, CardTypes};
