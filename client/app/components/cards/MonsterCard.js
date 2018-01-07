@@ -22,7 +22,7 @@ class MonsterCard extends React.Component{
     }
 
     getCardCenterEditor(){
-        if (this.props.cardState.attribute === 'SPELL'){
+        if (this.props.cardState.attribute === 'SPELL' || this.props.cardState.attribute === 'TRAP'){
            return(
                <div className="ygo-card-spell-speed-container">
 
@@ -42,7 +42,7 @@ class MonsterCard extends React.Component{
     }
 
     getCardBottom(){
-        if (this.props.cardState.attribute === 'SPELL'){
+        if (this.props.cardState.attribute === 'SPELL' || this.props.cardState.attribute === 'TRAP'){
             return (
                 <div className="ygo-card-bottom">
                     <DescriptionEditor
@@ -104,6 +104,9 @@ class MonsterCard extends React.Component{
         var classNames = ['ygo-card-content'];
         if (this.props.cardState.attribute === 'SPELL'){
             classNames.push('spell-card');
+        }
+        else if (this.props.cardState.attribute === 'TRAP'){
+            classNames.push('trap-card');
         }
         else{
             if (this.props.cardState.monsterType === MonsterTypes.FUSION){

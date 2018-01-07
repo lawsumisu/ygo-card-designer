@@ -80,6 +80,15 @@
     }
   }
 
+  &.trap-card{
+    background-image: url("~client/app/assets/NormalTrap.png");
+    .ygo-card-name{
+      input{
+        color: white;
+      }  
+    }
+  }
+
 }
 
 .ygo-card-top, .ygo-card-bottom{
