@@ -3,10 +3,12 @@ import React from 'react';
 import _ from 'lodash';
 import $ from 'jquery';
 import {sprintf} from 'sprintf-js';
-import {AutoscalingTextarea} from './common/AutoscalingTextarea';
-import {MonsterTypes} from '../constants';
-import {CatalogInput} from './common/catalogInput/CatalogInput';
-import {AutoscalingInput} from 'client/app/components/common/AutoscalingInput';
+
+import {MonsterTypes} from 'client/app/constants';
+
+import {AutoscalingTextarea} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextarea';
+import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
+import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
 
 class DescriptionEditor extends React.Component{
     constructor(props){

@@ -6,4 +6,6 @@ const MonsterTypes = {
     XYZ: 'Xyz'
 }
 
-export {MonsterTypes}
+const OrderedMonsterTypeKeyList = ['BASIC', 'FUSION', 'SYNCHRO', 'RITUAL', 'XYZ']
+
+export {MonsterTypes, OrderedMonsterTypeKeyList};

@@ -1,5 +1,5 @@
 import React from 'react';
-import image from '../assets/BlueEyesWhiteDragon.png';
+import image from 'client/app/assets/BlueEyesWhiteDragon.png';
 
 class ImageSelector extends React.Component{
     constructor(props){

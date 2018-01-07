@@ -1,7 +1,7 @@
 import React from 'react';
-import level from '../assets/Level.png';
+import level from 'client/app/assets/Level.png';
 import rank from 'client/app/assets/Rank.png';
-import {MonsterTypes} from '../constants';
+import {MonsterTypes} from 'client/app/constants';
 
 /**
  * Component for setting the level of a card.

@@ -1,19 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {MonsterTypes} from '../constants';
-import {ActionCreators} from 'client/app/redux/actions';
-import {LevelSelector} from './LevelSelector';
-import {AttributeEditor} from 'client/app/components/AttributeEditor';
-import {ImageSelector} from './ImageSelector';
-import {TypeEditor} from './typeEditor/TypeEditor';
-import {DescriptionEditor} from './DescriptionEditor';
 import _ from 'lodash';
-import styles from './App.scss';
-import image from '../assets/BlueEyesWhiteDragon.png';
-import {AutoscalingInput} from './common/AutoscalingInput';
+
+import {MonsterTypes} from 'client/app/constants';
+import {ActionCreators} from 'client/app/redux/actions';
+
+import {LevelSelector} from 'client/app/components/editors/LevelSelector';
+import {AttributeEditor} from 'client/app/components/editors/AttributeEditor';
+import {ImageSelector} from 'client/app/components/editors/ImageSelector';
+import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
+import {DescriptionEditor} from 'client/app/components/editors/DescriptionEditor';
+import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
+
+import 'client/app/components/cards/MonsterCard.scss';
+import image from 'client/app/assets/BlueEyesWhiteDragon.png';
 
 
-class Card extends React.Component{
+class MonsterCard extends React.Component{
     constructor(props){
         super(props);
     }
@@ -132,4 +135,4 @@ const mapDispatchToProps = function(dispatch){
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default connect(mapStateToProps, mapDispatchToProps)(MonsterCard);

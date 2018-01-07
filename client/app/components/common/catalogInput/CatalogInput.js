@@ -1,11 +1,11 @@
 import React from 'react';
 import $ from 'jquery';
-import {ResizableInput} from '../ResizableInput';
-import style from './CatalogInput.scss';
+import {ResizableInput} from 'client/app/components/common/resizableInput/ResizableInput';
+import style from 'client/app/components/common/catalogInput/CatalogInput.scss';
 
 
 /**
- * A <input/> like component that can be used to display a list of independently modified values.
+ * An <input/> like component that can be used to display a list of independently modified values.
  */
 class CatalogInput extends React.Component{
     constructor(props){

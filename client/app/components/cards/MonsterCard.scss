@@ -1,44 +1,35 @@
 @font-face{
   font-family: YGO Matrix Regular Small Caps;
-  src: url('../assets/Fonts/YGOMatrixRegularSmallCaps1.ttf');
+  src: url('~client/app/assets/Fonts/YGOMatrixRegularSmallCaps1.ttf');
 }
 
 @font-face{
   font-family: YGO ITC Stone Serif Small Caps Bold;
-  src: url('../assets/Fonts/YGOITCStoneSerifSmallCapsBold.ttf');
+  src: url('~client/app/assets/Fonts/YGOITCStoneSerifSmallCapsBold.ttf');
 }
 
 @font-face{
   font-family: YGO ITC Stone Serif LT Italic;
-  src: url('../assets/Fonts/YGOITCStoneSerifLTItalic.ttf');
+  src: url('~client/app/assets/Fonts/YGOITCStoneSerifLTItalic.ttf');
 }
 
 @font-face{
   font-family: YGO ITC Stone Serif Semibold;
-  src: url('../assets/Fonts/YGOITCStoneSerifSemibold.ttf')
+  src: url('~client/app/assets/Fonts/YGOITCStoneSerifSemibold.ttf')
 }
 
 @font-face{
   font-family: YGO Matrix Book;
-  src: url('../assets/Fonts/YGOMatrixBook.ttf')
+  src: url('~client/app/assets/Fonts/YGOMatrixBook.ttf')
 }
 
 
-.app {
-  text-size-adjust: none;
-  font-family: helvetica, arial, sans-serif;
-  line-height: 200%;
-  margin-top: 50px;
-
+.ygo-card-content{
   --card-diagonal: 1042.93px;
   --aspect-ratio: 1.46;
   --card-width: 590px;
   --card-height: calc(86/59 * var(--card-width));
 
-}
-
-.ygo-card-content{
-  // border: solid 1px red;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,27 +43,27 @@
   }
 
   &.normal-monster{
-    background-image: url("../assets/NormalMonster2.png");
+    background-image: url("~client/app/assets/NormalMonster2.png");
   }
 
   &.effect-monster{
-    background-image: url("../assets/EffectMonster.png");
+    background-image: url("~client/app/assets/EffectMonster.png");
   }
 
   &.fusion-monster{
-    background-image: url("../assets/FusionMonster.png");
+    background-image: url("~client/app/assets/FusionMonster.png");
   }
 
   &.ritual-monster{
-    background-image: url("../assets/RitualMonster.png");
+    background-image: url("~client/app/assets/RitualMonster.png");
   }
 
   &.synchro-monster{
-    background-image: url("../assets/SynchroMonster.png");
+    background-image: url("~client/app/assets/SynchroMonster.png");
   }
 
    &.xyz-monster{
-    background-image: url("../assets/XyzMonster.png");
+    background-image: url("~client/app/assets/XyzMonster.png");
     .ygo-card-name{
       input{
         color: white;

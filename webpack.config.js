@@ -3,9 +3,10 @@ const webpack = require('webpack');
 
 var BUILD_DIR = path.resolve(__dirname, 'client/build');
 var APP_DIR = path.resolve(__dirname, 'client/app');
+var CLIENT_DIR = path.resolve(__dirname, 'client');
 
 module.exports = {
-    context: APP_DIR,
+    context: CLIENT_DIR,
     entry: [
         'react-hot-loader/patch',
         // activate HMR for React
@@ -55,7 +56,7 @@ module.exports = {
             },
             {
                 test: /\.jsx?/,
-                include: APP_DIR,
+                include: CLIENT_DIR,
                 use: ['babel-loader'],
             },
             {
