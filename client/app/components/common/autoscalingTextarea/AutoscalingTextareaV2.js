@@ -74,7 +74,6 @@ class AutoscalingTextareaV2 extends React.Component{
         fontSizeFullContentElement.show();
         const maxHeight = autoscalingContentElement.height();
         let contentHeight = fontSizeFullContentElement.height();
-        console.log(contentHeight, maxHeight);
 
         let lastFittingFontSize;      
         while(true){

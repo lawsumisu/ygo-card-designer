@@ -25,6 +25,7 @@ class AutoscalingInput extends React.Component{
         this.scaleInput();
     }
 
+    
     updateInput(event){
         this.props.onChange(event);  
     }
@@ -32,33 +33,22 @@ class AutoscalingInput extends React.Component{
     scaleInput(){
         $(this.refs.fullSizeContent).text($(this.autoscalingInputRef.refs.content).val()); 
         var newScale = Math.min($(this.refs.maxSizeContainer).width()/$(this.refs.fullSizeContent).width(), 1);
-        if (newScale !== this.state.scale){
-            this.setState({
-            scale: newScale 
-            });
-        }
-        
-    }
-
-    getStyle(){
-        return {
-            transform: sprintf('scale(%s, 1)', this.state.scale)
-        };
+        $(this.resizableInputDOMElement).css('transform', sprintf('scale(%s, 1)', newScale));   
     }
 
     render(){
         return(
-            <div 
+            <div
                 ref="maxSizeContainer"
                 className={this.props.className}>
                 <span className="full-size-content" ref="fullSizeContent"></span>
                 <ResizableInput
                     containerClassName='autoscaling-content'
                     ref={(input) => this.autoscalingInputRef = input} 
+                    DOMElementRef={(element) => this.resizableInputDOMElement = element}
                     type="text" 
                     placeholder={this.props.placeholder}
                     value={this.props.value} 
-                    containerStyle={this.getStyle()}
                     onChange={(event) => this.updateInput(event)}
                     onFocus={this.props.onFocus ? (event) => this.props.onFocus(event) : (event) => {}}
                     onBlur={this.props.onBlur ? (event) => this.props.onBlur(event) : (event) => {}}

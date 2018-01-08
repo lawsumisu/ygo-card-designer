@@ -291,7 +291,9 @@
     }
 
     &.ygo-card-full-description{
-      line-height: 15px;
+      .ygo-card-effect, .ygo-card-lore{
+         line-height: 15px;
+      }
     }
   }
 

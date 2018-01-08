@@ -151,7 +151,6 @@ class DescriptionEditor extends React.Component{
         let classNames = ['ygo-card-bottom-text'];
         const showLore = !_.isEmpty(this.props.lore) || this.state.loreIsFocused || this.state.mainIsHovered || this.state.effectIsFocused;
         const showEffect = !_.isEmpty(this.props.effect) || this.state.effectIsFocused || this.state.mainIsHovered || this.state.loreIsFocused;
-        console.log(showLore, showEffect);
         if (showLore && showEffect){
             classNames.push('ygo-card-full-description');
         }
@@ -211,7 +210,7 @@ class DescriptionEditor extends React.Component{
         if (this.props.cardType === CardTypes.MONSTER && (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO)){
             const monsterMaterialProperties = this.getMonsterMaterialProperties();
             const maxWidth = $('.ygo-card-effect-container').width();
-            const actualWidth = $(monsterMaterialProperties.className).width();
+            const actualWidth = $('.'+monsterMaterialProperties.className).width();
             if (!actualWidth || actualWidth === 0) return;
             const materialHorizontalScaleFactor = Math.min(maxWidth/actualWidth, 1);
             if (materialHorizontalScaleFactor !== this.state.materialHorizontalScale){
