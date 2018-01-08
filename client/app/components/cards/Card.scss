@@ -187,7 +187,7 @@
     line-height:1.5;
     display: flex;
     flex-direction: row;
-    font-size: 25px;
+    font-size: 23px;
     font-family: YGO ITC Stone Serif Small Caps Bold;
 
     &:hover{
@@ -247,10 +247,10 @@
     // border-bottom: 1px solid;
     display: flex;
     flex-direction: column;
+    font-size: 15px;
+    line-height: 21px;
 
     .ygo-card-lore, .ygo-card-effect-container{
-      font-size: 15px;
-      line-height: 21px;
       resize:none;
       flex: 1 0;
       height: 50%;
@@ -288,6 +288,10 @@
       .catalog-delimiter{
         padding: 0px 4px;
       }
+    }
+
+    &.ygo-card-full-description{
+      line-height: 15px;
     }
   }
 

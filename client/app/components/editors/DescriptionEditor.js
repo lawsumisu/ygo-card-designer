@@ -117,6 +117,8 @@ class DescriptionEditor extends React.Component{
         (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO || this.props.monsterType === MonsterTypes.XYZ);
     }
 
+
+
     /* -------------- *
      | Event Handlers |
      + -------------- */
@@ -144,6 +146,18 @@ class DescriptionEditor extends React.Component{
             monsterMaterialIsHovered: false
         });
     };
+
+    getDescriptionContainerClassNames(){
+        let classNames = ['ygo-card-bottom-text'];
+        const showLore = !_.isEmpty(this.props.lore) || this.state.loreIsFocused || this.state.mainIsHovered || this.state.effectIsFocused;
+        const showEffect = !_.isEmpty(this.props.effect) || this.state.effectIsFocused || this.state.mainIsHovered || this.state.loreIsFocused;
+        console.log(showLore, showEffect);
+        if (showLore && showEffect){
+            classNames.push('ygo-card-full-description');
+        }
+        return classNames.join(' ');
+
+    }
 
     getEffectContainerClassNames(effectText){
         var effectClassNames = ['ygo-card-effect-container'];
@@ -211,7 +225,7 @@ class DescriptionEditor extends React.Component{
 
     render(){
         return (
-            <div className="ygo-card-bottom-text"
+            <div className={this.getDescriptionContainerClassNames()}
                 onMouseEnter={(event) => this.handleBottomTextContainerOnMouseEnter()}
                 onMouseLeave={(event) => this.handleBottomTextContainerOnMouseLeave()}>
                 <div 
@@ -229,6 +243,7 @@ class DescriptionEditor extends React.Component{
                 <AutoscalingTextareaV2
                     style={this.getStyle(this.props.lore)}
                     maxFontSize={15}
+                    minFontSize={13}
                     className="ygo-card-lore"
                     placeholder="Enter lore here..."
                     value={this.props.lore} 
