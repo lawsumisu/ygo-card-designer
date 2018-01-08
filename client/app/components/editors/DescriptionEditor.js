@@ -231,8 +231,9 @@ class DescriptionEditor extends React.Component{
                 <div 
                     className={this.getEffectContainerClassNames(this.props.effect)}>
                     {this.getMaterialEditor()}
-                    <AutoscalingTextarea
+                    <AutoscalingTextareaV2
                         maxFontSize={15}
+                        minFontSize={12}
                         className={this.getEffectClassNames(this.props.effect)}
                         placeholder="Enter effect here..."
                         value={this.props.effect} 
@@ -243,7 +244,7 @@ class DescriptionEditor extends React.Component{
                 <AutoscalingTextareaV2
                     style={this.getStyle(this.props.lore)}
                     maxFontSize={15}
-                    minFontSize={13}
+                    minFontSize={12}
                     className="ygo-card-lore"
                     placeholder="Enter lore here..."
                     value={this.props.lore} 
