@@ -7,6 +7,7 @@ import {sprintf} from 'sprintf-js';
 import {MonsterTypes, CardTypes} from 'client/app/constants';
 
 import {AutoscalingTextarea} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextarea';
+import {AutoscalingTextareaV2} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextareaV2';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
 
@@ -225,7 +226,7 @@ class DescriptionEditor extends React.Component{
                         onFocus={(event) => this.updateFocus('effect', true)}
                         onBlur={(event) => this.updateFocus('effect', false)}/>
                 </div>         
-                <AutoscalingTextarea
+                <AutoscalingTextareaV2
                     style={this.getStyle(this.props.lore)}
                     maxFontSize={15}
                     className="ygo-card-lore"
