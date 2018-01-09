@@ -7,6 +7,7 @@ import {sprintf} from 'sprintf-js';
 import {MonsterTypes, CardTypes} from 'client/app/constants';
 
 import {AutoscalingTextarea} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextarea';
+import {AutoscalingTextareaV2} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextareaV2';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
 
@@ -116,6 +117,8 @@ class DescriptionEditor extends React.Component{
         (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO || this.props.monsterType === MonsterTypes.XYZ);
     }
 
+
+
     /* -------------- *
      | Event Handlers |
      + -------------- */
@@ -143,6 +146,17 @@ class DescriptionEditor extends React.Component{
             monsterMaterialIsHovered: false
         });
     };
+
+    getDescriptionContainerClassNames(){
+        let classNames = ['ygo-card-bottom-text'];
+        const showLore = !_.isEmpty(this.props.lore) || this.state.loreIsFocused || this.state.mainIsHovered || this.state.effectIsFocused;
+        const showEffect = !_.isEmpty(this.props.effect) || this.state.effectIsFocused || this.state.mainIsHovered || this.state.loreIsFocused;
+        if (showLore && showEffect){
+            classNames.push('ygo-card-full-description');
+        }
+        return classNames.join(' ');
+
+    }
 
     getEffectContainerClassNames(effectText){
         var effectClassNames = ['ygo-card-effect-container'];
@@ -196,7 +210,7 @@ class DescriptionEditor extends React.Component{
         if (this.props.cardType === CardTypes.MONSTER && (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO)){
             const monsterMaterialProperties = this.getMonsterMaterialProperties();
             const maxWidth = $('.ygo-card-effect-container').width();
-            const actualWidth = $(monsterMaterialProperties.className).width();
+            const actualWidth = $('.'+monsterMaterialProperties.className).width();
             if (!actualWidth || actualWidth === 0) return;
             const materialHorizontalScaleFactor = Math.min(maxWidth/actualWidth, 1);
             if (materialHorizontalScaleFactor !== this.state.materialHorizontalScale){
@@ -210,14 +224,15 @@ class DescriptionEditor extends React.Component{
 
     render(){
         return (
-            <div className="ygo-card-bottom-text"
+            <div className={this.getDescriptionContainerClassNames()}
                 onMouseEnter={(event) => this.handleBottomTextContainerOnMouseEnter()}
                 onMouseLeave={(event) => this.handleBottomTextContainerOnMouseLeave()}>
                 <div 
                     className={this.getEffectContainerClassNames(this.props.effect)}>
                     {this.getMaterialEditor()}
-                    <AutoscalingTextarea
+                    <AutoscalingTextareaV2
                         maxFontSize={15}
+                        minFontSize={12}
                         className={this.getEffectClassNames(this.props.effect)}
                         placeholder="Enter effect here..."
                         value={this.props.effect} 
@@ -225,9 +240,10 @@ class DescriptionEditor extends React.Component{
                         onFocus={(event) => this.updateFocus('effect', true)}
                         onBlur={(event) => this.updateFocus('effect', false)}/>
                 </div>         
-                <AutoscalingTextarea
+                <AutoscalingTextareaV2
                     style={this.getStyle(this.props.lore)}
                     maxFontSize={15}
+                    minFontSize={12}
                     className="ygo-card-lore"
                     placeholder="Enter lore here..."
                     value={this.props.lore} 

@@ -19,12 +19,27 @@ class ResizableInput extends React.Component{
         this.resizeInput();
     }
 
+    initializeMainContainerReference(element){
+        if (this.props.DOMElementRef){
+            this.props.DOMElementRef(element);
+        }
+        this.mainContainer = element;
+    }
+
     getClassName(){
         var className = "resizable-input-content"
         if (this.props.className){
             className += ' ' + this.props.className;
         }
         return className;
+    }
+    
+    getMainContainerClassNames(){
+        let classNames = ['resizable-input-container'];
+        if (this.props.containerClassName){
+            classNames.push(this.props.containerClassName);
+        }
+        return classNames.join(' ');
     }
 
     updateInput(event){
@@ -36,18 +51,18 @@ class ResizableInput extends React.Component{
         var resizingContentElement = $(this.refs.content);
 
         hiddenContentElement.show();
-        hiddenContentElement.text(resizingContentElement.val());
         resizingContentElement.width(hiddenContentElement.width()); 
         hiddenContentElement.hide();
     }
 
     render(){
         return (
-            <div 
-                className={this.props.containerClassName}
+            <div
+                ref={(element) => this.initializeMainContainerReference(element)}
+                className={this.getMainContainerClassNames()}
                 style={this.props.containerStyle}
                 >
-                <span className="resizable-input-hidden-content" ref="hiddenContent"></span>
+                <span className="resizable-input-hidden-content" ref="hiddenContent">{this.props.value}</span>
                 <input 
                     className={this.getClassName()}
                     ref="content" 
