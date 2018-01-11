@@ -34,9 +34,7 @@ class AutoscalingInput extends React.Component{
         let css = {}
         _.forEach(['transform', 'msTransform', 'moz-transform', 'WebkitTransform'], (operator) => {
             element.style[operator] = transform;
-            // css[operator] = transform;
         });
-        // $(element).css(css);
     }
 
     scaleInput(){
