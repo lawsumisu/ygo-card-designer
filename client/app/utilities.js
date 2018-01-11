@@ -48,3 +48,7 @@ export const getBrowser = function(){
         return BrowserTypes.CHROME;
     }
 }
+
+export const browserIsFirefox = function(){
+    return getBrowser() === BrowserTypes.FIREFOX;
+}

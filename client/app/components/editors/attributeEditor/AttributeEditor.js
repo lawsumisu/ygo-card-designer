@@ -77,24 +77,15 @@ class AttributeEditor extends React.Component{
                                 key={attribute}
                                 style={style}>
                                     <img
-                                    src={attributeMap[attribute]}
-                                    onClick={(event) => this.updateAttribute(event, attribute)}
-                                    className="ygo-card-attribute-suggestion"
+                                        src={attributeMap[attribute]}
+                                        onClick={(event) => this.updateAttribute(event, attribute)}
+                                        className="ygo-card-attribute-suggestion"
                                     />
                             </div>            
                         )})
                 }         
             </div>
         )
-    }
-
-    getAttributeImage(attributeName){
-        if (_.has(attributeMap, attributeName)){
-            return attributeMap[attributeName];
-        }
-        else if (_.has(spellTrapAttributeMap, attributeName)){
-            return spellTrapAttributeMap[attributeName];
-        }
     }
 
     /* -------------- +
@@ -122,7 +113,7 @@ class AttributeEditor extends React.Component{
                 onMouseLeave={(event) => this.mainContainerHandleOnMouseLeave()}>
                 <img
                     ref={(input) => this.attributeSelection = input} 
-                    src={this.getAttributeImage(this.props.attribute)}
+                    src={attributeMap[this.props.attribute]}
                     className="ygo-card-attribute-selection"/>
                 {this.state.mainContainerIsHovered ? this.getAttributeWheel() : null}
             </div> 
