@@ -1,3 +1,5 @@
+@import '~client/app/stylesheets/_mixins.scss';
+
 .max-size-container{
     width: 200px;
 }
@@ -12,7 +14,7 @@
 }
 
 .autoscaling-content{
-    transform-origin: 0% 50%;
+    @include transform-origin(0% 50%);
 
     .resizable-input-content{
         min-width: 100%;

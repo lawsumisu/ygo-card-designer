@@ -71,9 +71,10 @@ class AutoscalingTextareaV2 extends React.Component{
         const originalFontSize = parseFloat($(this.mainContainer).css('font-size'));
 
         // Initialize DOM size-related variables
-        fontSizeFullContentElement.show();
         const maxHeight = autoscalingContentElement.height();
+        fontSizeFullContentElement.show();      
         let contentHeight = fontSizeFullContentElement.height();
+        // console.log('Max Height:', maxHeight, 'Current Height', contentHeight);
 
         let lastFittingFontSize;      
         while(true){
@@ -88,13 +89,11 @@ class AutoscalingTextareaV2 extends React.Component{
                 maxFontSize = currentFontSize;
                 // Text is too big to fit in textarea, so need to shrink it.
                 const newFontSize = Math.floor((minFontSize + currentFontSize) / 2);
-                console.log(newFontSize);
                 var lineHeightScale = newFontSize / originalFontSize;
                 currentFontSize = newFontSize;
                 fontSizeFullContentElement.css('font-size', currentFontSize + unit);
                 fontSizeFullContentElement.css('line-height', (lineHeight*lineHeightScale) + lineHeightUnit);
                 contentHeight = fontSizeFullContentElement.height();
-                console.log(contentHeight);
             }
             else if (contentHeight <= maxHeight){
                 if (currentFontSize === maxFontSize){
@@ -146,11 +145,11 @@ class AutoscalingTextareaV2 extends React.Component{
             return;
         }
 
+        const maxHeight = autoscalingContentElement.height();
         fullContentElement.show();
         const initialWidth = fullContentElement.width()
         let currentWidth = initialWidth;
-        let currentHeight = fullContentElement.height();
-        const maxHeight = autoscalingContentElement.height();
+        let currentHeight = fullContentElement.height();     
         const lineHeight = parseFloat(fullContentElement.css('lineHeight'));
         let c = 0
         let minWidth = initialWidth;
@@ -191,7 +190,7 @@ class AutoscalingTextareaV2 extends React.Component{
             currentHeight = fullContentElement.height();
             c += 1;
         }
-        console.log('# Iterations:', c);
+        // console.log('# Iterations:', c);
         // Reset fullContentElement css properties
         fullContentElement.css('width', '');
         fullContentElement.css('display', '');

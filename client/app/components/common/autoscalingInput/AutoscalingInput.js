@@ -30,10 +30,17 @@ class AutoscalingInput extends React.Component{
         this.props.onChange(event);  
     }
 
+    setInlineTransformCss(element, transform){
+        let css = {}
+        _.forEach(['transform', 'msTransform', 'moz-transform', 'WebkitTransform'], (operator) => {
+            element.style[operator] = transform;
+        });
+    }
+
     scaleInput(){
         $(this.refs.fullSizeContent).text($(this.autoscalingInputRef.refs.content).val()); 
-        var newScale = Math.min($(this.refs.maxSizeContainer).width()/$(this.refs.fullSizeContent).width(), 1);
-        $(this.resizableInputDOMElement).css('transform', sprintf('scale(%s, 1)', newScale));   
+        const newScale = Math.min($(this.refs.maxSizeContainer).width()/$(this.refs.fullSizeContent).width(), 1);
+        this.setInlineTransformCss(this.resizableInputDOMElement, sprintf('scale(%s, 1)', newScale));
     }
 
     render(){
