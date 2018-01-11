@@ -8,7 +8,7 @@ const MonsterTypes = {
 
 const OrderedMonsterTypeKeyList = ['BASIC', 'FUSION', 'SYNCHRO', 'RITUAL', 'XYZ']
 
-const CardTypes = {
+export const CardTypes = {
     MONSTER: 'MONSTER',
     SPELL: 'SPELL',
     TRAP: 'TRAP'
@@ -27,6 +27,11 @@ export const TrapActionTypes = {
     COUNTER: 'COUNTER'
 }
 
+export const BrowserTypes = {
+    MOZILLA: 'MOZILLA',
+    CHROME: 'CHROME'
+}
+
 export const AllActionTypes = Object.assign({}, SpellActionTypes, TrapActionTypes);
 
-export {MonsterTypes, OrderedMonsterTypeKeyList, CardTypes};
+export {MonsterTypes, OrderedMonsterTypeKeyList};

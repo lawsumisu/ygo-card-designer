@@ -1,4 +1,4 @@
-import {CardTypes, SpellActionTypes, TrapActionTypes} from 'client/app/constants';
+import {CardTypes, SpellActionTypes, TrapActionTypes, BrowserTypes} from 'client/app/constants';
 import _ from 'lodash';
 
 export const getValidActionTypes = function(cardType){
@@ -33,4 +33,18 @@ export const getIncompatibleActionTypes = function(cardType, actionTypes){
         })
     }
     return incompatibleActionTypes;
+}
+
+export const getBrowser = function(){
+    // Opera 8.0+
+    // var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+    // Firefox 1.0+
+    if(typeof InstallTrigger !== 'undefined'){
+        return BrowserTypes.FIREFOX;
+    }
+    // Chrome 1+
+    else if (!!window.chrome && !!window.chrome.webstore){
+        return BrowserTypes.CHROME;
+    }
 }

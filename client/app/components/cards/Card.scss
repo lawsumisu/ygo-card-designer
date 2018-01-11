@@ -105,8 +105,8 @@
     font-size: 67px;
     font-family: YGO Matrix Regular Small Caps;
     padding-left: 10px;
-    flex: 1 0;
-    width: 84%;
+    // flex: 1 0;
+    width: calc(42.75/59 * var(--card-width));
   }
 
 }
@@ -147,10 +147,8 @@
       .ygo-card-level-hovered{
         opacity: 1;
       }
-      
     }
   }
-  
   
   .ygo-card-image{
     line-height: 0;
@@ -168,6 +166,13 @@
 
   .ygo-card-set-id{
     height: calc(3.8/59 * var(--card-width));
+  }
+}
+
+//Set browser specific values.
+.browser-type-firefox{
+  .ygo-card-type{
+    width: -moz-fit-content;
   }
 }
 
@@ -245,7 +250,7 @@
     display: flex;
     flex-direction: column;
     font-size: 15px;
-    line-height: 21px;
+    line-height: 18px;
 
     .ygo-card-lore, .ygo-card-effect-container{
       resize:none;
