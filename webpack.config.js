@@ -6,7 +6,7 @@ const BUILD_DIR = path.resolve(__dirname, 'build');
 const APP_DIR = path.resolve(__dirname, 'client/app');
 const CLIENT_DIR = path.resolve(__dirname, 'client');
 
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV || 'local';
 const {ifProduction, ifNotProduction} = getIfUtils(env);
 console.log(`Webpack bundling in ${env} mode`)
 

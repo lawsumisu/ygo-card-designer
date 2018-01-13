@@ -1,3 +1,5 @@
+@import '~client/app/stylesheets/_mixins.scss';
+
 @font-face{
   font-family: YGO Matrix Regular Small Caps;
   src: url('~client/app/assets/Fonts/YGOMatrixRegularSmallCaps1.ttf');
@@ -227,6 +229,8 @@
     .ygo-card-monster-type-selector, .ygo-card-type-input{
       display: none;
       font: inherit;
+      // @include appearance(none);
+      cursor: pointer;
 
       &:focus, &.ygo-card-monster-type-selector-visible{
         display: block;
@@ -237,6 +241,7 @@
     .ygo-card-monster-type{
       display: flex;
       flex-direction: row;
+      cursor: pointer;
     }
   }
 
@@ -251,6 +256,7 @@
     flex-direction: column;
     font-size: 15px;
     line-height: 18px;
+    padding: 0px 2.5px;
 
     .ygo-card-lore, .ygo-card-effect-container{
       resize:none;
