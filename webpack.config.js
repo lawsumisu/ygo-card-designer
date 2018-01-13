@@ -1,32 +1,43 @@
-var path = require('path');
+const path = require('path');
 const webpack = require('webpack');
+const {removeEmpty, getIfUtils} = require('webpack-config-utils');
 
-var BUILD_DIR = path.resolve(__dirname, 'client/build');
-var APP_DIR = path.resolve(__dirname, 'client/app');
-var CLIENT_DIR = path.resolve(__dirname, 'client');
+const BUILD_DIR = path.resolve(__dirname, 'build');
+const APP_DIR = path.resolve(__dirname, 'client/app');
+const CLIENT_DIR = path.resolve(__dirname, 'client');
 
-module.exports = {
+const env = process.env.NODE_ENV;
+const {ifProduction, ifNotProduction} = getIfUtils(env);
+console.log(`Webpack bundling in ${env} mode`)
+
+module.exports = removeEmpty({
     context: CLIENT_DIR,
-    entry: [
-        'react-hot-loader/patch',
+    entry: removeEmpty([
+        ifNotProduction('react-hot-loader/patch'),
         // activate HMR for React
 
-        'webpack-dev-server/client?http://localhost:8080',
+        ifNotProduction('webpack-dev-server/client?http://localhost:8080'),
         // bundle the client for webpack-dev-server
         // and connect to the provided endpoint
 
-        'webpack/hot/only-dev-server',
+        ifNotProduction('webpack/hot/only-dev-server'),
         // bundle the client for hot reloading
         // only- means to only hot reload for successful updates
 
         './main.js'
         // the entry point of our app
-    ],
-    output: {
-        path: BUILD_DIR,
-        publicPath: "/",
-        filename: "bundle.js"
-    },
+    ]),
+    output: ifProduction(
+        {
+            path: BUILD_DIR,
+            filename: 'bundle.js'
+        },
+        {
+            path: BUILD_DIR,
+            publicPath: '/',
+            filename: 'bundle.js'
+        }
+    ),
 
     devtool: 'source-map',
 
@@ -73,11 +84,11 @@ module.exports = {
         extensions: ['.js']
     },
 
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+    plugins: removeEmpty([
+        ifNotProduction(new webpack.HotModuleReplacementPlugin()),
         // enable HMR globally
 
-        new webpack.NamedModulesPlugin(),
+        ifNotProduction(new webpack.NamedModulesPlugin()),
         // prints more readable module names in the browser console on HMR updates
-    ],
-};
+    ]),
+});
