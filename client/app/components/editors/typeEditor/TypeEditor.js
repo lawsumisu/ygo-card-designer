@@ -4,6 +4,7 @@ import {sprintf} from 'sprintf-js';
 import $ from 'jquery';
 import {ResizableInput} from 'client/app/components/common/resizableInput/ResizableInput';
 import {MonsterTypeEditor} from 'client/app/components/editors/typeEditor/MonsterTypeEditor';
+import {MonsterClassEditor} from 'client/app/components/editors/typeEditor/MonsterClassEditor';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
 
 
@@ -17,6 +18,7 @@ class TypeEditor extends React.Component{
             editorIsHovered: false,
             editorIsFocused: false
         }
+        console.log(this.props.monsterClass)
     }
 
     componentDidUpdate(){
@@ -106,6 +108,13 @@ class TypeEditor extends React.Component{
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
                         showEditor={this.state.editorIsFocused || this.state.editorIsHovered}/>
+                    <MonsterClassEditor
+                        updateMonsterClass={this.props.updateMonsterClass}
+                        monsterClass={this.props.monsterClass}
+                        onFocus={(event) => this.handleOnFocus()}
+                        onBlur={(event) => this.handleOnBlur()}
+                        showEditor={this.state.editorIsFocused || this.state.editorIsHovered}
+                    />
                     {this.getEffectTypeAsDisplay()}
                     <span>]</span>
                 </div>

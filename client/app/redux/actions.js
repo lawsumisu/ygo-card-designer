@@ -19,6 +19,8 @@ const Actions = {
     UPDATE_TYPE: 'UPDATE_TYPE',
     UPDATE_MONSTER_TRIBE: 'UPDATE_MONSTER_TRIBE',
     UPDATE_MONSTER_TYPE:  'UPDATE_MONSTER_TYPE',
+    UPDATE_MONSTER_CLASS: 'UPDATE_MONSTER_CLASS',
+    UPDATE_MONSTER_ABILITIES: 'UPDATE_MONSTER_ABILITIES',
     UPDATE_FUSION_MATERIALS: 'UPDATE_FUSION_MATERIALS',
     UPDATE_SYNCHRO_MATERIALS: 'UPDATE_SYNCHRO_MATERIALS',
     UPDATE_XYZ_MATERIALS: 'UPDATE_XYZ_MATERIALS',
@@ -46,6 +48,8 @@ let ActionCreators = {
         updateDef: updateDef,
         updateTribes: updateTribes,
         updateMonsterType: updateMonsterType,
+        updateMonsterClass: updateMonsterClass,
+        updateMonsterAbilities: updateMonsterAbilities,
         updateFusionMaterials: updateFusionMaterials,
         updateSynchroMaterials: updateSynchroMaterials,
         updateXyzMaterials: updateXyzMaterials,
@@ -105,6 +109,20 @@ function updateMonsterType(monsterType){
     return {
         type: Actions.UPDATE_MONSTER_TYPE,
         monsterType: monsterType
+    }
+}
+
+function updateMonsterClass(monsterClass){
+    return {
+        type: Actions.UPDATE_MONSTER_CLASS,
+        monsterClass: monsterClass
+    }
+}
+
+function updateMonsterAbilities(monsterAbilities){
+    return {
+        type: Actions.UPDATE_MONSTER_ABILITIES,
+        monsterAbilities: monsterAbilities
     }
 }
 

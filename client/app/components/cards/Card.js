@@ -73,6 +73,8 @@ class Card extends React.Component{
                         updateTribes={this.props.updateTribes}
                         monsterType={this.props.cardState.monsterType}
                         updateMonsterType={this.props.updateMonsterType} 
+                        monsterClass={this.props.cardState.monsterClass}
+                        updateMonsterClass={this.props.updateMonsterClass}
                         isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
                     
                     <DescriptionEditor
@@ -181,6 +183,7 @@ const mapDispatchToProps = function(dispatch){
         updateLore: (lore) => dispatch(ActionCreators.general.updateLore(lore)),
         updateTribes: (tribes) => dispatch(ActionCreators.monster.updateTribes(tribes)),
         updateMonsterType: (type) => dispatch(ActionCreators.monster.updateMonsterType(type)),
+        updateMonsterClass: (monsterClass) => dispatch(ActionCreators.monster.updateMonsterClass(monsterClass)),
         updateFusionMaterials: (fusionMaterials) => dispatch(ActionCreators.monster.updateFusionMaterials(fusionMaterials)),
         updateSynchroMaterials: (synchroMaterials) => dispatch(ActionCreators.monster.updateSynchroMaterials(synchroMaterials)),
         updateXyzMaterials: (xyzMaterials) => dispatch(ActionCreators.monster.updateXyzMaterials(xyzMaterials))

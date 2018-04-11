@@ -27,6 +27,11 @@ export const TrapActionTypes = {
     COUNTER: 'COUNTER'
 }
 
+export const MonsterClasses = {
+    NON_TUNER: 'Non-Tuner',
+    TUNER: 'Tuner'
+}
+
 export const BrowserTypes = {
     MOZILLA: 'MOZILLA',
     CHROME: 'CHROME'
