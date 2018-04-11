@@ -1,12 +1,15 @@
-const MonsterTypes = {
+export const MonsterTypes = {
     BASIC: 'Basic',
     FUSION: 'Fusion',
     SYNCHRO: 'Synchro',
     RITUAL: 'Ritual',
-    XYZ: 'Xyz'
+    XYZ: 'Xyz',
+    PENDULUM: 'Pendulum',
+    PURE: 'Pure'
 }
 
-const OrderedMonsterTypeKeyList = ['BASIC', 'FUSION', 'SYNCHRO', 'RITUAL', 'XYZ']
+export const OrderedMonsterTypeKeyList = [MonsterTypes.BASIC, MonsterTypes.FUSION, MonsterTypes.SYNCHRO, MonsterTypes.RITUAL, MonsterTypes.XYZ];
+export const OrderedMonsterHybridTypeKeyList = ['PURE', 'PENDULUM'];
 
 export const CardTypes = {
     MONSTER: 'MONSTER',
@@ -27,11 +30,14 @@ export const TrapActionTypes = {
     COUNTER: 'COUNTER'
 }
 
+export const MonsterClasses = {
+    NON_TUNER: 'Non-Tuner',
+    TUNER: 'Tuner'
+}
+
 export const BrowserTypes = {
     MOZILLA: 'MOZILLA',
     CHROME: 'CHROME'
 }
 
 export const AllActionTypes = Object.assign({}, SpellActionTypes, TrapActionTypes);
-
-export {MonsterTypes, OrderedMonsterTypeKeyList};

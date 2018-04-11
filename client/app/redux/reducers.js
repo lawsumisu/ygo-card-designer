@@ -1,7 +1,7 @@
 'use strict';
 
 import {Actions} from 'client/app/redux/actions';
-import {MonsterTypes} from 'client/app/constants';
+import {MonsterTypes, MonsterClasses} from 'client/app/constants';
 
 const initialCardState = {
     name: 'Blue-Eyes White Dragon',
@@ -9,6 +9,9 @@ const initialCardState = {
     attribute: 'LIGHT',
     actionTypes: [],
     monsterType: MonsterTypes.BASIC,
+    monsterHybridType: MonsterTypes.PURE,
+    monsterClass: MonsterClasses.NON_TUNER,
+    monsterAbilities: [],
     fusionMaterials: ['"Blue-Eyes White Dragon"'],
     synchroMaterials: ['1 Tuner monster', '1 or more non-Tuner monsters'],
     xyzMaterials: '3 Normal Dragon-Type monsters',
@@ -56,6 +59,18 @@ function cardReducer(previousState=initialCardState, action){
         case Actions.UPDATE_MONSTER_TYPE:
             return Object.assign({}, previousState, {
                 monsterType: action.monsterType
+            });
+        case Actions.UPDATE_MONSTER_HYBRID_TYPE:
+            return Object.assign({}, previousState, {
+                monsterHybridType: action.monsterHybridType
+            });
+        case Actions.UPDATE_MONSTER_CLASS:
+            return Object.assign({}, previousState,{
+                monsterClass: action.monsterClass
+            });
+        case Actions.UPDATE_MONSTER_ABILITIES:
+            return Object.assign({}, previousState,{
+                monsterAbilities: action.monsterAbilities
             });
         case Actions.UPDATE_LORE:
             return Object.assign({}, previousState, {

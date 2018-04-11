@@ -102,7 +102,7 @@ class CatalogInput extends React.Component{
 
     getInputContainerClassNames(){
         var inputContainerClassNames = ['catalog-input-container'];
-        if (this.state.inputIsFocused || this.props.showInput || this.props.items.length === 0){
+        if (this.state.inputIsFocused || this.props.showInput || (this.props.items.length === 0 && this.showWhenEmpty)){
             inputContainerClassNames.push('catalog-input-container-visible');
         }
         return inputContainerClassNames.join(' ');
@@ -240,5 +240,9 @@ class CatalogInput extends React.Component{
         )
     }
 }
+
+CatalogInput.defaultProps = {
+    showWhenEmpty: true
+};
 
 export {CatalogInput};
