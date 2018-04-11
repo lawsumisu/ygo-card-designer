@@ -4,6 +4,7 @@ import {sprintf} from 'sprintf-js';
 import $ from 'jquery';
 import {ResizableInput} from 'client/app/components/common/resizableInput/ResizableInput';
 import {MonsterTypeEditor} from 'client/app/components/editors/typeEditor/MonsterTypeEditor';
+import {MonsterHybridTypeEditor} from 'client/app/components/editors/typeEditor/MonsterHybridTypeEditor';
 import {MonsterClassEditor} from 'client/app/components/editors/typeEditor/MonsterClassEditor';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
 
@@ -18,7 +19,6 @@ class TypeEditor extends React.Component{
             editorIsHovered: false,
             editorIsFocused: false
         }
-        console.log(this.props.monsterClass)
     }
 
     componentDidUpdate(){
@@ -47,6 +47,14 @@ class TypeEditor extends React.Component{
         this.setState({
             editorIsFocused: false
         });
+    }
+
+    getDividerAsDisplay(){
+        if(this.props.monsterAbilities.length > 0 || this.state.editorIsFocused || this.state.editorIsHovered){
+            return (
+                <span>/</span>
+            );
+        }
     }
 
     getEffectTypeAsDisplay(){
@@ -108,13 +116,32 @@ class TypeEditor extends React.Component{
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
                         showEditor={this.state.editorIsFocused || this.state.editorIsHovered}/>
+                    <MonsterHybridTypeEditor 
+                        updateMonsterHybridType={this.props.updateMonsterHybridType} 
+                        monsterHybridType={this.props.monsterHybridType}
+                        onFocus={(event) => this.handleOnFocus()}
+                        onBlur={(event) => this.handleOnBlur()}
+                        showEditor={this.state.editorIsFocused || this.state.editorIsHovered}/>
+                    {this.getDividerAsDisplay()}
+                    <CatalogInput
+                        placeholder='Add ability...'
+                        delimiter="/"
+                        items={this.props.monsterAbilities}
+                        updateItems={this.props.updateMonsterAbilities}
+                        onMouseEnter={(event) => this.updateScale()}
+                        onMouseLeave={(event) => this.updateScale()}
+                        onFocus={(event) => this.handleOnFocus()}
+                        onBlur={(event) => this.handleOnBlur()}
+                        showInput={this.state.editorIsFocused || this.state.editorIsHovered}
+                        showWhenEmpty={false}
+                        />
                     <MonsterClassEditor
                         updateMonsterClass={this.props.updateMonsterClass}
                         monsterClass={this.props.monsterClass}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
                         showEditor={this.state.editorIsFocused || this.state.editorIsHovered}
-                    />
+                    /> 
                     {this.getEffectTypeAsDisplay()}
                     <span>]</span>
                 </div>

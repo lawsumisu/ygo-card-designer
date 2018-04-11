@@ -73,8 +73,12 @@ class Card extends React.Component{
                         updateTribes={this.props.updateTribes}
                         monsterType={this.props.cardState.monsterType}
                         updateMonsterType={this.props.updateMonsterType} 
+                        monsterHybridType={this.props.cardState.monsterHybridType}
+                        updateMonsterHybridType={this.props.updateMonsterHybridType} 
                         monsterClass={this.props.cardState.monsterClass}
                         updateMonsterClass={this.props.updateMonsterClass}
+                        monsterAbilities={this.props.cardState.monsterAbilities}
+                        updateMonsterAbilities={this.props.updateMonsterAbilities}
                         isEffect={() => !_.isEmpty(this.props.cardState.effect)}/>
                     
                     <DescriptionEditor
@@ -183,7 +187,9 @@ const mapDispatchToProps = function(dispatch){
         updateLore: (lore) => dispatch(ActionCreators.general.updateLore(lore)),
         updateTribes: (tribes) => dispatch(ActionCreators.monster.updateTribes(tribes)),
         updateMonsterType: (type) => dispatch(ActionCreators.monster.updateMonsterType(type)),
+        updateMonsterHybridType: (type) => dispatch(ActionCreators.monster.updateMonsterHybridType(type)),
         updateMonsterClass: (monsterClass) => dispatch(ActionCreators.monster.updateMonsterClass(monsterClass)),
+        updateMonsterAbilities: (monsterAbilities) => dispatch(ActionCreators.monster.updateMonsterAbilities(monsterAbilities)),
         updateFusionMaterials: (fusionMaterials) => dispatch(ActionCreators.monster.updateFusionMaterials(fusionMaterials)),
         updateSynchroMaterials: (synchroMaterials) => dispatch(ActionCreators.monster.updateSynchroMaterials(synchroMaterials)),
         updateXyzMaterials: (xyzMaterials) => dispatch(ActionCreators.monster.updateXyzMaterials(xyzMaterials))

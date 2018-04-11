@@ -19,6 +19,7 @@ const Actions = {
     UPDATE_TYPE: 'UPDATE_TYPE',
     UPDATE_MONSTER_TRIBE: 'UPDATE_MONSTER_TRIBE',
     UPDATE_MONSTER_TYPE:  'UPDATE_MONSTER_TYPE',
+    UPDATE_MONSTER_HYBRID_TYPE: 'UPDATE_MONSTER_HYBRID_TYPE',
     UPDATE_MONSTER_CLASS: 'UPDATE_MONSTER_CLASS',
     UPDATE_MONSTER_ABILITIES: 'UPDATE_MONSTER_ABILITIES',
     UPDATE_FUSION_MATERIALS: 'UPDATE_FUSION_MATERIALS',
@@ -48,6 +49,7 @@ let ActionCreators = {
         updateDef: updateDef,
         updateTribes: updateTribes,
         updateMonsterType: updateMonsterType,
+        updateMonsterHybridType: updateMonsterHybridType,
         updateMonsterClass: updateMonsterClass,
         updateMonsterAbilities: updateMonsterAbilities,
         updateFusionMaterials: updateFusionMaterials,
@@ -109,6 +111,13 @@ function updateMonsterType(monsterType){
     return {
         type: Actions.UPDATE_MONSTER_TYPE,
         monsterType: monsterType
+    }
+}
+
+function updateMonsterHybridType(monsterHybridType){
+    return {
+        type: Actions.UPDATE_MONSTER_HYBRID_TYPE,
+        monsterHybridType: monsterHybridType
     }
 }
 
