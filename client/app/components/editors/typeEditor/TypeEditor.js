@@ -3,10 +3,9 @@ import _ from 'lodash';
 import {sprintf} from 'sprintf-js';
 import $ from 'jquery';
 import {ResizableInput} from 'client/app/components/common/resizableInput/ResizableInput';
-import {MonsterTypeEditor} from 'client/app/components/editors/typeEditor/MonsterTypeEditor';
-import {MonsterHybridTypeEditor} from 'client/app/components/editors/typeEditor/MonsterHybridTypeEditor';
-import {MonsterClassEditor} from 'client/app/components/editors/typeEditor/MonsterClassEditor';
+import {SelectInput} from 'client/app/components/common/selectInput/SelectInput';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
+import {MonsterTypes, MonsterClasses} from 'client/app/constants';
 
 
 class TypeEditor extends React.Component{
@@ -24,6 +23,10 @@ class TypeEditor extends React.Component{
     componentDidUpdate(){
         this.updateScale();
     }
+
+    /* ------------------- +
+     | DOM-related methods |
+     + ------------------- */
 
     handleOnMouseEnter(){
         this.setState({
@@ -49,7 +52,36 @@ class TypeEditor extends React.Component{
         });
     }
 
-    getDividerAsDisplay(){
+    updateScale(){
+        var scaleFactor = Math.min($(this.refs.hiddenContent).width()/($(this.refs.actualContent).width()), 1)
+        if (scaleFactor !== this.state.scale){
+            this.setState({
+                scale: Math.min(scaleFactor, 1)
+            });
+        }   
+    }
+
+    /* -------------- +
+     | Render Methods |
+     +--------------- */
+
+    renderMonsterTypeDivider(){
+        if(this.props.monsterType !== MonsterTypes.BASIC || this.state.editorIsFocused || this.state.editorIsHovered){
+            return (
+                <span>/</span>
+            );
+        }
+    }
+
+    renderMonsterHybridTypeDivider(){
+        if(this.props.monsterHybridType !== MonsterTypes.PURE || this.state.editorIsFocused || this.state.editorIsHovered){
+            return (
+                <span>/</span>
+            );
+        }
+    }
+
+    renderMonsterAbilitiesDivider(){
         if(this.props.monsterAbilities.length > 0 || this.state.editorIsFocused || this.state.editorIsHovered){
             return (
                 <span>/</span>
@@ -57,7 +89,15 @@ class TypeEditor extends React.Component{
         }
     }
 
-    getEffectTypeAsDisplay(){
+    renderMonsterClassDivider(){
+        if(this.props.monsterClass !== MonsterClasses.NON_TUNER || this.state.editorIsFocused || this.state.editorIsHovered){
+            return (
+                <span>/</span>
+            );
+        }
+    }
+
+    renderEffectType(){
         if (this.props.isEffect && this.props.isEffect()){
             return (
                 <div>
@@ -74,15 +114,6 @@ class TypeEditor extends React.Component{
                 </div>
             )
         }
-    }
-
-    updateScale(){
-        var scaleFactor = Math.min($(this.refs.hiddenContent).width()/($(this.refs.actualContent).width()), 1)
-        if (scaleFactor !== this.state.scale){
-            this.setState({
-                scale: Math.min(scaleFactor, 1)
-            });
-        }   
     }
 
     render(){
@@ -110,19 +141,25 @@ class TypeEditor extends React.Component{
                         onBlur={(event) => this.handleOnBlur()}
                         showInput={this.state.editorIsFocused || this.state.editorIsHovered}
                         />
-                    <MonsterTypeEditor 
-                        updateMonsterType={this.props.updateMonsterType} 
-                        monsterType={this.props.monsterType}
+                    {this.renderMonsterTypeDivider()}
+                    <SelectInput 
+                        onChange={this.props.updateMonsterType} 
+                        selectedItem={this.props.monsterType}
+                        selectOptions={[MonsterTypes.BASIC, MonsterTypes.FUSION, MonsterTypes.SYNCHRO, MonsterTypes.RITUAL, MonsterTypes.XYZ]}
+                        shouldHideSelectedItem={() => this.props.monsterType === MonsterTypes.BASIC}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
                         showEditor={this.state.editorIsFocused || this.state.editorIsHovered}/>
-                    <MonsterHybridTypeEditor 
-                        updateMonsterHybridType={this.props.updateMonsterHybridType} 
-                        monsterHybridType={this.props.monsterHybridType}
+                    {this.renderMonsterHybridTypeDivider()}
+                    <SelectInput 
+                        onChange={this.props.updateMonsterHybridType} 
+                        selectedItem={this.props.monsterHybridType}
+                        selectOptions={[MonsterTypes.PURE, MonsterTypes.PENDULUM]}
+                        shouldHideSelectedItem={() => this.props.monsterHybridType === MonsterTypes.PURE}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
                         showEditor={this.state.editorIsFocused || this.state.editorIsHovered}/>
-                    {this.getDividerAsDisplay()}
+                    {this.renderMonsterAbilitiesDivider()}
                     <CatalogInput
                         placeholder='Add ability...'
                         delimiter="/"
@@ -135,14 +172,17 @@ class TypeEditor extends React.Component{
                         showInput={this.state.editorIsFocused || this.state.editorIsHovered}
                         showWhenEmpty={false}
                         />
-                    <MonsterClassEditor
-                        updateMonsterClass={this.props.updateMonsterClass}
-                        monsterClass={this.props.monsterClass}
+                    {this.renderMonsterClassDivider()}
+                    <SelectInput
+                        onChange={this.props.updateMonsterClass}
+                        selectedItem={this.props.monsterClass}
+                        selectOptions={[MonsterClasses.NON_TUNER, MonsterClasses.TUNER]}
+                        shouldHideSelectedItem={() => this.props.monsterClass === MonsterClasses.NON_TUNER}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
                         showEditor={this.state.editorIsFocused || this.state.editorIsHovered}
                     /> 
-                    {this.getEffectTypeAsDisplay()}
+                    {this.renderEffectType()}
                     <span>]</span>
                 </div>
             </div>

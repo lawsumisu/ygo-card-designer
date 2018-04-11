@@ -1,7 +1,6 @@
 import React from 'react';
-import {MonsterTypes, OrderedMonsterHybridTypeKeyList} from 'client/app/constants';
 
-class MonsterHybridTypeEditor extends React.Component{
+class SelectInput extends React.Component{
     constructor(props){
         super(props);
 
@@ -10,18 +9,14 @@ class MonsterHybridTypeEditor extends React.Component{
         }
     }
 
-    getSelectedMonsterHybridTypeAsDisplay(){
-        if (this.props.monsterHybridType !== MonsterTypes.PURE && !this.state.selectIsFocused && !this.props.showEditor){
-            return (
-                <span className='ygo-card-monster-type-selected'>{this.props.monsterHybridType}</span>
-            );
+    getSelectedItemAsDisplay(){
+        let shouldHideSelectedItem = false;
+        if (this.props.shouldHideSelectedItem){
+            shouldHideSelectedItem = this.props.shouldHideSelectedItem();
         }
-    }
-
-    getDividerAsDisplay(){
-        if(this.props.monsterHybridType !== MonsterTypes.PURE || this.state.selectIsFocused || this.props.showEditor){
+        if (!shouldHideSelectedItem && !this.state.selectIsFocused && !this.props.showEditor){
             return (
-                <span>/</span>
+                <span className='ygo-card-monster-type-selected'>{this.props.selectedItem}</span>
             );
         }
     }
@@ -56,22 +51,23 @@ class MonsterHybridTypeEditor extends React.Component{
         });
     }
 
-
+    handleOnChange(event){
+        return this.props.onChange()
+    }
 
     render(){
         return (
             <div className="ygo-card-monster-type">
-                {this.getDividerAsDisplay()}
-                {this.getSelectedMonsterHybridTypeAsDisplay()}
+                {this.getSelectedItemAsDisplay()}
                 <select 
                     className={this.getSelectClassNames()}
-                    onChange={(event) => this.props.updateMonsterHybridType(event.target.value)}
+                    onChange={(event) => this.props.onChange(event.target.value)}
                     onFocus={(event) => this.handleOnFocus(event)}
                     onBlur={(event) => this.handleOnBlur(event)}
-                    value={this.props.monsterHybridType}>
-                    {_.map(OrderedMonsterHybridTypeKeyList, (monsterType) => {
+                    value={this.props.selectedItem}>
+                    {_.map(this.props.selectOptions, (item) => {
                         return (
-                             <option key={monsterType} value={MonsterTypes[monsterType]}>{MonsterTypes[monsterType]}</option>
+                             <option key={item} value={item}>{item}</option>
                         );
                     })}
                 </select>
@@ -80,4 +76,4 @@ class MonsterHybridTypeEditor extends React.Component{
     }
 }
 
-export {MonsterHybridTypeEditor};
+export {SelectInput};

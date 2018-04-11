@@ -8,7 +8,7 @@ export const MonsterTypes = {
     PURE: 'Pure'
 }
 
-export const OrderedMonsterTypeKeyList = ['BASIC', 'FUSION', 'SYNCHRO', 'RITUAL', 'XYZ'];
+export const OrderedMonsterTypeKeyList = [MonsterTypes.BASIC, MonsterTypes.FUSION, MonsterTypes.SYNCHRO, MonsterTypes.RITUAL, MonsterTypes.XYZ];
 export const OrderedMonsterHybridTypeKeyList = ['PURE', 'PENDULUM'];
 
 export const CardTypes = {

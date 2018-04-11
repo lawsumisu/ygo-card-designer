@@ -9,7 +9,7 @@ const initialCardState = {
     attribute: 'LIGHT',
     actionTypes: [],
     monsterType: MonsterTypes.BASIC,
-    monsterHybridType: MonsterTypes.NON_HYBRID,
+    monsterHybridType: MonsterTypes.PURE,
     monsterClass: MonsterClasses.NON_TUNER,
     monsterAbilities: [],
     fusionMaterials: ['"Blue-Eyes White Dragon"'],
