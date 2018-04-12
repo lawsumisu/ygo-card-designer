@@ -16,6 +16,8 @@ import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/Au
 
 import 'client/app/components/cards/Card.scss';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
+import pendulumBaseSmall from 'client/app/assets/Pendulum/PendulumBaseSmall.png';
+import pendulumEffectSmall from 'client/app/assets/Pendulum/PendulumEffectSmall.png';
 
 
 class Card extends React.Component{
@@ -112,6 +114,17 @@ class Card extends React.Component{
         }
     }
 
+    renderPendulumCard(){
+        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM){
+            return (
+                <div className="ygo-card-pendulum">
+                    <img src={pendulumEffectSmall}/>
+                    <img src={pendulumBaseSmall}/>
+                </div>
+            );
+        }
+    }
+
     getClassNames(){
         var classNames = ['ygo-card-content'];
         if (this.props.cardState.cardType === CardTypes.SPELL){
@@ -146,6 +159,7 @@ class Card extends React.Component{
     render(){
         return (
             <div className={this.getClassNames()}>
+                {this.renderPendulumCard()}
                 <div className="ygo-card-top">
                     <AutoscalingInput
                         className="ygo-card-name"
@@ -159,7 +173,9 @@ class Card extends React.Component{
                 </div>
                 <div className="ygo-card-center">
                     {this.getCardCenterEditor()}
-                    <ImageSelector/>
+                    <ImageSelector
+                        monsterHybridType={this.props.cardState.monsterHybridType}
+                    />
                     <div className="ygo-card-set-id"></div>
                 </div>
                 {this.getCardBottom()}

@@ -1,5 +1,6 @@
 import React from 'react';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
+import {MonsterTypes} from 'client/app/constants';
 
 class ImageSelector extends React.Component{
     constructor(props){
@@ -32,10 +33,18 @@ class ImageSelector extends React.Component{
         }
     }
 
+    getClassNames(){
+        let classNames = ['ygo-card-image'];
+        if (this.props.monsterHybridType === MonsterTypes.PENDULUM){
+            classNames.push('ygo-card-image-pendulum');
+        }
+        return classNames.join(' ');
+    }
+
     render(){
         return (
             <div 
-                className="ygo-card-image"
+                className={this.getClassNames()}
                 onClick={(event) => this.loadImageFromFile()}>
                 <input type="file" id="ygo-card-image-file-loader" accept="image/*" onChange={(event) => this.updateImage(event)}/>
                 <img src={this.state.imageSrc}/>
