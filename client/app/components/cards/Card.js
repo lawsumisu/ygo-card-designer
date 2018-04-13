@@ -12,6 +12,7 @@ import {ActionTypeEditor} from 'client/app/components/editors/actionTypeEditor/A
 import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
 import {DescriptionEditor} from 'client/app/components/editors/DescriptionEditor';
+import {PendulumInfoEditor} from 'client/app/components/editors/PendulumInfoEditor';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
 
 import 'client/app/components/cards/Card.scss';
@@ -125,6 +126,21 @@ class Card extends React.Component{
         }
     }
 
+    renderPendulumContainer(){
+        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM){
+            return (
+                <PendulumInfoEditor
+                    updatePendulumEffect={this.props.updatePendulumEffect}
+                    updatePendulumLeftScale={(scale) => this.props.updatePendulumScale(scale, true)}
+                    updatePendulumRightScale={(scale) => this.props.updatePendulumScale(scale, false)}
+                    pendulumEffect={this.props.cardState.pendulumEffect}
+                    leftPendulumScale={this.props.cardState.leftPendulumScale}
+                    rightPendulumScale={this.props.cardState.rightPendulumScale}
+                />
+            );
+        }
+    }
+
     getClassNames(){
         var classNames = ['ygo-card-content'];
         if (this.props.cardState.cardType === CardTypes.SPELL){
@@ -177,6 +193,7 @@ class Card extends React.Component{
                         monsterHybridType={this.props.cardState.monsterHybridType}
                     />
                     <div className="ygo-card-set-id"></div>
+                    {this.renderPendulumContainer()}
                 </div>
                 {this.getCardBottom()}
             </div>
@@ -201,6 +218,8 @@ const mapDispatchToProps = function(dispatch){
         updateDef: (def) => dispatch(ActionCreators.monster.updateDef(def)),
         updateEffect: (effect) => dispatch(ActionCreators.general.updateEffect(effect)),
         updateLore: (lore) => dispatch(ActionCreators.general.updateLore(lore)),
+        updatePendulumEffect: (pendulumEffect) => dispatch(ActionCreators.monster.updatePendulumEffect(pendulumEffect)),
+        updatePendulumScale: (pendulumScale, isLeftNotRightScale) => dispatch(ActionCreators.monster.updatePendulumScale(pendulumScale, isLeftNotRightScale)),
         updateTribes: (tribes) => dispatch(ActionCreators.monster.updateTribes(tribes)),
         updateMonsterType: (type) => dispatch(ActionCreators.monster.updateMonsterType(type)),
         updateMonsterHybridType: (type) => dispatch(ActionCreators.monster.updateMonsterHybridType(type)),

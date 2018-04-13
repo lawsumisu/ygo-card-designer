@@ -74,15 +74,17 @@ class AutoscalingTextareaV2 extends React.Component{
         const maxHeight = autoscalingContentElement.height();
         fontSizeFullContentElement.show();      
         let contentHeight = fontSizeFullContentElement.height();
-        // console.log('Max Height:', maxHeight, 'Current Height', contentHeight);
+        // console.log('Max Height:', maxHeight, 'Current Height', contentHeight, 'Font Size:', currentFontSize);
 
-        let lastFittingFontSize;      
-        while(true){
+        let lastFittingFontSize;   
+        let c = 0;   
+        while(c<2){
+            c++;
             if (contentHeight > maxHeight){
-                if (currentFontSize === minFontSize || lastFittingFontSize === currentFontSize -1){
+                if (currentFontSize <= minFontSize || lastFittingFontSize === currentFontSize -1){
                     // End loop if reached minimum font size or if it is 1 away from the previous best fit. 
                     if (!lastFittingFontSize){
-                        lastFittingFontSize = currentFontSize;
+                        lastFittingFontSize = minFontSize;
                     }
                     break;
                 }
@@ -96,8 +98,8 @@ class AutoscalingTextareaV2 extends React.Component{
                 contentHeight = fontSizeFullContentElement.height();
             }
             else if (contentHeight <= maxHeight){
-                if (currentFontSize === maxFontSize){
-                    lastFittingFontSize = currentFontSize;
+                if (currentFontSize >= maxFontSize){
+                    lastFittingFontSize = maxFontSize;
                     break;
                 }
                 lastFittingFontSize = currentFontSize;

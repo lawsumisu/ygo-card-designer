@@ -18,6 +18,9 @@ const initialCardState = {
     lore: 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
     tribes: ['Dragon'],
     effect: '',
+    pendulumEffect: '',
+    leftPendulumScale: 0,
+    rightPendulumScale: 13,
     atk: 3000,
     def: 2500,
 }
@@ -79,6 +82,18 @@ function cardReducer(previousState=initialCardState, action){
         case Actions.UPDATE_EFFECT:
             return Object.assign({}, previousState, {
                 effect: action.effect
+            });
+        case Actions.UPDATE_PENDULUM_EFFECT:
+            return Object.assign({}, previousState, {
+                pendulumEffect: action.pendulumEffect
+            })
+        case Actions.UPDATE_PENDULUM_SCALE_RIGHT:
+            return Object.assign({}, previousState, {
+                rightPendulumScale: action.pendulumScale
+            });
+        case Actions.UPDATE_PENDULUM_SCALE_LEFT:
+            return Object.assign({}, previousState, {
+                leftPendulumScale: action.pendulumScale
             });
         case Actions.UPDATE_LEVEL:
             return Object.assign({}, previousState, {

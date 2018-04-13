@@ -17,12 +17,32 @@
 
 @font-face{
   font-family: YGO ITC Stone Serif Semibold;
-  src: url('~client/app/assets/Fonts/YGOITCStoneSerifSemibold.ttf')
+  src: url('~client/app/assets/Fonts/YGOITCStoneSerifSemibold.ttf');
 }
 
 @font-face{
   font-family: YGO Matrix Book;
-  src: url('~client/app/assets/Fonts/YGOMatrixBook.ttf')
+  src: url('~client/app/assets/Fonts/YGOMatrixBook.ttf');
+}
+
+@font-face{
+  font-family: YGO Matrix Bold;
+  src: url('~client/app/assets/Fonts/Matrix-Bold.otf');
+}
+
+@font-face{
+  font-family: YGO Matrix Bold Small Caps;
+  src: url('~client/app/assets/Fonts/MatrixBoldSmallCaps.otf');
+}
+
+font-face{
+  font-family: YGO Matrix Extra Bold;
+  src: url('~client/app/assets/Fonts/MatrixExtraBold.otf');
+}
+
+@font-face{
+  font-family: YGO Matrix Bold Fractions;
+  src: url('~client/app/assets/Fonts/MatrixFractions-Bold.otf');
 }
 
 
@@ -98,6 +118,7 @@
   position: absolute;
   height: 100%;
   width: 100%;
+  z-index: 10;
 }
 
 .ygo-card-top, .ygo-card-bottom{
@@ -122,7 +143,8 @@
 
 .ygo-card-center{
   width: calc(52/59 * var(--card-width));
-  height: calc(53.5/86 * var(--card-height));;
+  height: calc(53.5/86 * var(--card-height));
+  position: relative;
 
   .ygo-card-level{
     display: flex;
@@ -179,6 +201,37 @@
 
   .ygo-card-set-id{
     height: calc(3.8/59 * var(--card-width));
+  }
+
+  .ygo-card-pendulum-container{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 13%;
+    z-index: 20;
+    .ygo-card-pendulum-scale{
+      flex-shrink: 0;
+      width: 10%;
+      padding: 32px 11px 0px 11px;
+      text-align: center;
+      box-sizing: border-box;
+      >input{
+        font-size: 32px;
+        text-align: center;
+        font-family: YGO Matrix Bold Fractions;
+        width: 100%;
+      }
+    }
+    .ygo-card-pendulum-effect{
+      font-family: YGO Matrix Book;
+      font-size: 15px;
+      line-height: 18px;
+      box-sizing: border-box;
+      padding: 5px;
+      width: 80%;
+    }
   }
 }
 
@@ -318,24 +371,26 @@
   }
 
   .ygo-card-battle-points{
-    width: calc(24/59 * var(--card-width));
-    font-family: YGO ITC Stone Serif Semibold;
+    font-family: YGO Matrix Bold Small Caps;
+    width: calc(22/59 * var(--card-width));
     align-self: flex-end;
     display: flex;
-    font-size: 21px;
+    font-size: 25px;
     flex: 0 0 30px;
+    padding-top: 2px;
+    box-sizing: border-box;
 
     .battle-point-slash{
       padding-left: 5px;
     }
 
     .ygo-card-battle-point-spacer{
-      padding: 0px 8px;
+      padding: 0px 5px;
     }
 
     div{
       input{
-        width: 53px;
+        width: 50px;
         font-family: inherit;
         font-size: inherit;
         text-align: right;
