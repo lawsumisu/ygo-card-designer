@@ -17,12 +17,32 @@
 
 @font-face{
   font-family: YGO ITC Stone Serif Semibold;
-  src: url('~client/app/assets/Fonts/YGOITCStoneSerifSemibold.ttf')
+  src: url('~client/app/assets/Fonts/YGOITCStoneSerifSemibold.ttf');
 }
 
 @font-face{
   font-family: YGO Matrix Book;
-  src: url('~client/app/assets/Fonts/YGOMatrixBook.ttf')
+  src: url('~client/app/assets/Fonts/YGOMatrixBook.ttf');
+}
+
+@font-face{
+  font-family: YGO Matrix Bold;
+  src: url('~client/app/assets/Fonts/Matrix-Bold.otf');
+}
+
+@font-face{
+  font-family: YGO Matrix Bold Small Caps;
+  src: url('~client/app/assets/Fonts/MatrixBoldSmallCaps.otf');
+}
+
+font-face{
+  font-family: YGO Matrix Extra Bold;
+  src: url('~client/app/assets/Fonts/MatrixExtraBold.otf');
+}
+
+@font-face{
+  font-family: YGO Matrix Bold Fractions;
+  src: url('~client/app/assets/Fonts/MatrixFractions-Bold.otf');
 }
 
 
@@ -31,6 +51,7 @@
   --aspect-ratio: 1.46;
   --card-width: 590px;
   --card-height: calc(86/59 * var(--card-width));
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -45,27 +66,27 @@
   }
 
   &.normal-monster{
-    background-image: url("~client/app/assets/NormalMonster2.png");
+    background-image: url("~client/app/assets/NormalMonster3.png");
   }
 
   &.effect-monster{
-    background-image: url("~client/app/assets/EffectMonster.png");
+    background-image: url("~client/app/assets/EffectMonster2.png");
   }
 
   &.fusion-monster{
-    background-image: url("~client/app/assets/FusionMonster.png");
+    background-image: url("~client/app/assets/FusionMonster2.png");
   }
 
   &.ritual-monster{
-    background-image: url("~client/app/assets/RitualMonster.png");
+    background-image: url("~client/app/assets/RitualMonster2.png");
   }
 
   &.synchro-monster{
-    background-image: url("~client/app/assets/SynchroMonster.png");
+    background-image: url("~client/app/assets/SynchroMonster2.png");
   }
 
   &.xyz-monster{
-    background-image: url("~client/app/assets/XyzMonster.png");
+    background-image: url("~client/app/assets/XyzMonster2.png");
     .ygo-card-name{
       input{
         color: white;
@@ -74,7 +95,7 @@
   }
 
   &.spell-card{
-    background-image: url("~client/app/assets/NormalSpell.png");
+    background-image: url("~client/app/assets/Series 9/SpellCard.png");
     .ygo-card-name{
       input{
         color: white;
@@ -83,39 +104,47 @@
   }
 
   &.trap-card{
-    background-image: url("~client/app/assets/NormalTrap.png");
+    background-image: url("~client/app/assets/Series 9/TrapCard.png");
     .ygo-card-name{
       input{
         color: white;
       }  
     }
   }
+}
 
+.ygo-card-pendulum, .ygo-card-pendulum img{
+  pointer-events: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
 }
 
 .ygo-card-top, .ygo-card-bottom{
-  width: calc(50.9/59 * var(--card-width));
+  width: calc(52.2/59 * var(--card-width));
   box-sizing: border-box;
 }
 
 .ygo-card-top{
-  margin-top: calc(3.3/86 * var(--card-height));
-  height: calc(7.5/86 * var(--card-height));
+  margin-top: calc(3.1/86 * var(--card-height));
+  height: calc(7.3/86 * var(--card-height));
   display: flex;
 
   .ygo-card-name{
     font-size: 67px;
     font-family: YGO Matrix Regular Small Caps;
-    padding-left: 10px;
+    padding-left: 8px;
     // flex: 1 0;
-    width: calc(42.75/59 * var(--card-width));
+    width: calc(44.25/59 * var(--card-width));
   }
 
 }
 
 .ygo-card-center{
-  width: calc(47/59 * var(--card-width));
-  height: calc(53/86 * var(--card-height));;
+  width: calc(52/59 * var(--card-width));
+  height: calc(53.5/86 * var(--card-height));
+  position: relative;
 
   .ygo-card-level{
     display: flex;
@@ -154,9 +183,14 @@
   
   .ygo-card-image{
     line-height: 0;
-    padding: 10px 12.5px;
+    padding: 12px 35px 0px 35px;
     cursor: pointer;
-    height: calc(44.3/59 * var(--card-width));
+    height: calc(44.8/59 * var(--card-width));
+    &.ygo-card-image-pendulum{
+      padding: 4px 0px 0px 0px;
+      box-sizing: border-box;
+      height: calc(49.8/59 * var(--card-width));
+    }
     #ygo-card-image-file-loader{
       display: none;
     }
@@ -168,6 +202,37 @@
 
   .ygo-card-set-id{
     height: calc(3.8/59 * var(--card-width));
+  }
+
+  .ygo-card-pendulum-container{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 13%;
+    z-index: 20;
+    .ygo-card-pendulum-scale{
+      flex-shrink: 0;
+      width: 10%;
+      padding: 32px 11px 0px 11px;
+      text-align: center;
+      box-sizing: border-box;
+      >input{
+        font-size: 32px;
+        text-align: center;
+        font-family: YGO Matrix Bold Fractions;
+        width: 100%;
+      }
+    }
+    .ygo-card-pendulum-effect{
+      font-family: YGO Matrix Book;
+      font-size: 15px;
+      line-height: 18px;
+      box-sizing: border-box;
+      padding: 5px;
+      width: 80%;
+    }
   }
 }
 
@@ -184,6 +249,7 @@
   flex-direction: column;
   box-sizing: border-box;
   padding: calc(1/59 * var(--card-width));
+  z-index: 30;
 
   .ygo-card-type{
     margin-top: calc(-1/59 * var(--card-width)); //Need to push card type up to offset the way this font pushes the text down.
@@ -306,24 +372,26 @@
   }
 
   .ygo-card-battle-points{
-    width: calc(24/59 * var(--card-width));
-    font-family: YGO ITC Stone Serif Semibold;
+    font-family: YGO Matrix Bold Small Caps;
+    width: calc(22/59 * var(--card-width));
     align-self: flex-end;
     display: flex;
-    font-size: 21px;
+    font-size: 25px;
     flex: 0 0 30px;
+    padding-top: 2px;
+    box-sizing: border-box;
 
     .battle-point-slash{
       padding-left: 5px;
     }
 
     .ygo-card-battle-point-spacer{
-      padding: 0px 8px;
+      padding: 0px 5px;
     }
 
     div{
       input{
-        width: 53px;
+        width: 50px;
         font-family: inherit;
         font-size: inherit;
         text-align: right;

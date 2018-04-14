@@ -71,7 +71,7 @@ module.exports = removeEmpty({
                 use: ['babel-loader'],
             },
             {
-                test: /\.(png|svg|jpg|gif|ttf)$/,
+                test: /\.(png|svg|jpg|gif|ttf|otf)$/,
                 use: 'url-loader'
             }
         ]

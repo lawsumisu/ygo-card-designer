@@ -22,6 +22,9 @@ const Actions = {
     UPDATE_MONSTER_HYBRID_TYPE: 'UPDATE_MONSTER_HYBRID_TYPE',
     UPDATE_MONSTER_CLASS: 'UPDATE_MONSTER_CLASS',
     UPDATE_MONSTER_ABILITIES: 'UPDATE_MONSTER_ABILITIES',
+    UPDATE_PENDULUM_EFFECT: 'UPDATE_PENDULUM_EFFECT',
+    UPDATE_PENDULUM_SCALE_RIGHT: 'UPDATE_PENDULUM_SCALE_RIGHT',
+    UPDATE_PENDULUM_SCALE_LEFT: 'UPDATE_PENDULUM_SCALE_LEFT',
     UPDATE_FUSION_MATERIALS: 'UPDATE_FUSION_MATERIALS',
     UPDATE_SYNCHRO_MATERIALS: 'UPDATE_SYNCHRO_MATERIALS',
     UPDATE_XYZ_MATERIALS: 'UPDATE_XYZ_MATERIALS',
@@ -55,6 +58,8 @@ let ActionCreators = {
         updateFusionMaterials: updateFusionMaterials,
         updateSynchroMaterials: updateSynchroMaterials,
         updateXyzMaterials: updateXyzMaterials,
+        updatePendulumEffect: updatePendulumEffect,
+        updatePendulumScale: updatePendulumScale
     },
     action: {
         updateActionTypes: updateActionTypes
@@ -83,7 +88,7 @@ function updateAtk(atk){
         }
     } 
     else return {
-        type: NONE
+        type: Actions.NONE
     }
 }
 
@@ -96,7 +101,7 @@ function updateDef(def){
         }
     } 
     else return {
-        type: NONE
+        type: Actions.NONE
     }
 }
 
@@ -181,6 +186,28 @@ function updateActionTypes(actionTypes){
     return {
         type: Actions.UPDATE_ACTION_TYPES,
         actionTypes: actionTypes
+    }
+}
+
+function updatePendulumEffect(pendulumEffect){
+    return {
+        type: Actions.UPDATE_PENDULUM_EFFECT,
+        pendulumEffect: pendulumEffect
+    }
+}
+
+function updatePendulumScale(pendulumScale, isLeftNotRightScale){
+    if (isLeftNotRightScale){
+        return {
+            type: Actions.UPDATE_PENDULUM_SCALE_LEFT,
+            pendulumScale: pendulumScale
+        }
+    }
+    else{
+       return {
+            type: Actions.UPDATE_PENDULUM_SCALE_RIGHT,
+            pendulumScale: pendulumScale
+        } 
     }
 }
 

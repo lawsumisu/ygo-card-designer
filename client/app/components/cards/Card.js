@@ -12,10 +12,13 @@ import {ActionTypeEditor} from 'client/app/components/editors/actionTypeEditor/A
 import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
 import {DescriptionEditor} from 'client/app/components/editors/DescriptionEditor';
+import {PendulumInfoEditor} from 'client/app/components/editors/PendulumInfoEditor';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
 
 import 'client/app/components/cards/Card.scss';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
+import pendulumBaseSmall from 'client/app/assets/Pendulum/PendulumBaseSmall.png';
+import pendulumEffectSmall from 'client/app/assets/Pendulum/PendulumEffectSmall.png';
 
 
 class Card extends React.Component{
@@ -112,6 +115,32 @@ class Card extends React.Component{
         }
     }
 
+    renderPendulumCard(){
+        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER){
+            return (
+                <div className="ygo-card-pendulum">
+                    <img src={pendulumEffectSmall}/>
+                    <img src={pendulumBaseSmall}/>
+                </div>
+            );
+        }
+    }
+
+    renderPendulumContainer(){
+        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER){
+            return (
+                <PendulumInfoEditor
+                    updatePendulumEffect={this.props.updatePendulumEffect}
+                    updatePendulumLeftScale={(scale) => this.props.updatePendulumScale(scale, true)}
+                    updatePendulumRightScale={(scale) => this.props.updatePendulumScale(scale, false)}
+                    pendulumEffect={this.props.cardState.pendulumEffect}
+                    leftPendulumScale={this.props.cardState.leftPendulumScale}
+                    rightPendulumScale={this.props.cardState.rightPendulumScale}
+                />
+            );
+        }
+    }
+
     getClassNames(){
         var classNames = ['ygo-card-content'];
         if (this.props.cardState.cardType === CardTypes.SPELL){
@@ -146,6 +175,7 @@ class Card extends React.Component{
     render(){
         return (
             <div className={this.getClassNames()}>
+                {this.renderPendulumCard()}
                 <div className="ygo-card-top">
                     <AutoscalingInput
                         className="ygo-card-name"
@@ -159,8 +189,12 @@ class Card extends React.Component{
                 </div>
                 <div className="ygo-card-center">
                     {this.getCardCenterEditor()}
-                    <ImageSelector/>
+                    <ImageSelector
+                        monsterHybridType={this.props.cardState.monsterHybridType}
+                        cardType={this.props.cardState.cardType}
+                    />
                     <div className="ygo-card-set-id"></div>
+                    {this.renderPendulumContainer()}
                 </div>
                 {this.getCardBottom()}
             </div>
@@ -185,6 +219,8 @@ const mapDispatchToProps = function(dispatch){
         updateDef: (def) => dispatch(ActionCreators.monster.updateDef(def)),
         updateEffect: (effect) => dispatch(ActionCreators.general.updateEffect(effect)),
         updateLore: (lore) => dispatch(ActionCreators.general.updateLore(lore)),
+        updatePendulumEffect: (pendulumEffect) => dispatch(ActionCreators.monster.updatePendulumEffect(pendulumEffect)),
+        updatePendulumScale: (pendulumScale, isLeftNotRightScale) => dispatch(ActionCreators.monster.updatePendulumScale(pendulumScale, isLeftNotRightScale)),
         updateTribes: (tribes) => dispatch(ActionCreators.monster.updateTribes(tribes)),
         updateMonsterType: (type) => dispatch(ActionCreators.monster.updateMonsterType(type)),
         updateMonsterHybridType: (type) => dispatch(ActionCreators.monster.updateMonsterHybridType(type)),
