@@ -1,6 +1,6 @@
 import React from 'react';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
-import {MonsterTypes} from 'client/app/constants';
+import {MonsterTypes, CardTypes} from 'client/app/constants';
 
 class ImageSelector extends React.Component{
     constructor(props){
@@ -35,7 +35,7 @@ class ImageSelector extends React.Component{
 
     getClassNames(){
         let classNames = ['ygo-card-image'];
-        if (this.props.monsterHybridType === MonsterTypes.PENDULUM){
+        if (this.props.monsterHybridType === MonsterTypes.PENDULUM && this.props.cardType === CardTypes.MONSTER){
             classNames.push('ygo-card-image-pendulum');
         }
         return classNames.join(' ');

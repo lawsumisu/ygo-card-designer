@@ -95,7 +95,7 @@ font-face{
   }
 
   &.spell-card{
-    background-image: url("~client/app/assets/NormalSpell.png");
+    background-image: url("~client/app/assets/Series 9/SpellCard.png");
     .ygo-card-name{
       input{
         color: white;
@@ -104,7 +104,7 @@ font-face{
   }
 
   &.trap-card{
-    background-image: url("~client/app/assets/NormalTrap.png");
+    background-image: url("~client/app/assets/Series 9/TrapCard.png");
     .ygo-card-name{
       input{
         color: white;
@@ -187,7 +187,8 @@ font-face{
     cursor: pointer;
     height: calc(44.8/59 * var(--card-width));
     &.ygo-card-image-pendulum{
-      padding: 0px;
+      padding: 4px 0px 0px 0px;
+      box-sizing: border-box;
       height: calc(49.8/59 * var(--card-width));
     }
     #ygo-card-image-file-loader{

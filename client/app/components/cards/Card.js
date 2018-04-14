@@ -116,7 +116,7 @@ class Card extends React.Component{
     }
 
     renderPendulumCard(){
-        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM){
+        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER){
             return (
                 <div className="ygo-card-pendulum">
                     <img src={pendulumEffectSmall}/>
@@ -127,7 +127,7 @@ class Card extends React.Component{
     }
 
     renderPendulumContainer(){
-        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM){
+        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER){
             return (
                 <PendulumInfoEditor
                     updatePendulumEffect={this.props.updatePendulumEffect}
@@ -191,6 +191,7 @@ class Card extends React.Component{
                     {this.getCardCenterEditor()}
                     <ImageSelector
                         monsterHybridType={this.props.cardState.monsterHybridType}
+                        cardType={this.props.cardState.cardType}
                     />
                     <div className="ygo-card-set-id"></div>
                     {this.renderPendulumContainer()}
