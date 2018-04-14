@@ -1,6 +1,6 @@
 import React from 'react';
 import level from 'client/app/assets/Level2.png';
-import rank from 'client/app/assets/Rank.png';
+import rank from 'client/app/assets/Series 9/Rank.png';
 import {MonsterTypes} from 'client/app/constants';
 
 /**

@@ -116,7 +116,7 @@ font-face{
 .ygo-card-pendulum, .ygo-card-pendulum img{
   pointer-events: none;
   position: absolute;
-  height: 100%;
+  flex-grow: 1;
   width: 100%;
   z-index: 10;
 }
@@ -321,13 +321,14 @@ font-face{
     display: flex;
     flex-direction: column;
     font-size: 15px;
-    line-height: 18px;
+    line-height: 20px;
     padding: 0px 2.5px;
 
-    .ygo-card-lore, .ygo-card-effect-container{
+    .ygo-card-lore, .ygo-card-effect{
       resize:none;
       flex: 1 0;
-      height: 50%;
+      display: flex;
+      flex-direction: column;
     }
 
     .ygo-card-lore{
@@ -363,6 +364,12 @@ font-face{
         padding: 0px 4px;
       }
     }
+
+    .ygo-card-description-container{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
 
     &.ygo-card-full-description{
       .ygo-card-effect, .ygo-card-lore{

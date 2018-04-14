@@ -78,8 +78,8 @@ class AutoscalingTextareaV2 extends React.Component{
 
         let lastFittingFontSize;   
         let c = 0;   
-        while(c<2){
-            c++;
+        while(true){
+            // c++;
             if (contentHeight > maxHeight){
                 if (currentFontSize <= minFontSize || lastFittingFontSize === currentFontSize -1){
                     // End loop if reached minimum font size or if it is 1 away from the previous best fit. 

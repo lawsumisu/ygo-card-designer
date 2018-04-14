@@ -58,8 +58,7 @@ class DescriptionEditor extends React.Component{
                             showInput={this.state.monsterMaterialIsHovered}
                         />
                     </div>
-                    
-                )
+                );
             }
             else if (this.props.monsterType === MonsterTypes.XYZ){
                 return (
@@ -209,7 +208,7 @@ class DescriptionEditor extends React.Component{
     updateMaterialHorizontalScale(){
         if (this.props.cardType === CardTypes.MONSTER && (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO)){
             const monsterMaterialProperties = this.getMonsterMaterialProperties();
-            const maxWidth = $('.ygo-card-effect-container').width();
+            const maxWidth = $('.ygo-card-monster-materials-container').width();
             const actualWidth = $('.'+monsterMaterialProperties.className).width();
             if (!actualWidth || actualWidth === 0) return;
             const materialHorizontalScaleFactor = Math.min(maxWidth/actualWidth, 1);
@@ -227,9 +226,8 @@ class DescriptionEditor extends React.Component{
             <div className={this.getDescriptionContainerClassNames()}
                 onMouseEnter={(event) => this.handleBottomTextContainerOnMouseEnter()}
                 onMouseLeave={(event) => this.handleBottomTextContainerOnMouseLeave()}>
-                <div 
-                    className={this.getEffectContainerClassNames(this.props.effect)}>
-                    {this.getMaterialEditor()}
+                {this.getMaterialEditor()}
+                <div className="ygo-card-description-container">
                     <AutoscalingTextareaV2
                         maxFontSize={15}
                         minFontSize={12}
@@ -239,18 +237,25 @@ class DescriptionEditor extends React.Component{
                         onChange={(event) => this.props.updateEffect(event.target.value)}
                         onFocus={(event) => this.updateFocus('effect', true)}
                         onBlur={(event) => this.updateFocus('effect', false)}/>
-                </div>         
-                <AutoscalingTextareaV2
-                    style={this.getStyle(this.props.lore)}
-                    maxFontSize={15}
-                    minFontSize={12}
-                    className="ygo-card-lore"
-                    placeholder="Enter lore here..."
-                    value={this.props.lore} 
-                    onChange={(event) => this.props.updateLore(event.target.value)}
-                    onFocus={(event) => this.updateFocus('lore', true)}
-                    onBlur={(event) => this.updateFocus('lore', false)}
+                    <AutoscalingTextareaV2
+                        style={this.getStyle(this.props.lore)}
+                        maxFontSize={15}
+                        minFontSize={12}
+                        className="ygo-card-lore"
+                        placeholder="Enter lore here..."
+                        value={this.props.lore} 
+                        onChange={(event) => this.props.updateLore(event.target.value)}
+                        onFocus={(event) => this.updateFocus('lore', true)}
+                        onBlur={(event) => this.updateFocus('lore', false)}
                     />
+                </div>
+            
+                {/*<div 
+                    className={this.getEffectContainerClassNames(this.props.effect)}>
+                    
+                    
+                </div>         */}
+                
             </div>
         )
         
