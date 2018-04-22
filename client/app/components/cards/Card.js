@@ -19,6 +19,7 @@ import 'client/app/components/cards/Card.scss';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
 import pendulumBaseSmall from 'client/app/assets/Series 10/Pendulum/PendulumBaseSmall.png';
 import pendulumEffectSmall from 'client/app/assets/Series 10/Pendulum/PendulumEffectSmall.png';
+import normalArtBox from 'client/app/assets/Series 10/ArtBox.png';
 
 
 class Card extends React.Component{
@@ -121,6 +122,13 @@ class Card extends React.Component{
                 <div className="ygo-card-pendulum">
                     <img src={pendulumEffectSmall}/>
                     <img src={pendulumBaseSmall}/>
+                </div>
+            );
+        }
+        else{
+            return (
+                <div className="card--normal-art--container">
+                    <img src={normalArtBox}/>
                 </div>
             );
         }

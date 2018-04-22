@@ -70,19 +70,19 @@ font-face{
   }
 
   &.normal-monster{
-    background-image: url("~client/app/assets/Series 10/NormalMonster.png");
+    background-image: url("~client/app/assets/Series 10/NormalMonster2.png");
   }
 
   &.effect-monster{
-    background-image: url("~client/app/assets/Series 10/EffectMonster.png");
+    background-image: url("~client/app/assets/Series 10/EffectMonster2.png");
   }
 
   &.fusion-monster{
-    background-image: url("~client/app/assets/Series 10/FusionMonster.png");
+    background-image: url("~client/app/assets/Series 10/FusionMonster2.png");
   }
 
   &.ritual-monster{
-    background-image: url("~client/app/assets/Series 10/RitualMonster.png");
+    background-image: url("~client/app/assets/Series 10/RitualMonster2.png");
   }
 
   &.synchro-monster{
@@ -90,7 +90,7 @@ font-face{
   }
 
   &.xyz-monster{
-    background-image: url("~client/app/assets/Series 10/XyzMonster.png");
+    background-image: url("~client/app/assets/Series 10/XyzMonster2.png");
     .ygo-card-name{
       input{
         color: white;
@@ -99,7 +99,7 @@ font-face{
   }
 
   &.spell-card{
-    background-image: url("~client/app/assets/Series 10/SpellCard.png");
+    background-image: url("~client/app/assets/Series 10/SpellCard2.png");
     .ygo-card-name{
       input{
         color: white;
@@ -108,7 +108,7 @@ font-face{
   }
 
   &.trap-card{
-    background-image: url("~client/app/assets/Series 10/TrapCard.png");
+    background-image: url("~client/app/assets/Series 10/TrapCard2.png");
     .ygo-card-name{
       input{
         color: white;
@@ -117,11 +117,15 @@ font-face{
   }
 }
 
-.ygo-card-pendulum, .ygo-card-pendulum img{
+.ygo-card-pendulum, .ygo-card-pendulum img, .card--normal-art--container, .card--normal-art--container img{
   pointer-events: none;
   position: absolute;
   width: 100%;
   z-index: 10;
+}
+
+.card--normal-art--container, .card--normal-art--container img{
+  z-index: 0;
 }
 
 .ygo-card-top, .ygo-card-bottom{
@@ -148,6 +152,7 @@ font-face{
   width: calc(51.7/59 * var(--card-width));
   height: calc(53.5/86 * var(--card-height));
   position: relative;
+
 
   .ygo-card-level{
     display: flex;
