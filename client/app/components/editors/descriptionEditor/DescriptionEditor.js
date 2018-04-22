@@ -11,6 +11,8 @@ import {AutoscalingTextareaV2} from 'client/app/components/common/autoscalingTex
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
 
+import 'client/app/components/editors/descriptionEditor/DescriptionEditor.scss';
+
 class DescriptionEditor extends React.Component{
     constructor(props){
         super(props);
@@ -20,7 +22,11 @@ class DescriptionEditor extends React.Component{
             effectIsFocused: false,
             loreIsFocused: false,
             monsterMaterialIsFocused: false,
-            materialHorizontalScale: 1
+            materialHorizontalScale: 1,
+            showLore: props.lore.length > 0,
+            showEffect: props.effect.length > 0,
+            effectEditButtonText: '-',
+            loreEditButtonText: '-'
         };
     }
 
@@ -28,7 +34,7 @@ class DescriptionEditor extends React.Component{
         this.updateMaterialHorizontalScale();
     }
 
-    getMaterialEditor(){
+    renderMaterialEditor(){
         if (this.props.cardType === CardTypes.MONSTER){
             const monsterMaterialProperties = this.getMonsterMaterialProperties();
             if (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO){ 
@@ -58,8 +64,7 @@ class DescriptionEditor extends React.Component{
                             showInput={this.state.monsterMaterialIsHovered}
                         />
                     </div>
-                    
-                )
+                );
             }
             else if (this.props.monsterType === MonsterTypes.XYZ){
                 return (
@@ -147,32 +152,50 @@ class DescriptionEditor extends React.Component{
         });
     };
 
-    getDescriptionContainerClassNames(){
-        let classNames = ['ygo-card-bottom-text'];
-        const showLore = !_.isEmpty(this.props.lore) || this.state.loreIsFocused || this.state.mainIsHovered || this.state.effectIsFocused;
-        const showEffect = !_.isEmpty(this.props.effect) || this.state.effectIsFocused || this.state.mainIsHovered || this.state.loreIsFocused;
-        if (showLore && showEffect){
-            classNames.push('ygo-card-full-description');
+    handleEditButtonOnClick(buttonType){
+        if (buttonType === 'effect'){
+            this.setState({
+                showEffect: !this.state.showEffect
+            });
+        }
+        else if (buttonType === 'lore'){
+            this.setState({
+                showLore: !this.state.showLore
+            });
+        }
+    }
+
+    getDescriptionEditorClassNames(){
+        const classNamePrefix = 'description--editor';
+        let classNames = [classNamePrefix];
+        // const showLore = !_.isEmpty(this.props.lore) || this.state.loreIsFocused || this.state.mainIsHovered || this.state.effectIsFocused;
+        // const showEffect = !_.isEmpty(this.props.effect) || this.state.effectIsFocused || this.state.mainIsHovered || this.state.loreIsFocused;
+        if (this.state.showLore && this.state.showEffect){
+            classNames.push(`${classNamePrefix}--full`);
         }
         return classNames.join(' ');
 
     }
-
-    getEffectContainerClassNames(effectText){
-        var effectClassNames = ['ygo-card-effect-container'];
-        if (_.isEmpty(effectText) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.monsterMaterialIsFocused && !this.state.mainIsHovered && (
-            _.isEmpty(this.props.fusionMaterials) || !this.includesMonsterMaterials())){
-            effectClassNames.push('ygo-card-effect-container-invisible');
+    
+    getDescriptionTextContainerClassNames(){
+        const classNamePrefix = 'description--text--container';
+        let classNames = [classNamePrefix];
+        if (this.state.inEditMode){
+            classNames.push(`${classNamePrefix}--edit`);
         }
-        return effectClassNames.join(' ');
+        else{
+            classNames.push(`${classNamePrefix}--display`);
+        }
+        return classNames.join(' ');
     }
 
-    getEffectClassNames(effectText){
-        var effectClassNames = ['ygo-card-effect'];
-        if (_.isEmpty(effectText) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.mainIsHovered){
-            effectClassNames.push('ygo-card-effect-invisible');
+    getDescriptionTextInputClassNames(inputType){
+        const showState = inputType === 'effect' ? this.state.showEffect : this.state.showLore;
+        let classNames = [`description--text--input-${inputType}`];
+        if (!showState){
+            classNames.push(`description--text--input--invisible`);
         }
-        return effectClassNames.join(' ');
+        return classNames.join(' ');
     }
 
     updateFocus(inputType, isFocused){
@@ -197,19 +220,10 @@ class DescriptionEditor extends React.Component{
         this.props.updateEffect(event.target.value);
     }
 
-    getStyle(text){
-        if (_.isEmpty(text) && !this.state.effectIsFocused && !this.state.loreIsFocused && !this.state.mainIsHovered){
-            return {
-                display: 'none'
-            };
-        }
-        else return {}
-    }
-
     updateMaterialHorizontalScale(){
         if (this.props.cardType === CardTypes.MONSTER && (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO)){
             const monsterMaterialProperties = this.getMonsterMaterialProperties();
-            const maxWidth = $('.ygo-card-effect-container').width();
+            const maxWidth = $('.ygo-card-monster-materials-container').width();
             const actualWidth = $('.'+monsterMaterialProperties.className).width();
             if (!actualWidth || actualWidth === 0) return;
             const materialHorizontalScaleFactor = Math.min(maxWidth/actualWidth, 1);
@@ -219,38 +233,41 @@ class DescriptionEditor extends React.Component{
                 });
             }
         }
-         
     }
 
     render(){
         return (
-            <div className={this.getDescriptionContainerClassNames()}
+            <div className={this.getDescriptionEditorClassNames()}
                 onMouseEnter={(event) => this.handleBottomTextContainerOnMouseEnter()}
-                onMouseLeave={(event) => this.handleBottomTextContainerOnMouseLeave()}>
-                <div 
-                    className={this.getEffectContainerClassNames(this.props.effect)}>
-                    {this.getMaterialEditor()}
-                    <AutoscalingTextareaV2
+                onMouseLeave={(event) => this.handleBottomTextContainerOnMouseLeave()}
+                >
+                {this.renderMaterialEditor()}
+                <div className={this.getDescriptionTextContainerClassNames()}>
+                    <div className="description--text--edit-btn-anchor">
+                        <input type="button" className="description--text--edit-btn-effect" value="E" onClick={(event) => this.handleEditButtonOnClick('effect')}/>
+                        <input type="button" className="description--text--edit-btn-lore" value="L" onClick={(event) => this.handleEditButtonOnClick('lore')}/>    
+                    </div>
+                   <AutoscalingTextareaV2
                         maxFontSize={15}
                         minFontSize={12}
-                        className={this.getEffectClassNames(this.props.effect)}
+                        className={this.getDescriptionTextInputClassNames('effect')}
                         placeholder="Enter effect here..."
                         value={this.props.effect} 
                         onChange={(event) => this.props.updateEffect(event.target.value)}
                         onFocus={(event) => this.updateFocus('effect', true)}
-                        onBlur={(event) => this.updateFocus('effect', false)}/>
-                </div>         
-                <AutoscalingTextareaV2
-                    style={this.getStyle(this.props.lore)}
-                    maxFontSize={15}
-                    minFontSize={12}
-                    className="ygo-card-lore"
-                    placeholder="Enter lore here..."
-                    value={this.props.lore} 
-                    onChange={(event) => this.props.updateLore(event.target.value)}
-                    onFocus={(event) => this.updateFocus('lore', true)}
-                    onBlur={(event) => this.updateFocus('lore', false)}
+                        onBlur={(event) => this.updateFocus('effect', false)}
                     />
+                    <AutoscalingTextareaV2
+                        maxFontSize={15}
+                        minFontSize={12}
+                        className={this.getDescriptionTextInputClassNames('lore')}
+                        placeholder="Enter lore here..."
+                        value={this.props.lore} 
+                        onChange={(event) => this.props.updateLore(event.target.value)}
+                        onFocus={(event) => this.updateFocus('lore', true)}
+                        onBlur={(event) => this.updateFocus('lore', false)}
+                    />
+                </div>
             </div>
         )
         
