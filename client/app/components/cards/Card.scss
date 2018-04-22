@@ -98,6 +98,14 @@ font-face{
     }
   }
 
+  &.link-monster{
+    background-image: url("~client/app/assets/Series 10/LinkMonster.png");.ygo-card-name{
+      input{
+        color: white;
+      }  
+    }
+  }
+
   &.spell-card{
     background-image: url("~client/app/assets/Series 10/SpellCard2.png");
     .ygo-card-name{
@@ -117,15 +125,30 @@ font-face{
   }
 }
 
-.ygo-card-pendulum, .ygo-card-pendulum img, .card--normal-art--container, .card--normal-art--container img{
+.ygo-card-pendulum, .ygo-card-pendulum img, .card--normal-art--container, .card--normal-art-box, .card--link-art--container{
   pointer-events: none;
   position: absolute;
   width: 100%;
+}
+
+.ygo-card-pendulum, .ygo-card-pendulum img, .card--link-art-box{
   z-index: 10;
 }
 
-.card--normal-art--container, .card--normal-art--container img{
-  z-index: 0;
+.card--link-arrow--container{
+  height: 100%;
+  img{
+    pointer-events: initial;
+    cursor: pointer;
+    position: absolute;
+    z-index: 11;
+  }
+  .card--link-arrow-corner{
+    width: 68px; 
+  }
+  .card--link-arrow-middle{
+    height: 130px;
+  }
 }
 
 .ygo-card-top, .ygo-card-bottom{
@@ -163,6 +186,10 @@ font-face{
 
     &.ygo-card-stars-rank{
       flex-direction: row;
+    }
+
+    &.level--editor--invisible{
+      visibility: hidden;
     }
 
     .ygo-card-level-selected, .ygo-card-level-unselected{

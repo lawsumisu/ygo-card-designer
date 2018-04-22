@@ -70,6 +70,9 @@ class LevelSelector extends React.Component {
         if (this.props.monsterType === MonsterTypes.XYZ){
             classNames.push('ygo-card-stars-rank');
         }
+        else if (this.props.monsterType === MonsterTypes.LINK){
+            classNames.push('level--editor--invisible');
+        }
         return classNames.join(' ');
     }
 

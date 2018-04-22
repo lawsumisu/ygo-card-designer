@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import $ from 'jquery';
 
 import {MonsterTypes, CardTypes} from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
@@ -13,6 +14,7 @@ import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
 import {DescriptionEditor} from 'client/app/components/editors/descriptionEditor/DescriptionEditor';
 import {PendulumInfoEditor} from 'client/app/components/editors/PendulumInfoEditor';
+import {LinkArrowEditor} from 'client/app/components/editors/LinkArrowEditor';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
 
 import 'client/app/components/cards/Card.scss';
@@ -20,6 +22,9 @@ import image from 'client/app/assets/BlueEyesWhiteDragon.png';
 import pendulumBaseSmall from 'client/app/assets/Series 10/Pendulum/PendulumBaseSmall.png';
 import pendulumEffectSmall from 'client/app/assets/Series 10/Pendulum/PendulumEffectSmall.png';
 import normalArtBox from 'client/app/assets/Series 10/ArtBox.png';
+import linkArtBox from 'client/app/assets/Series 10/Link/LinkArrows.png';
+import cornerLinkArrow from 'client/app/assets/Series 10/Link/CornerLinkArrow2.png';
+import middleLinkArrow from 'client/app/assets/Series 10/Link/MiddleLinkArrow.png';
 
 
 class Card extends React.Component{
@@ -117,7 +122,8 @@ class Card extends React.Component{
     }
 
     renderPendulumCard(){
-        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER){
+        if (this.props.cardState.monsterHybridType === MonsterTypes.PENDULUM && this.props.cardState.cardType === CardTypes.MONSTER 
+        && this.props.cardState.monsterType !== MonsterTypes.LINK){
             return (
                 <div className="ygo-card-pendulum">
                     <img src={pendulumEffectSmall}/>
@@ -125,17 +131,28 @@ class Card extends React.Component{
                 </div>
             );
         }
+        else if (this.props.cardState.monsterType === MonsterTypes.LINK && this.props.cardState.cardType === CardTypes.MONSTER){
+            return (
+                <div className="card--link-art--container">
+                    <img className="card--normal-art-box" src={normalArtBox}/>
+                    <img className="card--link-art-box"src={linkArtBox}/>
+                    <LinkArrowEditor/>
+                </div>
+            );
+            
+        }
         else{
             return (
                 <div className="card--normal-art--container">
-                    <img src={normalArtBox}/>
+                    <img className="card--normal-art-box" src={normalArtBox}/>
                 </div>
             );
         }
     }
 
     renderPendulumContainer(){
-        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER){
+        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER
+        && this.props.cardState.monsterType !== MonsterTypes.LINK){
             return (
                 <PendulumInfoEditor
                     updatePendulumEffect={this.props.updatePendulumEffect}
@@ -170,6 +187,9 @@ class Card extends React.Component{
             else if (this.props.cardState.monsterType === MonsterTypes.XYZ){
                 classNames.push('xyz-monster');
             }
+            else if (this.props.cardState.monsterType === MonsterTypes.LINK){
+                classNames.push('link-monster');
+            }
             else if (this.props.cardState.effect.length > 0){
                 classNames.push('effect-monster');
             }
@@ -199,6 +219,7 @@ class Card extends React.Component{
                     {this.getCardCenterEditor()}
                     <ImageSelector
                         monsterHybridType={this.props.cardState.monsterHybridType}
+                        monsterType={this.props.cardState.monsterType}
                         cardType={this.props.cardState.cardType}
                     />
                     <div className="ygo-card-set-id"></div>

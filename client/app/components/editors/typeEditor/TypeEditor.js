@@ -74,7 +74,7 @@ class TypeEditor extends React.Component{
     }
 
     renderMonsterHybridTypeDivider(){
-        if(this.props.monsterHybridType !== MonsterTypes.PURE || this.state.editorIsFocused || this.state.editorIsHovered){
+        if((this.props.monsterHybridType !== MonsterTypes.PURE && this.props.monsterType !== MonsterTypes.LINK) || this.state.editorIsFocused || this.state.editorIsHovered){
             return (
                 <span>/</span>
             );
@@ -145,7 +145,7 @@ class TypeEditor extends React.Component{
                     <SelectInput 
                         onChange={this.props.updateMonsterType} 
                         selectedItem={this.props.monsterType}
-                        selectOptions={[MonsterTypes.BASIC, MonsterTypes.FUSION, MonsterTypes.SYNCHRO, MonsterTypes.RITUAL, MonsterTypes.XYZ]}
+                        selectOptions={[MonsterTypes.BASIC, MonsterTypes.FUSION, MonsterTypes.SYNCHRO, MonsterTypes.RITUAL, MonsterTypes.XYZ, MonsterTypes.LINK]}
                         shouldHideSelectedItem={() => this.props.monsterType === MonsterTypes.BASIC}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
@@ -155,7 +155,7 @@ class TypeEditor extends React.Component{
                         onChange={this.props.updateMonsterHybridType} 
                         selectedItem={this.props.monsterHybridType}
                         selectOptions={[MonsterTypes.PURE, MonsterTypes.PENDULUM]}
-                        shouldHideSelectedItem={() => this.props.monsterHybridType === MonsterTypes.PURE}
+                        shouldHideSelectedItem={() => this.props.monsterHybridType === MonsterTypes.PURE || this.props.monsterType === MonsterTypes.LINK}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
                         showEditor={this.state.editorIsFocused || this.state.editorIsHovered}/>

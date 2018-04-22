@@ -4,6 +4,7 @@ export const MonsterTypes = {
     SYNCHRO: 'Synchro',
     RITUAL: 'Ritual',
     XYZ: 'Xyz',
+    LINK: 'Link',
     PENDULUM: 'Pendulum',
     PURE: 'Pure'
 }
