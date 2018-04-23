@@ -23,6 +23,13 @@ class LinkArrowEditor extends React.Component{
         if (this.props.linkArrows[linkIndex]){
             classNames.push(`${classNamePrefix}--selected`);
         }
+        //Special classes for middle arrows
+        if (linkIndex === 3 || linkIndex === 7){
+            classNames.push('card--link-arrow-middle--vertical');
+        }
+        else{
+            classNames.push('card--link-arrow-middle--horizontal')
+        }
         return classNames.join(' ');
     }
 
@@ -31,14 +38,8 @@ class LinkArrowEditor extends React.Component{
     }
 
     render(){
-        const cardWidth = 590;
-        const cardHeight = 860;
-        const offsetX = 4.0/59 * cardWidth;
-        const offsetY = 56.9/86 * cardHeight;
-        const imgLength = 44.2/59 * cardWidth;
-        const middleImgLength = 48.2/59 * cardWidth;
-        const middleOffsetX = 5.3/59 * cardWidth;
-        const middleOffsetY = 62.2/86 * cardHeight; 
+        const cornerArrowPosition = [['bottom', 'left'], ['bottom', 'right'], ['top', 'left'], ['top', 'right']];
+        const middleArrowPosition = ['bottom', 'left', 'top', 'right'];
         return (
             <div className="card--link-arrow--container">
                 {_.map([0,2,4,6], (linkIndex, i) => {
@@ -47,8 +48,8 @@ class LinkArrowEditor extends React.Component{
                     const sx = -2*x + 1;
                     const sy = -2*y + 1
                     const style = {
-                        left: `${x*imgLength + offsetX}px`,
-                        top: `${(y*-imgLength) + offsetY}px`,
+                        [cornerArrowPosition[i][0]]: 0,
+                        [cornerArrowPosition[i][1]]: 0,
                         transform: `scale(${sx}, ${sy})`
                     }
                     return (
@@ -63,14 +64,9 @@ class LinkArrowEditor extends React.Component{
                 {_.map([1,3,5,7], (linkIndex, i) => {
                     const x = i % 2;
                     const y = Math.floor(i/2);
-                    const inset = (2*y-1)*.5;
-                    const insetX = x === 1 ? inset+.5 : .5;
-                    const insetY = x === 0 ? inset+.5 : .5;
-                    const centerOffset = -65;
                     const middleStyle = {
-                        left: `${insetX*middleImgLength + middleOffsetX + centerOffset}px`,
-                        top: `${(insetY*-middleImgLength) + middleOffsetY + centerOffset}px`,
-                        transform: `rotate(${90*i}deg)`
+                        [middleArrowPosition[i]]: 0,
+                        transform: `rotate(${y*180}deg)`
                     }
                     return (
                         <div 

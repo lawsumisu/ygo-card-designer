@@ -141,7 +141,13 @@ font-face{
 }
 
 .card--link-arrow--container{
-  height: 100%;
+  position: absolute;
+  top: 120px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: calc(52.3/59 * var(--card-width));
+  height: calc(52.3/59 * var(--card-width));
   div{
     pointer-events: initial;
     cursor: pointer;
@@ -152,27 +158,46 @@ font-face{
     }
   }
   .card--link-arrow-corner{
-    width: 68px; 
-    height: 68px;
+    width: calc(6.8/59 * var(--card-width));
+    height: calc(6.8/59 * var(--card-width));
+    margin: calc(.55/59 * var(--card-width));
     background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrow2.png");
     background-size: cover;
     &:hover{
       background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrowHovered.png");
     }
     &.card--link-arrow-corner--selected{
-      background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrowSelected.png");
-    }
+        background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrowSelected.png");
+      }
   }
   .card--link-arrow-middle{
-    height: 130px;
-    width: 130px;
-    background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrow.png");
     background-size: cover;
-    &:hover{
-      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowHovered.png");
+    margin: auto;
+    &.card--link-arrow-middle--vertical{
+      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowVertical.png");
+      width: calc(4.02/59 * var(--card-width));
+      height: calc(13/86 * var(--card-height));
+      bottom: 0;
+      top: 0;
+      &:hover{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowHoveredVertical.png");
+      }
+      &.card--link-arrow-middle--selected{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowSelectedVertical.png");
+      }
     }
-    &.card--link-arrow-middle--selected{
-      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowSelected.png");
+    &.card--link-arrow-middle--horizontal{
+      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrow2.png");
+      width: 130px;
+      height: 40.2px;
+      left: 0;
+      right: 0;
+      &:hover{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowHovered.png");
+      }
+      &.card--link-arrow-middle--selected{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowSelected2.png");
+      }
     }
   }
 }
@@ -258,6 +283,9 @@ font-face{
     img{
       width: 100%;
       height: 100%;
+      &:hover{
+        filter: brightness(1.2);
+      }
     }
   }
 
