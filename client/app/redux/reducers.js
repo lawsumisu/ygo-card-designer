@@ -3,7 +3,7 @@
 import {Actions} from 'client/app/redux/actions';
 import {MonsterTypes, MonsterClasses} from 'client/app/constants';
 
-const initialCardState = {
+let initialCardState = {
     name: 'Blue-Eyes White Dragon',
     level: 8,
     attribute: 'LIGHT',
@@ -21,9 +21,12 @@ const initialCardState = {
     pendulumEffect: '',
     leftPendulumScale: 0,
     rightPendulumScale: 13,
+    linkArrows: [false, false, false, false, false, false, false, false],
+    linkMaterials: '3+ LIGHT Normal Dragon-Type monsters',
     atk: 3000,
     def: 2500,
 }
+
 
 function cardReducer(previousState=initialCardState, action){
     switch(action.type){
@@ -58,6 +61,10 @@ function cardReducer(previousState=initialCardState, action){
         case Actions.UPDATE_XYZ_MATERIALS:
             return Object.assign({}, previousState, {
                 xyzMaterials: action.xyzMaterials
+            });
+        case Actions.UPDATE_LINK_MATERIALS:
+            return Object.assign({}, previousState, {
+                linkMaterials: action.linkMaterials
             });
         case Actions.UPDATE_MONSTER_TYPE:
             return Object.assign({}, previousState, {
@@ -94,6 +101,12 @@ function cardReducer(previousState=initialCardState, action){
         case Actions.UPDATE_PENDULUM_SCALE_LEFT:
             return Object.assign({}, previousState, {
                 leftPendulumScale: action.pendulumScale
+            });
+        case Actions.UPDATE_LINK_ARROW:
+            return Object.assign({}, previousState, {
+                linkArrows: previousState.linkArrows.map((oldLinkArrowValue, linkIndex) => {
+                    return linkIndex === action.linkIndex ? action.linkArrowValue : oldLinkArrowValue;
+                })
             });
         case Actions.UPDATE_LEVEL:
             return Object.assign({}, previousState, {

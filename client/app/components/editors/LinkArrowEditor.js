@@ -17,30 +17,17 @@ class LinkArrowEditor extends React.Component{
         }
     }
 
-    getArrowImg(index, arrowType){
-        const key = `arrow${index}IsHovered`;
-        if (arrowType === 'corner'){
-            if (this.state[key]) return cornerLinkArrowHovered;
-            else return cornerLinkArrow;
+    getLinkArrowClassNames(arrowType, linkIndex){
+        const classNamePrefix = `card--link-arrow-${arrowType}`;
+        let classNames = [classNamePrefix];
+        if (this.props.linkArrows[linkIndex]){
+            classNames.push(`${classNamePrefix}--selected`);
         }
-        else if (arrowType === 'middle'){
-            if (this.state[key]) return middleLinkArrowHovered;
-            else return middleLinkArrow;
-        }
+        return classNames.join(' ');
     }
 
-    handleOnMouseEnterArrow(index){
-        const key = `arrow${index}IsHovered`;
-        this.setState({
-            [key]: true
-        });
-    }
-
-    handleOnMouseLeaveArrow(index){
-        const key = `arrow${index}IsHovered`;
-        this.setState({
-            [key]: false
-        });
+    handleOnClickLinkArrow(linkIndex){
+        this.props.updateLinkArrow(!this.props.linkArrows[linkIndex], linkIndex);
     }
 
     render(){
@@ -52,10 +39,9 @@ class LinkArrowEditor extends React.Component{
         const middleImgLength = 48.2/59 * cardWidth;
         const middleOffsetX = 5.3/59 * cardWidth;
         const middleOffsetY = 62.2/86 * cardHeight; 
-        console.log(offsetX, offsetY);
         return (
             <div className="card--link-arrow--container">
-                {_.map([0,2,4,8], (arrowIndex, i) => {
+                {_.map([0,2,4,6], (linkIndex, i) => {
                     const x = i % 2;
                     const y = Math.floor(i/2);
                     const sx = -2*x + 1;
@@ -66,17 +52,15 @@ class LinkArrowEditor extends React.Component{
                         transform: `scale(${sx}, ${sy})`
                     }
                     return (
-                        <img 
+                        <div 
                             style={style} 
                             key={`${i}-corner`} 
-                            onMouseEnter={(event) => this.handleOnMouseEnterArrow(arrowIndex)}
-                            onMouseLeave={(event) => this.handleOnMouseLeaveArrow(arrowIndex)}
-                            className="card--link-arrow-corner" 
-                            src={this.getArrowImg(arrowIndex, 'corner')}
-                        />
+                            onClick={(event) => this.handleOnClickLinkArrow(linkIndex)}
+                            className={this.getLinkArrowClassNames('corner', linkIndex)} 
+                        ></div>
                     );
                 })}
-                {_.map([1,3,5,7], (arrowIndex, i) => {
+                {_.map([1,3,5,7], (linkIndex, i) => {
                     const x = i % 2;
                     const y = Math.floor(i/2);
                     const inset = (2*y-1)*.5;
@@ -89,14 +73,12 @@ class LinkArrowEditor extends React.Component{
                         transform: `rotate(${90*i}deg)`
                     }
                     return (
-                        <img 
+                        <div 
                             style={middleStyle} 
                             key={`${i}-middle`} 
-                            onMouseEnter={(event) => this.handleOnMouseEnterArrow(arrowIndex)}
-                            onMouseLeave={(event) => this.handleOnMouseLeaveArrow(arrowIndex)}
-                            src={this.getArrowImg(arrowIndex, 'middle')}
-                            className="card--link-arrow-middle" 
-                            src={middleLinkArrow}/>
+                            onClick={(event) => this.handleOnClickLinkArrow(linkIndex)}
+                            className={this.getLinkArrowClassNames('middle', linkIndex)} 
+                        ></div>
                     );
                 })}              
             </div>

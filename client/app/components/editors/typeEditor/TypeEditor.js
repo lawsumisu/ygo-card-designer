@@ -61,6 +61,14 @@ class TypeEditor extends React.Component{
         }   
     }
 
+    getMonsterHybridTypeContainerClassNames(){
+        let classNames = ['ygo-card-monster-type'];
+        if (this.props.monsterType === MonsterTypes.LINK){
+            classNames.push('type--hybrid-select--link-selected');
+        }
+        return classNames.join(' ');
+    }
+
     /* -------------- +
      | Render Methods |
      +--------------- */
@@ -122,6 +130,7 @@ class TypeEditor extends React.Component{
         }
         return (
             <div
+                className="type--container"
                 onMouseEnter={(event) => this.handleOnMouseEnter()}
                 onMouseLeave={(event) => this.handleOnMouseLeave()}>
                 <div className="ygo-card-type-hidden-content"  ref="hiddenContent"></div>
@@ -129,7 +138,7 @@ class TypeEditor extends React.Component{
                     className="ygo-card-type"
                     ref="actualContent"       
                     style={style}>
-                    <span>[</span>
+                    <span className="type--brace">[</span>
                     <CatalogInput
                         placeholder='Add tribe...'
                         delimiter="-"
@@ -152,6 +161,7 @@ class TypeEditor extends React.Component{
                         showEditor={this.state.editorIsFocused || this.state.editorIsHovered}/>
                     {this.renderMonsterHybridTypeDivider()}
                     <SelectInput 
+                        containerClassName={this.getMonsterHybridTypeContainerClassNames()}
                         onChange={this.props.updateMonsterHybridType} 
                         selectedItem={this.props.monsterHybridType}
                         selectOptions={[MonsterTypes.PURE, MonsterTypes.PENDULUM]}
@@ -183,7 +193,7 @@ class TypeEditor extends React.Component{
                         showEditor={this.state.editorIsFocused || this.state.editorIsHovered}
                     /> 
                     {this.renderEffectType()}
-                    <span>]</span>
+                    <span className="type--brace">]</span>
                 </div>
             </div>
             

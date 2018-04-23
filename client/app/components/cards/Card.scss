@@ -50,6 +50,11 @@ font-face{
   src: url('~client/app/assets/Fonts/SCRIPTBL.ttf');
 }
 
+@font-face{
+  font-family: Eurostile Candy W01 Bold;
+  src: url('~client/app/assets/Fonts/Eurostile Candy W01 Bold.ttf');
+}
+
 .ygo-card-content{
   --card-diagonal: 1042.93px;
   --aspect-ratio: 1.46;
@@ -137,17 +142,38 @@ font-face{
 
 .card--link-arrow--container{
   height: 100%;
-  img{
+  div{
     pointer-events: initial;
     cursor: pointer;
     position: absolute;
     z-index: 11;
+    &:hover{
+      filter: brightness(1.2);
+    }
   }
   .card--link-arrow-corner{
     width: 68px; 
+    height: 68px;
+    background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrow2.png");
+    background-size: cover;
+    &:hover{
+      background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrowHovered.png");
+    }
+    &.card--link-arrow-corner--selected{
+      background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrowSelected.png");
+    }
   }
   .card--link-arrow-middle{
     height: 130px;
+    width: 130px;
+    background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrow.png");
+    background-size: cover;
+    &:hover{
+      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowHovered.png");
+    }
+    &.card--link-arrow-middle--selected{
+      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowSelected.png");
+    }
   }
 }
 
@@ -286,15 +312,24 @@ font-face{
   padding: calc(1/59 * var(--card-width));
   z-index: 30;
 
+  .type--container{
+    margin-top: 2px;
+    margin-bottom: -4px;
+  }
+
   .ygo-card-type{
-    margin-top: calc(-1/59 * var(--card-width)); //Need to push card type up to offset the way this font pushes the text down.
     width: fit-content;
     transform-origin: 0% 50%;
     line-height:1.5;
     display: flex;
     flex-direction: row;
-    font-size: 23px;
+    font-size: 21px;
     font-family: YGO ITC Stone Serif Small Caps Bold;
+    margin-top: calc(-1/59 * var(--card-width)); //Need to push card type up to offset the way this font pushes the text down.
+
+    .catalog-input{
+      width: 160px;
+    }
 
     &:hover{
       .ygo-card-type-input, .ygo-card-monster-type-selector{
@@ -303,6 +338,10 @@ font-face{
       .ygo-card-monster-type-selected{
         display: none;
       }
+    }
+
+    .type--brace{
+      margin-top: -1.5px;
     }
     
     .ygo-card-type-tribe{
@@ -342,6 +381,13 @@ font-face{
       display: flex;
       flex-direction: row;
       cursor: pointer;
+
+      &.type--hybrid-select--link-selected{
+        select{
+          color: #777;
+          text-decoration: line-through;
+        }
+      }
     }
   }
 
@@ -366,6 +412,17 @@ font-face{
 
     .ygo-card-battle-point-spacer{
       padding: 0px 5px;
+    }
+
+    .card--battle-points--link-rating{
+      margin-top: -1px;
+      display: flex;
+      font-family: Eurostile Candy W01 Bold;
+      font-size:22px;
+      .card--battle-points--link-rating-value{
+        width: 25px;
+        text-align: end;
+      }
     }
 
     div{

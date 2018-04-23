@@ -53,6 +53,24 @@ class Card extends React.Component{
             );
         }
     }
+    getSecondaryBattleStat(){
+        if (this.props.cardState.monsterType === MonsterTypes.LINK){
+            return (
+                <div className="card--battle-points--link-rating">
+                    <span>LINK-</span>
+                    <span className="card--battle-points--link-rating-value">{_.filter(this.props.cardState.linkArrows, (linkArrow) => linkArrow).length}</span>
+                </div>    
+            );
+        }
+        else{
+            return (
+                <div>
+                    <span>DEF</span><span className="battle-point-slash">/</span>
+                    <input type="text" value={this.props.cardState.def} onChange={(event) => this.props.updateDef(event.target.value)}/>
+                </div>        
+            );
+        }
+    }
 
     getCardBottom(){
         if (this.props.cardState.attribute === 'SPELL' || this.props.cardState.attribute === 'TRAP'){
@@ -99,6 +117,8 @@ class Card extends React.Component{
                         updateSynchroMaterials={this.props.updateSynchroMaterials}
                         xyzMaterials={this.props.cardState.xyzMaterials}
                         updateXyzMaterials={this.props.updateXyzMaterials}
+                        linkMaterials={this.props.cardState.linkMaterials}
+                        updateLinkMaterials={this.props.updateLinkMaterials}
                         effect={this.props.cardState.effect} 
                         updateEffect={this.props.updateEffect} 
                         lore={this.props.cardState.lore} 
@@ -109,12 +129,8 @@ class Card extends React.Component{
                             <input type="text" value={this.props.cardState.atk} onChange={(event) => this.props.updateAtk(event.target.value)}/>
                         </div>
                         <div className="ygo-card-battle-point-spacer">
-
                         </div>
-                        <div>
-                            <span>DEF</span><span className="battle-point-slash">/</span>
-                            <input type="text" value={this.props.cardState.def} onChange={(event) => this.props.updateDef(event.target.value)}/>
-                        </div>                                       
+                        {this.getSecondaryBattleStat()}                                     
                     </div>
                 </div>
             );
@@ -135,8 +151,10 @@ class Card extends React.Component{
             return (
                 <div className="card--link-art--container">
                     <img className="card--normal-art-box" src={normalArtBox}/>
-                    <img className="card--link-art-box"src={linkArtBox}/>
-                    <LinkArrowEditor/>
+                    <LinkArrowEditor 
+                        updateLinkArrow={this.props.updateLinkArrow}
+                        linkArrows={this.props.cardState.linkArrows}
+                    />
                 </div>
             );
             
@@ -250,6 +268,7 @@ const mapDispatchToProps = function(dispatch){
         updateLore: (lore) => dispatch(ActionCreators.general.updateLore(lore)),
         updatePendulumEffect: (pendulumEffect) => dispatch(ActionCreators.monster.updatePendulumEffect(pendulumEffect)),
         updatePendulumScale: (pendulumScale, isLeftNotRightScale) => dispatch(ActionCreators.monster.updatePendulumScale(pendulumScale, isLeftNotRightScale)),
+        updateLinkArrow: (linkArrowValue, linkIndex) => dispatch(ActionCreators.monster.updateLinkArrow(linkArrowValue, linkIndex)),
         updateTribes: (tribes) => dispatch(ActionCreators.monster.updateTribes(tribes)),
         updateMonsterType: (type) => dispatch(ActionCreators.monster.updateMonsterType(type)),
         updateMonsterHybridType: (type) => dispatch(ActionCreators.monster.updateMonsterHybridType(type)),
@@ -257,7 +276,8 @@ const mapDispatchToProps = function(dispatch){
         updateMonsterAbilities: (monsterAbilities) => dispatch(ActionCreators.monster.updateMonsterAbilities(monsterAbilities)),
         updateFusionMaterials: (fusionMaterials) => dispatch(ActionCreators.monster.updateFusionMaterials(fusionMaterials)),
         updateSynchroMaterials: (synchroMaterials) => dispatch(ActionCreators.monster.updateSynchroMaterials(synchroMaterials)),
-        updateXyzMaterials: (xyzMaterials) => dispatch(ActionCreators.monster.updateXyzMaterials(xyzMaterials))
+        updateXyzMaterials: (xyzMaterials) => dispatch(ActionCreators.monster.updateXyzMaterials(xyzMaterials)),
+        updateLinkMaterials: (linkMaterials) => dispatch(ActionCreators.monster.updateLinkMaterials(linkMaterials))
     }
 }
 

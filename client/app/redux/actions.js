@@ -25,9 +25,11 @@ const Actions = {
     UPDATE_PENDULUM_EFFECT: 'UPDATE_PENDULUM_EFFECT',
     UPDATE_PENDULUM_SCALE_RIGHT: 'UPDATE_PENDULUM_SCALE_RIGHT',
     UPDATE_PENDULUM_SCALE_LEFT: 'UPDATE_PENDULUM_SCALE_LEFT',
+    UPDATE_LINK_ARROW: 'UPDATE_LINK_ARROW',
     UPDATE_FUSION_MATERIALS: 'UPDATE_FUSION_MATERIALS',
     UPDATE_SYNCHRO_MATERIALS: 'UPDATE_SYNCHRO_MATERIALS',
     UPDATE_XYZ_MATERIALS: 'UPDATE_XYZ_MATERIALS',
+    UPDATE_LINK_MATERIALS: 'UPDATE_LINK_MATERIALS',
     UPDATE_SPELL_SUBTYPE: 'UPDATE_SPELL_SUBTYPE',
     UPDATE_TRAP_SUBTYPE: 'UPDATE_TRAP_SUBTYPE',
     UPDATE_LORE: 'UPDATE_LORE',
@@ -58,8 +60,10 @@ let ActionCreators = {
         updateFusionMaterials: updateFusionMaterials,
         updateSynchroMaterials: updateSynchroMaterials,
         updateXyzMaterials: updateXyzMaterials,
+        updateLinkMaterials: updateLinkMaterials,
         updatePendulumEffect: updatePendulumEffect,
-        updatePendulumScale: updatePendulumScale
+        updatePendulumScale: updatePendulumScale,
+        updateLinkArrow: updateLinkArrow
     },
     action: {
         updateActionTypes: updateActionTypes
@@ -161,6 +165,13 @@ function updateXyzMaterials(xyzMaterials){
     }
 }
 
+function updateLinkMaterials(linkMaterials){
+    return {
+        type: Actions.UPDATE_LINK_MATERIALS,
+        linkMaterials: linkMaterials
+    }
+}
+
 function updateLore(lore){
     return {
         type: Actions.UPDATE_LORE,
@@ -208,6 +219,14 @@ function updatePendulumScale(pendulumScale, isLeftNotRightScale){
             type: Actions.UPDATE_PENDULUM_SCALE_RIGHT,
             pendulumScale: pendulumScale
         } 
+    }
+}
+
+function updateLinkArrow(linkArrowValue, linkIndex){
+    return {
+        type: Actions.UPDATE_LINK_ARROW,
+        linkArrowValue: linkArrowValue,
+        linkIndex: linkIndex
     }
 }
 
