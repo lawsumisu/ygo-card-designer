@@ -154,7 +154,7 @@ class TypeEditor extends React.Component{
                     <SelectInput 
                         onChange={this.props.updateMonsterType} 
                         selectedItem={this.props.monsterType}
-                        selectOptions={[MonsterTypes.BASIC, MonsterTypes.FUSION, MonsterTypes.SYNCHRO, MonsterTypes.RITUAL, MonsterTypes.XYZ, MonsterTypes.LINK]}
+                        selectOptions={[MonsterTypes.BASIC, MonsterTypes.FUSION, MonsterTypes.SYNCHRO, MonsterTypes.DARK_SYNCHRO, MonsterTypes.RITUAL, MonsterTypes.XYZ, MonsterTypes.LINK]}
                         shouldHideSelectedItem={() => this.props.monsterType === MonsterTypes.BASIC}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}
@@ -186,7 +186,7 @@ class TypeEditor extends React.Component{
                     <SelectInput
                         onChange={this.props.updateMonsterClass}
                         selectedItem={this.props.monsterClass}
-                        selectOptions={[MonsterClasses.NON_TUNER, MonsterClasses.TUNER]}
+                        selectOptions={[MonsterClasses.NON_TUNER, MonsterClasses.TUNER, MonsterClasses.DARK_TUNER]}
                         shouldHideSelectedItem={() => this.props.monsterClass === MonsterClasses.NON_TUNER}
                         onFocus={(event) => this.handleOnFocus()}
                         onBlur={(event) => this.handleOnBlur()}

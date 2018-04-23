@@ -88,6 +88,10 @@
           &:hover{
             cursor: pointer;
           }
+          &.description--text--edit-btn--no-show{
+             background-image: url('~client/app/assets/no.png');
+             background-size: cover;
+          }
         }
 
         .description--text--edit-btn-effect{

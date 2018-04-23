@@ -196,6 +196,9 @@ class Card extends React.Component{
             else if (this.props.cardState.monsterType === MonsterTypes.SYNCHRO){
                 classNames.push('synchro-monster');
             }
+            else if (this.props.cardState.monsterType === MonsterTypes.DARK_SYNCHRO){
+                classNames.push('dark-synchro-monster');
+            }
             else if (this.props.cardState.monsterType === MonsterTypes.RITUAL){
                 classNames.push('ritual-monster');
             }
