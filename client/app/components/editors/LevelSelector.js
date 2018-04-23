@@ -1,6 +1,7 @@
 import React from 'react';
 import level from 'client/app/assets/Level2.png';
 import rank from 'client/app/assets/Series 9/Rank.png';
+import negativeLevel from 'client/app/assets/NegativeLevel.png';
 import {MonsterTypes} from 'client/app/constants';
 
 /**
@@ -42,10 +43,13 @@ class LevelSelector extends React.Component {
         else classNames.push('ygo-card-level-unselected');
 
         if (isHovered) classNames.push('ygo-card-level-hovered');
+        let starImg = level;
+        if (this.props.monsterType === MonsterTypes.DARK_SYNCHRO) starImg = negativeLevel;
+        else if (this.props.monsterType === MonsterTypes.XYZ) starImg = rank;
 
         return (
             <img 
-                src={this.props.monsterType === MonsterTypes.XYZ ? rank: level} 
+                src={starImg} 
                 className={classNames.join(' ')}                
                 onMouseEnter={(event) => this.updateHover(index)}
                 onClick={(event) => this.props.updateLevel(index)}
@@ -69,6 +73,9 @@ class LevelSelector extends React.Component {
         let classNames = ['ygo-card-level'];
         if (this.props.monsterType === MonsterTypes.XYZ){
             classNames.push('ygo-card-stars-rank');
+        }
+        else if (this.props.monsterType === MonsterTypes.DARK_SYNCHRO){
+            classNames.push('level--stars--negative');
         }
         else if (this.props.monsterType === MonsterTypes.LINK){
             classNames.push('level--editor--invisible');

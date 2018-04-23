@@ -206,6 +206,15 @@ class DescriptionEditor extends React.Component{
         return classNames.join(' ');
     }
 
+    getEditButtonClassNames(descriptionType){
+        const classNames = [`description--text--edit-btn-${descriptionType}`];
+        const showState = descriptionType === 'effect' ? this.state.showEffect : this.state.showLore;
+        if (!showState){
+            classNames.push('description--text--edit-btn--no-show');
+        }
+        return classNames.join(' ');
+    }
+
     updateFocus(inputType, isFocused){
         if (inputType === 'effect'){
             this.setState({
@@ -252,8 +261,8 @@ class DescriptionEditor extends React.Component{
                 {this.renderMaterialEditor()}
                 <div className={this.getDescriptionTextContainerClassNames()}>
                     <div className="description--text--edit-btn-anchor">
-                        <input type="button" className="description--text--edit-btn-effect" value="E" onClick={(event) => this.handleEditButtonOnClick('effect')}/>
-                        <input type="button" className="description--text--edit-btn-lore" value="L" onClick={(event) => this.handleEditButtonOnClick('lore')}/>    
+                        <input type="button" className={this.getEditButtonClassNames('effect')} value="E" onClick={(event) => this.handleEditButtonOnClick('effect')}/>
+                        <input type="button" className={this.getEditButtonClassNames('lore')} value="L" onClick={(event) => this.handleEditButtonOnClick('lore')}/>    
                     </div>
                    <AutoscalingTextareaV2
                         maxFontSize={15}

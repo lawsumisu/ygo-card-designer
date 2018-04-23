@@ -2,6 +2,7 @@ export const MonsterTypes = {
     BASIC: 'Basic',
     FUSION: 'Fusion',
     SYNCHRO: 'Synchro',
+    DARK_SYNCHRO: 'Dark Synchro',
     RITUAL: 'Ritual',
     XYZ: 'Xyz',
     LINK: 'Link',
@@ -33,7 +34,8 @@ export const TrapActionTypes = {
 
 export const MonsterClasses = {
     NON_TUNER: 'Non-Tuner',
-    TUNER: 'Tuner'
+    TUNER: 'Tuner',
+    DARK_TUNER: 'Dark Tuner'
 }
 
 export const BrowserTypes = {

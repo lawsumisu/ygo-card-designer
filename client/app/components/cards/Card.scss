@@ -94,6 +94,15 @@ font-face{
     background-image: url("~client/app/assets/Series 10/SynchroMonster2.png");
   }
 
+  &.dark-synchro-monster{
+    background-image: url("~client/app/assets/Series 10/DarkSynchroMonster.png");
+    .ygo-card-name{
+      input{
+        color: white;
+      }  
+    }
+  }
+
   &.xyz-monster{
     background-image: url("~client/app/assets/Series 10/XyzMonster2.png");
     .ygo-card-name{
@@ -235,7 +244,7 @@ font-face{
     align-items: center;
     height: calc(4.2/86 * var(--card-height));
 
-    &.ygo-card-stars-rank{
+    &.ygo-card-stars-rank, &.level--stars--negative{
       flex-direction: row;
     }
 
@@ -417,6 +426,9 @@ font-face{
         }
       }
     }
+    .ygo-card-monster-type-selected{
+        white-space: nowrap;
+    }
   }
 
   .description--text--input-effect, .description--text--input-lore{
@@ -443,6 +455,7 @@ font-face{
     }
 
     .card--battle-points--link-rating{
+      cursor: default;
       margin-top: -1px;
       display: flex;
       font-family: Eurostile Candy W01 Bold;
