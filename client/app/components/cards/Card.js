@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import $ from 'jquery';
 
 import {MonsterTypes, CardTypes} from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
@@ -13,6 +14,7 @@ import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
 import {DescriptionEditor} from 'client/app/components/editors/descriptionEditor/DescriptionEditor';
 import {PendulumInfoEditor} from 'client/app/components/editors/PendulumInfoEditor';
+import {LinkArrowEditor} from 'client/app/components/editors/LinkArrowEditor';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
 
 import 'client/app/components/cards/Card.scss';
@@ -45,6 +47,24 @@ class Card extends React.Component{
                     updateLevel={this.props.updateLevel}
                     monsterType={this.props.cardState.monsterType}
                 />
+            );
+        }
+    }
+    getSecondaryBattleStat(){
+        if (this.props.cardState.monsterType === MonsterTypes.LINK){
+            return (
+                <div className="card--battle-points--link-rating">
+                    <span>LINK-</span>
+                    <span className="card--battle-points--link-rating-value">{_.filter(this.props.cardState.linkArrows, (linkArrow) => linkArrow).length}</span>
+                </div>    
+            );
+        }
+        else{
+            return (
+                <div>
+                    <span>DEF</span><span className="battle-point-slash">/</span>
+                    <input type="text" value={this.props.cardState.def} onChange={(event) => this.props.updateDef(event.target.value)}/>
+                </div>        
             );
         }
     }
@@ -94,6 +114,8 @@ class Card extends React.Component{
                         updateSynchroMaterials={this.props.updateSynchroMaterials}
                         xyzMaterials={this.props.cardState.xyzMaterials}
                         updateXyzMaterials={this.props.updateXyzMaterials}
+                        linkMaterials={this.props.cardState.linkMaterials}
+                        updateLinkMaterials={this.props.updateLinkMaterials}
                         effect={this.props.cardState.effect} 
                         updateEffect={this.props.updateEffect} 
                         lore={this.props.cardState.lore} 
@@ -104,12 +126,8 @@ class Card extends React.Component{
                             <input type="text" value={this.props.cardState.atk} onChange={(event) => this.props.updateAtk(event.target.value)}/>
                         </div>
                         <div className="ygo-card-battle-point-spacer">
-
                         </div>
-                        <div>
-                            <span>DEF</span><span className="battle-point-slash">/</span>
-                            <input type="text" value={this.props.cardState.def} onChange={(event) => this.props.updateDef(event.target.value)}/>
-                        </div>                                       
+                        {this.getSecondaryBattleStat()}                                     
                     </div>
                 </div>
             );
@@ -117,7 +135,8 @@ class Card extends React.Component{
     }
 
     renderPendulumCard(){
-        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER){
+        if (this.props.cardState.monsterHybridType === MonsterTypes.PENDULUM && this.props.cardState.cardType === CardTypes.MONSTER 
+        && this.props.cardState.monsterType !== MonsterTypes.LINK){
             return (
                 <div className="ygo-card-pendulum">
                     <img src={pendulumEffectSmall}/>
@@ -125,17 +144,30 @@ class Card extends React.Component{
                 </div>
             );
         }
+        else if (this.props.cardState.monsterType === MonsterTypes.LINK && this.props.cardState.cardType === CardTypes.MONSTER){
+            return (
+                <div className="card--link-art--container">
+                    <img className="card--normal-art-box" src={normalArtBox}/>
+                    <LinkArrowEditor 
+                        updateLinkArrow={this.props.updateLinkArrow}
+                        linkArrows={this.props.cardState.linkArrows}
+                    />
+                </div>
+            );
+            
+        }
         else{
             return (
                 <div className="card--normal-art--container">
-                    <img src={normalArtBox}/>
+                    <img className="card--normal-art-box" src={normalArtBox}/>
                 </div>
             );
         }
     }
 
     renderPendulumContainer(){
-        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER){
+        if (this.props.cardState.monsterHybridType == MonsterTypes.PENDULUM && this.props.cardState.cardType == CardTypes.MONSTER
+        && this.props.cardState.monsterType !== MonsterTypes.LINK){
             return (
                 <PendulumInfoEditor
                     updatePendulumEffect={this.props.updatePendulumEffect}
@@ -170,6 +202,9 @@ class Card extends React.Component{
             else if (this.props.cardState.monsterType === MonsterTypes.XYZ){
                 classNames.push('xyz-monster');
             }
+            else if (this.props.cardState.monsterType === MonsterTypes.LINK){
+                classNames.push('link-monster');
+            }
             else if (this.props.cardState.effect.length > 0){
                 classNames.push('effect-monster');
             }
@@ -199,6 +234,7 @@ class Card extends React.Component{
                     {this.getCardCenterEditor()}
                     <ImageSelector
                         monsterHybridType={this.props.cardState.monsterHybridType}
+                        monsterType={this.props.cardState.monsterType}
                         cardType={this.props.cardState.cardType}
                     />
                     <div className="ygo-card-set-id"></div>
@@ -229,6 +265,7 @@ const mapDispatchToProps = function(dispatch){
         updateLore: (lore) => dispatch(ActionCreators.general.updateLore(lore)),
         updatePendulumEffect: (pendulumEffect) => dispatch(ActionCreators.monster.updatePendulumEffect(pendulumEffect)),
         updatePendulumScale: (pendulumScale, isLeftNotRightScale) => dispatch(ActionCreators.monster.updatePendulumScale(pendulumScale, isLeftNotRightScale)),
+        updateLinkArrow: (linkArrowValue, linkIndex) => dispatch(ActionCreators.monster.updateLinkArrow(linkArrowValue, linkIndex)),
         updateTribes: (tribes) => dispatch(ActionCreators.monster.updateTribes(tribes)),
         updateMonsterType: (type) => dispatch(ActionCreators.monster.updateMonsterType(type)),
         updateMonsterHybridType: (type) => dispatch(ActionCreators.monster.updateMonsterHybridType(type)),
@@ -236,7 +273,8 @@ const mapDispatchToProps = function(dispatch){
         updateMonsterAbilities: (monsterAbilities) => dispatch(ActionCreators.monster.updateMonsterAbilities(monsterAbilities)),
         updateFusionMaterials: (fusionMaterials) => dispatch(ActionCreators.monster.updateFusionMaterials(fusionMaterials)),
         updateSynchroMaterials: (synchroMaterials) => dispatch(ActionCreators.monster.updateSynchroMaterials(synchroMaterials)),
-        updateXyzMaterials: (xyzMaterials) => dispatch(ActionCreators.monster.updateXyzMaterials(xyzMaterials))
+        updateXyzMaterials: (xyzMaterials) => dispatch(ActionCreators.monster.updateXyzMaterials(xyzMaterials)),
+        updateLinkMaterials: (linkMaterials) => dispatch(ActionCreators.monster.updateLinkMaterials(linkMaterials))
     }
 }
 

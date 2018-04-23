@@ -33,6 +33,14 @@ class SelectInput extends React.Component{
         return classNames.join(' ');
     }
 
+    getSelectContainerClassNames(){
+        var classNames = ['select-input--container'];
+        if (this.props.containerClassName){
+            classNames.push(this.props.containerClassName);
+        }
+        return classNames.join(' ');
+    }
+
     handleOnFocus(event){
         if (this.props.onFocus){
             this.props.onFocus(event);
@@ -57,7 +65,7 @@ class SelectInput extends React.Component{
 
     render(){
         return (
-            <div className="ygo-card-monster-type">
+            <div className={this.getSelectContainerClassNames()}>
                 {this.getSelectedItemAsDisplay()}
                 <select 
                     className={this.getSelectClassNames()}

@@ -66,11 +66,11 @@ class DescriptionEditor extends React.Component{
                     </div>
                 );
             }
-            else if (this.props.monsterType === MonsterTypes.XYZ){
+            else if (this.props.monsterType === MonsterTypes.XYZ || this.props.monsterType === MonsterTypes.LINK){
                 return (
                     <AutoscalingInput
                         value={monsterMaterialProperties.monsterMaterials}
-                        onChange={(event) => this.props.updateXyzMaterials(event.target.value)}
+                        onChange={(event) => monsterMaterialProperties.updateFunction(event.target.value)}
                         placeholder={monsterMaterialProperties.placeholder}
                         className={monsterMaterialProperties.className}
                         onBlur={(event) => this.updateFocus('monsterMaterial', false)}
@@ -105,6 +105,14 @@ class DescriptionEditor extends React.Component{
                     updateFunction: this.props.updateXyzMaterials,
                     placeholder: 'Add Xyz Material...',
                     className: 'ygo-card-xyz-materials'
+                };
+            }
+            else if (this.props.monsterType === MonsterTypes.LINK){
+                return {
+                    monsterMaterials: this.props.linkMaterials,
+                    updateFunction: this.props.updateLinkMaterials,
+                    placeholder: 'Add Link Material...',
+                    className: 'ygo-card-link-materials'
                 };
             }
             else{

@@ -35,7 +35,7 @@ class ImageSelector extends React.Component{
 
     getClassNames(){
         let classNames = ['ygo-card-image'];
-        if (this.props.monsterHybridType === MonsterTypes.PENDULUM && this.props.cardType === CardTypes.MONSTER){
+        if (this.props.monsterHybridType === MonsterTypes.PENDULUM && this.props.cardType === CardTypes.MONSTER && this.props.monsterType !== MonsterTypes.LINK){
             classNames.push('ygo-card-image-pendulum');
         }
         return classNames.join(' ');

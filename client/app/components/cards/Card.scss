@@ -50,6 +50,11 @@ font-face{
   src: url('~client/app/assets/Fonts/SCRIPTBL.ttf');
 }
 
+@font-face{
+  font-family: Eurostile Candy W01 Bold;
+  src: url('~client/app/assets/Fonts/Eurostile Candy W01 Bold.ttf');
+}
+
 .ygo-card-content{
   --card-diagonal: 1042.93px;
   --aspect-ratio: 1.46;
@@ -98,6 +103,14 @@ font-face{
     }
   }
 
+  &.link-monster{
+    background-image: url("~client/app/assets/Series 10/LinkMonster.png");.ygo-card-name{
+      input{
+        color: white;
+      }  
+    }
+  }
+
   &.spell-card{
     background-image: url("~client/app/assets/Series 10/SpellCard2.png");
     .ygo-card-name{
@@ -117,15 +130,76 @@ font-face{
   }
 }
 
-.ygo-card-pendulum, .ygo-card-pendulum img, .card--normal-art--container, .card--normal-art--container img{
+.ygo-card-pendulum, .ygo-card-pendulum img, .card--normal-art--container, .card--normal-art-box, .card--link-art--container{
   pointer-events: none;
   position: absolute;
   width: 100%;
+}
+
+.ygo-card-pendulum, .ygo-card-pendulum img, .card--link-art-box{
   z-index: 10;
 }
 
-.card--normal-art--container, .card--normal-art--container img{
-  z-index: 0;
+.card--link-arrow--container{
+  position: absolute;
+  top: calc(12/86 * var(--card-height));
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: calc(52.3/59 * var(--card-width));
+  height: calc(52.3/59 * var(--card-width));
+  div{
+    pointer-events: initial;
+    cursor: pointer;
+    position: absolute;
+    z-index: 11;
+    &:hover{
+      filter: brightness(1.2);
+    }
+  }
+  .card--link-arrow-corner{
+    width: calc(6.8/59 * var(--card-width));
+    height: calc(6.8/59 * var(--card-width));
+    margin: calc(.55/59 * var(--card-width));
+    background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrow2.png");
+    background-size: cover;
+    &:hover{
+      background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrowHovered.png");
+    }
+    &.card--link-arrow-corner--selected{
+        background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrowSelected.png");
+      }
+  }
+  .card--link-arrow-middle{
+    background-size: cover;
+    margin: auto;
+    &.card--link-arrow-middle--vertical{
+      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowVertical.png");
+      width: calc(4.02/59 * var(--card-width));
+      height: calc(13/86 * var(--card-height));
+      bottom: 0;
+      top: 0;
+      &:hover{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowHoveredVertical.png");
+      }
+      &.card--link-arrow-middle--selected{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowSelectedVertical.png");
+      }
+    }
+    &.card--link-arrow-middle--horizontal{
+      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrow2.png");
+      height: calc(4.02/59 * var(--card-width));
+      width: calc(13/86 * var(--card-height));
+      left: 0;
+      right: 0;
+      &:hover{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowHovered.png");
+      }
+      &.card--link-arrow-middle--selected{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowSelected2.png");
+      }
+    }
+  }
 }
 
 .ygo-card-top, .ygo-card-bottom{
@@ -163,6 +237,10 @@ font-face{
 
     &.ygo-card-stars-rank{
       flex-direction: row;
+    }
+
+    &.level--editor--invisible{
+      visibility: hidden;
     }
 
     .ygo-card-level-selected, .ygo-card-level-unselected{
@@ -205,6 +283,9 @@ font-face{
     img{
       width: 100%;
       height: 100%;
+      &:hover{
+        filter: brightness(1.2);
+      }
     }
   }
 
@@ -259,15 +340,24 @@ font-face{
   padding: calc(1/59 * var(--card-width));
   z-index: 30;
 
+  .type--container{
+    margin-top: 2px;
+    margin-bottom: -4px;
+  }
+
   .ygo-card-type{
-    margin-top: calc(-1/59 * var(--card-width)); //Need to push card type up to offset the way this font pushes the text down.
     width: fit-content;
     transform-origin: 0% 50%;
     line-height:1.5;
     display: flex;
     flex-direction: row;
-    font-size: 23px;
+    font-size: 21px;
     font-family: YGO ITC Stone Serif Small Caps Bold;
+    margin-top: calc(-1/59 * var(--card-width)); //Need to push card type up to offset the way this font pushes the text down.
+
+    .catalog-input{
+      width: 160px;
+    }
 
     &:hover{
       .ygo-card-type-input, .ygo-card-monster-type-selector{
@@ -276,6 +366,10 @@ font-face{
       .ygo-card-monster-type-selected{
         display: none;
       }
+    }
+
+    .type--brace{
+      margin-top: -1.5px;
     }
     
     .ygo-card-type-tribe{
@@ -315,6 +409,13 @@ font-face{
       display: flex;
       flex-direction: row;
       cursor: pointer;
+
+      &.type--hybrid-select--link-selected{
+        select{
+          color: #777;
+          text-decoration: line-through;
+        }
+      }
     }
   }
 
@@ -339,6 +440,17 @@ font-face{
 
     .ygo-card-battle-point-spacer{
       padding: 0px 5px;
+    }
+
+    .card--battle-points--link-rating{
+      margin-top: -1px;
+      display: flex;
+      font-family: Eurostile Candy W01 Bold;
+      font-size:22px;
+      .card--battle-points--link-rating-value{
+        width: 25px;
+        text-align: end;
+      }
     }
 
     div{
