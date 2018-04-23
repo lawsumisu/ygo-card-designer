@@ -142,7 +142,7 @@ font-face{
 
 .card--link-arrow--container{
   position: absolute;
-  top: 120px;
+  top: calc(12/86 * var(--card-height));
   left: 0;
   right: 0;
   margin: auto;
@@ -188,8 +188,8 @@ font-face{
     }
     &.card--link-arrow-middle--horizontal{
       background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrow2.png");
-      width: 130px;
-      height: 40.2px;
+      height: calc(4.02/59 * var(--card-width));
+      width: calc(13/86 * var(--card-height));
       left: 0;
       right: 0;
       &:hover{

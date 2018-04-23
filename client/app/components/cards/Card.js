@@ -22,9 +22,6 @@ import image from 'client/app/assets/BlueEyesWhiteDragon.png';
 import pendulumBaseSmall from 'client/app/assets/Series 10/Pendulum/PendulumBaseSmall.png';
 import pendulumEffectSmall from 'client/app/assets/Series 10/Pendulum/PendulumEffectSmall.png';
 import normalArtBox from 'client/app/assets/Series 10/ArtBox.png';
-import linkArtBox from 'client/app/assets/Series 10/Link/LinkArrows.png';
-import cornerLinkArrow from 'client/app/assets/Series 10/Link/CornerLinkArrow2.png';
-import middleLinkArrow from 'client/app/assets/Series 10/Link/MiddleLinkArrow.png';
 
 
 class Card extends React.Component{
