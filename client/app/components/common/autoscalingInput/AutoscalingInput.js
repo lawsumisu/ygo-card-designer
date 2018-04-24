@@ -18,13 +18,13 @@ class AutoscalingInput extends React.Component{
     }
 
     componentDidMount(){
-        this.scaleInput();
+        // On initial load, this element's width can still be in flux. Do the rescaling after a delay to guarantee all DOM elements have the correct width.
+        setTimeout(() => this.scaleInput(), 1);
     }
 
     componentDidUpdate(){
         this.scaleInput();
     }
-
     
     updateInput(event){
         this.props.onChange(event);  

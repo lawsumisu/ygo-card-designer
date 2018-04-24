@@ -22,6 +22,8 @@ class TypeEditor extends React.Component{
 
     componentDidUpdate(){
         this.updateScale();
+        // On initial load, this element's width can still be in flux. Do another rescaling after a delay to guarantee all DOM elements have the correct width.
+        setTimeout(() => this.updateScale(), 1);
     }
 
     /* ------------------- +
