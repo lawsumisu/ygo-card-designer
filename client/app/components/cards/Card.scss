@@ -363,6 +363,7 @@ font-face{
     font-size: 21px;
     font-family: YGO ITC Stone Serif Small Caps Bold;
     margin-top: calc(-1/59 * var(--card-width)); //Need to push card type up to offset the way this font pushes the text down.
+    height: calc(3.15/86 * var(--card-height));
 
     .catalog-input{
       width: 160px;
@@ -442,7 +443,7 @@ font-face{
     align-self: flex-end;
     display: flex;
     font-size: 25px;
-    flex: 0 0 27px;
+    height: calc(2.7/86 * var(--card-height));;
     padding-top: 1px;
     box-sizing: border-box;
 

@@ -12,7 +12,8 @@ class ResizableInput extends React.Component{
     }
 
     componentDidMount(){
-        this.resizeInput();
+        // On initial load in chrome, this element's width can still be in flux. Do the rescaling after a delay to guarantee all DOM elements have the correct width.
+        setTimeout(() => this.resizeInput(), 1);
     }
 
     componentDidUpdate(){

@@ -14,6 +14,7 @@
       z-index: 10;
       textarea {
         flex-grow: 1;
+        margin: 0px; //Firefox textarea seem to have default margins.
       }
     }
 
