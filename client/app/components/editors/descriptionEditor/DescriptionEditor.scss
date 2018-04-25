@@ -22,7 +22,8 @@
       font-family: YGO ITC Stone Serif LT Italic;
     }
 
-    .description--text--input-effect, .ygo-card-fusion-materials, .ygo-card-synchro-materials, .ygo-card-xyz-materials, .ygo-card-link-materials{
+    .description--text--input-effect, .ygo-card-fusion-materials, .ygo-card-synchro-materials, .ygo-card-dark-synchro-materials,
+    .ygo-card-xyz-materials, .ygo-card-link-materials{
       font-family: YGO Matrix Book;
     }
 
@@ -35,7 +36,7 @@
       }
     }
 
-    .ygo-card-fusion-materials, .ygo-card-synchro-materials{
+    .ygo-card-fusion-materials, .ygo-card-synchro-materials, .ygo-card-dark-synchro-materials{
       flex-shrink: 0;
       width: fit-content;
       transform-origin: 0% 50%;

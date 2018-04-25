@@ -112,6 +112,8 @@ class Card extends React.Component{
                         updateFusionMaterials={this.props.updateFusionMaterials} 
                         synchroMaterials={this.props.cardState.synchroMaterials}
                         updateSynchroMaterials={this.props.updateSynchroMaterials}
+                        darkSynchroMaterials={this.props.cardState.darkSynchroMaterials}
+                        updateDarkSynchroMaterials={this.props.updateDarkSynchroMaterials}
                         xyzMaterials={this.props.cardState.xyzMaterials}
                         updateXyzMaterials={this.props.updateXyzMaterials}
                         linkMaterials={this.props.cardState.linkMaterials}
@@ -276,6 +278,7 @@ const mapDispatchToProps = function(dispatch){
         updateMonsterAbilities: (monsterAbilities) => dispatch(ActionCreators.monster.updateMonsterAbilities(monsterAbilities)),
         updateFusionMaterials: (fusionMaterials) => dispatch(ActionCreators.monster.updateFusionMaterials(fusionMaterials)),
         updateSynchroMaterials: (synchroMaterials) => dispatch(ActionCreators.monster.updateSynchroMaterials(synchroMaterials)),
+        updateDarkSynchroMaterials: (darkSynchroMaterials) => dispatch(ActionCreators.monster.updateDarkSynchroMaterials(darkSynchroMaterials)),
         updateXyzMaterials: (xyzMaterials) => dispatch(ActionCreators.monster.updateXyzMaterials(xyzMaterials)),
         updateLinkMaterials: (linkMaterials) => dispatch(ActionCreators.monster.updateLinkMaterials(linkMaterials))
     }

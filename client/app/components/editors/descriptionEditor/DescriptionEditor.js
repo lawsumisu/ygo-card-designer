@@ -37,7 +37,7 @@ class DescriptionEditor extends React.Component{
     renderMaterialEditor(){
         if (this.props.cardType === CardTypes.MONSTER){
             const monsterMaterialProperties = this.getMonsterMaterialProperties();
-            if (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO){ 
+            if (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO || this.props.monsterType === MonsterTypes.DARK_SYNCHRO){ 
                 const style = {
                     transform: sprintf('scale(%s, 1)', this.state.materialHorizontalScale)
                 }
@@ -99,6 +99,14 @@ class DescriptionEditor extends React.Component{
                     className: 'ygo-card-synchro-materials'
                 };
             }
+            else if (this.props.monsterType === MonsterTypes.DARK_SYNCHRO){
+                return {
+                    monsterMaterials: this.props.darkSynchroMaterials,
+                    updateFunction: this.props.updateDarkSynchroMaterials,
+                    placeholder: 'Add Dark Synchro Material...',
+                    className: 'ygo-card-dark-synchro-materials'
+                };
+            }
             else if (this.props.monsterType === MonsterTypes.XYZ){
                 return {
                     monsterMaterials: this.props.xyzMaterials,
@@ -127,7 +135,8 @@ class DescriptionEditor extends React.Component{
 
     includesMonsterMaterials(){
         return this.props.cardType === CardTypes.MONSTER && 
-        (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO || this.props.monsterType === MonsterTypes.XYZ);
+        (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO || 
+        this.props.monsterType === MonsterTypes.XYZ || this.props.monsterType === MonsterType.DARK_SYNCRHO);
     }
 
 
@@ -238,7 +247,8 @@ class DescriptionEditor extends React.Component{
     }
 
     updateMaterialHorizontalScale(){
-        if (this.props.cardType === CardTypes.MONSTER && (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO)){
+        if (this.props.cardType === CardTypes.MONSTER && (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO ||
+        this.props.monsterType === MonsterTypes.DARK_SYNCHRO)){
             const monsterMaterialProperties = this.getMonsterMaterialProperties();
             const maxWidth = $('.ygo-card-monster-materials-container').width();
             const actualWidth = $('.'+monsterMaterialProperties.className).width();

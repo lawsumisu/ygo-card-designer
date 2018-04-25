@@ -28,6 +28,7 @@ const Actions = {
     UPDATE_LINK_ARROW: 'UPDATE_LINK_ARROW',
     UPDATE_FUSION_MATERIALS: 'UPDATE_FUSION_MATERIALS',
     UPDATE_SYNCHRO_MATERIALS: 'UPDATE_SYNCHRO_MATERIALS',
+    UPDATE_DARK_SYNCHRO_MATERIALS: 'UPDATE_DARK_SYNCHRO_MATERIALS',
     UPDATE_XYZ_MATERIALS: 'UPDATE_XYZ_MATERIALS',
     UPDATE_LINK_MATERIALS: 'UPDATE_LINK_MATERIALS',
     UPDATE_SPELL_SUBTYPE: 'UPDATE_SPELL_SUBTYPE',
@@ -59,6 +60,7 @@ let ActionCreators = {
         updateMonsterAbilities: updateMonsterAbilities,
         updateFusionMaterials: updateFusionMaterials,
         updateSynchroMaterials: updateSynchroMaterials,
+        updateDarkSynchroMaterials: updateDarkSynchroMaterials,
         updateXyzMaterials: updateXyzMaterials,
         updateLinkMaterials: updateLinkMaterials,
         updatePendulumEffect: updatePendulumEffect,
@@ -155,6 +157,13 @@ function updateSynchroMaterials(synchroMaterials){
     return {
         type: Actions.UPDATE_SYNCHRO_MATERIALS,
         synchroMaterials: synchroMaterials
+    }
+}
+
+function updateDarkSynchroMaterials(darkSynchroMaterials){
+    return {
+        type: Actions.UPDATE_DARK_SYNCHRO_MATERIALS,
+        darkSynchroMaterials: darkSynchroMaterials
     }
 }
 
