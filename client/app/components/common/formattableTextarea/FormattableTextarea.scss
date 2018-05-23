@@ -1,0 +1,17 @@
+.formattable-textarea--container{
+    textarea, div{
+        width: 400px;
+        resize: none;
+        font-size: 15px;
+        line-height: 1.5;
+        font-family: serif;
+    }
+    span{
+        display: inline-block;
+        white-space: pre;
+    }
+    img{
+        height: 22px;
+        vertical-align: bottom;
+    }
+}

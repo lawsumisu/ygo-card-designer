@@ -4,6 +4,7 @@ import CardDownloader from 'client/app/components/cards/CardDownloader';
 import {getBrowser} from 'client/app/utilities';
 import {BrowserTypes} from 'client/app/constants';
 import styles from 'client/app/App.scss';
+import {FormattableTextarea} from 'client/app/components/common/formattableTextarea/FormattableTextarea';
 
 class App extends React.Component{
   constructor(props){
@@ -25,6 +26,7 @@ class App extends React.Component{
   render(){
     return (
       <div className={this.getClassNames()}>
+        <FormattableTextarea/>
         <CardDownloader/>
         <Card/>
       </div>
