@@ -1,0 +1,18 @@
+django==2.0
+
+# Configuration
+django-environ==0.4.0
+
+# Python-PostgreSQL Database Adapter
+psycopg2==2.7.3.1
+
+# Django-related Libraries
+django-filter==1.1.0
+djangorestframework==3.8.2
+django-model-utils==3.1.2
+
+# Factories
+factory_boy==2.11.1
+
+# Shell
+ipython==6.4.0
