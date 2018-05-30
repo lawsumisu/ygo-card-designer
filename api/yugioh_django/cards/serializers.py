@@ -3,7 +3,6 @@ import re
 from rest_framework import serializers
 
 from yugioh_django.cards.models import Card
-from yugioh_django.users.models import User
 
 
 class CardSerializer(serializers.ModelSerializer):
@@ -33,3 +32,7 @@ class CardSerializer(serializers.ModelSerializer):
         if not self._validate_battle_value(defense):
             raise serializers.ValidationError('{} is an invalid defense value'.format(defense))
         return defense
+
+    def create(self, validated_data):
+        validated_data['author'] = self.context['request'].user
+        return super().create(validated_data)

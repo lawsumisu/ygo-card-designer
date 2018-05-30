@@ -8,4 +8,5 @@ class User(AbstractUser):
     class Meta:
         db_table = 'user'
 
-    REQUIRED_FIELDS = []
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    REQUIRED_FIELDS = ['email']
