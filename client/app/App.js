@@ -25,8 +25,22 @@ class App extends React.Component{
   render(){
     return (
       <div className={this.getClassNames()}>
-        <CardDownloader/>
-        <Card/>
+        <div className="navigation-bar--container">
+          Navigation Bar
+          <div className="account-management--container">
+            Account Management
+            <div>Username</div>
+            <input type="button" value="Login"/>
+          </div>
+        </div>
+        <div className="app-content--container">
+          <div>Menu location</div>
+          <div className='canvas--container'>
+            <CardDownloader/>
+            <Card/>
+          </div>
+        </div>
+        
       </div>
     )
   }

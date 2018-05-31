@@ -1,4 +1,25 @@
-.app {
+body{
+  margin: 0px;
+}
+.app-content--container{
+  display: flex;
+  flex-direction: row
+}
+
+.navigation-bar--container{
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  .account-management--container{
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.canvas--container {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
