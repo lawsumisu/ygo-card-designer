@@ -15,7 +15,7 @@ import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
 import {DescriptionEditor} from 'client/app/components/editors/descriptionEditor/DescriptionEditor';
 import {PendulumInfoEditor} from 'client/app/components/editors/PendulumInfoEditor';
 import {LinkArrowEditor} from 'client/app/components/editors/LinkArrowEditor';
-import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
+import {NameEditor} from 'client/app/components/editors/nameEditor/nameEditor.component';
 
 import 'client/app/components/cards/Card.scss';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
@@ -225,7 +225,7 @@ class Card extends React.Component{
             <div className={this.getClassNames()}>
                 {this.renderPendulumCard()}
                 <div className="ygo-card-top">
-                    <AutoscalingInput
+                    <NameEditor
                         className="ygo-card-name"
                         placeholder="Enter a name here..."
                         value={this.props.cardState.name} 

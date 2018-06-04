@@ -11,6 +11,7 @@
     "deploy": "npm run build && gh-pages -d build"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^1.1.5",
     "jquery": "^3.2.1",
