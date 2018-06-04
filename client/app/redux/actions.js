@@ -37,6 +37,7 @@ const Actions = {
     UPDATE_EFFECT: 'UPDATE_EFFECT',
     UPDATE_ATTRIBUTE: 'UPDATE_ATTRIBUTE',
     UPDATE_ACTION_TYPES: 'UPDATE_ACTION_TYPES',
+    UPDATE_RARITY: 'UPDATE_RARITY',
     NONE: 'NONE'
 }
 
@@ -46,10 +47,10 @@ let ActionCreators = {
         updateName: updateName,
         updateLore: updateLore,
         updateEffect: updateEffect,
-        updateAttribute: updateAttribute
+        updateAttribute: updateAttribute,
+        updateRarity: updateRarity
     },
     monster: {
-        updateName: updateName,
         updateLevel: updateLevel,
         updateAtk: updateAtk,
         updateDef: updateDef,
@@ -75,6 +76,13 @@ function updateName(name){
     return {
         type: Actions.UPDATE_NAME,
         name: name
+    }
+}
+
+function updateRarity(rarity){
+    return {
+        type: Actions.UPDATE_RARITY,
+        rarity: rarity
     }
 }
 

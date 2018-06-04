@@ -1,7 +1,30 @@
 import React from 'react';
+import _ from 'lodash';
+import {Rarities} from 'client/app/constants';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/autoscalingInput.component';
 
 export class NameEditor extends AutoscalingInput{
+    getTextFill(){
+        if (this.props.rarity === Rarities.RARE){
+            return "url(#silver)";
+        }
+        else if(this.props.rarity === Rarities.ULTRA_RARE){
+            return "url(#gold)";
+        }
+        else{
+            return "black";
+        }
+    }
+
+    getFilter(){
+        if (_.includes([Rarities.RARE, Rarities.ULTRA_RARE], this.props.rarity)){
+            return "url(#rarity)";
+        }
+        else{
+            return null;
+        }
+    }
+
     renderDisplayText(){
         return(
             <svg
@@ -10,13 +33,13 @@ export class NameEditor extends AutoscalingInput{
                 <defs>
                     <linearGradient
                         id="gold" x1="0" x2=".2" y1="0" y2="1">
-                        <stop  offset="0%" stopColor="gold" stopOpacity="1" />
-                        <stop  offset="100%" stopColor="#604400" stopOpacity="1" />
+                        <stop  offset="0%" stopColor="#daa520" stopOpacity="1" />
+                        <stop  offset="100%" stopColor="#402400" stopOpacity="1" />
                     </linearGradient>
                     <linearGradient
                         id="silver" x1="0" x2="1" y1="0" y2="1">
-                        <stop  offset="0%" stopColor="#dddddd" stopOpacity="1" />
-                        <stop  offset="100%" stopColor="#444444" stopOpacity="1" />
+                        <stop  offset="0%" stopColor="#999999" stopOpacity="1" />
+                        <stop  offset="100%" stopColor="#222222" stopOpacity="1" />
                     </linearGradient>
                     <filter id="rarity" x="0" y="0" width="100%" height="100%">
                         // Convolution matrix to get the edges of the text
@@ -37,8 +60,8 @@ export class NameEditor extends AutoscalingInput{
                 <text
                     y="3"
                     transform={this.getScaleTransform()}
-                    filter="url(#rarity)" 
-                    fill="url(#gold)" 
+                    filter={this.getFilter()} 
+                    fill={this.getTextFill()} 
                     >{this.props.value}</text>
             </svg>
         )

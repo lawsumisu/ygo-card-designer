@@ -3,10 +3,11 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 import $ from 'jquery';
 
-import {MonsterTypes, CardTypes} from 'client/app/constants';
+import {MonsterTypes, CardTypes, Rarities} from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
 import {selectCardType} from 'client/app/redux/selectors';
 
+import {CardDownloader} from 'client/app/components/cards/CardDownloader';
 import {LevelSelector} from 'client/app/components/editors/LevelSelector';
 import {AttributeEditor} from 'client/app/components/editors/attributeEditor/AttributeEditor';
 import {ActionTypeEditor} from 'client/app/components/editors/actionTypeEditor/ActionTypeEditor';
@@ -222,30 +223,46 @@ class Card extends React.Component{
 
     render(){
         return (
-            <div className={this.getClassNames()}>
-                {this.renderPendulumCard()}
-                <div className="ygo-card-top">
-                    <NameEditor
-                        className="ygo-card-name"
-                        placeholder="Enter a name here..."
-                        value={this.props.cardState.name} 
-                        onChange={(event) => this.props.updateName(event.target.value)}
-                    />
-                    <AttributeEditor 
-                        updateAttribute={this.props.updateAttribute}
-                        attribute={this.props.cardState.attribute}/> 
+            <div className="card--container">
+                <div className="card--settings--container">
+                    <div className="card--rarity-editor">
+                        Rarity: 
+                        <select value={this.props.cardState.rarity} onChange={(event) => this.props.updateRarity(event.target.value)}>
+                           {_.map(Rarities, (rarity) => {
+                                return (
+                                    <option key={rarity} value={rarity}>{rarity}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
+                    <CardDownloader cardName={this.props.cardState.name}/>
                 </div>
-                <div className="ygo-card-center">
-                    {this.getCardCenterEditor()}
-                    <ImageSelector
-                        monsterHybridType={this.props.cardState.monsterHybridType}
-                        monsterType={this.props.cardState.monsterType}
-                        cardType={this.props.cardState.cardType}
-                    />
-                    <div className="ygo-card-set-id"></div>
-                    {this.renderPendulumContainer()}
+                <div className={this.getClassNames()}>
+                    {this.renderPendulumCard()}
+                    <div className="ygo-card-top">
+                        <NameEditor
+                            className="ygo-card-name"
+                            placeholder="Enter a name here..."
+                            value={this.props.cardState.name} 
+                            onChange={(event) => this.props.updateName(event.target.value)}
+                            rarity={this.props.cardState.rarity}
+                        />
+                        <AttributeEditor 
+                            updateAttribute={this.props.updateAttribute}
+                            attribute={this.props.cardState.attribute}/> 
+                    </div>
+                    <div className="ygo-card-center">
+                        {this.getCardCenterEditor()}
+                        <ImageSelector
+                            monsterHybridType={this.props.cardState.monsterHybridType}
+                            monsterType={this.props.cardState.monsterType}
+                            cardType={this.props.cardState.cardType}
+                        />
+                        <div className="ygo-card-set-id"></div>
+                        {this.renderPendulumContainer()}
+                    </div>
+                    {this.getCardBottom()}
                 </div>
-                {this.getCardBottom()}
             </div>
         )
     }
@@ -260,7 +277,8 @@ const mapStateToProps = function(state){
 
 const mapDispatchToProps = function(dispatch){
     return {
-        updateName: (name) => dispatch(ActionCreators.monster.updateName(name)),
+        updateName: (name) => dispatch(ActionCreators.general.updateName(name)),
+        updateRarity: (rarity) => dispatch(ActionCreators.general.updateRarity(rarity)),
         updateLevel: (level) => dispatch(ActionCreators.monster.updateLevel(level)),
         updateAttribute: (attribute) => dispatch(ActionCreators.general.updateAttribute(attribute)),
         updateActionTypes: (actionTypes) => dispatch(ActionCreators.action.updateActionTypes(actionTypes)),

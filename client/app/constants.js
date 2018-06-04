@@ -38,6 +38,12 @@ export const MonsterClasses = {
     DARK_TUNER: 'Dark Tuner'
 }
 
+export const Rarities = {
+    COMMON: 'Common',
+    RARE: 'Rare',
+    ULTRA_RARE: 'Ultra Rare'
+}
+
 export const BrowserTypes = {
     MOZILLA: 'MOZILLA',
     CHROME: 'CHROME'

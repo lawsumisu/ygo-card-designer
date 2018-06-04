@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * Specialized dropdown that displays the selected item as normal text until the element is hovered, revealing the dropdown.
+ */
 class SelectInput extends React.Component{
     constructor(props){
         super(props);

@@ -479,4 +479,12 @@ font-face{
   }
 }
 
+.card--settings--container{
+  display: flex;
+  flex-direction: row;
+  .card-downloader--button{
+    margin-left: auto;
+    cursor: pointer;
+  }
+}
 
