@@ -289,11 +289,11 @@ font-face{
     #ygo-card-image-file-loader{
       display: none;
     }
-    img{
+    img, svg, image{
       width: 100%;
       height: 100%;
       &:hover{
-        filter: brightness(1.2);
+        filter: brightness(1);
       }
     }
   }

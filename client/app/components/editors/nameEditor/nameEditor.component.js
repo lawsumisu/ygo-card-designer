@@ -2,13 +2,14 @@ import React from 'react';
 import _ from 'lodash';
 import {Rarities} from 'client/app/constants';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/autoscalingInput.component';
+import 'client/app/components/editors/nameEditor/nameEditor.scss';
 
 export class NameEditor extends AutoscalingInput{
     getTextFill(){
         if (this.props.rarity === Rarities.RARE){
             return "url(#silver)";
         }
-        else if(this.props.rarity === Rarities.ULTRA_RARE){
+        else if(_.includes([Rarities.ULTRA_RARE, Rarities.ULTIMATE_RARE], this.props.rarity)){
             return "url(#gold)";
         }
         else{
@@ -17,7 +18,7 @@ export class NameEditor extends AutoscalingInput{
     }
 
     getFilter(){
-        if (_.includes([Rarities.RARE, Rarities.ULTRA_RARE], this.props.rarity)){
+        if (_.includes([Rarities.RARE, Rarities.ULTRA_RARE, Rarities.ULTIMATE_RARE], this.props.rarity)){
             return "url(#rarity)";
         }
         else{
@@ -29,6 +30,7 @@ export class NameEditor extends AutoscalingInput{
         return(
             <svg
                 xmlns="http://www.w3.org/2000/svg"
+                className='card-name--display'
                 >
                 <defs>
                     <linearGradient

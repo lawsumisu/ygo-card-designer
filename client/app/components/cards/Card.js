@@ -47,6 +47,7 @@ class Card extends React.Component{
                     level={this.props.cardState.level} 
                     updateLevel={this.props.updateLevel}
                     monsterType={this.props.cardState.monsterType}
+                    rarity={this.props.cardState.rarity}
                 />
             );
         }
@@ -249,7 +250,9 @@ class Card extends React.Component{
                         />
                         <AttributeEditor 
                             updateAttribute={this.props.updateAttribute}
-                            attribute={this.props.cardState.attribute}/> 
+                            attribute={this.props.cardState.attribute}
+                            rarity={this.props.cardState.rarity}
+                            /> 
                     </div>
                     <div className="ygo-card-center">
                         {this.getCardCenterEditor()}

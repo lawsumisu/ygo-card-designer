@@ -1,8 +1,9 @@
 import React from 'react';
 import level from 'client/app/assets/Level2.png';
+import ultimateRareLevel from 'client/app/assets/Level-UtR.png';
 import rank from 'client/app/assets/Series 9/Rank.png';
 import negativeLevel from 'client/app/assets/NegativeLevel.png';
-import {MonsterTypes} from 'client/app/constants';
+import {MonsterTypes, Rarities} from 'client/app/constants';
 
 /**
  * Component for setting the level of a card.
@@ -47,6 +48,10 @@ class LevelSelector extends React.Component {
         if (this.props.monsterType === MonsterTypes.DARK_SYNCHRO) starImg = negativeLevel;
         else if (this.props.monsterType === MonsterTypes.XYZ) starImg = rank;
 
+        if (this.props.rarity === Rarities.ULTIMATE_RARE){
+            starImg = ultimateRareLevel;
+        }
+
         return (
             <img 
                 src={starImg} 
@@ -55,6 +60,8 @@ class LevelSelector extends React.Component {
                 onClick={(event) => this.props.updateLevel(index)}
                 key={index}/>
         )
+
+        
     }
 
     getStarsAsDisplay(){

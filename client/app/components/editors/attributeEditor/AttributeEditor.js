@@ -2,6 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import {sprintf} from 'sprintf-js'
 import $ from 'jquery';
+import {Rarities} from 'client/app/constants';
+
 import light from 'client/app/assets/LIGHT.png';
 import dark from 'client/app/assets/DARK.png';
 import fire from 'client/app/assets/FIRE.png';
@@ -11,12 +13,16 @@ import divine from 'client/app/assets/DIVINE.png';
 import earth from 'client/app/assets/EARTH.png';
 import spell from 'client/app/assets/SPELL.png';
 import trap from 'client/app/assets/TRAP.png';
+import lightUTR from 'client/app/assets/LIGHT-UtR.png';
 
 import 'client/app/components/editors/attributeEditor/AttributeEditor.scss';
 
 
 const attributeMap = {
-    LIGHT: light,
+    LIGHT: {
+        normal: light,
+        ultimateRare: lightUTR
+    },
     DARK: dark,
     WIND: wind,
     WATER: water,
@@ -37,6 +43,15 @@ class AttributeEditor extends React.Component{
             mainContainerIsHovered: false
         };
         
+    }
+
+    getAttributeImage(attributeName){
+        if (this.props.rarity === Rarities.ULTIMATE_RARE){
+            return attributeMap[attributeName].ultimateRare;
+        }
+        else{
+            return attributeMap[attributeName].normal || attributeMap[attributeName];
+        }
     }
 
     updateAttribute(event, attribute){
@@ -77,7 +92,7 @@ class AttributeEditor extends React.Component{
                                 key={attribute}
                                 style={style}>
                                     <img
-                                        src={attributeMap[attribute]}
+                                        src={this.getAttributeImage(attribute)}
                                         onClick={(event) => this.updateAttribute(event, attribute)}
                                         className="ygo-card-attribute-suggestion"
                                     />
@@ -113,7 +128,7 @@ class AttributeEditor extends React.Component{
                 onMouseLeave={(event) => this.mainContainerHandleOnMouseLeave()}>
                 <img
                     ref={(input) => this.attributeSelection = input} 
-                    src={attributeMap[this.props.attribute]}
+                    src={this.getAttributeImage(this.props.attribute)}
                     className="ygo-card-attribute-selection"/>
                 {this.state.mainContainerIsHovered ? this.getAttributeWheel() : null}
             </div> 

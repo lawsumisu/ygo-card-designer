@@ -76,6 +76,9 @@ class AutoscalingInput extends React.Component{
     
     getInputContainerClassNames(){
         let containerClassNames = ['autoscaling-content'];
+        if (this.state.isHovered && !this.state.isFocused){
+            containerClassNames.push('autoscaling-content--clickable')
+        }
         if (this.state.isFocused || this.state.isHovered){
             containerClassNames.push('autoscaling-content--visible');
         }
