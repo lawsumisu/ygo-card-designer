@@ -42,7 +42,6 @@ export const Rarities = {
     COMMON: 'Common',
     RARE: 'Rare',
     ULTRA_RARE: 'Ultra Rare',
-    ULTIMATE_RARE: 'Ultimate Rare'
 }
 
 export const BrowserTypes = {

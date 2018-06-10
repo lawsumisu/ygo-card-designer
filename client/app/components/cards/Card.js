@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 import $ from 'jquery';
 
-import {MonsterTypes, CardTypes, Rarities} from 'client/app/constants';
+import {MonsterTypes, CardTypes} from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
 import {selectCardType} from 'client/app/redux/selectors';
 
 import {CardDownloader} from 'client/app/components/cards/CardDownloader';
-import {LevelSelector} from 'client/app/components/editors/LevelSelector';
-import {AttributeEditor} from 'client/app/components/editors/attributeEditor/AttributeEditor';
+import {StarEditor} from 'client/app/components/editors/starEditor/starEditor.component';
+import {AttributeEditor} from 'client/app/components/editors/attributeEditor/attributeEditor.component';
 import {ActionTypeEditor} from 'client/app/components/editors/actionTypeEditor/ActionTypeEditor';
 import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
@@ -17,6 +17,7 @@ import {DescriptionEditor} from 'client/app/components/editors/descriptionEditor
 import {PendulumInfoEditor} from 'client/app/components/editors/PendulumInfoEditor';
 import {LinkArrowEditor} from 'client/app/components/editors/LinkArrowEditor';
 import {NameEditor} from 'client/app/components/editors/nameEditor/nameEditor.component';
+import {RarityEditor} from 'client/app/components/editors/rarityEditor/rarityEditor.component';
 
 import 'client/app/components/cards/Card.scss';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
@@ -30,7 +31,7 @@ class Card extends React.Component{
         super(props);
     }
 
-    getCardCenterEditor(){
+    renderCardCenterEditor(){
         if (this.props.cardState.cardType === CardTypes.SPELL || this.props.cardState.cardType === CardTypes.TRAP){
             return(
                 <ActionTypeEditor
@@ -43,7 +44,7 @@ class Card extends React.Component{
         }  
         else if (this.props.cardState.cardType === CardTypes.MONSTER){
             return (
-                <LevelSelector 
+                <StarEditor 
                     level={this.props.cardState.level} 
                     updateLevel={this.props.updateLevel}
                     monsterType={this.props.cardState.monsterType}
@@ -52,6 +53,7 @@ class Card extends React.Component{
             );
         }
     }
+
     getSecondaryBattleStat(){
         if (this.props.cardState.monsterType === MonsterTypes.LINK){
             return (
@@ -226,16 +228,7 @@ class Card extends React.Component{
         return (
             <div className="card--container">
                 <div className="card--settings--container">
-                    <div className="card--rarity-editor">
-                        Rarity: 
-                        <select value={this.props.cardState.rarity} onChange={(event) => this.props.updateRarity(event.target.value)}>
-                           {_.map(Rarities, (rarity) => {
-                                return (
-                                    <option key={rarity} value={rarity}>{rarity}</option>
-                                )
-                            })}
-                        </select>
-                    </div>
+                    <RarityEditor rarity={this.props.cardState.rarity} updateRarity={this.props.updateRarity}/>
                     <CardDownloader cardName={this.props.cardState.name}/>
                 </div>
                 <div className={this.getClassNames()}>
@@ -255,7 +248,7 @@ class Card extends React.Component{
                             /> 
                     </div>
                     <div className="ygo-card-center">
-                        {this.getCardCenterEditor()}
+                        {this.renderCardCenterEditor()}
                         <ImageSelector
                             monsterHybridType={this.props.cardState.monsterHybridType}
                             monsterType={this.props.cardState.monsterType}

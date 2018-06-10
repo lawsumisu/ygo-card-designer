@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
-import {ResizableInput} from 'client/app/components/common/resizableInput/ResizableInput';
+import * as _ from 'lodash';
+import {ResizableInput} from 'client/app/components/common/resizableInput/resizableInput.component';
 import styles from 'client/app/components/common/autoscalingInput/autoscalingInput.scss';
 import classNames from 'classnames'
 
@@ -14,42 +15,30 @@ class AutoscalingInput extends React.Component{
 
         this.state = {
             isFocused: false,
-            isHovered: false,
             scaleX: 1
         }
-
-        // setTimeout(() =>this.updateScale());
     }
 
     componentDidMount(){
         setTimeout(() => this.updateScale(),0);
     }
 
-    updateScale(newText){
-         // Update the full size content DOM element here rather in render() so that we can get the new size of that element immediately
-        // without having to wait for a full rerender.
-        $(this.fullSizeContent).text(this.props.value);
-        const scale =  Math.min($(this.refs.maxSizeContainer).width()/$(this.fullSizeContent).width(), 1) || 1;
-        this.setState({
-            scaleX: scale
-        });
+    updateScale(){
+        const oldText = $(this.fullSizeContent).text();
+        if (this.props.value.length > oldText.length || this.state.scaleX < 1){
+            // Update the full size content DOM element here rather in render() so that we can get the new size of that element immediately
+            // without having to wait for a full rerender.
+            $(this.fullSizeContent).text(this.props.value);
+            const scale =  Math.min($(this.refs.maxSizeContainer).width()/$(this.fullSizeContent).width(), 1) || 1;
+            this.setState({
+                scaleX: scale
+            });
+        }
     }
     
     updateInput(event){
         this.props.onChange(event);
         this.setState({}, this.updateScale); 
-    }
-
-    handleOnMouseEnter(){
-        this.setState({
-            isHovered:true
-        });
-    }
-
-    handleOnMouseLeave(){
-        this.setState({
-            isHovered: false
-        });
     }
 
     handleInputOnFocus(event){
@@ -75,11 +64,9 @@ class AutoscalingInput extends React.Component{
     }
     
     getInputContainerClassNames(){
+        const renderedDisplayText = this.renderDisplayText();
         let containerClassNames = ['autoscaling-content'];
-        if (this.state.isHovered && !this.state.isFocused){
-            containerClassNames.push('autoscaling-content--clickable')
-        }
-        if (this.state.isFocused || this.state.isHovered){
+        if (this.state.isFocused || _.isNil(renderedDisplayText)){
             containerClassNames.push('autoscaling-content--visible');
         }
         return classNames(containerClassNames);
@@ -97,14 +84,14 @@ class AutoscalingInput extends React.Component{
             <div
                 ref="maxSizeContainer"
                 className={classNames(this.props.className, 'autoscaling-input--container')}
-                onMouseEnter={(event) => this.handleOnMouseEnter()}
-                onMouseLeave={(event) => this.handleOnMouseLeave()}>
+            >
                 <span className="full-size-content" ref={(element) => this.fullSizeContent = element}></span>
-                {!this.state.isFocused && !this.state.isHovered ? this.renderDisplayText() : null}
+                <div className="display-text--container">
+                    {!this.state.isFocused ? this.renderDisplayText() : null}
+                </div>  
                 <ResizableInput
                     containerClassName={this.getInputContainerClassNames()}
-                    containerStyle={style}
-                    type="text" 
+                    containerStyle={style} 
                     placeholder={this.props.placeholder}
                     value={this.props.value} 
                     onChange={(event) => this.updateInput(event)}

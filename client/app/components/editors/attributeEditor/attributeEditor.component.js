@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import {sprintf} from 'sprintf-js'
 import $ from 'jquery';
 import {Rarities} from 'client/app/constants';
 
@@ -13,16 +12,12 @@ import divine from 'client/app/assets/DIVINE.png';
 import earth from 'client/app/assets/EARTH.png';
 import spell from 'client/app/assets/SPELL.png';
 import trap from 'client/app/assets/TRAP.png';
-import lightUTR from 'client/app/assets/LIGHT-UtR.png';
 
-import 'client/app/components/editors/attributeEditor/AttributeEditor.scss';
+import 'client/app/components/editors/attributeEditor/attributeEditor.scss';
 
 
 const attributeMap = {
-    LIGHT: {
-        normal: light,
-        ultimateRare: lightUTR
-    },
+    LIGHT: light,
     DARK: dark,
     WIND: wind,
     WATER: water,
@@ -35,23 +30,10 @@ const attributeMap = {
 
 const orderedAttributeList = ['LIGHT', 'WIND', 'WATER', 'DIVINE', 'FIRE', 'EARTH', 'DARK', 'TRAP', 'SPELL'];
 
-class AttributeEditor extends React.Component{
+export class AttributeEditor extends React.Component{
     constructor(props){
         super(props);
-
-        this.state = {
-            mainContainerIsHovered: false
-        };
         
-    }
-
-    getAttributeImage(attributeName){
-        if (this.props.rarity === Rarities.ULTIMATE_RARE){
-            return attributeMap[attributeName].ultimateRare;
-        }
-        else{
-            return attributeMap[attributeName].normal || attributeMap[attributeName];
-        }
     }
 
     updateAttribute(event, attribute){
@@ -63,7 +45,7 @@ class AttributeEditor extends React.Component{
         return start*(1-t) + stop*(t);
     }
 
-    getAttributeWheel(){
+    renderAttributeWheel(){
         const attributeSelectionWidth = $(this.attributeSelection).width();
         const radius = attributeSelectionWidth;
         const attributeSelectionContainerWidth = $(this.attributeSelectionContainer).outerWidth();
@@ -75,14 +57,14 @@ class AttributeEditor extends React.Component{
             left: -(wheelDimension-attributeSelectionContainerWidth)/2 + 'px',
         };
         return (
-            <div style={attributeWheelStyle}>
+            <div style={attributeWheelStyle} className="attribute-wheel--container">
                 {
                     _.map(orderedAttributeList, (attribute, index) => {
                         const t = index/(_.size(attributeMap));
                         const angleStart = 5/6*Math.PI;
                         const theta = this.getInterpolatedValue(angleStart, angleStart+Math.PI*2, t);
                         const style = {
-                            transform: sprintf('rotate(%srad) translate(%spx) rotate(%srad)', theta, radius, -theta),
+                            transform: `rotate(${theta}rad) translate(${radius}px) rotate(${-theta}rad)`,
                             top: radius + 'px',
                             left: radius + 'px',
                         }
@@ -92,7 +74,7 @@ class AttributeEditor extends React.Component{
                                 key={attribute}
                                 style={style}>
                                     <img
-                                        src={this.getAttributeImage(attribute)}
+                                        src={attributeMap[orderedAttributeList[index]]}
                                         onClick={(event) => this.updateAttribute(event, attribute)}
                                         className="ygo-card-attribute-suggestion"
                                     />
@@ -103,37 +85,18 @@ class AttributeEditor extends React.Component{
         )
     }
 
-    /* -------------- +
-     | Event Handlers |
-     + -------------- */
-
-     mainContainerHandleOnMouseEnter(){
-         this.setState({
-             mainContainerIsHovered: true
-         });
-     }
-
-     mainContainerHandleOnMouseLeave(){
-         this.setState({
-             mainContainerIsHovered: false
-         });
-     }
-
     render(){
         return (
             <div 
                 ref={(input) => this.attributeSelectionContainer = input} 
                 className="ygo-card-attribute"
-                onMouseEnter={(event) =>this.mainContainerHandleOnMouseEnter()}
-                onMouseLeave={(event) => this.mainContainerHandleOnMouseLeave()}>
+             >
                 <img
                     ref={(input) => this.attributeSelection = input} 
-                    src={this.getAttributeImage(this.props.attribute)}
+                    src={attributeMap[this.props.attribute]}
                     className="ygo-card-attribute-selection"/>
-                {this.state.mainContainerIsHovered ? this.getAttributeWheel() : null}
+                {this.renderAttributeWheel()}
             </div> 
         )
     }
 }
-
-export {AttributeEditor};

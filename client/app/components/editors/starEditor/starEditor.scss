@@ -1,0 +1,38 @@
+ .star-editor--container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    height: calc(4.2/86 * var(--card-height));
+
+    &.star-editor--rank, &.star-editor--negative{
+      flex-direction: row;
+    }
+
+    &.star-editor--invisible{
+      visibility: hidden;
+    }
+
+    .star--selected, .star--unselected{
+      width: calc(3.8/59 * var(--card-width));
+      height: calc(3.8/59 * var(--card-width));
+      cursor: pointer;
+    }
+    
+    .star--unselected{
+      visibility: hidden;
+    }
+
+    &:hover{
+      .star--selected{
+        opacity: .5;
+      }
+      .star--unselected{
+        opacity: .15;
+        visibility: visible;
+      }
+      .star--hovered{
+        opacity: 1;
+      }
+    }
+  }
