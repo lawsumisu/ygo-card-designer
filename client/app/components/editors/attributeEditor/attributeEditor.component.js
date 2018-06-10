@@ -33,7 +33,11 @@ const orderedAttributeList = ['LIGHT', 'WIND', 'WATER', 'DIVINE', 'FIRE', 'EARTH
 export class AttributeEditor extends React.Component{
     constructor(props){
         super(props);
-        
+    }
+
+    componentDidMount(){
+        // Force a rerender now that the refs have been initialized.
+        this.setState({});
     }
 
     updateAttribute(event, attribute){
@@ -65,8 +69,8 @@ export class AttributeEditor extends React.Component{
                         const theta = this.getInterpolatedValue(angleStart, angleStart+Math.PI*2, t);
                         const style = {
                             transform: `rotate(${theta}rad) translate(${radius}px) rotate(${-theta}rad)`,
-                            top: radius + 'px',
-                            left: radius + 'px',
+                            top: `${radius}px`,
+                            left: `${radius}px`,
                         }
                         return (
                             <div
