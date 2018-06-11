@@ -9,7 +9,7 @@ import {MonsterTypes, CardTypes} from 'client/app/constants';
 import {AutoscalingTextarea} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextarea';
 import {AutoscalingTextareaV2} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextareaV2';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
-import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
+import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/autoscalingInput.component';
 
 import 'client/app/components/editors/descriptionEditor/DescriptionEditor.scss';
 

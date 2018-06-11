@@ -1,7 +1,7 @@
 'use strict';
 
 import {Actions} from 'client/app/redux/actions';
-import {MonsterTypes, MonsterClasses} from 'client/app/constants';
+import {MonsterTypes, MonsterClasses, Rarities} from 'client/app/constants';
 
 let initialCardState = {
     name: 'Blue-Eyes White Dragon',
@@ -26,6 +26,7 @@ let initialCardState = {
     linkMaterials: '3+ LIGHT Normal Dragon-Type monsters',
     atk: 3000,
     def: 2500,
+    rarity: Rarities.ULTRA_RARE
 }
 
 
@@ -121,6 +122,10 @@ function cardReducer(previousState=initialCardState, action){
             return Object.assign({}, previousState, {
                 name: action.name
             });
+        case Actions.UPDATE_RARITY:
+            return Object.assign({}, previousState,{
+                rarity: action.rarity
+            })
         default:
             return previousState;
     }

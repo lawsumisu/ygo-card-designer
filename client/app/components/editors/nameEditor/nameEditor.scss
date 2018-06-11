@@ -1,0 +1,16 @@
+.card-name--display{
+    width: 100%;
+    height: 100%;
+    filter {
+        color-interpolation-filters: srgb;
+    }
+    text{
+        dominant-baseline: text-before-edge;
+    }
+}
+
+.name-editor--container{
+    .autoscaling-content{
+        color: transparent;
+    }
+}

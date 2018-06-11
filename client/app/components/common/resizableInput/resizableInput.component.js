@@ -20,13 +20,6 @@ class ResizableInput extends React.Component{
         this.resizeInput();
     }
 
-    initializeMainContainerReference(element){
-        if (this.props.DOMElementRef){
-            this.props.DOMElementRef(element);
-        }
-        this.mainContainer = element;
-    }
-
     getClassName(){
         var className = "resizable-input-content"
         if (this.props.className){
@@ -50,16 +43,17 @@ class ResizableInput extends React.Component{
     resizeInput(){
         var hiddenContentElement =  $(this.refs.hiddenContent);
         var resizingContentElement = $(this.refs.content);
-
-        hiddenContentElement.show();
-        resizingContentElement.width(hiddenContentElement.width()); 
-        hiddenContentElement.hide();
+        if (resizingContentElement.is(':visible')){
+            // Only want to resize the text box if it is visible, otherwise the width can be erroneously set to 0.
+            hiddenContentElement.show();
+            resizingContentElement.width(hiddenContentElement.width()); 
+            hiddenContentElement.hide();
+        }        
     }
 
     render(){
         return (
             <div
-                ref={(element) => this.initializeMainContainerReference(element)}
                 className={this.getMainContainerClassNames()}
                 style={this.props.containerStyle}
                 >
@@ -74,8 +68,7 @@ class ResizableInput extends React.Component{
                     onChange={(event) => this.updateInput(event)}
                     onKeyDown={this.props.onKeyDown ? (event) => this.props.onKeyDown(event) : (event) => {}}
                     onFocus={this.props.onFocus ? (event) => this.props.onFocus(event) : (event) => {}}
-                    onBlur={this.props.onBlur ? (event) => this.props.onBlur(event) : (event) => {}}/>
-                    
+                    onBlur={this.props.onBlur ? (event) => this.props.onBlur(event) : (event) => {}}/>                 
             </div>     
         )
         
