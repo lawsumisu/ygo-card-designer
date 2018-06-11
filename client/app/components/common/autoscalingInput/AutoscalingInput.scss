@@ -13,11 +13,32 @@
     font: inherit;
 }
 
-.autoscaling-content{
-    @include transform-origin(0% 50%);
+.autoscaling-input--container{
+    .autoscaling-content{
+        display: none;
+        @include transform-origin(0% 50%);
 
-    .resizable-input-content{
-        min-width: 100%;
+        .resizable-input-content{
+            min-width: 100%;
+        }
+        &.autoscaling-content--visible{
+            display: block;
+        }
+    }
+
+    .display-text--container{
+        @include transform-origin(0% 50%);
+    }
+
+    &:hover{
+        .autoscaling-content{
+            display: block;
+        }
+        .display-text--container{
+            display: none;
+        }
     }
 }
+
+
 

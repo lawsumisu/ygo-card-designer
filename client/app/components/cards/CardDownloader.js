@@ -2,10 +2,9 @@ import React from 'react';
 import $ from 'jquery';
 import domtoimage from 'dom-to-image';
 import FileSaver from 'file-saver';
-import {connect} from 'react-redux';
 import {browserIsFirefox}  from 'client/app/utilities';
 
-class CardDownloader extends React.Component{
+export class CardDownloader extends React.Component{
     constructor(props){
         super(props);
 
@@ -58,16 +57,7 @@ class CardDownloader extends React.Component{
 
     render(){
         return (
-            <input type="button" value={this.getLabel()} onClick={(event) => this.handleOnClick(event)}/>
+            <input className="card-downloader--button" type="button" value={this.getLabel()} onClick={(event) => this.handleOnClick(event)}/>
         )
     }
 }
-
-// Hook up Redux store state to props of this Component.
-const mapStateToProps = function(state){
-    return {
-        cardName: state.cardReducer.name
-    }
-}
-
-export default connect(mapStateToProps)(CardDownloader);

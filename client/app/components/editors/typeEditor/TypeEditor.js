@@ -1,8 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import {sprintf} from 'sprintf-js';
 import $ from 'jquery';
-import {ResizableInput} from 'client/app/components/common/resizableInput/ResizableInput';
+import {ResizableInput} from 'client/app/components/common/resizableInput/resizableInput.component';
 import {SelectInput} from 'client/app/components/common/selectInput/SelectInput';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
 import {MonsterTypes, MonsterClasses} from 'client/app/constants';
@@ -128,7 +127,7 @@ class TypeEditor extends React.Component{
 
     render(){
         var style = {
-            transform: sprintf('scale(%s, 1)', this.state.scale)
+            transform: `scale(${this.state.scale}, 1)`
         }
         return (
             <div

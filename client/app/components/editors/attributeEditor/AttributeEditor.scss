@@ -10,31 +10,39 @@
         width: calc(5.1/59 * var(--card-width));
         height: auto;
     }
-    
-    .ygo-card-attribute-suggestion-anchor{
-        z-index: 10;
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        height: calc(5.1/59 * var(--card-width));
-        width: calc(5.1/59 * var(--card-width));
 
-        &:hover{
-            z-index: 11;
+    .attribute-wheel--container{
+        display: none;
+        .ygo-card-attribute-suggestion-anchor{
+            z-index: 10;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            height: calc(5.1/59 * var(--card-width));
+            width: calc(5.1/59 * var(--card-width));
+
+            &:hover{
+                z-index: 11;
+                .ygo-card-attribute-suggestion{
+                    opacity: 1;
+                    width: calc(4.5/59 * var(--card-width));
+                }
+            }
             .ygo-card-attribute-suggestion{
-                opacity: 1;
-                width: calc(4.5/59 * var(--card-width));
+                width: calc(2.8/59 * var(--card-width));
+                height: auto;
+                opacity: .9;   
+                transition: width .2s;
             }
         }
-        .ygo-card-attribute-suggestion{
-            width: calc(2.8/59 * var(--card-width));
-            height: auto;
-            opacity: .9;   
-            transition: width .2s;
-        }
+    }
 
+    &:hover{
+        .attribute-wheel--container{
+            display: block;
+        }
     }
     
 }

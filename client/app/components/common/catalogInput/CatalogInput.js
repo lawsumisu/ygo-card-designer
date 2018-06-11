@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import {ResizableInput} from 'client/app/components/common/resizableInput/ResizableInput';
+import {ResizableInput} from 'client/app/components/common/resizableInput/resizableInput.component';
 import style from 'client/app/components/common/catalogInput/CatalogInput.scss';
 
 

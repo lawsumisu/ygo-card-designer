@@ -7,15 +7,17 @@ import {MonsterTypes, CardTypes} from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
 import {selectCardType} from 'client/app/redux/selectors';
 
-import {LevelSelector} from 'client/app/components/editors/LevelSelector';
-import {AttributeEditor} from 'client/app/components/editors/attributeEditor/AttributeEditor';
+import {CardDownloader} from 'client/app/components/cards/CardDownloader';
+import {StarEditor} from 'client/app/components/editors/starEditor/starEditor.component';
+import {AttributeEditor} from 'client/app/components/editors/attributeEditor/attributeEditor.component';
 import {ActionTypeEditor} from 'client/app/components/editors/actionTypeEditor/ActionTypeEditor';
 import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
 import {DescriptionEditor} from 'client/app/components/editors/descriptionEditor/DescriptionEditor';
 import {PendulumInfoEditor} from 'client/app/components/editors/PendulumInfoEditor';
 import {LinkArrowEditor} from 'client/app/components/editors/LinkArrowEditor';
-import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/AutoscalingInput';
+import {NameEditor} from 'client/app/components/editors/nameEditor/nameEditor.component';
+import {RarityEditor} from 'client/app/components/editors/rarityEditor/rarityEditor.component';
 
 import 'client/app/components/cards/Card.scss';
 import image from 'client/app/assets/BlueEyesWhiteDragon.png';
@@ -29,7 +31,7 @@ class Card extends React.Component{
         super(props);
     }
 
-    getCardCenterEditor(){
+    renderCardCenterEditor(){
         if (this.props.cardState.cardType === CardTypes.SPELL || this.props.cardState.cardType === CardTypes.TRAP){
             return(
                 <ActionTypeEditor
@@ -42,14 +44,16 @@ class Card extends React.Component{
         }  
         else if (this.props.cardState.cardType === CardTypes.MONSTER){
             return (
-                <LevelSelector 
+                <StarEditor 
                     level={this.props.cardState.level} 
                     updateLevel={this.props.updateLevel}
                     monsterType={this.props.cardState.monsterType}
+                    rarity={this.props.cardState.rarity}
                 />
             );
         }
     }
+
     getSecondaryBattleStat(){
         if (this.props.cardState.monsterType === MonsterTypes.LINK){
             return (
@@ -222,30 +226,39 @@ class Card extends React.Component{
 
     render(){
         return (
-            <div className={this.getClassNames()}>
-                {this.renderPendulumCard()}
-                <div className="ygo-card-top">
-                    <AutoscalingInput
-                        className="ygo-card-name"
-                        placeholder="Enter a name here..."
-                        value={this.props.cardState.name} 
-                        onChange={(event) => this.props.updateName(event.target.value)}
-                    />
-                    <AttributeEditor 
-                        updateAttribute={this.props.updateAttribute}
-                        attribute={this.props.cardState.attribute}/> 
+            <div className="card--container">
+                <div className="card--settings--container">
+                    <RarityEditor rarity={this.props.cardState.rarity} updateRarity={this.props.updateRarity}/>
+                    <CardDownloader cardName={this.props.cardState.name}/>
                 </div>
-                <div className="ygo-card-center">
-                    {this.getCardCenterEditor()}
-                    <ImageSelector
-                        monsterHybridType={this.props.cardState.monsterHybridType}
-                        monsterType={this.props.cardState.monsterType}
-                        cardType={this.props.cardState.cardType}
-                    />
-                    <div className="ygo-card-set-id"></div>
-                    {this.renderPendulumContainer()}
+                <div className={this.getClassNames()}>
+                    {this.renderPendulumCard()}
+                    <div className="ygo-card-top">
+                        <NameEditor
+                            className="ygo-card-name"
+                            placeholder="Enter a name here..."
+                            value={this.props.cardState.name} 
+                            onChange={(event) => this.props.updateName(event.target.value)}
+                            rarity={this.props.cardState.rarity}
+                        />
+                        <AttributeEditor 
+                            updateAttribute={this.props.updateAttribute}
+                            attribute={this.props.cardState.attribute}
+                            rarity={this.props.cardState.rarity}
+                            /> 
+                    </div>
+                    <div className="ygo-card-center">
+                        {this.renderCardCenterEditor()}
+                        <ImageSelector
+                            monsterHybridType={this.props.cardState.monsterHybridType}
+                            monsterType={this.props.cardState.monsterType}
+                            cardType={this.props.cardState.cardType}
+                        />
+                        <div className="ygo-card-set-id"></div>
+                        {this.renderPendulumContainer()}
+                    </div>
+                    {this.getCardBottom()}
                 </div>
-                {this.getCardBottom()}
             </div>
         )
     }
@@ -260,7 +273,8 @@ const mapStateToProps = function(state){
 
 const mapDispatchToProps = function(dispatch){
     return {
-        updateName: (name) => dispatch(ActionCreators.monster.updateName(name)),
+        updateName: (name) => dispatch(ActionCreators.general.updateName(name)),
+        updateRarity: (rarity) => dispatch(ActionCreators.general.updateRarity(rarity)),
         updateLevel: (level) => dispatch(ActionCreators.monster.updateLevel(level)),
         updateAttribute: (attribute) => dispatch(ActionCreators.general.updateAttribute(attribute)),
         updateActionTypes: (actionTypes) => dispatch(ActionCreators.action.updateActionTypes(actionTypes)),
