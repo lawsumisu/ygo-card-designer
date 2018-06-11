@@ -2,12 +2,11 @@
 import React from 'react';
 import _ from 'lodash';
 import $ from 'jquery';
-import {sprintf} from 'sprintf-js';
 
 import {MonsterTypes, CardTypes} from 'client/app/constants';
 
-import {AutoscalingTextarea} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextarea';
-import {AutoscalingTextareaV2} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextareaV2';
+import {AutoscalingTextarea} from 'client/app/components/common/autoscalingTextarea/autoscalingTextarea.component';
+import {AutoscalingTextareaV2} from 'client/app/components/common/autoscalingTextarea/autoscalingTextareaV2.component';
 import {CatalogInput} from 'client/app/components/common/catalogInput/CatalogInput';
 import {AutoscalingInput} from 'client/app/components/common/autoscalingInput/autoscalingInput.component';
 
@@ -39,7 +38,7 @@ class DescriptionEditor extends React.Component{
             const monsterMaterialProperties = this.getMonsterMaterialProperties();
             if (this.props.monsterType === MonsterTypes.FUSION || this.props.monsterType === MonsterTypes.SYNCHRO || this.props.monsterType === MonsterTypes.DARK_SYNCHRO){ 
                 const style = {
-                    transform: sprintf('scale(%s, 1)', this.state.materialHorizontalScale)
+                    transform: `scale(${this.state.materialHorizontalScale}, 1)`
                 }
                 return (
                     <div 
