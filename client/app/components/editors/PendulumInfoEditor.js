@@ -1,5 +1,5 @@
 import React from 'react';
-import {AutoscalingTextareaV2} from 'client/app/components/common/autoscalingTextarea/AutoscalingTextareaV2';
+import {AutoscalingTextareaV2} from 'client/app/components/common/autoscalingTextarea/autoscalingTextareaV2.component';
 
 class PendulumInfoEditor extends React.Component{
     constructor(props){
