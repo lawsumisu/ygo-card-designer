@@ -1,6 +1,6 @@
 {
   "name": "ygo-card-maker",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Editor for creating Yugioh cards",
   "homepage": "https://lawsumisu.github.io/ygo-card-designer",
   "main": "index.js",
