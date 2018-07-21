@@ -2,28 +2,30 @@ import React from 'react';
 import Card from 'client/app/components/cards/Card';
 import {getBrowser} from 'client/app/utilities';
 import {BrowserTypes} from 'client/app/constants';
-import styles from 'client/app/App.scss';
+import 'client/app/App.scss';
+import classNames from 'classnames';
 
 class App extends React.Component{
   constructor(props){
     super(props);
   }
 
-  getClassNames(){
-    let classNames = ['app'];
+  getClassNames(): string[]{
+    let output: string[] = ['app'];
     const browserType = getBrowser();
     if (browserType === BrowserTypes.CHROME){
-      classNames.push('browser-type-chrome');
+      output.push('browser-type-chrome');
     }
     else if (browserType === BrowserTypes.FIREFOX){
-      classNames.push('browser-type-firefox');
+      output.push('browser-type-firefox');
     }
-    return classNames.join(' ');
+    return output;
   }
 
   render(){
+    const browserType = getBrowser();
     return (
-      <div className={this.getClassNames()}>
+      <div className={classNames(this.getClassNames())}>
         <Card/>
       </div>
     )
