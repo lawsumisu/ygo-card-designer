@@ -1,7 +1,9 @@
 import {CardTypes, SpellActionTypes, TrapActionTypes, BrowserTypes} from 'client/app/constants';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
-export const getValidActionTypes = function(cardType){
+declare const InstallTrigger: any;
+
+export const getValidActionTypes = function(cardType): SpellActionTypes[] | TrapActionTypes[]{
     switch(cardType){
     case CardTypes.SPELL:
         return [SpellActionTypes.QUICKPLAY, SpellActionTypes.EQUIP, SpellActionTypes.CONTINUOUS, SpellActionTypes.FIELD, SpellActionTypes.RITUAL];
@@ -17,7 +19,7 @@ export const getValidActionTypes = function(cardType){
  * @param {*} cardType 
  * @param {*} actionType 
  */
-export const getIncompatibleActionTypes = function(cardType, actionTypes){
+export const getIncompatibleActionTypes = function(cardType, actionTypes): Set<SpellActionTypes | TrapActionTypes>{
     let incompatibleActionTypes = new Set();
     if (cardType === CardTypes.SPELL){
         _.forEach(actionTypes, (actionType) => {
@@ -35,7 +37,7 @@ export const getIncompatibleActionTypes = function(cardType, actionTypes){
     return incompatibleActionTypes;
 }
 
-export const getBrowser = function(){
+export const getBrowser = function(): BrowserTypes | undefined{
     // Opera 8.0+
     // var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
@@ -44,11 +46,11 @@ export const getBrowser = function(){
         return BrowserTypes.FIREFOX;
     }
     // Chrome 1+
-    else if (!!window.chrome && !!window.chrome.webstore){
+    else if (!!(window as any).chrome && !!(window as any).chrome.webstore){
         return BrowserTypes.CHROME;
     }
 }
 
-export const browserIsFirefox = function(){
+export const browserIsFirefox = function(): boolean{
     return getBrowser() === BrowserTypes.FIREFOX;
 }
