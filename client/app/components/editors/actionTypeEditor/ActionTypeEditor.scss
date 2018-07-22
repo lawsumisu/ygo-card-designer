@@ -1,30 +1,32 @@
+@import '~client/app/stylesheets/_card.scss';
+
 .ygo-card-action-text-container{
-    height: calc(4.2/86 * var(--card-height));
+    height: asCardUnit(42);
     font-family: YGO ITC Stone Serif Small Caps Bold;
     display: flex;
     flex-direction: row-reverse;
-    font-size: 28px;
+    font-size: asCardUnit(28);
     >div{
         display: flex;
         flex-direction: row;
 
-        margin-top: 3.5px;
-        margin-right: 24.5px;
+        margin-top: asCardUnit(3.5);
+        margin-right: asCardUnit(24.5);
         .action-text-container-left-brace{
-            padding-right: 2px;
+            padding-right: asCardUnit(2);
         }
         .action-text-container-right-brace{
-            padding-left: 2px;
+            padding-left: asCardUnit(2);
         }
 
         .action-type-container{
             display: flex;
             flex-direction: row;
-            margin: 3px -1px 0px 9px;
+            margin: asCardUnit(3) asCardUnit(-1) 0 asCardUnit(9);
             .action-type{
                 cursor: pointer;
-                width: calc(3/59 * var(--card-width));
-                height: calc(3/59 * var(--card-width));
+                width: asCardUnit(30);
+                height: asCardUnit(30);
                 opacity: .5;
                 display: none;
 

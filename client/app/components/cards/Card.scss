@@ -1,4 +1,5 @@
 @import '~client/app/stylesheets/_mixins.scss';
+@import '~client/app/stylesheets/_card.scss';
 
 @font-face{
   font-family: YGO Matrix Regular Small Caps;
@@ -60,6 +61,7 @@ font-face{
   --aspect-ratio: 1.46;
   --card-width: 590px;
   --card-height: calc(86/59 * var(--card-width));
+  line-height: asCardUnit(32);
   position: relative;
 
   display: flex;
@@ -151,12 +153,12 @@ font-face{
 
 .card--link-arrow--container{
   position: absolute;
-  top: calc(12/86 * var(--card-height));
+  top: asCardUnit(120);
   left: 0;
   right: 0;
   margin: auto;
-  width: calc(52.3/59 * var(--card-width));
-  height: calc(52.3/59 * var(--card-width));
+  width: asCardUnit(523);
+  height: asCardUnit(523);
   div{
     pointer-events: initial;
     cursor: pointer;
@@ -167,9 +169,9 @@ font-face{
     }
   }
   .card--link-arrow-corner{
-    width: calc(6.8/59 * var(--card-width));
-    height: calc(6.8/59 * var(--card-width));
-    margin: calc(.55/59 * var(--card-width));
+    width: asCardUnit(68);
+    height: asCardUnit(68);
+    margin: asCardUnit(5.5);
     background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrow2.png");
     background-size: cover;
     &:hover{
@@ -184,8 +186,8 @@ font-face{
     margin: auto;
     &.card--link-arrow-middle--vertical{
       background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowVertical.png");
-      width: calc(4.02/59 * var(--card-width));
-      height: calc(13/86 * var(--card-height));
+      width: asCardUnit(40.2);
+      height: asCardUnit(130);
       bottom: 0;
       top: 0;
       &:hover{
@@ -197,8 +199,8 @@ font-face{
     }
     &.card--link-arrow-middle--horizontal{
       background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrow2.png");
-      height: calc(4.02/59 * var(--card-width));
-      width: calc(13/86 * var(--card-height));
+      height: asCardUnit(40.2);
+      width: asCardUnit(130);
       left: 0;
       right: 0;
       &:hover{
@@ -212,38 +214,39 @@ font-face{
 }
 
 .ygo-card-top, .ygo-card-bottom{
-  width: calc(53/59 * var(--card-width));
+  width: asCardUnit(530);
   box-sizing: border-box;
 }
 
 .ygo-card-top{
-  margin-top: calc(2.9/86 * var(--card-height));
-  height: calc(7.3/86 * var(--card-height));
+  margin-top: asCardUnit(29);
+  height: asCardUnit(73);
   display: flex;
 
   .ygo-card-name{
-    font-size: 67px;
+    font-size: asCardUnit(67);
     font-family: YGO Matrix Regular Small Caps;
-    padding-left: 12px;
-    // flex: 1 0;
-    width: calc(44.75/59 * var(--card-width));
+    padding-left: asCardUnit(12);
+    width: asCardUnit(447.5);
   }
 
 }
 
 .ygo-card-center{
-  width: calc(51.7/59 * var(--card-width));
-  height: calc(53.5/86 * var(--card-height));
+  // width: calc(51.7/59 * var(--card-width));
+  // height: calc(53.5/86 * var(--card-height));
+  width: asCardUnit(517);
+  height: asCardUnit(535);
   position: relative;
   
   .ygo-card-image{
     line-height: 0;
-    padding: 13px 34px 0px 34px;
-    height: calc(44.85/59 * var(--card-width));
+    padding: asCardUnit(13) asCardUnit(34) 0 asCardUnit(34);
+    height: asCardUnit(448.5);
     &.ygo-card-image-pendulum{
-      padding: 4px 0px 0px 0px;
+      padding: asCardUnit(4) 0 0 0;
       box-sizing: border-box;
-      height: calc(49.8/59 * var(--card-width));
+      height: asCardUnit(498)
     }
     #ygo-card-image-file-loader{
       display: none;
@@ -259,7 +262,7 @@ font-face{
   }
 
   .ygo-card-set-id{
-    height: calc(3.8/59 * var(--card-width));
+    height: asCardUnit(38);
   }
 
   .ygo-card-pendulum-container{
@@ -273,11 +276,11 @@ font-face{
     .ygo-card-pendulum-scale{
       flex-shrink: 0;
       width: 9%;
-      padding: 35px 7px 0px 7px;
+      padding: asCardUnit(35) asCardUnit(7) 0px asCardUnit(7);
       text-align: center;
       box-sizing: border-box;
       >input{
-        font-size: 32px;
+        font-size: asCardUnit(32);
         text-align: center;
         font-family: YGO Matrix Bold Fractions;
         width: 100%;
@@ -285,10 +288,10 @@ font-face{
     }
     .ygo-card-pendulum-effect{
       font-family: YGO Matrix Book;
-      font-size: 15px;
-      line-height: 18px;
+      font-size: asCardUnit(15);
+      line-height: asCardUnit(18);
       box-sizing: border-box;
-      padding: 5px 4px 0px 5px;
+      padding: asCardUnit(5) asCardUnit(4) 0px asCardUnit(5);
       width: 82%;
     }
   }
@@ -303,30 +306,31 @@ font-face{
 
 .ygo-card-bottom{
   height: calc(18/86 * var(--card-height));
+  height: asCardUnit(180);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: calc(1/59 * var(--card-width));
+  padding: asCardUnit(10);
   z-index: 30;
 
   .type--container{
-    margin-top: 2px;
-    margin-bottom: -4px;
+    margin-top: asCardUnit(2);
+    margin-bottom: asCardUnit(-4);
   }
 
   .ygo-card-type{
     width: fit-content;
     transform-origin: 0% 50%;
-    line-height:1.5;
+    line-height: 1.5;
     display: flex;
     flex-direction: row;
-    font-size: 21px;
+    font-size: asCardUnit(21);
     font-family: YGO ITC Stone Serif Small Caps Bold;
-    margin-top: calc(-1/59 * var(--card-width)); //Need to push card type up to offset the way this font pushes the text down.
-    height: calc(3.15/86 * var(--card-height));
+    margin-top: asCardUnit(-10); //Need to push card type up to offset the way this font pushes the text down.
+    height: asCardUnit(31.8);
 
     .catalog-input{
-      width: 160px;
+      width: asCardUnit(160);
     }
 
     &:hover{
@@ -339,7 +343,7 @@ font-face{
     }
 
     .type--brace{
-      margin-top: -1.5px;
+      margin-top: asCardUnit(-1.5);
     }
     
     .ygo-card-type-tribe{
@@ -359,7 +363,7 @@ font-face{
     .ygo-card-type-input{
       padding: 0px;
       margin: 0px;
-      width: 200px;
+      width: asCardUnit(200);
       flex: 1 0;
       box-sizing: border-box;
     }
@@ -399,20 +403,20 @@ font-face{
 
   .ygo-card-battle-points{
     font-family: YGO Matrix Bold Small Caps;
-    width: calc(22/59 * var(--card-width));
+    width: asCardUnit(220);
     align-self: flex-end;
     display: flex;
-    font-size: 25px;
-    height: calc(2.7/86 * var(--card-height));;
-    padding-top: 1px;
+    font-size: asCardUnit(25);
+    height: asCardUnit(27);
+    padding-top: asCardUnit(1);
     box-sizing: border-box;
 
     .battle-point-slash{
-      padding-left: 5px;
+      padding-left: asCardUnit(5);
     }
 
     .ygo-card-battle-point-spacer{
-      padding: 0px 5px;
+      padding: 0px asCardUnit(5);
     }
 
     .card--battle-points--link-rating{
@@ -420,16 +424,16 @@ font-face{
       margin-top: -1px;
       display: flex;
       font-family: Eurostile Candy W01 Bold;
-      font-size:22px;
+      font-size: asCardUnit(22);
       .card--battle-points--link-rating-value{
-        width: 25px;
+        width: asCardUnit(25);
         text-align: end;
       }
     }
 
     div{
       input{
-        width: 50px;
+        width: asCardUnit(50);
         font-family: inherit;
         font-size: inherit;
         text-align: right;

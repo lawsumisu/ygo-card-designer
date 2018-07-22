@@ -1,5 +1,7 @@
+@import '~client/app/stylesheets/_card.scss';
+
 .ygo-card-attribute{
-    padding: 6px;
+    padding: asCardUnit(6);
     flex: 0 0;
     display: flex;
     align-items: center;
@@ -7,7 +9,7 @@
     cursor: pointer;
 
     .ygo-card-attribute-selection{
-        width: calc(5.1/59 * var(--card-width));
+        width: asCardUnit(51);
         height: auto;
     }
 
@@ -20,18 +22,18 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            height: calc(5.1/59 * var(--card-width));
-            width: calc(5.1/59 * var(--card-width));
+            height: asCardUnit(51);
+            width: asCardUnit(51);
 
             &:hover{
                 z-index: 11;
                 .ygo-card-attribute-suggestion{
                     opacity: 1;
-                    width: calc(4.5/59 * var(--card-width));
+                    width: asCardUnit(45);
                 }
             }
             .ygo-card-attribute-suggestion{
-                width: calc(2.8/59 * var(--card-width));
+                width: asCardUnit(28);
                 height: auto;
                 opacity: .9;   
                 transition: width .2s;

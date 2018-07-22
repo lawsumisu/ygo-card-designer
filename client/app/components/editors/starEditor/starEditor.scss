@@ -1,9 +1,11 @@
- .star-editor--container{
+@import '~client/app/stylesheets/_card.scss';
+
+.star-editor--container{
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-    height: calc(4.2/86 * var(--card-height));
+    height: asCardUnit(42);
 
     &.star-editor--rank, &.star-editor--negative{
       flex-direction: row;
@@ -14,8 +16,8 @@
     }
 
     .star--selected, .star--unselected{
-      width: calc(3.8/59 * var(--card-width));
-      height: calc(3.8/59 * var(--card-width));
+      width: asCardUnit(38);
+      height: asCardUnit(38);
       cursor: pointer;
     }
     
