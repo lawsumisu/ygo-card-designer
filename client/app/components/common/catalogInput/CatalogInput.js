@@ -162,8 +162,9 @@ class CatalogInput extends React.Component{
 
     handleKeyPress(event){
         //If pressing enter when there is content in this input, add it.
-        if (event.key === 'Enter'){
-            var input = event.target.value;
+        const newInput = event.target.value;
+        if (event.key === 'Enter' && newInput.length > 0){
+            var input = newInput
             this.setState({
                 input: '',
             });

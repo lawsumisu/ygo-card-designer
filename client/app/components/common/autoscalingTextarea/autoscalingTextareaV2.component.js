@@ -1,8 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
-import {sprintf} from 'sprintf-js';
-import 'client/app/components/common/autoscalingTextarea/AutoscalingTextarea.scss';
+import 'client/app/components/common/autoscalingTextarea/autoscalingTextarea.scss';
 
 
 /**
@@ -199,7 +198,7 @@ class AutoscalingTextareaV2 extends React.Component{
 
         const updatedScale = Math.min(initialWidth/currentWidth,1);
         autoscalingContentElement.width(currentWidth);
-        autoscalingContentElement.css('transform', sprintf('scale(%s, 1)', updatedScale));
+        autoscalingContentElement.css('transform', `scale(${updatedScale},1)`);
 
         // Cache max height to allow shortcutting this logic when small changes are made.
         if (maxHeight !== this.state.cachedMaxHeight){

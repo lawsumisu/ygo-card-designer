@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
-import styles from 'client/app/components/common/autoscalingTextarea/AutoscalingTextarea.scss';
+import styles from 'client/app/components/common/autoscalingTextarea/autoscalingTextarea.scss';
 
 
 /**

@@ -13,7 +13,7 @@ import {AttributeEditor} from 'client/app/components/editors/attributeEditor/att
 import {ActionTypeEditor} from 'client/app/components/editors/actionTypeEditor/ActionTypeEditor';
 import {ImageSelector} from 'client/app/components/editors/ImageSelector';
 import {TypeEditor} from 'client/app/components/editors/typeEditor/TypeEditor';
-import {DescriptionEditor} from 'client/app/components/editors/descriptionEditor/DescriptionEditor';
+import {DescriptionEditor} from 'client/app/components/editors/descriptionEditor/descriptionEditor.component';
 import {PendulumInfoEditor} from 'client/app/components/editors/PendulumInfoEditor';
 import {LinkArrowEditor} from 'client/app/components/editors/LinkArrowEditor';
 import {NameEditor} from 'client/app/components/editors/nameEditor/nameEditor.component';
