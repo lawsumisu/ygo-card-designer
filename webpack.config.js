@@ -24,7 +24,7 @@ module.exports = removeEmpty({
         // bundle the client for hot reloading
         // only- means to only hot reload for successful updates
 
-        './main.js'
+        './main.tsx'
         // the entry point of our app
     ]),
     output: ifProduction(
@@ -71,6 +71,21 @@ module.exports = removeEmpty({
                 use: ['babel-loader'],
             },
             {
+                test: /\.tsx?$/,
+                include: CLIENT_DIR,
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    },
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            configFile: path.resolve(__dirname, 'tsconfig.json')
+                        }
+                    }
+                ]
+            },
+            {
                 test: /\.(png|svg|jpg|gif|ttf|otf|ico)$/,
                 use: 'url-loader'
             }
@@ -81,7 +96,7 @@ module.exports = removeEmpty({
         alias: {
             client: path.join(__dirname, 'client')
         },
-        extensions: ['.js']
+        extensions: ['.js', '.ts', '.tsx']
     },
 
     plugins: removeEmpty([

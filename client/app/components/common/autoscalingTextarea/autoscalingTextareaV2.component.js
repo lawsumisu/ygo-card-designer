@@ -198,7 +198,7 @@ class AutoscalingTextareaV2 extends React.Component{
 
         const updatedScale = Math.min(initialWidth/currentWidth,1);
         autoscalingContentElement.width(currentWidth);
-        autoscalingContentElement.css('transform', `scale(${updateScale},1)`);
+        autoscalingContentElement.css('transform', `scale(${updatedScale},1)`);
 
         // Cache max height to allow shortcutting this logic when small changes are made.
         if (maxHeight !== this.state.cachedMaxHeight){

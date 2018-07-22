@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es6",
+        "strictNullChecks": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "jsx": "preserve",
+        "lib": [
+            "dom",
+            "es6"
+        ]
+    },
+    "include": [
+        "client/**/*"
+    ]
+}
