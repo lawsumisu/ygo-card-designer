@@ -26,7 +26,7 @@ class AutoscalingTextareaV2 extends React.Component{
     }
 
     getMinFontSize(){
-        return this.props.minFontSize || 1;
+        return (this.props.minFontSize || 0) * parseFloat($(this.mainContainer).css('font-size'));
     }
 
     getFontSizeFullContentElementFontSize(){
@@ -59,15 +59,11 @@ class AutoscalingTextareaV2 extends React.Component{
         }
 
         // Initialize fontSize-related variables
-        let minFontSize = this.getMinFontSize();
-        let maxFontSize = this.props.maxFontSize || 40;
-        const currentFontSizeStr = autoscalingContentElement.css('font-size');
-        let currentFontSize = parseFloat(currentFontSizeStr);
-        const unit = currentFontSizeStr.replace(currentFontSize, '');
-        const lineHeightStr = $(this.mainContainer).css('line-height');
-        const lineHeight = parseFloat(lineHeightStr);
-        const lineHeightUnit = lineHeightStr.replace(lineHeight, '');
+        let currentFontSize = parseFloat(autoscalingContentElement.css('font-size'));
+        const lineHeight = parseFloat($(this.mainContainer).css('line-height'));
         const originalFontSize = parseFloat($(this.mainContainer).css('font-size'));
+        let minFontSize = this.getMinFontSize();
+        let maxFontSize = this.props.maxFontSize * originalFontSize;
 
         // Initialize DOM size-related variables
         const maxHeight = autoscalingContentElement.height();
@@ -75,25 +71,24 @@ class AutoscalingTextareaV2 extends React.Component{
         let contentHeight = fontSizeFullContentElement.height();
         // console.log('Max Height:', maxHeight, 'Current Height', contentHeight, 'Font Size:', currentFontSize);
 
-        let lastFittingFontSize;   
+        let lastFittingFontSize = 0;   
         let c = 0;   
         while(true){
             // c++;
             if (contentHeight > maxHeight){
-                if (currentFontSize <= minFontSize || lastFittingFontSize === currentFontSize -1){
-                    // End loop if reached minimum font size or if it is 1 away from the previous best fit. 
-                    if (!lastFittingFontSize){
+                if (currentFontSize / minFontSize <= 1.01 || currentFontSize - lastFittingFontSize <= 1){
+                    // End loop if reached minimum font size or if it is at most 1px away from the previous best fit. 
+                    if (lastFittingFontSize === 0){
                         lastFittingFontSize = minFontSize;
                     }
                     break;
                 }
                 maxFontSize = currentFontSize;
                 // Text is too big to fit in textarea, so need to shrink it.
-                const newFontSize = Math.floor((minFontSize + currentFontSize) / 2);
+                const newFontSize = (minFontSize + currentFontSize) / 2;
                 var lineHeightScale = newFontSize / originalFontSize;
                 currentFontSize = newFontSize;
-                fontSizeFullContentElement.css('font-size', currentFontSize + unit);
-                fontSizeFullContentElement.css('line-height', (lineHeight*lineHeightScale) + lineHeightUnit);
+                this.updateElementFont(fontSizeFullContentElement, lineHeightScale, lineHeightScale*lineHeight/originalFontSize);
                 contentHeight = fontSizeFullContentElement.height();
             }
             else if (contentHeight <= maxHeight){
@@ -103,20 +98,19 @@ class AutoscalingTextareaV2 extends React.Component{
                 }
                 lastFittingFontSize = currentFontSize;
                 minFontSize = currentFontSize;
+          
                 // Text is too small to fit in textarea, so need to grow it.
-                const newFontSizeBS = Math.ceil((maxFontSize + currentFontSize) / 2); //new potential font size from binary search
+                const newFontSizeBS = (maxFontSize + currentFontSize) / 2; //new potential font size from binary search
                 const newFontSizeLS = Math.min(maxFontSize, currentFontSize + 1); // New potential font size from linear search (useful when increment of 1 causes overflow)
                 const lineHeightScaleBS = newFontSizeBS / originalFontSize;
                 const lineHeightScaleLS = newFontSizeLS / originalFontSize;
                 // Try the default binary search.
-                fontSizeFullContentElement.css('font-size', newFontSizeBS + unit);
-                fontSizeFullContentElement.css('line-height', (lineHeight*lineHeightScaleBS) + lineHeightUnit);
+                this.updateElementFont(fontSizeFullContentElement, lineHeightScaleBS, lineHeightScaleBS*lineHeight/originalFontSize);
                 contentHeight = fontSizeFullContentElement.height();
                 currentFontSize = newFontSizeBS;
                 
                 // Now try the linear search.
-                fontSizeFullContentElement.css('font-size', newFontSizeLS + unit); 
-                fontSizeFullContentElement.css('line-height', (lineHeight*lineHeightScaleLS) + lineHeightUnit);
+                this.updateElementFont(fontSizeFullContentElement, lineHeightScaleLS, lineHeightScaleLS*lineHeight/originalFontSize);
                 if (fontSizeFullContentElement.height() > maxHeight){
                     // If the linear search resulted in overflow, then use this new font size, as it is closer to the goal font size.
                     contentHeight = fontSizeFullContentElement.height();
@@ -125,20 +119,19 @@ class AutoscalingTextareaV2 extends React.Component{
             }
         }
         fontSizeFullContentElement.hide();
-        var lineHeightScale = lastFittingFontSize / originalFontSize;
-        fontSizeFullContentElement.css('font-size', lastFittingFontSize + unit);
-        fontSizeFullContentElement.css('line-height', (lineHeight*(lineHeightScale)) + lineHeightUnit);
-        fontScalingFullContentElement.css('font-size', lastFittingFontSize + unit);
-        fontScalingFullContentElement.css('line-height', (lineHeight*(lineHeightScale)) + lineHeightUnit);
-        autoscalingContentElement.css('font-size', lastFittingFontSize + unit);
-        autoscalingContentElement.css('line-height', (lineHeight*lineHeightScale) + lineHeightUnit);
+        const finalLineHeightScale = lastFittingFontSize / originalFontSize;
+        _.forEach([fontScalingFullContentElement, fontSizeFullContentElement, autoscalingContentElement], (element) => {
+            this.updateElementFont(element, lastFittingFontSize/originalFontSize, finalLineHeightScale*lineHeight/originalFontSize);
+        })
     }
 
 
     updateFontSpacing(){
         let autoscalingContentElement = $(this.refs.autoscalingContent);
         let fullContentElement = $(this.refs.fullContent);
-        if(_.isEmpty(autoscalingContentElement) || _.isEmpty(fullContentElement) || this.getFontSizeFullContentElementFontSize() !== this.getMinFontSize()){
+        console.log(Math.abs(this.getFontSizeFullContentElementFontSize() / this.getMinFontSize()));
+        if(_.isEmpty(autoscalingContentElement) || _.isEmpty(fullContentElement) || 
+        Math.abs(this.getFontSizeFullContentElementFontSize() / this.getMinFontSize()) > 1.01){
             if (!_.isEmpty(autoscalingContentElement)){
                 autoscalingContentElement.css('width', '');
                 autoscalingContentElement.css('transform', '');
@@ -156,10 +149,11 @@ class AutoscalingTextareaV2 extends React.Component{
         let minWidth = initialWidth;
         let maxWidth = initialWidth * Math.floor(maxHeight/lineHeight);
 
-        if (this.state.cachedMaxHeight === maxHeight && currentHeight < maxHeight){
-            fullContentElement.hide();
-            return;
-        }
+        // if (this.state.cachedMaxHeight === maxHeight && currentHeight < maxHeight){
+        //     console.log('cached', this.state.cachedMaxHeight, currentHeight);
+        //     fullContentElement.hide();
+        //     return;
+        // }
 
         while (currentHeight !== maxHeight && c < 30){
             if (currentHeight < maxHeight){
@@ -206,7 +200,10 @@ class AutoscalingTextareaV2 extends React.Component{
                 cachedMaxHeight: maxHeight,
             });
         }
+    }
 
+    updateElementFont(element, fontSize, lineHeight){
+        element.css('font-size', `${fontSize}em`).css('line-height', `${lineHeight}em`);      
     }
 
     render(){

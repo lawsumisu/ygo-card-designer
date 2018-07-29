@@ -274,8 +274,8 @@ class DescriptionEditor extends React.Component{
                         <input type="button" className={this.getEditButtonClassNames('lore')} value="L" onClick={(event) => this.handleEditButtonOnClick('lore')}/>    
                     </div>
                    <AutoscalingTextareaV2
-                        maxFontSize={15}
-                        minFontSize={12}
+                        maxFontSize={1}
+                        minFontSize={.8}
                         className={this.getDescriptionTextInputClassNames('effect')}
                         placeholder="Enter effect here..."
                         value={this.props.effect} 
@@ -284,8 +284,8 @@ class DescriptionEditor extends React.Component{
                         onBlur={(event) => this.updateFocus('effect', false)}
                     />
                     <AutoscalingTextareaV2
-                        maxFontSize={15}
-                        minFontSize={12}
+                        maxFontSize={1}
+                        minFontSize={.8}
                         className={this.getDescriptionTextInputClassNames('lore')}
                         placeholder="Enter lore here..."
                         value={this.props.lore} 

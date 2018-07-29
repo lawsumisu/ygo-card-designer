@@ -52,6 +52,7 @@
         flex-direction: column;
         flex-grow: 1;
         position: relative;
+        // font-size: asCardUnit(16);
         &:hover{
           .description--text--edit-btn-effect, .description--text--edit-btn-lore{
             display: block;
