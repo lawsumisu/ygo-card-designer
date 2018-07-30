@@ -49,4 +49,14 @@ export enum BrowserTypes {
     CHROME = 'CHROME'
 }
 
+export enum Attribute {
+    LIGHT = 'LIGHT',
+    DARK = 'DARK',
+    WIND = 'WIND',
+    WATER = 'WATER',
+    EARTH = 'EARTH',
+    FIRE = 'FIRE',
+    DIVINE = 'DIVINE'
+}
+
 export const AllActionTypes = Object.assign({}, SpellActionTypes, TrapActionTypes);
