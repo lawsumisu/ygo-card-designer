@@ -2,6 +2,8 @@
 
 import {Actions} from 'client/app/redux/actions';
 import {MonsterTypes, MonsterClasses, Rarities} from 'client/app/constants';
+import { cardReducer as cardReducer2 } from 'client/app/redux/card/reducers';
+import {combineReducers} from 'redux';
 
 let initialCardState = {
     name: 'Blue-Eyes White Dragon',
@@ -130,5 +132,9 @@ function cardReducer(previousState=initialCardState, action){
             return previousState;
     }
 }
+
+export const entityReducer = combineReducers({
+    cards: cardReducer2,
+});
 
 export {cardReducer};
