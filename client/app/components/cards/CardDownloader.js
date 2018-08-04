@@ -46,6 +46,7 @@ export class CardDownloader extends React.Component {
   }
 
   download(){
+    console.log(this.props.element);
     //There is a regression in Firefox that affects persisting the embedded imgs as part of the file: https://bugzilla.mozilla.org/show_bug.cgi?id=1409992
     //It's apparently fixed in FF 58, which is currently in development. In the meantime, workaround is to transfer img src as background-image.
     if (browserIsFirefox()) {
@@ -57,7 +58,7 @@ export class CardDownloader extends React.Component {
       });
     }
 
-    return domtoimage.toBlob(this.props.element, {type: "image/png", style: {display: 'block'}}).then((blob) => {
+    return domtoimage.toBlob(this.props.element).then((blob) => {
       FileSaver.saveAs(blob, this.getCardFileName());
       //Need to restore css if it were modified
       if (browserIsFirefox()) {

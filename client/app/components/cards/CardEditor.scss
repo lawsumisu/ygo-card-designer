@@ -237,6 +237,9 @@ font-face{
     font-family: YGO Matrix Regular Small Caps;
     padding-left: asCardUnit(12);
     width: asCardUnit(447.5);
+    text {
+      font-size: asCardUnit(67.5);
+    }
   }
 
 }

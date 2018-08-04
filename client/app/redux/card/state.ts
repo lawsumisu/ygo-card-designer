@@ -23,8 +23,8 @@ export interface CardFields extends Field {
   rightPendulumScale: number;
   linkArrows: [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean];
   linkMaterials: string;
-  atk: number | '?',
-  def: number | '?',
+  atk: string,
+  def: string,
   rarity: Rarities
 }
 
@@ -54,8 +54,8 @@ export const initialCard: CardFields = {
   rightPendulumScale: 13,
   linkArrows: [false, false, false, false, false, false, false, false],
   linkMaterials: '3+ LIGHT Normal Dragon-Type monsters',
-  atk: 3000,
-  def: 2500,
+  atk: '3000',
+  def: '2500',
   rarity: Rarities.ULTRA_RARE
 };
 
