@@ -56,6 +56,15 @@ font-face{
   src: url('~client/app/assets/Fonts/Eurostile Candy W01 Bold.ttf');
 }
 
+.card--full-size{
+  display: none;
+  &.foo {
+    .ygo-card-content{
+      --card-width: 590px !important;
+    }
+  }
+}
+
 .ygo-card-content{
   --card-diagonal: 1042.93px;
   --aspect-ratio: 1.46;

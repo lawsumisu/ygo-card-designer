@@ -56,7 +56,9 @@ export enum Attribute {
     WATER = 'WATER',
     EARTH = 'EARTH',
     FIRE = 'FIRE',
-    DIVINE = 'DIVINE'
+    DIVINE = 'DIVINE',
+    SPELL = 'SPELL',
+    TRAP = 'TRAP'
 }
 
 export const AllActionTypes = Object.assign({}, SpellActionTypes, TrapActionTypes);
