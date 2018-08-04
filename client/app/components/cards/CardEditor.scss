@@ -56,15 +56,6 @@ font-face{
   src: url('~client/app/assets/Fonts/Eurostile Candy W01 Bold.ttf');
 }
 
-.card--full-size{
-  display: none;
-  &.foo {
-    .ygo-card-content{
-      --card-width: 590px !important;
-    }
-  }
-}
-
 .ygo-card-content{
   --card-diagonal: 1042.93px;
   --aspect-ratio: 1.46;
@@ -245,8 +236,6 @@ font-face{
 }
 
 .ygo-card-center{
-  // width: calc(51.7/59 * var(--card-width));
-  // height: calc(53.5/86 * var(--card-height));
   width: asCardUnit(517);
   height: asCardUnit(535);
   position: relative;
@@ -373,8 +362,8 @@ font-face{
       display: none;
     }
     .ygo-card-type-input{
-      padding: 0px;
-      margin: 0px;
+      padding: 0;
+      margin: 0;
       width: asCardUnit(200);
       flex: 1 0;
       box-sizing: border-box;
@@ -449,7 +438,7 @@ font-face{
         font-family: inherit;
         font-size: inherit;
         text-align: right;
-        padding: 0px;
+        padding: 0;
       }
     }
   }

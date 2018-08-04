@@ -26,6 +26,7 @@ import { CardFields } from "client/app/redux/card/state";
 import { Dispatch } from "redux";
 import { AppState } from "client/app/redux/store";
 import { updateCard } from "client/app/redux/card/actions";
+import CardDisplay from 'client/app/components/cards/cardDisplay/cardDisplay.component';
 
 
 interface CardEditorProps {
@@ -363,6 +364,7 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
           </div>
           {this.getCardBottom()}
         </div>
+        <CardDisplay id={this.props.id}/>
       </div>
     )
   }
