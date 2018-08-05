@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as _ from 'lodash';
+import * as $ from 'jquery';
 
 import { MonsterTypes, CardTypes, SpellActionTypes, Attribute, MonsterClasses, Rarities } from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
@@ -19,9 +20,9 @@ import {NameEditor} from 'client/app/components/editors/nameEditor/nameEditor.co
 import {RarityEditor} from 'client/app/components/editors/rarityEditor/rarityEditor.component';
 
 import 'client/app/components/cards/CardEditor.scss';
-// import pendulumBaseSmall from 'client/app/assets/Series 10/Pendulum/PendulumBaseSmall.png';
-// import pendulumEffectSmall from 'client/app/assets/Series 10/Pendulum/PendulumEffectSmall.png';
-// import normalArtBox from 'client/app/assets/Series 10/ArtBox.png';
+import pendulumBaseSmall from 'client/app/assets/Series 10/Pendulum/PendulumBaseSmall.png';
+import pendulumEffectSmall from 'client/app/assets/Series 10/Pendulum/PendulumEffectSmall.png';
+import normalArtBox from 'client/app/assets/Series 10/ArtBox.png';
 import { CardFields } from "client/app/redux/card/state";
 import { Dispatch } from "redux";
 import { AppState } from "client/app/redux/store";
@@ -240,15 +241,15 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
       && this.props.fields.monsterType !== MonsterTypes.LINK) {
       return (
         <div className="ygo-card-pendulum">
-          {/*<img src={pendulumEffectSmall}/>*/}
-          {/*<img src={pendulumBaseSmall}/>*/}
+          <img src={pendulumEffectSmall}/>
+          <img src={pendulumBaseSmall}/>
         </div>
       );
     }
     else if (this.props.fields.monsterType === MonsterTypes.LINK && this.getCardType() === CardTypes.MONSTER) {
       return (
         <div className="card--link-art--container">
-          {/*<img className="card--normal-art-box"/>*/}
+          <img className="card--normal-art-box" src={normalArtBox}/>
           <LinkArrowEditor
             updateLinkArrow={this.props.updateLinkArrow}
             linkArrows={this.props.fields.linkArrows}
@@ -260,7 +261,7 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
     else {
       return (
         <div className="card--normal-art--container">
-          {/*<img className="card--normal-art-box"/>*/}
+          <img className="card--normal-art-box" src={normalArtBox}/>
         </div>
       );
     }
@@ -322,12 +323,12 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
 
   render() {
     return (
-      <div className="card--container">
+      <div className="card--container" ref={(element) => this.element = element}>
         <div className="card--settings--container">
           <RarityEditor rarity={this.props.fields.rarity} updateRarity={this.props.updateRarity}/>
           <CardDownloader
             cardName={this.props.fields.name}
-            element={this.element}
+            element={() => !_.isNil(this.element) ? this.element.querySelector('.card--full-size') : null}
             preprocessor={(done) => {
               this.setState({isFullSize: true}, done)
             }}
@@ -336,7 +337,7 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
             }}
           />
         </div>
-        <div className={this.getClassNames()} ref={(element) => this.element = element}>
+        <div className={this.getClassNames()}>
           {this.renderPendulumCard()}
           <div className="ygo-card-top">
             <NameEditor

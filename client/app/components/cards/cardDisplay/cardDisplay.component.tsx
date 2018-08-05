@@ -13,6 +13,7 @@ import 'client/app/components/cards/cardDisplay/cardDisplay.scss';
  */
 
 interface CardDisplayProps {
+  className?: string;
   id: string;
 }
 
@@ -45,7 +46,7 @@ class CardDisplay extends React.Component<CardDisplayProps & CardDisplayStateMap
 
   private getClassName(): string {
     const type = this.getCardType();
-    const classes = ['ygo-card-content'];
+    const classes = ['ygo-card-content', 'ygo-card-display', this.props.className];
     if (type === CardTypes.SPELL) {
       classes.push('spell-card');
     }
