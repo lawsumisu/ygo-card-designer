@@ -1,0 +1,16 @@
+@import '~client/app/stylesheets/_card.scss';
+
+.image-display--container{
+  line-height: 0;
+  padding: asCardUnit(13) asCardUnit(34) 0 asCardUnit(34);
+  height: asCardUnit(448.5);
+  &.image-display--pendulum{
+    padding: asCardUnit(4) 0 0 0;
+    box-sizing: border-box;
+    height: asCardUnit(498)
+  }
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -5,10 +5,6 @@ import {MonsterTypes, CardTypes} from 'client/app/constants';
 class ImageSelector extends React.Component{
     constructor(props){
         super(props);
-
-        this.state = {
-            imageSrc: image
-        }
     }
 
     updateImage(event){
@@ -18,9 +14,7 @@ class ImageSelector extends React.Component{
         if (imageType.test(file.type)) {
             var reader = new FileReader();
             reader.onload = (event) => {
-                this.setState({
-                    imageSrc: event.target.result
-                });
+                this.props.onChange(event);
             };
             reader.readAsDataURL(file);
         }
@@ -51,7 +45,7 @@ class ImageSelector extends React.Component{
                   id="ygo-card-image-file-loader"
                   accept="image/*"
                   onChange={(event) => this.updateImage(event)}/>
-                <img src={this.state.imageSrc} onClick={() => this.loadImageFromFile()}/>
+                <img src={this.props.imageSrc} onClick={() => this.loadImageFromFile()}/>
             </div>
         )
     }

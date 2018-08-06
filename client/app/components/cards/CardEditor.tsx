@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as _ from 'lodash';
-import * as $ from 'jquery';
 
 import { MonsterTypes, CardTypes, SpellActionTypes, Attribute, MonsterClasses, Rarities } from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
@@ -50,7 +49,7 @@ interface CardEditorDispatchMappedProps {
   updateLore: (lore: string) => any;
   updatePendulumEffect: (pendulumEffect: string) => any;
   updatePendulumScale: (pendulumScale: number, isLeftNotRightScale: boolean) => any;
-  updateLinkArrow: (linkArrowValue: boolean, linkIndex: number) => any;
+  updateLinkArrows: (linkArrows: [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean]) => any;
   updateTribes: (tribes: string[]) => any;
   updateMonsterType: (type: MonsterTypes) => any;
   updateMonsterHybridType: (type: MonsterTypes.PURE | MonsterTypes.PENDULUM) => any;
@@ -61,6 +60,7 @@ interface CardEditorDispatchMappedProps {
   updateDarkSynchroMaterials: (darkSynchroMaterials: string[]) => any;
   updateXyzMaterials: (xyzMaterials: string) => any;
   updateLinkMaterials: (linkMaterials: string) => any;
+  updateImage: (imageSrc: string) => any;
 }
 
 interface CardEditorState {
@@ -94,16 +94,12 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
       updatePendulumEffect: (pendulumEffect) => dispatch(updateCard({pendulumEffect, id})),
       updatePendulumScale: (pendulumScale, isLeftNotRightScale) => {
         if (isLeftNotRightScale){
-          updateCard({id, leftPendulumScale: pendulumScale});
+          dispatch(updateCard({id, leftPendulumScale: pendulumScale}));
         } else {
-          updateCard({id, rightPendulumScale: pendulumScale});
+          dispatch(updateCard({id, rightPendulumScale: pendulumScale}));
         }
       },
-      updateLinkArrow: (linkArrowValue, linkIndex) => {
-        const linkArrows = _.clone(props.fields.linkArrows);
-        linkArrows[linkIndex] = linkArrowValue;
-        updateCard({id, linkArrows})
-      },
+      updateLinkArrows: (linkArrows) => dispatch(updateCard({id, linkArrows})),
       updateTribes: (tribes) => dispatch(updateCard({tribes, id})),
       updateMonsterType: (monsterType) => dispatch(updateCard({monsterType, id})),
       updateMonsterHybridType: (monsterHybridType) => dispatch(updateCard({monsterHybridType, id})),
@@ -113,7 +109,8 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
       updateSynchroMaterials: (synchroMaterials) => dispatch(updateCard({synchroMaterials, id})),
       updateDarkSynchroMaterials: (darkSynchroMaterials) => dispatch(updateCard({darkSynchroMaterials, id})),
       updateXyzMaterials: (xyzMaterials) => dispatch(updateCard({xyzMaterials, id})),
-      updateLinkMaterials: (linkMaterials) => dispatch(updateCard({linkMaterials, id}))
+      updateLinkMaterials: (linkMaterials) => dispatch(updateCard({linkMaterials, id})),
+      updateImage: (imageSrc) => dispatch(updateCard({image: imageSrc, id}))
     }
   }
   
@@ -251,7 +248,11 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
         <div className="card--link-art--container">
           <img className="card--normal-art-box" src={normalArtBox}/>
           <LinkArrowEditor
-            updateLinkArrow={this.props.updateLinkArrow}
+            updateLinkArrow={(value, index) => {
+              const linkArrows = _.clone(this.props.fields.linkArrows);
+              linkArrows[index] = value;
+              this.props.updateLinkArrows(linkArrows);
+            }}
             linkArrows={this.props.fields.linkArrows}
           />
         </div>
@@ -268,7 +269,7 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
   }
 
   renderPendulumContainer() {
-    if (this.props.fields.monsterHybridType == MonsterTypes.PENDULUM && this.getCardType() == CardTypes.MONSTER
+    if (this.props.fields.monsterHybridType === MonsterTypes.PENDULUM && this.getCardType() === CardTypes.MONSTER
       && this.props.fields.monsterType !== MonsterTypes.LINK) {
       return (
         <PendulumInfoEditor
@@ -367,6 +368,8 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
               monsterHybridType={this.props.fields.monsterHybridType}
               monsterType={this.props.fields.monsterType}
               cardType={this.getCardType()}
+              imageSrc={this.props.fields.image}
+              onChange={(event) => this.props.updateImage(event.target.result)}
             />
             <div className="ygo-card-set-id"/>
             {this.renderPendulumContainer()}

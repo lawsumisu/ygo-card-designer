@@ -1,13 +1,11 @@
-import React from 'react';
-import _ from 'lodash';
-import $ from 'jquery';
+import * as _ from 'lodash';
+import * as React from 'react';
 
-import cornerLinkArrow from 'client/app/assets/Series 10/Link/CornerLinkArrow2.png';
-import cornerLinkArrowHovered from 'client/app/assets/Series 10/Link/CornerLinkArrowHovered.png';
-import middleLinkArrow from 'client/app/assets/Series 10/Link/MiddleLinkArrow.png';
-import middleLinkArrowHovered from 'client/app/assets/Series 10/Link/MiddleLinkArrowHovered.png';
+interface LinkArrowDisplayProps {
+  linkArrows: [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean];
+}
 
-class LinkArrowEditor extends React.Component {
+export class LinkArrowDisplay extends React.PureComponent<LinkArrowDisplayProps> {
   constructor(props) {
     super(props);
 
@@ -33,15 +31,11 @@ class LinkArrowEditor extends React.Component {
     return classNames.join(' ');
   }
 
-  handleOnClickLinkArrow(linkIndex) {
-    this.props.updateLinkArrow(!this.props.linkArrows[linkIndex], linkIndex);
-  }
-
   render() {
     const cornerArrowPosition = [['bottom', 'left'], ['bottom', 'right'], ['top', 'left'], ['top', 'right']];
     const middleArrowPosition = ['bottom', 'left', 'top', 'right'];
     return (
-      <div className="card--link-arrow--container">
+      <div className='card--link-arrow--container'>
         {_.map([0, 2, 4, 6], (linkIndex, i) => {
           const x = i % 2;
           const y = Math.floor(i / 2);
@@ -51,35 +45,30 @@ class LinkArrowEditor extends React.Component {
             [cornerArrowPosition[i][0]]: 0,
             [cornerArrowPosition[i][1]]: 0,
             transform: `scale(${sx}, ${sy})`
-          }
+          };
           return (
             <div
               style={style}
               key={`${i}-corner`}
-              onClick={(event) => this.handleOnClickLinkArrow(linkIndex)}
               className={this.getLinkArrowClassNames('corner', linkIndex)}
             />
           );
         })}
         {_.map([1, 3, 5, 7], (linkIndex, i) => {
-          const x = i % 2;
-          const y = Math.floor(i / 2);
+          const theta = Math.floor(i / 2);
           const middleStyle = {
             [middleArrowPosition[i]]: 0,
-            transform: `rotate(${y * 180}deg)`
-          }
+            transform: `rotate(${theta * 180}deg)`
+          };
           return (
             <div
               style={middleStyle}
               key={`${i}-middle`}
-              onClick={(event) => this.handleOnClickLinkArrow(linkIndex)}
               className={this.getLinkArrowClassNames('middle', linkIndex)}
             />
           );
         })}
       </div>
-    )
+    );
   }
 }
-
-export {LinkArrowEditor};

@@ -1,9 +1,11 @@
 import { SpellActionTypes, MonsterTypes, MonsterClasses, Rarities, Attribute } from 'client/app/constants';
 import { Field, Model } from "client/app/redux/utilities";
 import { v4 } from 'uuid';
+import blueEyes from 'client/app/assets/BlueEyesWhiteDragon.png';
 
 export interface CardFields extends Field {
   name: string;
+  image: string;
   stars: number,
   attribute: Attribute;
   actionTypes: SpellActionTypes[];
@@ -35,6 +37,7 @@ const id = v4();
 export const initialCard: CardFields = {
   id: id,
   name: 'Blue-Eyes White Dragon',
+  image: blueEyes,
   stars: 8,
   attribute: Attribute.LIGHT,
   actionTypes: [],

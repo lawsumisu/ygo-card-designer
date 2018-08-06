@@ -1,0 +1,18 @@
+@import '~client/app/stylesheets/_card.scss';
+
+.star-display--container{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  height: asCardUnit(42);
+  padding: 0 asCardUnit(34);
+
+  &.star-display--rank, &.star-display--negative{
+    flex-direction: row;
+  }
+
+  .star{
+    width: asCardUnit(38);
+    height: asCardUnit(38);
+  }
+}

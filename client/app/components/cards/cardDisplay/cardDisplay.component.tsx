@@ -7,6 +7,12 @@ import 'client/app/components/cards/CardEditor.scss';
 import { AutoscalingTextDisplay } from "client/app/components/common/autoscalingTextDisplay/autoscalingTextDisplay.component";
 import { connect } from "react-redux";
 import 'client/app/components/cards/cardDisplay/cardDisplay.scss';
+import { AttributeDisplay } from "client/app/components/cards/cardDisplay/components/attributeDisplay.component";
+import { StarDisplay } from "client/app/components/cards/cardDisplay/components/starDisplay/starDisplay.component";
+import { ImageDisplay } from "client/app/components/cards/cardDisplay/components/imageDisplay/imageDisplay.component";
+import { ArtBoxDisplay } from "client/app/components/cards/cardDisplay/components/artBoxDisplay/artBoxDisplay.component";
+import { TypeDisplay } from "client/app/components/cards/cardDisplay/components/typeDisplay/typeDisplay.component";
+
 
 /**
  * Component for rendering a display-only view of a card's fields.
@@ -31,15 +37,41 @@ class CardDisplay extends React.Component<CardDisplayProps & CardDisplayStateMap
   }
 
   public render(): React.ReactNode {
+    const cardType = this.getCardType();
     return (
       <div className={this.getClassName()}>
+        <ArtBoxDisplay
+          cardType={cardType}
+          linkArrows={this.props.fields.linkArrows}
+          monsterHybridType={this.props.fields.monsterHybridType}
+          monsterType={this.props.fields.monsterType}
+        />
         <div className={'ygo-card-top'}>
           <AutoscalingTextDisplay
             text={this.props.fields.name}
             className='ygo-card-name'
           />
+          <AttributeDisplay attribute={this.props.fields.attribute}/>
         </div>
-
+        <div className='ygo-card-center'>
+          <StarDisplay monsterType={this.props.fields.monsterType} stars={this.props.fields.stars}/>
+          <ImageDisplay
+            imageSrc={this.props.fields.image}
+            cardType={cardType}
+            monsterType={this.props.fields.monsterType}
+            monsterHybridType={this.props.fields.monsterHybridType}
+          />
+        </div>
+        <div className='ygo-card-bottom'>
+          <TypeDisplay
+            tribes={this.props.fields.tribes}
+            effect={this.props.fields.effect}
+            monsterType={this.props.fields.monsterType}
+            monsterHybridType={this.props.fields.monsterHybridType}
+            monsterAbilities={this.props.fields.monsterAbilities}
+            monsterClass={this.props.fields.monsterClass}
+          />
+        </div>
       </div>
     )
   }
@@ -92,6 +124,10 @@ class CardDisplay extends React.Component<CardDisplayProps & CardDisplayStateMap
     else{
       return CardTypes.MONSTER;
     }
+  }
+
+  private renderPendulumCard() {
+
   }
 }
 
