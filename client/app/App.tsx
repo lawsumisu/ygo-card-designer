@@ -1,9 +1,9 @@
 import React from 'react';
-import Card from 'client/app/components/cards/Card';
 import {getBrowser} from 'client/app/utilities';
 import {BrowserTypes} from 'client/app/constants';
 import 'client/app/App.scss';
 import classNames from 'classnames';
+import CardGallery from "client/app/components/cards/CardGallery";
 
 class App extends React.Component{
   constructor(props){
@@ -37,7 +37,7 @@ class App extends React.Component{
         <div className="app-content--container">
           <div>Menu location</div>
           <div className='canvas--container'>
-            <Card/>
+            <CardGallery/>
           </div>
         </div>
       </div>

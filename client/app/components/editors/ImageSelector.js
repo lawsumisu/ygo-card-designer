@@ -27,9 +27,8 @@ class ImageSelector extends React.Component{
     }
 
     loadImageFromFile(){
-        var fileLoader = document.getElementById("ygo-card-image-file-loader");
-        if (fileLoader){
-            fileLoader.click();
+        if (this.fileLoaderButton){
+            this.fileLoaderButton.click();
         }
     }
 
@@ -46,8 +45,13 @@ class ImageSelector extends React.Component{
             <div 
                 className={this.getClassNames()}
             >
-                <input type="file" id="ygo-card-image-file-loader" accept="image/*" onChange={(event) => this.updateImage(event)}/>
-                <img src={this.state.imageSrc} onClick={(event) => this.loadImageFromFile()}/>
+                <input
+                  ref={(element) => this.fileLoaderButton = element}
+                  type="file"
+                  id="ygo-card-image-file-loader"
+                  accept="image/*"
+                  onChange={(event) => this.updateImage(event)}/>
+                <img src={this.state.imageSrc} onClick={() => this.loadImageFromFile()}/>
             </div>
         )
     }

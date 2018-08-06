@@ -129,8 +129,7 @@ class AutoscalingTextareaV2 extends React.Component{
     updateFontSpacing(){
         let autoscalingContentElement = $(this.refs.autoscalingContent);
         let fullContentElement = $(this.refs.fullContent);
-        console.log(Math.abs(this.getFontSizeFullContentElementFontSize() / this.getMinFontSize()));
-        if(_.isEmpty(autoscalingContentElement) || _.isEmpty(fullContentElement) || 
+        if(_.isEmpty(autoscalingContentElement) || _.isEmpty(fullContentElement) ||
         Math.abs(this.getFontSizeFullContentElementFontSize() / this.getMinFontSize()) > 1.01){
             if (!_.isEmpty(autoscalingContentElement)){
                 autoscalingContentElement.css('width', '');

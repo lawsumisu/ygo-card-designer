@@ -73,7 +73,7 @@ export class NameEditor extends AutoscalingInput{
                         </filter>
                     </defs>    
                     <text
-                        y="3"
+                        y="1"
                         x="-1"
                         transform={this.getScaleTransform()}
                         filter={this.getFilter()} 
