@@ -1,3 +1,9 @@
+.browser-type-firefox{
+  .autoscaling-text-display--text{
+    width: -moz-fit-content;
+  }
+}
+
 .autoscaling-text-display--text{
   transform-origin: 0 50%;
   white-space: pre;

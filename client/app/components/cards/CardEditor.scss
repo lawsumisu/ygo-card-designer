@@ -140,6 +140,13 @@ font-face{
       }  
     }
   }
+
+
+  &.card--full-size {
+    --card-width: 590px !important;
+    position: absolute;
+    opacity: 0;
+  }
 }
 
 .ygo-card-pendulum, .ygo-card-pendulum img, .card--normal-art--container, .card--normal-art-box, .card--link-art--container{

@@ -64,7 +64,7 @@ interface CardEditorDispatchMappedProps {
 }
 
 interface CardEditorState {
-  isFullSize: boolean;
+  isDownloading: boolean;
 }
 
 type CardEditorAllProps = CardEditorProps & CardEditorStateMappedProps & CardEditorDispatchMappedProps;
@@ -118,7 +118,7 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
   }
   
   public state: CardEditorState = {
-    isFullSize: false,
+    isDownloading: false,
   };
   
   private element: HTMLDivElement | null;
@@ -328,12 +328,20 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
           <RarityEditor rarity={this.props.fields.rarity} updateRarity={this.props.updateRarity}/>
           <CardDownloader
             cardName={this.props.fields.name}
-            element={() => !_.isNil(this.element) ? this.element.querySelector('.card--full-size') : null}
+            getElement={this.getCardElement}
             preprocessor={(done) => {
-              this.setState({isFullSize: true}, done)
+              this.setState({isDownloading: true}, done)
             }}
             postprocessor={() => {
-              this.setState({isFullSize: false})
+              this.setState({isDownloading: false})
+            }}
+            style={{
+              position: 'relative',
+              right: '0',
+              left: '0',
+              top: '0',
+              bottom: '0',
+              opacity: '1'
             }}
           />
         </div>
@@ -366,6 +374,7 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
           {this.getCardBottom()}
         </div>
         <CardDisplay id={this.props.id}/>
+        {this.state.isDownloading ? <CardDisplay id={this.props.id} className={'card--full-size'}/> : null }
       </div>
     )
   }
@@ -380,6 +389,13 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
     else{
       return CardTypes.MONSTER;
     }
+  }
+
+  private getCardElement = (): Element | null => {
+    if (!_.isNil(this.element)){
+      return this.element.querySelector('.card--full-size');
+    }
+    return null;
   }
 }
 
