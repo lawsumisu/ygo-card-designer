@@ -9,7 +9,7 @@ import earth from 'client/app/assets/EARTH.png';
 import spell from 'client/app/assets/SPELL.png';
 import trap from 'client/app/assets/TRAP.png';
 
-import 'client/app/components/editors/attributeEditor/attributeEditor.scss';
+import 'client/app/components/editors/attributeEditor/AttributeEditor.scss';
 import { Attribute } from "client/app/constants";
 
 

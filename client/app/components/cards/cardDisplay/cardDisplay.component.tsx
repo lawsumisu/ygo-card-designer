@@ -7,11 +7,13 @@ import 'client/app/components/cards/CardEditor.scss';
 import { AutoscalingTextDisplay } from "client/app/components/common/autoscalingTextDisplay/autoscalingTextDisplay.component";
 import { connect } from "react-redux";
 import 'client/app/components/cards/cardDisplay/cardDisplay.scss';
-import { AttributeDisplay } from "client/app/components/cards/cardDisplay/components/attributeDisplay.component";
+import { AttributeDisplay } from "client/app/components/cards/cardDisplay/components/attributeDisplay/attributeDisplay.component";
 import { StarDisplay } from "client/app/components/cards/cardDisplay/components/starDisplay/starDisplay.component";
 import { ImageDisplay } from "client/app/components/cards/cardDisplay/components/imageDisplay/imageDisplay.component";
 import { ArtBoxDisplay } from "client/app/components/cards/cardDisplay/components/artBoxDisplay/artBoxDisplay.component";
 import { TypeDisplay } from "client/app/components/cards/cardDisplay/components/typeDisplay/typeDisplay.component";
+import { StatDisplay } from "client/app/components/cards/cardDisplay/components/statPointDisplay/statDisplay.component";
+import { DescriptionDisplay } from "client/app/components/cards/cardDisplay/components/descriptionDisplay/descriptionDisplay.component";
 
 
 /**
@@ -71,6 +73,20 @@ class CardDisplay extends React.Component<CardDisplayProps & CardDisplayStateMap
             monsterAbilities={this.props.fields.monsterAbilities}
             monsterClass={this.props.fields.monsterClass}
           />
+          <DescriptionDisplay
+            cardType={cardType}
+            monsterType={this.props.fields.monsterType}
+            fusionMaterials={this.props.fields.fusionMaterials}
+            synchroMaterials={this.props.fields.synchroMaterials}
+            darkSynchroMaterials={this.props.fields.darkSynchroMaterials}
+            xyzMaterials={this.props.fields.xyzMaterials}
+            linkMaterials={this.props.fields.linkMaterials}/>
+          <StatDisplay
+            atk={this.props.fields.atk}
+            def={this.props.fields.def}
+            monsterType={this.props.fields.monsterType}
+            linkArrows={this.props.fields.linkArrows}
+          />
         </div>
       </div>
     )
@@ -124,11 +140,7 @@ class CardDisplay extends React.Component<CardDisplayProps & CardDisplayStateMap
     else{
       return CardTypes.MONSTER;
     }
-  }
-
-  private renderPendulumCard() {
-
-  }
+  };
 }
 
 // Hook up Redux store state to props of this Component.

@@ -1,0 +1,49 @@
+@import '~client/app/stylesheets/_card.scss';
+
+.link-arrow-display--container{
+  position: absolute;
+  top: asCardUnit(120);
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: asCardUnit(523);
+  height: asCardUnit(523);
+  div{
+    position: absolute;
+    z-index: 11;
+  }
+  .link-arrow-display--corner{
+    width: asCardUnit(68);
+    height: asCardUnit(68);
+    margin: asCardUnit(5.5);
+    background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrow2.png");
+    background-size: cover;
+    &.link-arrow-display--corner--selected{
+      background-image: url("~client/app/assets/Series 10/Link/CornerLinkArrowSelected.png");
+    }
+  }
+  .link-arrow-display--middle{
+    background-size: cover;
+    margin: auto;
+    &.link-arrow-display--middle--vertical{
+      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowVertical.png");
+      width: asCardUnit(40.2);
+      height: asCardUnit(130);
+      bottom: 0;
+      top: 0;
+      &.link-arrow-display--middle--selected{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowSelectedVertical.png");
+      }
+    }
+    &.link-arrow-display--middle--horizontal{
+      background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrow2.png");
+      height: asCardUnit(40.2);
+      width: asCardUnit(130);
+      left: 0;
+      right: 0;
+      &.link-arrow-display--middle--selected{
+        background-image: url("~client/app/assets/Series 10/Link/MiddleLinkArrowSelected2.png");
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import * as React from 'react';
+import 'client/app/components/cards/cardDisplay/components/linkArrowDisplay/linkArrowDisplay.scss';
 
 interface LinkArrowDisplayProps {
   linkArrows: [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean];
@@ -16,17 +17,17 @@ export class LinkArrowDisplay extends React.PureComponent<LinkArrowDisplayProps>
   }
 
   getLinkArrowClassNames(arrowType, linkIndex) {
-    const classNamePrefix = `card--link-arrow-${arrowType}`;
+    const classNamePrefix = `link-arrow-display--${arrowType}`;
     let classNames = [classNamePrefix];
     if (this.props.linkArrows[linkIndex]) {
       classNames.push(`${classNamePrefix}--selected`);
     }
     //Special classes for middle arrows
     if (linkIndex === 3 || linkIndex === 7) {
-      classNames.push('card--link-arrow-middle--vertical');
+      classNames.push('link-arrow-display--middle--vertical');
     }
     else {
-      classNames.push('card--link-arrow-middle--horizontal')
+      classNames.push('link-arrow-display--middle--horizontal')
     }
     return classNames.join(' ');
   }
@@ -35,7 +36,7 @@ export class LinkArrowDisplay extends React.PureComponent<LinkArrowDisplayProps>
     const cornerArrowPosition = [['bottom', 'left'], ['bottom', 'right'], ['top', 'left'], ['top', 'right']];
     const middleArrowPosition = ['bottom', 'left', 'top', 'right'];
     return (
-      <div className='card--link-arrow--container'>
+      <div className='link-arrow-display--container'>
         {_.map([0, 2, 4, 6], (linkIndex, i) => {
           const x = i % 2;
           const y = Math.floor(i / 2);

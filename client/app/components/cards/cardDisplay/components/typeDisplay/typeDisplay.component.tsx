@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { MonsterClasses, MonsterTypes } from 'client/app/constants';
 import 'client/app/components/cards/cardDisplay/components/typeDisplay/typeDisplay.scss';
-import * as _ from 'lodash';
+import {
+  AutoscalingLineElement,
+  AutoscalingLineElementState
+} from "client/app/components/cards/cardDisplay/components/AutoscalingLineElement";
 
 interface TypeDisplayProps {
   tribes: string[];
@@ -12,30 +15,14 @@ interface TypeDisplayProps {
   monsterClass: MonsterClasses;
 }
 
-interface TypeDisplayState {
+interface TypeDisplayState extends AutoscalingLineElementState {
   scale: number;
 }
 
-export class TypeDisplay extends React.Component<TypeDisplayProps, TypeDisplayState> {
+export class TypeDisplay extends AutoscalingLineElement<TypeDisplayProps, TypeDisplayState> {
   public state: TypeDisplayState = {
     scale: 1,
   };
-
-  private fullContent: HTMLDivElement | null;
-  private actualContent: HTMLDivElement | null;
-
-  public componentWillMount(){
-    this.setState({});
-  }
-
-  public componentDidUpdate(){
-    const scale = this.getScale();
-    if (this.state.scale !== scale){
-      this.setState({
-        scale
-      });
-    }
-  }
 
   public render(): React.ReactNode {
     const style = {
@@ -63,14 +50,5 @@ export class TypeDisplay extends React.Component<TypeDisplayProps, TypeDisplaySt
       .filter((str) => str.length > 0)
       .join('/');
     return `[${typeString}]`;
-  }
-
-  private getScale(): number {
-    if (_.isNil(this.fullContent) || _.isNil(this.actualContent)){
-      return 1;
-    }
-    else{
-      return Math.min(this.fullContent.clientWidth / this.actualContent.clientWidth, 1);
-    }
   }
 }

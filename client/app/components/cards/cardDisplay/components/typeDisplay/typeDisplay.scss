@@ -5,6 +5,11 @@
   src: url('~client/app/assets/Fonts/YGOITCStoneSerifSmallCapsBold.ttf');
 }
 
+.type-display--container{
+  margin-top: asCardUnit(2);
+  margin-bottom: asCardUnit(-4);
+}
+
 .browser-type-firefox{
   .type--display-text{
     width: -moz-fit-content;

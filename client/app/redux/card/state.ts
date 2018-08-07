@@ -3,6 +3,8 @@ import { Field, Model } from "client/app/redux/utilities";
 import { v4 } from 'uuid';
 import blueEyes from 'client/app/assets/BlueEyesWhiteDragon.png';
 
+export type LinkArrows = [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean];
+
 export interface CardFields extends Field {
   name: string;
   image: string;
@@ -23,7 +25,7 @@ export interface CardFields extends Field {
   pendulumEffect: string;
   leftPendulumScale: number;
   rightPendulumScale: number;
-  linkArrows: [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean];
+  linkArrows: LinkArrows;
   linkMaterials: string;
   atk: string,
   def: string,

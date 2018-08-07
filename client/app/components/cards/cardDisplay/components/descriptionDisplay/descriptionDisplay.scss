@@ -1,0 +1,38 @@
+@import '~client/app/stylesheets/_card.scss';
+
+@font-face{
+  font-family: YGO ITC Stone Serif Semibold;
+  src: url('~client/app/assets/Fonts/YGOITCStoneSerifSemibold.ttf');
+}
+
+@font-face{
+  font-family: YGO Matrix Book;
+  src: url('~client/app/assets/Fonts/YGOMatrixBook.ttf');
+}
+
+.description--text--input-lore{
+  font-family: YGO ITC Stone Serif LT Italic;
+}
+
+.description--text--input-effect, .material-display--container{
+  font-family: YGO Matrix Book;
+}
+
+.browser-type-firefox{
+  .material-display--materials--container{
+    width: -moz-fit-content;
+  }
+}
+
+.material-display--materials--container {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  transform-origin: 0 50%;
+  .materials--delimiter{
+    padding: 0 asCardUnit(4);
+  }
+  .materials--item {
+    white-space: pre;
+  }
+}
