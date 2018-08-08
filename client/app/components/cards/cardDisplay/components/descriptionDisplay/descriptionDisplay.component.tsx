@@ -6,6 +6,7 @@ import {
   AutoscalingLineElement,
   AutoscalingLineElementState
 } from "client/app/components/cards/cardDisplay/components/AutoscalingLineElement";
+import { AutoscalingTextareaDisplay } from "client/app/components/cards/cardDisplay/components/autoscalingTextareaDisplay/autoscalingTextareaDisplay.component";
 
 interface MaterialDisplayProps {
   delimiter?: string;
@@ -76,6 +77,8 @@ class MaterialDisplay extends AutoscalingLineElement<MaterialDisplayProps, Mater
 
 interface DescriptionDisplayProps {
   cardType: CardTypes;
+  effect: string;
+  lore: string;
   monsterType: MonsterTypes;
   fusionMaterials: string[];
   synchroMaterials: string[];
@@ -98,7 +101,24 @@ export class DescriptionDisplay extends React.Component<DescriptionDisplayProps>
             linkMaterials={this.props.linkMaterials}
           /> : null
         }
-        <div className='description--text--container'/>
+        <div className='description--text--container'>
+          {this.props.effect.length > 0 ?
+            <AutoscalingTextareaDisplay
+              className='description-display--text--effect'
+              minEmFontSize={.8}
+              maxEmFontSize={1}
+              value={this.props.effect}
+            /> : null
+          }
+          {this.props.lore.length > 0 ?
+            <AutoscalingTextareaDisplay
+              className='description-display--text--lore'
+              minEmFontSize={.8}
+              maxEmFontSize={1}
+              value={this.props.lore}
+            /> : null
+          }
+        </div>
       </div>
     );
   }

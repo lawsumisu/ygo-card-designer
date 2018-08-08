@@ -1,0 +1,19 @@
+.textarea-display--hidden-content, .textarea-display--content{
+  font: inherit;
+  width: 100%;
+  padding: 0;
+}
+
+.textarea-display--hidden-content{
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  display: none;
+}
+
+.textarea-display--content{
+  flex-grow: 1;
+  resize: none;
+  height: 100%;
+  overflow: hidden;
+  transform-origin: 0 50%;
+}

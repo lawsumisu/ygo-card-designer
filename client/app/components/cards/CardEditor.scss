@@ -78,19 +78,19 @@ font-face{
   }
 
   &.normal-monster{
-    background-image: url("~client/app/assets/Series 10/NormalMonster2.png");
+    background-image: url("~client/app/assets/Series 10/NormalMonster3.png");
   }
 
   &.effect-monster{
-    background-image: url("~client/app/assets/Series 10/EffectMonster2.png");
+    background-image: url("~client/app/assets/Series 10/EffectMonster3.png");
   }
 
   &.fusion-monster{
-    background-image: url("~client/app/assets/Series 10/FusionMonster2.png");
+    background-image: url("~client/app/assets/Series 10/FusionMonster3.png");
   }
 
   &.ritual-monster{
-    background-image: url("~client/app/assets/Series 10/RitualMonster2.png");
+    background-image: url("~client/app/assets/Series 10/RitualMonster3.png");
   }
 
   &.synchro-monster{
@@ -98,44 +98,44 @@ font-face{
   }
 
   &.dark-synchro-monster{
-    background-image: url("~client/app/assets/Series 10/DarkSynchroMonster.png");
+    background-image: url("~client/app/assets/Series 10/DarkSynchroMonster2.png");
     .ygo-card-name{
-      input{
+      input, div{
         color: white;
       }  
     }
   }
 
   &.xyz-monster{
-    background-image: url("~client/app/assets/Series 10/XyzMonster2.png");
+    background-image: url("~client/app/assets/Series 10/XyzMonster3.png");
     .ygo-card-name{
-      input{
+      input, div{
         color: white;
       }  
     }
   }
 
   &.link-monster{
-    background-image: url("~client/app/assets/Series 10/LinkMonster.png");.ygo-card-name{
-      input{
+    background-image: url("~client/app/assets/Series 10/LinkMonster2.png");.ygo-card-name{
+      input, div{
         color: white;
       }  
     }
   }
 
   &.spell-card{
-    background-image: url("~client/app/assets/Series 10/SpellCard2.png");
+    background-image: url("~client/app/assets/Series 10/SpellCard3.png");
     .ygo-card-name{
-      input{
+      input, div{
         color: white;
       }  
     }
   }
 
   &.trap-card{
-    background-image: url("~client/app/assets/Series 10/TrapCard2.png");
+    background-image: url("~client/app/assets/Series 10/TrapCard3.png");
     .ygo-card-name{
-      input{
+      input, div{
         color: white;
       }  
     }
@@ -441,7 +441,8 @@ font-face{
     }
 
     div{
-      input{
+      input, .battle-point--value{
+        display: inline-block;
         width: asCardUnit(50);
         font-family: inherit;
         font-size: inherit;

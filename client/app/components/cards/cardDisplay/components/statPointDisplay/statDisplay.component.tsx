@@ -14,7 +14,7 @@ class BattlePointDisplay extends React.PureComponent<BattlePointDisplayProps> {
       <div>
         <span>{this.props.label}</span>
         <span className="battle-point-slash">/</span>
-        <span>{this.props.value}</span>
+        <span className='battle-point--value'>{this.props.value}</span>
       </div>
     )
   }

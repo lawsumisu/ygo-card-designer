@@ -1,0 +1,13 @@
+@import '~client/app/stylesheets/_card.scss';
+
+@font-face{
+  font-family: YGO Matrix Bold Fractions;
+  src: url('~client/app/assets/Fonts/MatrixFractions-Bold.otf');
+}
+
+.pendulum-info-display--scale{
+  font-size: asCardUnit(32);
+  text-align: center;
+  font-family: YGO Matrix Bold Fractions;
+  width: 100%;
+}

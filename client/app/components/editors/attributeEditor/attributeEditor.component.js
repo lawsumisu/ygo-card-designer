@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import $ from 'jquery';
-import {Rarities} from 'client/app/constants';
 
 import light from 'client/app/assets/LIGHT.png';
 import dark from 'client/app/assets/DARK.png';
@@ -14,7 +13,6 @@ import spell from 'client/app/assets/SPELL.png';
 import trap from 'client/app/assets/TRAP.png';
 
 import 'client/app/components/editors/attributeEditor/attributeEditor.scss';
-
 
 const attributeMap = {
     LIGHT: light,

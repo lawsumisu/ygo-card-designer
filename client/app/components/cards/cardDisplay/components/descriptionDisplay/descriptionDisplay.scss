@@ -10,11 +10,16 @@
   src: url('~client/app/assets/Fonts/YGOMatrixBook.ttf');
 }
 
+@font-face{
+  font-family: YGO ITC Stone Serif LT Italic;
+  src: url('~client/app/assets/Fonts/YGOITCStoneSerifLTItalic.ttf');
+}
+
 .description--text--input-lore{
   font-family: YGO ITC Stone Serif LT Italic;
 }
 
-.description--text--input-effect, .material-display--container{
+.description-display--text--effect, .material-display--container{
   font-family: YGO Matrix Book;
 }
 
@@ -35,4 +40,19 @@
   .materials--item {
     white-space: pre;
   }
+}
+
+.description-display--text--lore, .description-display--text--effect {
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.description-display--text--effect {
+  flex: 1 1;
+}
+
+.description-display--text--lore{
+  flex: 1 0;
+  font-family: YGO ITC Stone Serif LT Italic;
 }

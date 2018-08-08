@@ -2,7 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as _ from 'lodash';
 
-import { MonsterTypes, CardTypes, SpellActionTypes, Attribute, MonsterClasses, Rarities } from 'client/app/constants';
+import {
+  MonsterTypes,
+  CardTypes,
+  SpellActionTypes,
+  Attribute,
+  MonsterClasses,
+  Rarities,
+  ActionType
+} from 'client/app/constants';
 import {ActionCreators} from 'client/app/redux/actions';
 import {selectCardType} from 'client/app/redux/selectors';
 
@@ -42,7 +50,7 @@ interface CardEditorDispatchMappedProps {
   updateRarity: (rarity: Rarities) => any;
   updateLevel: (level: number) => any;
   updateAttribute: (attribute: Attribute) => any;
-  updateActionTypes: (actionTypes: SpellActionTypes[]) => any;
+  updateActionTypes: (actionTypes: ActionType[]) => any;
   updateAtk: (atk: string) => any;
   updateDef: (def: string) => any;
   updateEffect: (effect: string) => any;

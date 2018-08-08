@@ -14,6 +14,8 @@ import { ArtBoxDisplay } from "client/app/components/cards/cardDisplay/component
 import { TypeDisplay } from "client/app/components/cards/cardDisplay/components/typeDisplay/typeDisplay.component";
 import { StatDisplay } from "client/app/components/cards/cardDisplay/components/statPointDisplay/statDisplay.component";
 import { DescriptionDisplay } from "client/app/components/cards/cardDisplay/components/descriptionDisplay/descriptionDisplay.component";
+import { ActionTypeDisplay } from "client/app/components/cards/cardDisplay/components/actionTypeDisplay/actionTypeDisplay.component";
+import { PendulumInfoDisplay } from "client/app/components/cards/cardDisplay/components/pendulumInfoDisplay/pendulumInfoDisplay.component";
 
 
 /**
@@ -56,37 +58,53 @@ class CardDisplay extends React.Component<CardDisplayProps & CardDisplayStateMap
           <AttributeDisplay attribute={this.props.fields.attribute}/>
         </div>
         <div className='ygo-card-center'>
-          <StarDisplay monsterType={this.props.fields.monsterType} stars={this.props.fields.stars}/>
+          {cardType === CardTypes.MONSTER ?
+            <StarDisplay monsterType={this.props.fields.monsterType} stars={this.props.fields.stars}/> :
+            <ActionTypeDisplay actionTypes={this.props.fields.actionTypes} cardType={cardType}/>
+          }
           <ImageDisplay
             imageSrc={this.props.fields.image}
             cardType={cardType}
             monsterType={this.props.fields.monsterType}
             monsterHybridType={this.props.fields.monsterHybridType}
           />
+          {this.isPendulumMonster() ?
+            <PendulumInfoDisplay
+              leftPendulumScale={this.props.fields.leftPendulumScale}
+              rightPendulumScale={this.props.fields.rightPendulumScale}
+              pendulumEffect={this.props.fields.pendulumEffect}
+            /> : null
+          }
         </div>
         <div className='ygo-card-bottom'>
-          <TypeDisplay
-            tribes={this.props.fields.tribes}
-            effect={this.props.fields.effect}
-            monsterType={this.props.fields.monsterType}
-            monsterHybridType={this.props.fields.monsterHybridType}
-            monsterAbilities={this.props.fields.monsterAbilities}
-            monsterClass={this.props.fields.monsterClass}
-          />
+          {cardType === CardTypes.MONSTER ?
+            <TypeDisplay
+              tribes={this.props.fields.tribes}
+              effect={this.props.fields.effect}
+              monsterType={this.props.fields.monsterType}
+              monsterHybridType={this.props.fields.monsterHybridType}
+              monsterAbilities={this.props.fields.monsterAbilities}
+              monsterClass={this.props.fields.monsterClass}
+            /> : null
+          }
           <DescriptionDisplay
             cardType={cardType}
+            effect={this.props.fields.effect}
+            lore={this.props.fields.lore}
             monsterType={this.props.fields.monsterType}
             fusionMaterials={this.props.fields.fusionMaterials}
             synchroMaterials={this.props.fields.synchroMaterials}
             darkSynchroMaterials={this.props.fields.darkSynchroMaterials}
             xyzMaterials={this.props.fields.xyzMaterials}
             linkMaterials={this.props.fields.linkMaterials}/>
-          <StatDisplay
-            atk={this.props.fields.atk}
-            def={this.props.fields.def}
-            monsterType={this.props.fields.monsterType}
-            linkArrows={this.props.fields.linkArrows}
-          />
+          {cardType === CardTypes.MONSTER ?
+            <StatDisplay
+              atk={this.props.fields.atk}
+              def={this.props.fields.def}
+              monsterType={this.props.fields.monsterType}
+              linkArrows={this.props.fields.linkArrows}
+            /> : null
+          }
         </div>
       </div>
     )
@@ -128,6 +146,11 @@ class CardDisplay extends React.Component<CardDisplayProps & CardDisplayStateMap
       }
     }
     return classNames(classes);
+  }
+
+  private isPendulumMonster(): boolean {
+    return this.props.fields.monsterHybridType === MonsterTypes.PENDULUM && this.getCardType() === CardTypes.MONSTER
+      && this.props.fields.monsterType !== MonsterTypes.LINK;
   }
 
   private getCardType = (): CardTypes => {

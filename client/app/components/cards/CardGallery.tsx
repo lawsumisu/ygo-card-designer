@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import 'client/app/components/cards/cardGallery.scss';
 
 interface CardGalleryStateMappedProps {
-  cards: CardFields[],
+  ids: string[],
 }
 
 interface CardGalleryDispatchMappedProps {
@@ -21,9 +21,8 @@ interface CardGalleryDispatchMappedProps {
 
 class CardGallery extends React.Component<CardGalleryStateMappedProps & CardGalleryDispatchMappedProps> {
   public static mapStateToProps(state: AppState): CardGalleryStateMappedProps {
-    const cards = state.entities.cards;
     return {
-      cards: _.map(cards.allIds, (id: string) => cards.byId[id])
+      ids: state.entities.cards.allIds
     }
   }
 
@@ -41,8 +40,8 @@ class CardGallery extends React.Component<CardGalleryStateMappedProps & CardGall
       <div className='card-gallery--container'>
         <input type="button" value='Click Me!' onClick={() => this.props.actions.addCard()}/>
         <div className={'cards--container'}>
-          {_.map(this.props.cards, (card: CardFields) => (
-            <CardEditor key={card.id} id={card.id}/>
+          {_.map(this.props.ids, (id: string) => (
+            <CardEditor key={id} id={id}/>
           ))}
         </div>
 

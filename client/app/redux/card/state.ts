@@ -1,4 +1,4 @@
-import { SpellActionTypes, MonsterTypes, MonsterClasses, Rarities, Attribute } from 'client/app/constants';
+import { SpellActionTypes, MonsterTypes, MonsterClasses, Rarities, Attribute, ActionType } from 'client/app/constants';
 import { Field, Model } from "client/app/redux/utilities";
 import { v4 } from 'uuid';
 import blueEyes from 'client/app/assets/BlueEyesWhiteDragon.png';
@@ -10,7 +10,7 @@ export interface CardFields extends Field {
   image: string;
   stars: number,
   attribute: Attribute;
-  actionTypes: SpellActionTypes[];
+  actionTypes: ActionType[];
   monsterType: MonsterTypes;
   monsterHybridType: MonsterTypes.PURE | MonsterTypes.PENDULUM;
   monsterClass: MonsterClasses;
