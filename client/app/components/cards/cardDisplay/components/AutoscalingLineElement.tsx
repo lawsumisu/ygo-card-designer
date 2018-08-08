@@ -19,7 +19,7 @@ export abstract class AutoscalingLineElement<TProps, TState extends AutoscalingL
   protected fullContent: HTMLDivElement | null;
   protected actualContent: HTMLDivElement | null;
 
-  public componentWillMount(){
+  public componentDidMount(){
     this.setState({});
   }
 
@@ -32,7 +32,7 @@ export abstract class AutoscalingLineElement<TProps, TState extends AutoscalingL
     }
   }
 
-  private getScale(): number {
+  protected getScale(): number {
     if (_.isNil(this.fullContent) || _.isNil(this.actualContent)){
       return 1;
     }

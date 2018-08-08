@@ -16,6 +16,7 @@ import { StatDisplay } from "client/app/components/cards/cardDisplay/components/
 import { DescriptionDisplay } from "client/app/components/cards/cardDisplay/components/descriptionDisplay/descriptionDisplay.component";
 import { ActionTypeDisplay } from "client/app/components/cards/cardDisplay/components/actionTypeDisplay/actionTypeDisplay.component";
 import { PendulumInfoDisplay } from "client/app/components/cards/cardDisplay/components/pendulumInfoDisplay/pendulumInfoDisplay.component";
+import { NameDisplay } from "client/app/components/cards/cardDisplay/components/nameDisplay/nameDisplay.component";
 
 
 /**
@@ -51,9 +52,9 @@ class CardDisplay extends React.Component<CardDisplayProps & CardDisplayStateMap
           monsterType={this.props.fields.monsterType}
         />
         <div className={'ygo-card-top'}>
-          <AutoscalingTextDisplay
-            text={this.props.fields.name}
-            className='ygo-card-name'
+          <NameDisplay
+            name={this.props.fields.name}
+            rarity={this.props.fields.rarity}
           />
           <AttributeDisplay attribute={this.props.fields.attribute}/>
         </div>

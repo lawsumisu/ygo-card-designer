@@ -26,23 +26,35 @@ export class CardDownloader extends React.Component {
     if (!this.state.loading) {
       this.setState({
         loading: true
-      }, () => {
-        const performDownload = () => this.download().then(() => {
-          if (this.props.postprocessor) {
-            this.props.postprocessor();
-          }
-          this.setState({
-            loading: false
-          });
-        });
-
-        if (this.props.preprocessor) {
-          this.props.preprocessor(performDownload);
-        } else {
-          performDownload();
-        }
       });
+
+      const performDownload = () => this.download().then(() => {
+        if (this.props.postprocessor) {
+          this.props.postprocessor();
+        }
+        this.setState({
+          loading: false
+        });
+      });
+
+      if (this.props.preprocessor) {
+        setTimeout(() => this.props.preprocessor(performDownload));
+      } else {
+        setTimeout(performDownload);
+      }
     }
+
+  }
+
+  performDownload(){
+    this.download().then(() => {
+      if (this.props.postprocessor) {
+        this.props.postprocessor();
+      }
+      this.setState({
+        loading: false
+      });
+    });
   }
 
   download(){

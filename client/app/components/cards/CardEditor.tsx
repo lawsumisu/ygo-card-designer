@@ -384,7 +384,7 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
           </div>
           {this.getCardBottom()}
         </div>
-        <CardDisplay id={this.props.id}/>
+        {/*<CardDisplay id={this.props.id}/>*/}
         {this.state.isDownloading ? <CardDisplay id={this.props.id} className={'card--full-size'}/> : null }
       </div>
     )
