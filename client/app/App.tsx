@@ -3,7 +3,9 @@ import {getBrowser} from 'client/app/utilities';
 import {BrowserTypes} from 'client/app/constants';
 import 'client/app/App.scss';
 import classNames from 'classnames';
-import CardGallery from "client/app/components/cards/CardGallery";
+import CardGallery from 'client/app/components/cards/CardGallery';
+import { TopBar } from 'client/app/components/topBar/topBar.component';
+import SetGallery from 'client/app/components/setGallery/setGallery.component';
 
 class App extends React.Component{
   constructor(props){
@@ -26,16 +28,11 @@ class App extends React.Component{
     const browserType = getBrowser();
     return (
       <div className={classNames(this.getClassNames())}>
-        <div className="navigation-bar--container">
-          Navigation Bar
-          <div className="account-management--container">
-            Account Management
-            <div>Username</div>
-            <input type="button" value="Login"/>
+        <TopBar/>
+        <div className='app-content--container'>
+          <div>
+            <SetGallery/>
           </div>
-        </div>
-        <div className="app-content--container">
-          <div>Menu location</div>
           <div className='canvas--container'>
             <CardGallery/>
           </div>

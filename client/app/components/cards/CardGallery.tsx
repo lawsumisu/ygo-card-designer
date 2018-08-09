@@ -14,7 +14,6 @@ interface CardGalleryStateMappedProps {
 
 interface CardGalleryDispatchMappedProps {
   actions: {
-    updateCard: (cardFields: Partial<CardFields>) => any;
     addCard: () => any;
   }
 }
@@ -30,7 +29,6 @@ class CardGallery extends React.Component<CardGalleryStateMappedProps & CardGall
     return {
       actions: {
         addCard: () => dispatch(addCard()),
-        updateCard: (cardFields: Partial<CardFields>) => dispatch(updateCard(cardFields)),
       }
     }
   }
@@ -44,7 +42,6 @@ class CardGallery extends React.Component<CardGalleryStateMappedProps & CardGall
             <CardEditor key={id} id={id}/>
           ))}
         </div>
-
       </div>
     )
   }

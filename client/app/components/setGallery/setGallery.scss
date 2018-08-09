@@ -1,0 +1,10 @@
+.sets--container{
+  display: flex;
+  flex-direction: column;
+
+  .set-gallery--image {
+    width: 180px;
+    border: 1px solid rgba(50,50,50,.25);
+    box-sizing: border-box;
+  }
+}

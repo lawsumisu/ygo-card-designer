@@ -1,21 +1,13 @@
 body{
-  margin: 0px;
+  margin: 0;
 }
 .app-content--container{
-  display: flex;
-  flex-direction: row
-}
-
-.navigation-bar--container{
+  background-color: #eff2f8;
+  padding-top: 50px;
   display: flex;
   flex-direction: row;
-  height: 50px;
-  .account-management--container{
-    margin-left: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .canvas--container {

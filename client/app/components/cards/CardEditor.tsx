@@ -87,7 +87,7 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
     };
   }
   
-  public static mapDispatchToProps(dispatch: Dispatch<any>, props: CardEditorProps & CardEditorStateMappedProps): CardEditorDispatchMappedProps {
+  public static mapDispatchToProps(dispatch: Dispatch<any>, props: CardEditorProps): CardEditorDispatchMappedProps {
     const { id } = props;
     return {
       updateName: (name) => dispatch(updateCard({name, id})),
