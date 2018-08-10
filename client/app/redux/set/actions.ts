@@ -15,7 +15,7 @@ export interface SetAction extends Action {
 }
 
 
-export function updateSet(payload: Partial<CardFields>): SetAction {
+export function updateSet(payload: Partial<SetField>): SetAction {
   return {
     type: SetActionType.UPDATE_SET,
     payload: payload,

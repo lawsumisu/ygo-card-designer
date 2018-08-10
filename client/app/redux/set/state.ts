@@ -19,7 +19,7 @@ export interface SetState extends Model<SetField> {}
 
 export const initialState: SetState = {
   byId: {
-    [id]: initialSet
+    [id]: initialSet,
   },
   allIds: [id]
 };

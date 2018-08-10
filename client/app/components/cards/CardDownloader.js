@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import domtoimage from 'dom-to-image';
+import domtoimage from 'client/app/utilities/domToImage';
 import FileSaver from 'file-saver';
 import {browserIsFirefox} from 'client/app/utilities';
 

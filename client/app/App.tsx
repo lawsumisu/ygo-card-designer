@@ -6,10 +6,15 @@ import classNames from 'classnames';
 import CardGallery from 'client/app/components/cards/CardGallery';
 import { TopBar } from 'client/app/components/topBar/topBar.component';
 import SetGallery from 'client/app/components/setGallery/setGallery.component';
+import { initialSet } from 'client/app/redux/set/state';
 
-class App extends React.Component{
-  constructor(props){
-    super(props);
+interface AppComponentState {
+  setId: string;
+}
+
+class App extends React.Component<{}, AppComponentState>{
+  public state: AppComponentState = {
+    setId: initialSet.id,
   }
 
   getClassNames(): string[]{
@@ -30,11 +35,14 @@ class App extends React.Component{
       <div className={classNames(this.getClassNames())}>
         <TopBar/>
         <div className='app-content--container'>
-          <div>
-            <SetGallery/>
+          <div className='sidebar--container'>
+            <SetGallery 
+              selectedId={this.state.setId}
+              onSelection={(id: string) => this.setState({setId: id})}
+            />
           </div>
           <div className='canvas--container'>
-            <CardGallery/>
+            <CardGallery setId={this.state.setId}/>
           </div>
         </div>
       </div>

@@ -8,6 +8,10 @@ body{
   flex-direction: row;
   min-height: 100vh;
   box-sizing: border-box;
+
+  .sidebar--container {
+    border-right: 1px solid rgba(50,50,50, .25);
+  }
 }
 
 .canvas--container {
@@ -15,5 +19,4 @@ body{
   text-size-adjust: none;
   font-family: helvetica, arial, sans-serif;
   line-height: 200%;
-  margin-top: 50px;
 }

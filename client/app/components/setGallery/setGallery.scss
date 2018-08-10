@@ -1,10 +1,23 @@
-.sets--container{
-  display: flex;
-  flex-direction: column;
+.set-gallery--container {
+  padding: 10px;
 
-  .set-gallery--image {
-    width: 180px;
-    border: 1px solid rgba(50,50,50,.25);
-    box-sizing: border-box;
+  .sets--container{
+    display: flex;
+    flex-direction: column;
+
+    .set-gallery--image {
+      width: 180px;
+      border: 1px solid rgba(50,50,50,.25);
+      box-sizing: border-box;
+    }
+    
+    .set--container{
+      cursor: pointer;
+      margin: 10px;
+      &.set--selected {
+        border: 2px solid lightseagreen;
+      }
+    }
+    
   }
 }

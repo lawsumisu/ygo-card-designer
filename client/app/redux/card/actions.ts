@@ -19,9 +19,9 @@ export function updateCard(payload: Partial<CardFields>): CardAction {
   }
 }
 
-export function addCard(): CardAction {
+export function addCard(id: string): CardAction {
   return {
     type: CardActionType.ADD_CARD,
-    payload: {}
+    payload: {id}
   }
 }

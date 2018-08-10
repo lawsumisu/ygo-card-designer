@@ -7,6 +7,12 @@ import { Dispatch } from 'redux';
 import { addSet } from 'client/app/redux/set/actions';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
+
+interface SetGalleryProps {
+  selectedId: string;
+  onSelection: (id: string) => void;
+}
 
 interface SetGalleryStateMappedProps {
   ids: string[]
@@ -18,7 +24,7 @@ interface SetGalleryDispatchMappedProps {
   }
 }
 
-type SetGalleryAllProps = SetGalleryStateMappedProps & SetGalleryDispatchMappedProps;
+type SetGalleryAllProps = SetGalleryProps & SetGalleryStateMappedProps & SetGalleryDispatchMappedProps;
 
 class SetGallery extends React.Component<SetGalleryAllProps> {
 
@@ -43,7 +49,13 @@ class SetGallery extends React.Component<SetGalleryAllProps> {
         <div className='sets--container'>
           <img src={boxImage} className='set-gallery--image'/>
           {_.map(this.props.ids, (id: string) => (
-            <SetEditor key={id} id={id}/>
+            <div
+              key={id}
+              onClick={() => this.props.onSelection(id)}
+              className={classNames(this.props.selectedId === id ? 'set--selected': null, 'set--container')}
+            >
+              <SetEditor id={id}/>
+            </div>
           ))}
         </div>
       </div>
