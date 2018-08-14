@@ -9,13 +9,13 @@ import SetGallery from 'client/app/components/setGallery/setGallery.component';
 import { initialSet } from 'client/app/redux/set/state';
 
 interface AppComponentState {
-  setId: string;
+  setId: string | null;
 }
 
 class App extends React.Component<{}, AppComponentState>{
   public state: AppComponentState = {
-    setId: initialSet.id,
-  }
+    setId: null,
+  };
 
   getClassNames(): string[]{
     let output: string[] = ['app'];
@@ -38,7 +38,7 @@ class App extends React.Component<{}, AppComponentState>{
           <div className='sidebar--container'>
             <SetGallery 
               selectedId={this.state.setId}
-              onSelection={(id: string) => this.setState({setId: id})}
+              onSelection={(id: string | null) => this.setState({setId: id})}
             />
           </div>
           <div className='canvas--container'>

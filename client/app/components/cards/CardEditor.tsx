@@ -11,8 +11,6 @@ import {
   Rarities,
   ActionType
 } from 'client/app/constants';
-import {ActionCreators} from 'client/app/redux/actions';
-import {selectCardType} from 'client/app/redux/selectors';
 
 import {CardDownloader} from 'client/app/components/cards/CardDownloader';
 import {StarEditor} from 'client/app/components/editors/starEditor/starEditor.component';

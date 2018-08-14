@@ -1,26 +1,12 @@
 @import '~client/app/stylesheets/_card.scss';
-
-@font-face{
-  font-family: YGO ITC Stone Serif Semibold;
-  src: url('~client/app/assets/Fonts/YGOITCStoneSerifSemibold.ttf');
-}
-
-@font-face{
-  font-family: YGO Matrix Book;
-  src: url('~client/app/assets/Fonts/YGOMatrixBook.ttf');
-}
-
-@font-face{
-  font-family: YGO ITC Stone Serif LT Italic;
-  src: url('~client/app/assets/Fonts/YGOITCStoneSerifLTItalic.ttf');
-}
+@import '~client/app/stylesheets/_typography.scss';
 
 .description--text--input-lore{
-  font-family: YGO ITC Stone Serif LT Italic;
+  font-family: 'YGO ITC Stone Serif LT Italic';
 }
 
 .description-display--text--effect, .material-display--container{
-  font-family: YGO Matrix Book;
+  font-family: 'YGO Matrix Book';
 }
 
 .browser-type-firefox{
@@ -54,5 +40,5 @@
 
 .description-display--text--lore{
   flex: 1 0;
-  font-family: YGO ITC Stone Serif LT Italic;
+  font-family: 'YGO ITC Stone Serif LT Italic';
 }

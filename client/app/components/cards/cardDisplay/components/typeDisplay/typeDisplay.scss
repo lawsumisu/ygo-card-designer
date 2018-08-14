@@ -1,9 +1,5 @@
 @import '~client/app/stylesheets/_card.scss';
-
-@font-face{
-  font-family: YGO ITC Stone Serif Small Caps Bold;
-  src: url('~client/app/assets/Fonts/YGOITCStoneSerifSmallCapsBold.ttf');
-}
+@import '~client/app/stylesheets/_typography.scss';
 
 .type-display--container{
   margin-top: asCardUnit(2);
@@ -22,7 +18,7 @@
   line-height: 1.5;
   white-space: pre;
   font-size: asCardUnit(21);
-  font-family: YGO ITC Stone Serif Small Caps Bold;
+  font-family: 'YGO ITC Stone Serif Small Caps Bold';
   margin-top: asCardUnit(-10); //Need to push card type up to offset the way this font pushes the text down.
   height: asCardUnit(31.8);
 }

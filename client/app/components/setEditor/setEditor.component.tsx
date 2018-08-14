@@ -3,6 +3,7 @@ import { AppState } from 'client/app/redux/store';
 import { Dispatch } from 'redux';
 import { updateSet } from 'client/app/redux/set/actions';
 import { connect } from 'react-redux';
+import { AutoscalingInput } from 'client/app/components/common/autoscalingInput/autoscalingInput.component';
 import 'client/app/components/setEditor/setEditor.scss';
 
 interface SetEditorProps {
@@ -36,7 +37,11 @@ class SetEditor extends React.Component<SetEditorAllProps> {
   public render(): React.ReactNode {
     return (
       <div className='set-editor--container'>
-        <input value={this.props.name} onChange={(event) => this.props.updateName(event.target.value)}/>
+        <AutoscalingInput
+          className='set-editor--input'
+          value={this.props.name}
+          onChange={(event) => this.props.updateName(event.target.value)}
+        />
       </div>
     )
   }

@@ -23,7 +23,6 @@ export function cardReducer(state: CardState = initialState, action: CardAction)
       }
     case CardActionType.ADD_CARD:
       const id = action.payload.id || v4();
-      console.log(id);
       return {
         byId: {
           ...state.byId,

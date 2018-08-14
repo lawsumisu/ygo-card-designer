@@ -7,7 +7,7 @@ export type LinkArrows = [boolean, boolean, boolean, boolean, boolean, boolean, 
 
 export interface CardFields extends Field {
   name: string;
-  image: string;
+  image: string | null;
   stars: number,
   attribute: Attribute;
   actionTypes: ActionType[];

@@ -10,8 +10,8 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 interface SetGalleryProps {
-  selectedId: string;
-  onSelection: (id: string) => void;
+  selectedId: string | null;
+  onSelection: (id: string | null) => void;
 }
 
 interface SetGalleryStateMappedProps {
@@ -45,6 +45,7 @@ class SetGallery extends React.Component<SetGalleryAllProps> {
   public render(): React.ReactNode {
     return (
       <div className='set-gallery--container'>
+        <input type='button' value='All' onClick={() => {this.props.onSelection(null)}}/>
         Sets
         <div className='sets--container'>
           <img src={boxImage} className='set-gallery--image'/>

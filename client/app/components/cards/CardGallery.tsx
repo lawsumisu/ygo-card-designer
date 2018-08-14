@@ -10,7 +10,7 @@ import { v4 } from 'uuid';
 import { updateSet } from "client/app/redux/set/actions";
 
 interface CardGalleryProps {
-  setId: string;
+  setId: string | null;
 }
 
 interface CardGalleryStateMappedProps {
@@ -19,7 +19,8 @@ interface CardGalleryStateMappedProps {
 
 interface CardGalleryDispatchMappedProps {
   actions: {
-    addCard: (cardId: string, setId: string, cards: string[]) => any;
+    addCard: (cardId: string) => any;
+    addCardToSet: (cardId: string, setId: string, cards: string[]) => any;
   }
 }
 
@@ -27,18 +28,28 @@ type CardGalleryAllProps = CardGalleryProps & CardGalleryStateMappedProps & Card
 
 class CardGallery extends React.Component<CardGalleryAllProps> {
   public static mapStateToProps(state: AppState, props: CardGalleryProps): CardGalleryStateMappedProps {
-    return {
-      ids: state.entities.sets.byId[props.setId].cards,
+    if (props.setId){
+      return {
+        ids: state.entities.sets.byId[props.setId].cards,
+      }
+    } else {
+      return {
+        ids: state.entities.cards.allIds
+      }
     }
+
   }
 
   public static mapDispatchToProps(dispatch: Dispatch<any>): CardGalleryDispatchMappedProps {
     return {
       actions: {
-        addCard: (cardId: string, setId: string, cards: string[]) => {
+        addCard: (cardId: string) => {
+          dispatch(addCard(cardId));
+        },
+        addCardToSet: (cardId: string, setId: string, cards: string[]) => {
           dispatch(addCard(cardId));
           dispatch(updateSet({id: setId, cards}));
-        },
+        }
       }
     }
   }
@@ -46,7 +57,7 @@ class CardGallery extends React.Component<CardGalleryAllProps> {
   public render(): React.ReactNode {
     return (
       <div className='card-gallery--container'>
-        <input type="button" value='Click Me!' onClick={this.addNewCardToSet}/>
+        <input type="button" value='Add New Card' onClick={this.addNewCardToSet}/>
         <div className={'cards--container'}>
           {_.map(this.props.ids, (id: string) => (
             <CardEditor key={id} id={id}/>
@@ -58,8 +69,13 @@ class CardGallery extends React.Component<CardGalleryAllProps> {
 
   private addNewCardToSet = (): void => {
     const cardId = v4();
-    const newCards = this.props.ids.concat(cardId);
-    this.props.actions.addCard(cardId, this.props.setId, newCards);
+    if (this.props.setId){
+      const newCards = this.props.ids.concat(cardId);
+      this.props.actions.addCardToSet(cardId, this.props.setId, newCards);
+    } else {
+      this.props.actions.addCard(cardId);
+    }
+
   }
 }
 

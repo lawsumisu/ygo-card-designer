@@ -13,7 +13,9 @@
     
     .set--container{
       cursor: pointer;
-      margin: 10px;
+      height: 151.5px;
+      width: 180px;
+      box-sizing: border-box;
       &.set--selected {
         border: 2px solid lightseagreen;
       }

@@ -4,7 +4,7 @@ import { CardTypes, MonsterTypes } from 'client/app/constants';
 import 'client/app/components/cards/cardDisplay/components/imageDisplay/imageDisplay.scss';
 
 interface ImageDisplayProps {
-  imageSrc: string;
+  imageSrc: string | null;
   cardType: CardTypes
   monsterType: MonsterTypes;
   monsterHybridType: MonsterTypes.PENDULUM | MonsterTypes.PURE;
@@ -24,7 +24,7 @@ export class ImageDisplay extends React.PureComponent<ImageDisplayProps> {
       <div
         className={this.getClassNames()}
       >
-        <img src={this.props.imageSrc}/>
+        {this.props.imageSrc ? <img src={this.props.imageSrc}/> : null}
       </div>
     )
   }
