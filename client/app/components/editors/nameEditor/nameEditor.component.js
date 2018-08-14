@@ -9,7 +9,7 @@ export class NameEditor extends AutoscalingInput {
     if (this.props.rarity === Rarities.RARE) {
       return "url(#silver)";
     }
-    else if (_.includes([Rarities.ULTRA_RARE, Rarities.ULTIMATE_RARE], this.props.rarity)) {
+    else if (_.includes([Rarities.ULTRA_RARE], this.props.rarity)) {
       return "url(#gold)";
     }
     else {
@@ -18,7 +18,7 @@ export class NameEditor extends AutoscalingInput {
   }
 
   getFilter() {
-    if (_.includes([Rarities.RARE, Rarities.ULTRA_RARE, Rarities.ULTIMATE_RARE], this.props.rarity)) {
+    if (_.includes([Rarities.RARE, Rarities.ULTRA_RARE], this.props.rarity)) {
       return "url(#rarity)";
     }
     else {
@@ -27,7 +27,7 @@ export class NameEditor extends AutoscalingInput {
   }
 
   renderDisplayText() {
-    if (this.props.rarity === Rarities.COMMON) {
+    if (this.props.rarity === Rarities.COMMON || this.props.value.length === 0) {
       return null;
     }
     else {
@@ -68,11 +68,9 @@ export class NameEditor extends AutoscalingInput {
                 <feMergeNode in="offset1"/>
                 <feMergeNode in="specOut2"/>
               </feMerge>
-
               <feGaussianBlur in="merge1" result="blur2" stdDeviation="1"/>
               <feComposite in="blur2" in2="SourceGraphic" result="composite1" operator="arithmetic" k1="3" k2=".5"
                            k3="1"/>
-
             </filter>
           </defs>
           <text

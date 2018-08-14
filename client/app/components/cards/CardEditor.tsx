@@ -95,8 +95,16 @@ class CardEditor extends React.Component<CardEditorAllProps, CardEditorState> {
       updateLevel: (stars) => dispatch(updateCard({stars, id})),
       updateAttribute: (attribute) => dispatch(updateCard({attribute, id})),
       updateActionTypes: (actionTypes) => dispatch(updateCard({actionTypes, id})),
-      updateAtk: (atk) => dispatch(updateCard({atk, id})),
-      updateDef: (def) => dispatch(updateCard({def, id})),
+      updateAtk: (atk) => {
+        if (atk === '' || atk === '?' || (/^[0-9]+$/.test(atk) && parseInt(atk) < 10000)){
+          dispatch(updateCard({atk, id}));
+        }
+      },
+      updateDef: (def) => {
+        if (def === '' || def === '?' || (/^[0-9]+$/.test(def) && parseInt(def) < 10000)){
+          dispatch(updateCard({def, id}));
+        }
+      },
       updateEffect: (effect) => dispatch(updateCard({effect, id})),
       updateLore: (lore) => dispatch(updateCard({lore, id})),
       updatePendulumEffect: (pendulumEffect) => dispatch(updateCard({pendulumEffect, id})),
