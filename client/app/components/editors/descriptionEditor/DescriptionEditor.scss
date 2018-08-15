@@ -1,118 +1,121 @@
-.description--editor{
+@import '~client/app/stylesheets/_card.scss';
+
+.description--editor {
+  flex: 1 0;
+  display: flex;
+  flex-direction: column;
+  font-size: asCardUnit(15);
+  line-height: asCardUnit(20);
+  padding: 0px asCardUnit(2.5);
+
+  .description--text--input-lore, .description--text--input-effect {
+    resize: none;
     flex: 1 0;
     display: flex;
     flex-direction: column;
-    font-size: 15px;
-    line-height: 20px;
-    padding: 0px 2.5px;
-
-    .description--text--input-lore, .description--text--input-effect{
-      resize:none;
-      flex: 1 0;
-      display: flex;
-      flex-direction: column;
-      z-index: 10;
-      textarea {
-        flex-grow: 1;
-        margin: 0px; //Firefox textarea seem to have default margins.
-      }
-    }
-
-    .description--text--input-lore{
-      font-family: YGO ITC Stone Serif LT Italic;
-    }
-
-    .description--text--input-effect, .ygo-card-fusion-materials, .ygo-card-synchro-materials, .ygo-card-dark-synchro-materials,
-    .ygo-card-xyz-materials, .ygo-card-link-materials{
-      font-family: YGO Matrix Book;
-    }
-
-    .description--text--input-effect{
-      min-height: 0px; //This is to help the flex-shrink to work when monster materials are visible
-      flex: 1 1;
-
-      &.ygo-card-effect-invisible{
-        display: none;
-      }
-    }
-
-    .ygo-card-fusion-materials, .ygo-card-synchro-materials, .ygo-card-dark-synchro-materials{
-      flex-shrink: 0;
-      width: fit-content;
-      transform-origin: 0% 50%;
-      .catalog-delimiter{
-        padding: 0px 4px;
-      }
-    }
-
-    .description--text--container{
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        position: relative;
-        &:hover{
-          .description--text--edit-btn-effect, .description--text--edit-btn-lore{
-            display: block;
-          }
-        }
-
-        .ygo-card-simple-description-text-container{
-          position: relative;
-          display: flex;
-          flex: 1 0;
-          &.ygo-card-simple-description-text-invisible{
-            height: 0px;
-            flex: 0 1;
-          }
-        }
-
-        .description--text--edit-btn-anchor{
-          position: absolute;
-          width: 110%;
-          height: 100%;
-          left: -27px;
-          &:hover{
-            .description--text--edit-btn-effect, .description--text--edit-btn-lore{
-              display: block;
-            }
-          }
-        }
-
-        .description--text--edit-btn-effect, .description--text--edit-btn-lore{
-          width: 22px;
-          height: 22px;
-          font-size: 15px;
-          border-radius: 3px;
-          text-align: center;
-          padding: 0px;
-          background: buttonface;
-          display: none;
-          &:hover{
-            cursor: pointer;
-          }
-          &.description--text--edit-btn--no-show{
-             background-image: url('~client/app/assets/no.png');
-             background-size: cover;
-          }
-        }
-
-        .description--text--edit-btn-effect{
-          font-family: YGO ITC Stone Serif Small Caps Bold;
-        }
-
-        .description--text--edit-btn-lore{
-          margin-top: 15px;
-          font-family: Script MT Bold;
-        }
-
-        .description--text--input--invisible{
-          display: none;
-        }
-      }
-
-    &.description--editor--full{
-      .description--text--input-lore, .description--text--input-effect{
-         line-height: 15px;
-      }
+    z-index: 10;
+    textarea {
+      flex-grow: 1;
+      margin: 0px; //Firefox textarea seem to have default margins.
     }
   }
+
+  .description--text--input-lore {
+    font-family: YGO ITC Stone Serif LT Italic;
+  }
+
+  .description--text--input-effect, .ygo-card-fusion-materials, .ygo-card-synchro-materials, .ygo-card-dark-synchro-materials,
+  .ygo-card-xyz-materials, .ygo-card-link-materials {
+    font-family: YGO Matrix Book;
+  }
+
+  .description--text--input-effect {
+    min-height: 0px; //This is to help the flex-shrink to work when monster materials are visible
+    flex: 1 1;
+
+    &.ygo-card-effect-invisible {
+      display: none;
+    }
+  }
+
+  .ygo-card-fusion-materials, .ygo-card-synchro-materials, .ygo-card-dark-synchro-materials {
+    flex-shrink: 0;
+    width: fit-content;
+    transform-origin: 0% 50%;
+    .catalog-delimiter {
+      padding: 0px asCardUnit(4);
+    }
+  }
+
+  .description--text--container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+    // font-size: asCardUnit(16);
+    &:hover {
+      .description--text--edit-btn-effect, .description--text--edit-btn-lore {
+        display: block;
+      }
+    }
+
+    .ygo-card-simple-description-text-container {
+      position: relative;
+      display: flex;
+      flex: 1 0;
+      &.ygo-card-simple-description-text-invisible {
+        height: 0px;
+        flex: 0 1;
+      }
+    }
+
+    .description--text--edit-btn-anchor {
+      position: absolute;
+      width: 110%;
+      height: 100%;
+      left: asCardUnit(-27);
+      &:hover {
+        .description--text--edit-btn-effect, .description--text--edit-btn-lore {
+          display: block;
+        }
+      }
+    }
+
+    .description--text--edit-btn-effect, .description--text--edit-btn-lore {
+      width: asCardUnit(22);
+      height: asCardUnit(22);
+      font-size: asCardUnit(15);
+      border-radius: asCardUnit(3);
+      text-align: center;
+      padding: 0px;
+      background: buttonface;
+      display: none;
+      &:hover {
+        cursor: pointer;
+      }
+      &.description--text--edit-btn--no-show {
+        background-image: url('~client/app/assets/no.png');
+        background-size: cover;
+      }
+    }
+
+    .description--text--edit-btn-effect {
+      font-family: YGO ITC Stone Serif Small Caps Bold;
+    }
+
+    .description--text--edit-btn-lore {
+      margin-top: asCardUnit(15);
+      font-family: Script MT Bold;
+    }
+
+    .description--text--input--invisible {
+      display: none;
+    }
+  }
+
+  &.description--editor--full {
+    .description--text--input-lore, .description--text--input-effect {
+      line-height: asCardUnit(15);
+    }
+  }
+}

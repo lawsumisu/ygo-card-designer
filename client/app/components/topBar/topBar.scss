@@ -1,0 +1,24 @@
+@import '~client/app/stylesheets/_typography.scss';
+
+.navigation-bar--container{
+  font-family: 'YGO Matrix Regular Small Caps';
+  font-size: 28px;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  width: 100%;
+  z-index: 90;
+  background-color: #915ae8;
+  position: fixed;
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  .app-title{
+    align-self: center;
+    margin-left: 15px
+  }
+  .account-management--container{
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}

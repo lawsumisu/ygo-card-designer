@@ -54,3 +54,5 @@ export const getBrowser = function(): BrowserTypes | undefined{
 export const browserIsFirefox = function(): boolean{
     return getBrowser() === BrowserTypes.FIREFOX;
 }
+
+export type Nullable<T> = T | null;

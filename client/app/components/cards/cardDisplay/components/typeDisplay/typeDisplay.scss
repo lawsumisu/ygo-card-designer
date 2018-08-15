@@ -1,0 +1,24 @@
+@import '~client/app/stylesheets/_card.scss';
+@import '~client/app/stylesheets/_typography.scss';
+
+.type-display--container{
+  margin-top: asCardUnit(2);
+  margin-bottom: asCardUnit(-4);
+}
+
+.browser-type-firefox{
+  .type--display-text{
+    width: -moz-fit-content;
+  }
+}
+
+.type-display--text{
+  width: fit-content;
+  transform-origin: 0 50%;
+  line-height: 1.5;
+  white-space: pre;
+  font-size: asCardUnit(21);
+  font-family: 'YGO ITC Stone Serif Small Caps Bold';
+  margin-top: asCardUnit(-10); //Need to push card type up to offset the way this font pushes the text down.
+  height: asCardUnit(31.8);
+}

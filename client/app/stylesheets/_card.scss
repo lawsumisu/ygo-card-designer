@@ -1,0 +1,5 @@
+$original-card-width: 590;
+
+@function asCardUnit($value){
+  @return calc(#{$value}/#{$original-card-width} * var(--card-width));
+}
