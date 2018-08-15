@@ -1,9 +1,30 @@
+@import '~client/app/stylesheets/_typography.scss';
+
 .set-gallery--container {
-  padding: 10px;
+  font-size: 24px;
+  font-family: 'YGO Matrix Regular Small Caps';
+  padding: 15px;
+  width: 200px;
+
+  .set-gallery--header{
+    display: flex;
+    align-items: center;
+    .header--add-set-btn, .header--show-all-btn {
+      font: inherit;
+    }
+    .header--show-all-btn{
+      margin-left: auto;
+    }
+    .header--add-set-btn {
+      margin-left: 10px;
+    }
+  }
 
   .sets--container{
     display: flex;
     flex-direction: column;
+    max-height: 85vh;
+    overflow-y: auto;
 
     .set-gallery--image {
       width: 180px;
@@ -16,6 +37,8 @@
       height: 151.5px;
       width: 180px;
       box-sizing: border-box;
+      border: 2px solid transparent;
+      margin-top: 15px;
       &.set--selected {
         border: 2px solid lightseagreen;
       }

@@ -7,19 +7,9 @@ export interface SetField extends Field {
   cards: string[];
 }
 
-const id = v4();
-
-export const initialSet: SetField = {
-  id,
-  name: 'Set 001',
-  cards: [initialCard.id]
-};
-
 export interface SetState extends Model<SetField> {}
 
 export const initialState: SetState = {
-  byId: {
-    [id]: initialSet,
-  },
-  allIds: [id]
+  byId: {},
+  allIds: []
 };

@@ -20,7 +20,7 @@ interface SetGalleryStateMappedProps {
 
 interface SetGalleryDispatchMappedProps {
   actions: {
-    addCard: () => any;
+    addSet: () => any;
   }
 }
 
@@ -37,7 +37,7 @@ class SetGallery extends React.Component<SetGalleryAllProps> {
   public static mapDispatchToProps(dispatch: Dispatch<any>): SetGalleryDispatchMappedProps {
     return {
       actions: {
-        addCard: () => dispatch(addSet()),
+        addSet: () => dispatch(addSet()),
       }
     }
   }
@@ -45,10 +45,23 @@ class SetGallery extends React.Component<SetGalleryAllProps> {
   public render(): React.ReactNode {
     return (
       <div className='set-gallery--container'>
-        <input type='button' value='All' onClick={() => {this.props.onSelection(null)}}/>
-        Sets
+        <div className='set-gallery--header'>
+          <div>Sets</div>
+          <input
+            type='button'
+            value='+'
+            onClick={() => this.props.actions.addSet()}
+            className='header--add-set-btn'
+          />
+          <input
+            type='button'
+            value='Show All'
+            onClick={() => {this.props.onSelection(null)}}
+            className='header--show-all-btn'
+          />
+        </div>
         <div className='sets--container'>
-          <img src={boxImage} className='set-gallery--image'/>
+          {/*<img src={boxImage} className='set-gallery--image'/>*/}
           {_.map(this.props.ids, (id: string) => (
             <div
               key={id}

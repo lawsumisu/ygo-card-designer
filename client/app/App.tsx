@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import CardGallery from 'client/app/components/cards/CardGallery';
 import { TopBar } from 'client/app/components/topBar/topBar.component';
 import SetGallery from 'client/app/components/setGallery/setGallery.component';
-import { initialSet } from 'client/app/redux/set/state';
 
 interface AppComponentState {
   setId: string | null;
@@ -30,7 +29,6 @@ class App extends React.Component<{}, AppComponentState>{
   }
 
   render(){
-    const browserType = getBrowser();
     return (
       <div className={classNames(this.getClassNames())}>
         <TopBar/>

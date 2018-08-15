@@ -9,11 +9,10 @@ export class TopBar extends React.Component<TopBarProps> {
   public render(): React.ReactNode {
     return (
       <div className="navigation-bar--container">
-        Industrial Illusions
+        <div className='app-title'>Industrial Illusions</div>
         <div className="account-management--container">
-          Account Management
-          <div>Username</div>
-          <input type="button" value="Login"/>
+          {/*<div>Username</div>*/}
+          {/*<input type="button" value="Login"/>*/}
         </div>
       </div>
     );
